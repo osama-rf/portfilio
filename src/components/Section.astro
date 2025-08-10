@@ -7,11 +7,38 @@ interface Props {
 const { text, href } = Astro.props;
 ---
 
-<section id={href} class="py-24">
+<section id={href} class="py-24 section-accent">
   <h2
-    class="mb-14 font-serif text-4xl font-bold tracking-tighter text-white md:text-5xl"
+    id={`section-title-${href}`}
+    class="mb-14 font-serif text-4xl font-bold tracking-tighter text-white md:text-5xl gradient-text-primary"
   >
     {text}
   </h2>
   <slot />
 </section>
+
+<script>
+  import { languageStore } from "@app/language-store";
+
+  const updateSectionTitles = () => {
+    const content = languageStore.content;
+    
+    const sectionTitleMapping: { [key: string]: string } = {
+      'projects': content.nav.featuredProjects,
+      'about': content.nav.aboutMe
+    };
+    
+    Object.entries(sectionTitleMapping).forEach(([href, title]) => {
+      const titleEl = document.getElementById(`section-title-${href}`);
+      if (titleEl) {
+        titleEl.textContent = title;
+      }
+    });
+  };
+
+  // Listen for language changes
+  window.addEventListener('language-change', updateSectionTitles);
+  
+  // Initialize
+  updateSectionTitles();
+</script>

@@ -1,98 +1,137 @@
-import type { SiteConfig, SiteContent } from "../types";
+import type { SiteConfig, SiteContent, Translations } from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Alejandro Múnez — Mobile & Web Developer",
-  author: "Alejandro Múnez Cuntez",
+  title: "Your Tech Partner for Turning Ideas into Success",
+  author: "Osama Refay",
   description:
-    "Software Engineer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
+    "Saudi-based software engineer turning ideas into real-world apps. I focus on performance, clean UI, and smart integrations.",
   lang: "en",
-  siteLogo: "/alejandro-small.jpg",
   navLinks: [
-    { text: "Experience", href: "#experience" },
     { text: "Projects", href: "#projects" },
     { text: "About", href: "#about" },
   ],
   socialLinks: [
-    { text: "Twitter", href: "https://github.com/immois/astro-zen" },
-    { text: "LinkedIn", href: "https://github.com/immois/astro-zen" },
-    { text: "Github", href: "https://github.com/immois/astro-zen" },
-    { text: "Youtube", href: "https://github.com/immois/astro-zen" },
-    { text: "Dribbble", href: "https://github.com/immois/astro-zen" },
+    { text: "Twitter", href: "https://twitter.com/" },
+    { text: "LinkedIn", href: "https://linkedin.com/" },
+    { text: "Github", href: "https://github.com/" },
+    { text: "Youtube", href: "https://youtube.com/" },
   ],
-  socialImage: "/zen-og.png",
-  canonicalURL: "https://astro-zen.vercel.app",
+  socialImage: "/osama-og.png",
+  canonicalURL: "https://osama-portfolio.vercel.app",
+};
+
+export const TRANSLATIONS: Translations = {
+  en: {
+    nav: {
+      projects: "Projects",
+      about: "About",
+      featuredProjects: "Featured Projects",
+      aboutMe: "About Me",
+    },
+    ui: {
+      email: "Email",
+      preview: "Preview",
+      source: "Source",
+      switchLang: "العربية",
+      whatsapp: "Let's Chat on WhatsApp",
+      ctaMain: "Ready to Build Your Success? 🚀",
+      ctaSubtitle: "Let's Turn Your Idea Into Reality",
+    },
+    hero: {
+      name: "Osama Refay",
+      specialty: "Your Tech Partner for Turning Ideas into Success",
+      summary:
+        "I help entrepreneurs and businesses turn ideas into mobile and web apps that actually work and scale.",
+      email: "youremail@example.com",
+    },
+    projects: [
+      {
+        name: "Glowpick",
+        summary:
+          "AI-powered skincare analysis app with e-commerce integration.",
+        linkPreview: "https://glowpick-demo.vercel.app",
+        image: "/glowpick.png",
+      },
+      {
+        name: "Zaai AI",
+        summary:
+          "AI solutions for businesses, offering analytics, automation, and smart recommendations.",
+        linkPreview: "https://zaai.vercel.app/ar",
+        image: "/zaai-og.png",
+      },
+      {
+        name: "Student Achievements App",
+        summary:
+          "Helps students save certificates, create CVs, and get study recommendations.",
+        linkPreview: "https://student-achievements.vercel.app",
+        image: "/spotifu.png",
+      },
+    ],
+    about: {
+      description: `
+        I'm Osama Refay, a Saudi software engineer who loves building apps that make life easier.
+        From e-commerce to AI-powered platforms, I focus on clean UI, high performance, and scalability.
+        Co-founder of Mutfarid, builder of Glowpick and Zaai AI.
+      `,
+      image: "/osama-big.jpg",
+    },
+  },
+  ar: {
+    nav: {
+      projects: "مشاريعي",
+      about: "عنّي",
+      featuredProjects: "مشاريعي",
+      aboutMe: "عنّي",
+    },
+    ui: {
+      email: "الإيميل",
+      preview: "معاينة",
+      source: "الكود",
+      switchLang: "English",
+      whatsapp: "يلا نتواصل على الواتس",
+      ctaMain: " جاهز نبني نجاحك؟" + " 🚀",
+      ctaSubtitle: "يلا نحول فكرتك لواقع",
+    },
+    hero: {
+      name: "أسامة رفاعي",
+      specialty: "شريكك التقني في تحويل افكارك لنجاحات",
+      summary:
+        "أساعد رواد الأعمال والشركات يحولون أفكارهم لتطبيقات ويب وجوال تشتغل وتكبر معهم.",
+      email: "youremail@example.com",
+    },
+    projects: [
+      {
+        name: "Glowpick",
+        summary: "تطبيق ذكاء اصطناعي لتحليل البشرة مع متجر إلكتروني.",
+        linkPreview: "https://glowpick-demo.vercel.app",
+        image: "/glowpick.png",
+      },
+      {
+        name: "Zaai AI",
+        summary: "حلول ذكاء اصطناعي للأعمال تشمل التحليلات والأتمتة والتوصيات.",
+        linkPreview: "zaai.vercel.app",
+        image: "/zaai-ai.png",
+      },
+      {
+        name: "تطبيق إنجازات الطلاب",
+        summary:
+          "يساعد الطلاب يحفظون شهاداتهم، يبنون سيرتهم الذاتية، ويحصلون على توصيات دراسية.",
+        linkPreview: "https://student-achievements.vercel.app",
+        image: "/student-app.png",
+      },
+    ],
+    about: {
+      description: `
+        هلا! أنا أسامة رفاعي، مهندس برمجيات سعودي أحب أحول الأفكار لمنتجات تشتغل وتنجح.
+        من المتاجر الإلكترونية لمنصات الذكاء الاصطناعي، تركيزي دايم على الواجهة النظيفة والأداء العالي
+      `,
+      image: "/osama-big.jpg",
+    },
+  },
 };
 
 export const SITE_CONTENT: SiteContent = {
-  hero: {
-    name: "Alejandro Múnez",
-    specialty: "Mobile & Web Developer",
-    summary:
-      "Developer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
-    email: "example@email.com",
-  },
-  experience: [
-    {
-      company: "Zalmart",
-      position: "Lead Android Developer",
-      startDate: "May 2018",
-      endDate: "Sept 2020",
-      summary: [
-        "Implemented advanced memory management and code optimization techniques, resulting in a reduction in application load time by 40% and a decrease in crashes by 25%. This significantly improved user experience and increased user retention by 20%.",
-        "I led a team of developers in building and integrating new features using Jetpack Android components such as LiveData and ViewModel. This enabled us to build scalable and maintainable applications, reducing the crash rate by 20% and speeding up the time to delivery of new features by 15%.",
-        "Integrated Google Pay for in-app purchases, resulting in a 35% increase in mobile transaction revenue. Additionally, implemented Firebase Analytics to gain insights into user behavior, enabling data-driven optimizations and a 30% increase in user retention.",
-      ],
-    },
-    {
-      company: "Bankit",
-      position: "Mobile Developer",
-      startDate: "Feb 2017",
-      endDate: "May 2018",
-      summary: [
-        "I designed and developed a mobile application using Flutter, allowing it to be deployed on both Android and iOS with a single codebase. This reduced development time by 50% and maintenance costs by 30%, facilitating a consistent user experience on both platforms.",
-        "I integrated biometric authentication and data encryption, significantly improving the security of user data. This implementation resulted in a 40% increase in user trust and a 25% reduction in unauthorized access attempts.",
-      ],
-    },
-    {
-      company: "Driveer",
-      position: "Frontend Developer",
-      startDate: "Jun 2015",
-      endDate: "Oct 2016",
-      summary:
-        "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
-    },
-  ],
-  projects: [
-    {
-      name: "Spotifu Music",
-      summary: "A music streaming app that emulates Spotify's core features.",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/spotifu.png",
-    },
-    {
-      name: "Shopp App",
-      summary: "An e-commerce platform that replicates Shopify's key features.",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/shopify-clon.png",
-    },
-    {
-      name: "ClonTagram",
-      summary: "A social network that replicates the features of Instagram",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/clone-ig.png",
-    },
-  ],
-  about: {
-    description: `
-      Hi, I’m Alejandro Múnez, a passionate Mobile and Web Developer with a knack for crafting seamless digital experiences. With a strong background in both Android and iOS development, as well as front-end web technologies, I thrive in the intersection where creativity meets technology.
-
-      Over the years, I’ve honed my skills in building robust, user-friendly applications that not only meet the needs of users but also push the boundaries of what’s possible. My projects range from innovative mobile applications to responsive web designs, all with a focus on performance, security, and scalability.
-    `,
-    image: "/alejandro-big.jpg",
-  },
+  hero: TRANSLATIONS.en.hero,
+  projects: TRANSLATIONS.en.projects,
+  about: TRANSLATIONS.en.about,
 };
-
-// #5755ff

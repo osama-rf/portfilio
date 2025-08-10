@@ -8,7 +8,6 @@ import Footer from "@components/Footer.astro";
 const {
   title,
   description,
-  siteLogo,
   navLinks,
   lang,
   author,
@@ -21,7 +20,7 @@ const ogImgUrl = canonicalURL + socialImage;
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-pt-16 scroll-smooth">
+<html lang={lang} dir="ltr" class="scroll-pt-16 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -43,10 +42,19 @@ const ogImgUrl = canonicalURL + socialImage;
     <meta property="twitter:image" content={ogImgUrl} />
   </head>
   <body class="bg-black font-sans">
-    <Header siteLogo={siteLogo} navLinks={navLinks} />
+    <Header navLinks={navLinks} />
     <main class="mx-auto max-w-3xl px-5">
       <slot />
     </main>
     <Footer author={author} socialLinks={socialLinks} />
+    
+    <script>
+      import { languageStore } from "@app/language-store";
+      import { themeStore } from "@app/theme-store";
+      
+      // Initialize language and theme stores on page load
+      languageStore;
+      themeStore;
+    </script>
   </body>
 </html>

@@ -1,13 +1,40 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Arabic';
+  src: local('Noto Sans Arabic'), local('Arabic UI'), local('Segoe UI');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
 @theme {
   --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
   --font-serif: "Gabarito Variable", ui-serif, serif;
+  --font-arabic: "Arabic", "Noto Sans Arabic", "Arabic UI", system-ui, sans-serif;
 
+  /* Dark theme colors */
   --color-primary: #2563eb;
   --color-neutral: #94a3b8;
   --color-white: #e2e8f0;
   --color-black: #0e141b;
+
+  /* Light theme colors */
+  --color-light-bg: #ffffff;
+  --color-light-text: #1f2937;
+  --color-light-neutral: #6b7280;
+  --color-pink-500: #ec4899;
+  --color-pink-400: #f472b6;
+  --color-pink-600: #db2777;
+  --color-pink-gradient-start: #ec4899;
+  --color-pink-gradient-end: #f472b6;
+  
+  /* Enhanced vibrant colors */
+  --color-accent-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-green: #10b981;
+  --color-accent-orange: #f59e0b;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
 
   --text-xs: 0.875rem;
   --text-xs--line-height: 1.125rem;
@@ -50,4 +77,232 @@
       transform: translateY(0);
     }
   }
+}
+
+html[dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+html[dir="rtl"] * {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+html[dir="rtl"] .mr-auto {
+  margin-right: unset !important;
+  margin-left: auto !important;
+}
+
+html[dir="rtl"] .ml-auto {
+  margin-left: unset !important;
+  margin-right: auto !important;
+}
+
+html[dir="rtl"] .flex-row-reverse {
+  flex-direction: row !important;
+}
+
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse !important;
+}
+
+/* Theme Switching Styles */
+.light {
+  --bg-color: var(--color-light-bg);
+  --text-color: var(--color-light-text);
+  --text-muted: var(--color-light-neutral);
+  --primary-gradient: linear-gradient(135deg, var(--color-pink-gradient-start), var(--color-pink-gradient-end));
+  --primary-color: var(--color-pink-500);
+  --accent-gradient: linear-gradient(135deg, var(--color-pink-500), var(--color-accent-purple));
+  --success-gradient: linear-gradient(135deg, var(--color-accent-green), var(--color-pink-500));
+}
+
+.dark {
+  --bg-color: var(--color-black);
+  --text-color: var(--color-white);
+  --text-muted: var(--color-neutral);
+  --primary-gradient: linear-gradient(135deg, var(--color-primary), var(--color-pink-500));
+  --primary-color: var(--color-primary);
+  --accent-gradient: linear-gradient(135deg, var(--color-accent-purple), var(--color-pink-500));
+  --success-gradient: linear-gradient(135deg, var(--color-accent-green), var(--color-pink-500));
+}
+
+/* Light theme styles */
+html.light body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+html.light .text-white {
+  color: var(--text-color) !important;
+}
+
+html.light .text-neutral {
+  color: var(--text-muted) !important;
+}
+
+html.light .text-primary {
+  background: var(--primary-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--primary-color);
+}
+
+html.light .bg-black {
+  background-color: var(--bg-color) !important;
+}
+
+html.light .bg-primary {
+  background: var(--primary-gradient) !important;
+}
+
+html.light .border-neutral\/40 {
+  border-color: rgba(107, 114, 128, 0.2) !important;
+}
+
+html.light .border-neutral\/20 {
+  border-color: rgba(107, 114, 128, 0.1) !important;
+}
+
+/* Additional light theme components */
+html.light .bg-\[\#1c232d\]\/85 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: var(--text-color) !important;
+}
+
+html.light .text-white\/70 {
+  color: rgba(31, 41, 55, 0.7) !important;
+}
+
+/* Enhanced section styling */
+.section-accent {
+  position: relative;
+}
+
+.section-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-pink-500), var(--color-pink-400), var(--color-accent-purple));
+  border-radius: 2px;
+}
+
+/* Enhanced project cards */
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+html.light .project-card:hover {
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.15);
+}
+
+/* Gradient text effects */
+.gradient-text-primary {
+  background: var(--primary-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-accent {
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+html.light .theme-toggle {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light .theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.lang-switch {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.lang-switch:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+html.light .lang-switch:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* CTA Section Styles */
+.cta-section {
+  background: radial-gradient(circle at center, rgba(236, 72, 153, 0.05), transparent);
+}
+
+html.light .cta-section {
+  background: radial-gradient(circle at center, rgba(236, 72, 153, 0.08), transparent);
+}
+
+/* CTA Title Color */
+#cta-title {
+  color: var(--text-color);
+}
+
+html.light #cta-title {
+  color: #1f2937 !important;
+}
+
+html.dark #cta-title {
+  color: #e2e8f0 !important;
+}
+
+/* RTL Support for CTA */
+html[dir="rtl"] .cta-button-content {
+  flex-direction: row-reverse !important;
+}
+
+/* Force white text and icon in CTA button for all themes */
+#cta-button-text {
+  color: #ffffff !important;
+}
+
+#cta-button svg {
+  color: #ffffff !important;
+}
+
+/* RTL support for CTA title - move emoji to end */
+html[dir="rtl"] #cta-title {
+  direction: rtl !important;
+  unicode-bidi: bidi-override !important;
 }

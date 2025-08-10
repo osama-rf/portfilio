@@ -1,25 +1,28 @@
 ---
 import Menu from "@icons/Menu.astro";
-import { Image } from "astro:assets";
 import type { HeaderProps } from "@types";
 
 type Props = HeaderProps;
 
-const { siteLogo, navLinks } = Astro.props;
+const { navLinks } = Astro.props;
 ---
 
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6"
 >
-  <a href="/" aria-label="Home link">
-    <Image
-      class="rounded-full"
-      src={siteLogo}
-      width="45"
-      height="45"
-      alt="website logo"
-    />
-  </a>
+  <button
+    id="theme-toggle"
+    class="theme-toggle"
+    aria-label="Toggle theme"
+    type="button"
+  >
+    <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+  </button>
 
   <button
     type="button"
@@ -48,15 +51,31 @@ const { siteLogo, navLinks } = Astro.props;
           </li>
         ))
       }
+      <li class="relative">
+        <button
+          id="lang-switch"
+          class="lang-switch nav-item relative block p-2 text-sm font-medium transition-all duration-500 hover:text-white rounded-md"
+          aria-label="Switch language"
+        >
+          العربية
+        </button>
+      </li>
     </ul>
   </nav>
 </header>
 
 <script>
+  import { languageStore } from "@app/language-store";
+  import { themeStore } from "@app/theme-store";
+  
   // Toggle mobile menu
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
   const navItems = document.querySelectorAll("#main-menu > ul > li > a");
+  const langButton = document.querySelector("#lang-switch") as HTMLButtonElement;
+  const themeButton = document.querySelector("#theme-toggle") as HTMLButtonElement;
+  const sunIcon = document.querySelector("#sun-icon");
+  const moonIcon = document.querySelector("#moon-icon");
 
   const toggleMenu = () => {
     menu?.classList.toggle("hidden");
@@ -64,10 +83,59 @@ const { siteLogo, navLinks } = Astro.props;
     button?.setAttribute("aria-expanded", `${!isHidden}`);
   };
 
+  const updateUI = () => {
+    const content = languageStore.content;
+    
+    // Update navigation links
+    navItems.forEach((item) => {
+      const href = item.getAttribute("href");
+      if (href === "#projects") {
+        item.textContent = content.nav.projects;
+      } else if (href === "#about") {
+        item.textContent = content.nav.about;
+      }
+    });
+    
+    // Update language switch button
+    if (langButton) {
+      langButton.textContent = content.ui.switchLang;
+    }
+    
+    // Update page content
+    const event = new CustomEvent('language-change', { detail: content });
+    window.dispatchEvent(event);
+  };
+
+  const updateThemeUI = () => {
+    if (themeStore.isDark) {
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+    } else {
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+    }
+  };
+
+  // Theme switching
+  themeButton?.addEventListener("click", () => {
+    themeStore.toggleTheme();
+    updateThemeUI();
+  });
+
+  // Language switching
+  langButton?.addEventListener("click", () => {
+    languageStore.toggleLanguage();
+    updateUI();
+  });
+
   button?.addEventListener("click", toggleMenu);
   navItems.forEach((item) => {
     item?.addEventListener("click", toggleMenu);
   });
+
+  // Initialize UI
+  updateUI();
+  updateThemeUI();
 
   // Update navigation based on scroll position with Intersection Observer
   const observer = new IntersectionObserver(

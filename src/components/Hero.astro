@@ -2,26 +2,46 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name, specialty, summary, email } = Astro.props;
+const { name, specialty, summary } = Astro.props;
 ---
 
 <section class="py-24 md:py-32" id="#hero">
   <h1
-    class="mb-1.5 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-0 md:text-9xl"
+    id="hero-name"
+    class="mb-8 font-serif text-5xl font-bold tracking-tightest text-white sm:text-6xl md:mb-10 md:text-7xl"
   >
     {name}
   </h1>
   <p
-    class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
+    id="hero-specialty"
+    class="mb-12 font-serif text-2xl leading-[36px] font-bold tracking-tighter text-primary sm:text-3xl md:text-4xl md:mb-16"
   >
     {specialty}
   </p>
-  <p class="mb-16 text-base font-normal text-neutral md:text-lg">
+  <p id="hero-summary" class="mb-16 text-base font-normal text-neutral md:text-lg">
     {summary}
   </p>
 
-  <a
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff]"
-    href={`mailto:${email}`}>Get in Touch</a
-  >
 </section>
+
+<script>
+  import { languageStore } from "@app/language-store";
+
+  const updateHero = () => {
+    const content = languageStore.content.hero;
+    
+    const nameEl = document.getElementById('hero-name');
+    const specialtyEl = document.getElementById('hero-specialty');
+    const summaryEl = document.getElementById('hero-summary');
+    
+    if (nameEl) nameEl.textContent = content.name;
+    if (specialtyEl) specialtyEl.textContent = content.specialty;
+    if (summaryEl) summaryEl.textContent = content.summary;
+  };
+
+  // Listen for language changes
+  window.addEventListener('language-change', updateHero);
+  
+  // Initialize
+  updateHero();
+</script>
