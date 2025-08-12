@@ -2,7 +2,7 @@ import type { SiteConfig, SiteContent, Translations } from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
   title: "Your Tech Partner for Turning Ideas into Success",
-  author: "Osama Refay",
+  author: "Osama AlRefay",
   description:
     "Saudi-based software engineer turning ideas into real-world apps. I focus on performance, clean UI, and smart integrations.",
   lang: "en",
@@ -11,10 +11,8 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "About", href: "#about" },
   ],
   socialLinks: [
-    { text: "Twitter", href: "https://twitter.com/" },
-    { text: "LinkedIn", href: "https://linkedin.com/" },
-    { text: "Github", href: "https://github.com/" },
-    { text: "Youtube", href: "https://youtube.com/" },
+    { text: "LinkedIn", href: "https://linkedin.com/in/osama-alrefay" },
+    { text: "Github", href: "https://github.com/osama-rf" },
   ],
   socialImage: "/osama-og.png",
   canonicalURL: "https://osama-portfolio.vercel.app",
@@ -49,7 +47,7 @@ export const TRANSLATIONS: Translations = {
         name: "Glowpick",
         summary:
           "AI-powered skincare analysis app with e-commerce integration.",
-        linkPreview: "https://glowpick-demo.vercel.app",
+        linkPreview: "https://apps.apple.com/sa/app/glowpick/id6737756143",
         image: "/glowpick.png",
       },
       {
@@ -60,11 +58,11 @@ export const TRANSLATIONS: Translations = {
         image: "/zaai-og.png",
       },
       {
-        name: "Student Achievements App",
+        name: "Dream International Schools",
         summary:
-          "Helps students save certificates, create CVs, and get study recommendations.",
-        linkPreview: "https://student-achievements.vercel.app",
-        image: "/spotifu.png",
+          "Website for Dream International Schools, providing services for students and parents, showcasing the school and its facilities.",
+        linkPreview: "https://dis-sa.vercel.app/ar",
+        image: "/dis.png",
       },
     ],
     about: {
@@ -73,7 +71,7 @@ export const TRANSLATIONS: Translations = {
         From e-commerce to AI-powered platforms, I focus on clean UI, high performance, and scalability.
         Co-founder of Mutfarid, builder of Glowpick and Zaai AI.
       `,
-      image: "/osama-big.jpg",
+      image: "/osama.webp",
     },
   },
   ar: {
@@ -93,7 +91,7 @@ export const TRANSLATIONS: Translations = {
       ctaSubtitle: "يلا نحول فكرتك لواقع",
     },
     hero: {
-      name: "أسامة رفاعي",
+      name: "أسامة الرفاعي",
       specialty: "شريكك التقني في تحويل افكارك لنجاحات",
       summary:
         "أساعد رواد الأعمال والشركات يحولون أفكارهم لتطبيقات ويب وجوال تشتغل وتكبر معهم.",
@@ -103,7 +101,7 @@ export const TRANSLATIONS: Translations = {
       {
         name: "Glowpick",
         summary: "تطبيق ذكاء اصطناعي لتحليل البشرة مع متجر إلكتروني.",
-        linkPreview: "https://glowpick-demo.vercel.app",
+        linkPreview: "https://apps.apple.com/sa/app/glowpick/id6737756143",
         image: "/glowpick.png",
       },
       {
@@ -113,11 +111,11 @@ export const TRANSLATIONS: Translations = {
         image: "/zaai-ai.png",
       },
       {
-        name: "تطبيق إنجازات الطلاب",
+        name: "مدارس دريم العالمية",
         summary:
-          "يساعد الطلاب يحفظون شهاداتهم، يبنون سيرتهم الذاتية، ويحصلون على توصيات دراسية.",
-        linkPreview: "https://student-achievements.vercel.app",
-        image: "/student-app.png",
+          "موقع مدارس دريم العالمية، يقدم خدمات للطلاب وأولياء الأمور. ويستعرض المدرسة ومرافقها.",
+        linkPreview: "https://dis-sa.vercel.app/ar",
+        image: "/dis.png",
       },
     ],
     about: {
@@ -125,7 +123,7 @@ export const TRANSLATIONS: Translations = {
         هلا! أنا أسامة رفاعي، مهندس برمجيات سعودي أحب أحول الأفكار لمنتجات تشتغل وتنجح.
         من المتاجر الإلكترونية لمنصات الذكاء الاصطناعي، تركيزي دايم على الواجهة النظيفة والأداء العالي
       `,
-      image: "/osama-big.jpg",
+      image: "/osama.webp",
     },
   },
 };
