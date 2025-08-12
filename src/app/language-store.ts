@@ -3,7 +3,7 @@ import { TRANSLATIONS } from "@config";
 type Language = 'en' | 'ar';
 
 class LanguageStore {
-  private currentLang: Language = 'en';
+  private currentLang: Language = 'ar';
   private listeners: (() => void)[] = [];
 
   constructor() {
