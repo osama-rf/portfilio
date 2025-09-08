@@ -8,6 +8,25 @@
   <h2 id="cta-title" class="mb-8 text-3xl font-bold md:text-4xl">
     🚀 Ready to Build Your Success?
   </h2>
+  
+  <h3 id="cta-subtitle" class="mb-8 text-xl md:text-2xl text-white/80 font-medium">
+    بكم أقدر أبدأ معك؟
+  </h3>
+
+  <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-2xl border border-white/10 mx-auto max-w-lg mb-12">
+    <div class="space-y-4">
+      <p id="cta-mvp-text" class="text-xl md:text-2xl text-white/90 font-medium">
+        النسخة الأولية (MVP) تبدأ من
+      </p>
+      <div class="text-4xl md:text-5xl font-bold text-primary">
+        <span id="cta-price-amount">2849</span>
+        <span id="cta-price-currency" class="text-xl md:text-2xl text-white/80 mr-2">ريال</span>
+      </div>
+      <p id="cta-price-note" class="text-base md:text-lg text-white/70 leading-relaxed">
+        السعر النهائي يعتمد على حجم الفكرة والمزايا المطلوبة
+      </p>
+    </div>
+  </div>
 
   <div class="group relative">
     <div
@@ -16,7 +35,7 @@
     </div>
     <a
       id="cta-button"
-      href="https://wa.me/966595199887?text=Hi%20Osama!%20I%27m%20ready%20to%20turn%20my%20idea%20into%20a%20successful%20app.%20Let%27s%20discuss!"
+      href="https://wa.me/966595199887?text=مرحباً، عندي فكرة وأبغى أعرف تفاصيل العرض."
       target="_blank"
       rel="noopener noreferrer"
       class="hover:shadow-3xl group cta-button-content relative flex min-w-max items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 shadow-2xl transition-all duration-300 hover:scale-105"
@@ -42,15 +61,23 @@
 
   const updateCTA = () => {
     const ui = languageStore.content.ui;
+    const pricing = languageStore.content.pricing;
 
     const ctaTitleEl = document.getElementById("cta-title");
+    const ctaSubtitleEl = document.getElementById("cta-subtitle");
     const ctaButtonTextEl = document.getElementById("cta-button-text");
+    const ctaMvpTextEl = document.getElementById("cta-mvp-text");
+    const ctaPriceAmountEl = document.getElementById("cta-price-amount");
+    const ctaPriceCurrencyEl = document.getElementById("cta-price-currency");
+    const ctaPriceNoteEl = document.getElementById("cta-price-note");
 
-    if (ctaTitleEl)
-      ctaTitleEl.textContent = ui.ctaMain || "🚀 Ready to Build Your Success?";
-    if (ctaButtonTextEl)
-      ctaButtonTextEl.textContent =
-        ui.ctaSubtitle || "Let's Turn Your Idea Into Reality";
+    if (ctaTitleEl) ctaTitleEl.textContent = ui.ctaMain || "🚀 Ready to Build Your Success?";
+    if (ctaSubtitleEl) ctaSubtitleEl.textContent = pricing.title;
+    if (ctaButtonTextEl) ctaButtonTextEl.textContent = ui.ctaSubtitle || "Let's Turn Your Idea Into Reality";
+    if (ctaMvpTextEl) ctaMvpTextEl.textContent = pricing.mvpText;
+    if (ctaPriceAmountEl) ctaPriceAmountEl.textContent = pricing.priceAmount;
+    if (ctaPriceCurrencyEl) ctaPriceCurrencyEl.textContent = pricing.priceCurrency;
+    if (ctaPriceNoteEl) ctaPriceNoteEl.textContent = pricing.note;
   };
 
   // Listen for language changes

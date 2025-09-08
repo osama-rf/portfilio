@@ -287,6 +287,32 @@ html.dark #cta-title {
   color: #e2e8f0 !important;
 }
 
+/* CTA Subtitle Color */
+#cta-subtitle {
+  color: var(--text-color);
+}
+
+html.light #cta-subtitle {
+  color: #1f2937 !important;
+}
+
+html.dark #cta-subtitle {
+  color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* CTA MVP Text Color */
+#cta-mvp-text {
+  color: var(--text-muted);
+}
+
+html.light #cta-mvp-text {
+  color: #374151 !important;
+}
+
+html.dark #cta-mvp-text {
+  color: rgba(226, 232, 240, 0.9) !important;
+}
+
 /* RTL Support for CTA */
 html[dir="rtl"] .cta-button-content {
   flex-direction: row-reverse !important;

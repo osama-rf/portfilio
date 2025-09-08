@@ -35,6 +35,14 @@ export const TRANSLATIONS: Translations = {
       ctaMain: "Ready to Build Your Success? 🚀",
       ctaSubtitle: "Let's Turn Your Idea Into Reality",
     },
+    pricing: {
+      title: "How Much to Get Started?",
+      mvpText: "MVP (Minimum Viable Product) starts from",
+      priceAmount: "2849",
+      priceCurrency: "SAR",
+      note: "Final price depends on the scope of your idea and required features",
+      ctaText: "Send Your Idea & Get Custom Quote",
+    },
     hero: {
       name: "Osama Refay",
       specialty: "Your Tech Partner for Turning Ideas into Success",
@@ -49,6 +57,21 @@ export const TRANSLATIONS: Translations = {
           "AI-powered skincare analysis app with e-commerce integration.",
         linkPreview: "https://apps.apple.com/sa/app/glowpick/id6737756143",
         image: "/glowpick.png",
+      },
+      {
+        name: "Thmanyah",
+        summary:
+          "Modern podcast web application built for Thmanyah media company, featuring responsive design and Arabic content optimization.",
+        linkPreview:
+          "https://thamanyah-assignment.vercel.app/?podcast=%D8%AB%D9%85%D8%A7%D9%86%D9%8A%D8%A5",
+        image: "/Thmanyah-Icon-tab.svg",
+      },
+      {
+        name: "Scan Me GPT",
+        summary:
+          "Free customizable QR code generator with advanced styling options, color themes, and instant download capabilities.",
+        linkPreview: "https://scan-me-gpt.vercel.app/ar",
+        image: "/scanme.svg",
       },
       {
         name: "Zaai AI",
@@ -90,6 +113,14 @@ export const TRANSLATIONS: Translations = {
       ctaMain: " جاهز نبني نجاحك؟" + " 🚀",
       ctaSubtitle: "يلا نحول فكرتك لواقع",
     },
+    pricing: {
+      title: "بكم أقدر أبدأ معك؟",
+      mvpText: "النسخة الأولية (MVP) تبدأ من",
+      priceAmount: "2849",
+      priceCurrency: "ريال",
+      note: "السعر النهائي يعتمد على حجم الفكرة والمزايا المطلوبة",
+      ctaText: "أرسل فكرتك وخذ عرض سعر مخصص",
+    },
     hero: {
       name: "أسامة الرفاعي",
       specialty: "شريكك التقني في تحويل افكارك لنجاحات",
@@ -103,6 +134,21 @@ export const TRANSLATIONS: Translations = {
         summary: "تطبيق ذكاء اصطناعي لتحليل البشرة مع متجر إلكتروني.",
         linkPreview: "https://apps.apple.com/sa/app/glowpick/id6737756143",
         image: "/glowpick.png",
+      },
+      {
+        name: "ثمانية",
+        summary:
+          "تطبيق ويب حديث للبودكاست مبني لشركة ثمانية الإعلامية، يتميز بالتصميم التجاوبي وتحسين المحتوى العربي.",
+        linkPreview:
+          "https://thamanyah-assignment.vercel.app/?podcast=%D8%AB%D9%85%D8%A7%D9%86%D9%8A%D8%A9",
+        image: "/Thmanyah-Icon-tab.svg",
+      },
+      {
+        name: "scanMe",
+        summary:
+          "مولد رموز QR مجاني قابل للتخصيص مع خيارات تصميم متقدمة وسمات ألوان وإمكانية تحميل فوري.",
+        linkPreview: "https://scan-me-gpt.vercel.app/ar",
+        image: "/scanme.svg",
       },
       {
         name: "Zaai AI",
