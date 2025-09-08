@@ -4,7 +4,6 @@ import type { SiteConfig } from "@types";
 type Props = Pick<SiteConfig, "author" | "socialLinks">;
 
 const { author, socialLinks } = Astro.props;
-const currentYear = new Date().getFullYear();
 ---
 
 <footer

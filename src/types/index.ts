@@ -24,6 +24,7 @@ export interface Translations {
       [key: string]: string;
     };
     ui: { [key: string]: string };
+    pricing: PricingProps;
   };
   ar: SiteContent & {
     nav: { 
@@ -34,6 +35,7 @@ export interface Translations {
       [key: string]: string;
     };
     ui: { [key: string]: string };
+    pricing: PricingProps;
   };
 }
 
@@ -55,6 +57,15 @@ export interface ProjectProps {
 export interface AboutProps {
   description: string;
   image: string;
+}
+
+export interface PricingProps {
+  title: string;
+  mvpText: string;
+  priceAmount: string;
+  priceCurrency: string;
+  note: string;
+  ctaText: string;
 }
 
 export interface HeaderProps {
