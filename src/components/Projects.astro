@@ -77,7 +77,7 @@ const { projects } = Astro.props;
         const nameEl = item.querySelector('.project-name');
         const summaryEl = item.querySelector('.project-summary');
         const previewEl = item.querySelector('.project-preview');
-        const mobileCardLink = item.parentElement;
+        const mobileCardLink = item.parentElement as HTMLAnchorElement;
         
         if (nameEl) nameEl.textContent = projectData.name;
         if (summaryEl) summaryEl.textContent = projectData.summary;
