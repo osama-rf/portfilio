@@ -332,3 +332,85 @@ html[dir="rtl"] #cta-title {
   direction: rtl !important;
   unicode-bidi: bidi-override !important;
 }
+
+/* Line clamp utilities for text truncation */
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Responsive line clamp removal for larger screens */
+@media (min-width: 640px) {
+  .sm\:line-clamp-none {
+    overflow: visible;
+    display: block;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: initial;
+  }
+}
+
+/* Force white text for project preview buttons in all themes */
+.project-preview {
+  color: #ffffff !important;
+}
+
+.project-preview span {
+  color: #ffffff !important;
+}
+
+.project-preview svg {
+  color: #ffffff !important;
+}
+
+html.light .project-preview {
+  color: #ffffff !important;
+}
+
+html.light .project-preview span {
+  color: #ffffff !important;
+}
+
+html.light .project-preview svg {
+  color: #ffffff !important;
+}
+
+/* Force white text for ebook button in all themes */
+#ebook-button {
+  color: #ffffff !important;
+}
+
+#ebook-button span {
+  color: #ffffff !important;
+}
+
+#ebook-button svg {
+  color: #ffffff !important;
+}
+
+html.light #ebook-button {
+  color: #ffffff !important;
+}
+
+html.light #ebook-button span {
+  color: #ffffff !important;
+}
+
+html.light #ebook-button svg {
+  color: #ffffff !important;
+}

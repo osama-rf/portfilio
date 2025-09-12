@@ -34,6 +34,7 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "Let's Chat on WhatsApp",
       ctaMain: "Ready to Build Your Success? 🚀",
       ctaSubtitle: "Let's Turn Your Idea Into Reality",
+      ebookCta: "Get The Guide",
     },
     pricing: {
       title: "How Much to Get Started?",
@@ -51,6 +52,13 @@ export const TRANSLATIONS: Translations = {
       email: "youremail@example.com",
     },
     projects: [
+      {
+        name: "Complete Guide to Building AI Websites & Apps 🚀",
+        summary:
+          "🚀 'Complete Guide to Building AI Websites & Apps' teaches you how to turn any idea into a ready app in hours, without programming experience. Over 50 ready commands + practical projects + plugins that make everything easier!",
+        linkPreview: "https://wtl3my.zid.store/products/الدليل-الشامل-لبناء-المواقع-والتطبيقات-بالذكاء-الاصطناعي",
+        image: "/ebook.png",
+      },
       {
         name: "Glowpick",
         summary:
@@ -112,6 +120,7 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "يلا نتواصل على الواتس",
       ctaMain: " جاهز نبني نجاحك؟" + " 🚀",
       ctaSubtitle: "يلا نحول فكرتك لواقع",
+      ebookCta: "احصل على الدليل",
     },
     pricing: {
       title: "بكم أقدر أبدأ معك؟",
@@ -129,6 +138,12 @@ export const TRANSLATIONS: Translations = {
       email: "youremail@example.com",
     },
     projects: [
+      {
+        name: "الدليل الشامل لبناء اﳌواقع والتطبيقات بالذكاء اﻻصطناعي 🚀",
+        summary: "🚀 كتاب 'الدليل الشامل لبناء المواقع والتطبيقات بالذكاء الاصطناعي' يعلّمك كيف تحوّل أي فكرة لتطبيق جاهز في ساعات، بدون خبرة برمجية. أكثر من 50 أمر جاهز + مشاريع عملية + ملحقات تسهّل عليك كل شيء!",
+        linkPreview: "https://wtl3my.zid.store/products/الدليل-الشامل-لبناء-المواقع-والتطبيقات-بالذكاء-الاصطناعي",
+        image: "/ebook.png",
+      },
       {
         name: "Glowpick",
         summary: "تطبيق ذكاء اصطناعي لتحليل البشرة مع متجر إلكتروني.",

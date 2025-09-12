@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="group relative">
+  <div class="group relative mb-16">
     <div
       class="absolute -inset-2 rounded-full bg-gradient-to-r from-pink-400 via-pink-500 to-purple-500 opacity-40 blur transition duration-300 group-hover:animate-pulse group-hover:opacity-70"
     >
@@ -54,6 +54,53 @@
       >
     </a>
   </div>
+
+  <!-- Separate Ebook Promotion Section -->
+  <div class="border-t border-white/10 pt-16">
+    <div class="text-center mb-12">
+      <h3 class="text-xl md:text-2xl font-bold text-white mb-4">
+        تبغى تبني بنفسك؟ 🤔
+      </h3>
+    </div>
+    
+    <!-- Ebook Card - Project Style -->
+    <div class="max-w-4xl mx-auto mb-8">
+      <div class="sticky rounded-2xl border border-neutral/20 bg-black project-card">
+        <div class="bg-difu relative z-[1] grid h-auto min-h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 sm:min-h-[400px] md:min-h-96">
+          <div class="flex flex-col justify-between px-6 pt-12 pb-6">
+            <div>
+              <h3 class="mb-5 font-serif text-2xl sm:text-3xl font-medium text-primary gradient-text-accent">
+                الدليل الشامل لبناء المواقع والتطبيقات بالذكاء الاصطناعي 🚀
+              </h3>
+              <p class="text-sm sm:text-base text-neutral leading-relaxed line-clamp-4 sm:line-clamp-none">🚀 كتاب "الدليل الشامل لبناء المواقع والتطبيقات بالذكاء الاصطناعي" يعلّمك كيف تحوّل أي فكرة لتطبيق جاهز في ساعات، بدون خبرة برمجية. أكثر من 50 أمر جاهز + مشاريع عملية + ملحقات تسهّل عليك كل شيء!</p>
+            </div>
+            <div class="flex gap-5 pt-6 sm:pt-10">
+              <a
+                id="ebook-button"
+                href="https://wtl3my.zid.store/products/الدليل-الشامل-لبناء-المواقع-والتطبيقات-بالذكاء-الاصطناعي"
+                target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                <span id="ebook-button-text">احصل على الدليل</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center justify-center p-4 sm:p-6 overflow-hidden">
+            <img
+              class="max-h-full max-w-full w-auto h-auto rounded-xl object-contain object-center"
+              src="/ebook.png"
+              alt="الدليل الشامل لبناء المواقع والتطبيقات بالذكاء الاصطناعي"
+              width="400"
+              height="300"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -66,6 +113,7 @@
     const ctaTitleEl = document.getElementById("cta-title");
     const ctaSubtitleEl = document.getElementById("cta-subtitle");
     const ctaButtonTextEl = document.getElementById("cta-button-text");
+    const ebookButtonTextEl = document.getElementById("ebook-button-text");
     const ctaMvpTextEl = document.getElementById("cta-mvp-text");
     const ctaPriceAmountEl = document.getElementById("cta-price-amount");
     const ctaPriceCurrencyEl = document.getElementById("cta-price-currency");
@@ -74,6 +122,7 @@
     if (ctaTitleEl) ctaTitleEl.textContent = ui.ctaMain || "🚀 Ready to Build Your Success?";
     if (ctaSubtitleEl) ctaSubtitleEl.textContent = pricing.title;
     if (ctaButtonTextEl) ctaButtonTextEl.textContent = ui.ctaSubtitle || "Let's Turn Your Idea Into Reality";
+    if (ebookButtonTextEl) ebookButtonTextEl.textContent = ui.ebookCta || "Get The Guide";
     if (ctaMvpTextEl) ctaMvpTextEl.textContent = pricing.mvpText;
     if (ctaPriceAmountEl) ctaPriceAmountEl.textContent = pricing.priceAmount;
     if (ctaPriceCurrencyEl) ctaPriceCurrencyEl.textContent = pricing.priceCurrency;

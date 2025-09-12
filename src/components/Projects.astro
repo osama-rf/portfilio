@@ -21,29 +21,34 @@ const { projects } = Astro.props;
             class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black project-card"
             data-project-index={index}
           >
-            <div class="bg-difu relative z-[1] grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
-              <div class="px-6 pt-12">
-                <h3 class="mb-5 font-serif text-3xl font-medium text-primary project-name gradient-text-accent">
-                  {name}
-                </h3>
-                <p class="text-base text-neutral project-summary">{summary}</p>
-                <div class="flex gap-5 pt-10 text-white">
+            <div class="bg-difu relative z-[1] grid h-auto min-h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 sm:min-h-[400px] md:min-h-96">
+              <div class="flex flex-col justify-between px-6 pt-12 pb-6">
+                <div>
+                  <h3 class="mb-5 font-serif text-2xl sm:text-3xl font-medium text-primary project-name gradient-text-accent">
+                    {name}
+                  </h3>
+                  <p class="text-sm sm:text-base text-neutral project-summary leading-relaxed line-clamp-4 sm:line-clamp-none">{summary}</p>
+                </div>
+                <div class="flex gap-5 pt-6 sm:pt-10">
                   <a
                     href={linkPreview}
                     target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline project-preview"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg project-preview"
                   >
-                    Preview
+                    <span>Preview</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
                   </a>
                 </div>
               </div>
-              <div class="flex items-end justify-end overflow-hidden">
+              <div class="flex items-center justify-center p-4 sm:p-6 overflow-hidden">
                 <Image
-                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-contain object-center sm:h-[85%] sm:w-full"
+                  class="max-h-full max-w-full w-auto h-auto rounded-xl object-contain object-center"
                   src={image}
                   alt={name}
-                  width="736"
-                height="483"
+                  width="400"
+                  height="300"
                 />
               </div>
             </div>
