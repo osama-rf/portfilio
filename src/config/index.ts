@@ -123,7 +123,7 @@ export const TRANSLATIONS: Translations = {
       ebookCta: "احصل على الدليل",
     },
     pricing: {
-      title: "بكم أقدر أبدأ معك؟",
+      title: "محتاج موقع أو تطبيق احترافي لمشروعك؟",
       mvpText: "النسخة الأولية (MVP) تبدأ من",
       priceAmount: "2849",
       priceCurrency: "ريال",
