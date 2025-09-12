@@ -19,12 +19,12 @@ const { projects } = Astro.props;
           <a
             href={linkPreview}
             target="_blank"
-            class="block"
+            class="block transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] active:opacity-90"
             data-mobile-card-link
           >
             <div
               style={`top: ${top}px;`}
-              class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black project-card cursor-pointer"
+              class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black project-card cursor-pointer transition-all duration-200 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 active:border-primary/50"
               data-project-index={index}
             >
               <div class="bg-difu relative z-[1] grid h-auto min-h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 sm:min-h-[400px] md:min-h-96">

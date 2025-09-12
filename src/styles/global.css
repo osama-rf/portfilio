@@ -414,3 +414,34 @@ html.light #ebook-button span {
 html.light #ebook-button svg {
   color: #ffffff !important;
 }
+
+/* Project card click/tap effects */
+.project-card {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Enhanced active state for mobile */
+@media (hover: none) and (pointer: coarse) {
+  [data-mobile-card-link]:active {
+    transform: scale(0.97) !important;
+    opacity: 0.8 !important;
+    transition: all 0.1s ease-out !important;
+  }
+  
+  [data-mobile-card-link]:active .project-card {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2) !important;
+  }
+}
+
+/* Desktop hover effects */
+@media (hover: hover) and (pointer: fine) {
+  [data-mobile-card-link]:hover .project-card {
+    transform: translateY(-2px);
+  }
+}
