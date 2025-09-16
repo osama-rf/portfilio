@@ -74,13 +74,13 @@ export const TRANSLATIONS: Translations = {
           "https://thamanyah-assignment.vercel.app/?podcast=%D8%AB%D9%85%D8%A7%D9%86%D9%8A%D8%A5",
         image: "/Thmanyah-Icon-tab.svg",
       },
-      {
-        name: "Scan Me GPT",
-        summary:
-          "Free customizable QR code generator with advanced styling options, color themes, and instant download capabilities.",
-        linkPreview: "https://scan-me-gpt.vercel.app/ar",
-        image: "/scanme.svg",
-      },
+      // {
+      //   name: "Scan Me GPT",
+      //   summary:
+      //     "Free customizable QR code generator with advanced styling options, color themes, and instant download capabilities.",
+      //   linkPreview: "https://scan-me-gpt.vercel.app/ar",
+      //   image: "/scanme.svg",
+      // },
       {
         name: "Zaai AI",
         summary:
@@ -158,13 +158,13 @@ export const TRANSLATIONS: Translations = {
           "https://thamanyah-assignment.vercel.app/?podcast=%D8%AB%D9%85%D8%A7%D9%86%D9%8A%D8%A9",
         image: "/Thmanyah-Icon-tab.svg",
       },
-      {
-        name: "scanMe",
-        summary:
-          "مولد رموز QR مجاني قابل للتخصيص مع خيارات تصميم متقدمة وسمات ألوان وإمكانية تحميل فوري.",
-        linkPreview: "https://scan-me-gpt.vercel.app/ar",
-        image: "/scanme.svg",
-      },
+      // {
+      //   name: "scanMe",
+      //   summary:
+      //     "مولد رموز QR مجاني قابل للتخصيص مع خيارات تصميم متقدمة وسمات ألوان وإمكانية تحميل فوري.",
+      //   linkPreview: "https://scan-me-gpt.vercel.app/ar",
+      //   image: "/scanme.svg",
+      // },
       {
         name: "Zaai AI",
         summary: "حلول ذكاء اصطناعي للأعمال تشمل التحليلات والأتمتة والتوصيات.",
