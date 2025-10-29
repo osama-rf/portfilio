@@ -22,10 +22,11 @@ const { text, href } = Astro.props;
 
   const updateSectionTitles = () => {
     const content = languageStore.content;
-    
+
     const sectionTitleMapping: { [key: string]: string } = {
       'projects': content.nav.featuredProjects,
-      'about': content.nav.aboutMe
+      'about': content.nav.aboutMe,
+      'testimonials': content.nav.testimonials
     };
     
     Object.entries(sectionTitleMapping).forEach(([href, title]) => {

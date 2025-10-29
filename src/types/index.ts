@@ -12,26 +12,29 @@ export interface SiteContent {
   hero: HeroProps;
   projects: ProjectProps[];
   about: AboutProps;
+  testimonials: TestimonialProps[];
 }
 
 export interface Translations {
   en: SiteContent & {
-    nav: { 
+    nav: {
       projects: string;
       about: string;
       featuredProjects: string;
       aboutMe: string;
+      testimonials: string;
       [key: string]: string;
     };
     ui: { [key: string]: string };
     pricing: PricingProps;
   };
   ar: SiteContent & {
-    nav: { 
+    nav: {
       projects: string;
       about: string;
       featuredProjects: string;
       aboutMe: string;
+      testimonials: string;
       [key: string]: string;
     };
     ui: { [key: string]: string };
@@ -70,4 +73,9 @@ export interface PricingProps {
 
 export interface HeaderProps {
   navLinks: { text: string; href: string }[];
+}
+
+export interface TestimonialProps {
+  content: string;
+  platform: string;
 }

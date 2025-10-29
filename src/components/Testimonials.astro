@@ -1,0 +1,63 @@
+---
+import Section from "./Section.astro";
+import type { TestimonialProps } from "@types";
+
+interface Props {
+  testimonials: TestimonialProps[];
+}
+
+const { testimonials } = Astro.props;
+---
+
+<Section text="Testimonials" href="testimonials">
+  <div id="testimonials-content" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      testimonials.map(({ content, platform }, index) => {
+        return (
+          <div
+            class="group relative rounded-2xl border border-neutral/20 bg-black p-8 pb-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10"
+            data-testimonial-index={index}
+          >
+            <div class="absolute -top-4 left-8 text-5xl text-primary/20 font-serif">"</div>
+            <p class="testimonial-content relative z-10 text-neutral leading-relaxed mb-4">
+              {content}
+            </p>
+            <div class="relative z-10 flex items-center justify-end mt-4 pt-4 border-t border-neutral/10">
+              <span class="testimonial-platform text-sm font-medium text-primary/80">
+                {platform}
+              </span>
+            </div>
+            <div class="absolute -bottom-4 right-8 text-5xl text-primary/20 font-serif rotate-180">"</div>
+          </div>
+        );
+      })
+    }
+  </div>
+</Section>
+
+<script>
+  import { languageStore } from "@app/language-store";
+
+  const updateTestimonials = () => {
+    const content = languageStore.content.testimonials;
+
+    const testimonialItems = document.querySelectorAll('[data-testimonial-index]');
+
+    testimonialItems.forEach((item, index) => {
+      const testimonialData = content[index];
+      if (testimonialData) {
+        const contentEl = item.querySelector('.testimonial-content');
+        const platformEl = item.querySelector('.testimonial-platform');
+
+        if (contentEl) contentEl.textContent = testimonialData.content;
+        if (platformEl) platformEl.textContent = testimonialData.platform;
+      }
+    });
+  };
+
+  // Listen for language changes
+  window.addEventListener('language-change', updateTestimonials);
+
+  // Initialize
+  updateTestimonials();
+</script>

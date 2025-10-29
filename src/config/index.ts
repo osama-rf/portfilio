@@ -25,6 +25,7 @@ export const TRANSLATIONS: Translations = {
       about: "About",
       featuredProjects: "Featured Projects",
       aboutMe: "About Me",
+      testimonials: "Testimonials",
     },
     ui: {
       email: "Email",
@@ -34,7 +35,6 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "Let's Chat on WhatsApp",
       ctaMain: "Ready to Build Your Success? 🚀",
       ctaSubtitle: "Let's Turn Your Idea Into Reality",
-      ebookCta: "Get The Guide",
     },
     pricing: {
       title: "How Much to Get Started?",
@@ -53,11 +53,11 @@ export const TRANSLATIONS: Translations = {
     },
     projects: [
       {
-        name: "Complete Guide to Building AI Websites & Apps 🚀",
+        name: "Maliha app",
         summary:
-          "🚀 'Complete Guide to Building AI Websites & Apps' teaches you how to turn any idea into a ready app in hours, without programming experience. Over 50 ready commands + practical projects + plugins that make everything easier!",
-        linkPreview: "https://osama-lab.com/products/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D8%B4%D8%A7%D9%85%D9%84-%D9%84%D8%A8%D9%86%D8%A7%D8%A1-%D8%A7%D9%84%D9%85%D9%88%D8%A7%D9%82%D8%B9-%D9%88%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1-%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A",
-        image: "/ebook.png",
+          "A comprehensive beauty booking platform connecting clients with professional makeup artists. Features real-time availability, secure payments, portfolio showcases, and seamless appointment management. Built with scalability in mind to handle thousands of bookings.",
+        linkPreview: "https://maliha.me",
+        image: "/maliha.png",
       },
       {
         name: "Glowpick",
@@ -104,6 +104,20 @@ export const TRANSLATIONS: Translations = {
       `,
       image: "/osama.webp",
     },
+    testimonials: [
+      {
+        content: "Working with Osama was a game-changer for our business. He transformed our idea into a fully functional platform that our makeup artists and clients love. The booking system is smooth, the interface is elegant, and everything runs without technical issues. Highly recommend!",
+        platform: "Maliha",
+      },
+      {
+        content: "Osama delivered beyond our expectations. The AI integration was complex, but he made it work seamlessly with our e-commerce platform. His attention to detail and commitment to performance optimization made our app stand out in the market. A true professional!",
+        platform: "Glowpick",
+      },
+      {
+        content: "Osama built us a fast, reliable platform that showcases our facilities beautifully and handles all our communication needs. The project was delivered on time and within budget. Professional, responsive, and delivered exactly what we needed!",
+        platform: "Dream International Schools",
+      },
+    ],
   },
   ar: {
     nav: {
@@ -111,6 +125,7 @@ export const TRANSLATIONS: Translations = {
       about: "عنّي",
       featuredProjects: "مشاريعي",
       aboutMe: "عنّي",
+      testimonials: "آراء العملاء",
     },
     ui: {
       email: "الإيميل",
@@ -120,7 +135,6 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "يلا نتواصل على الواتس",
       ctaMain: " جاهز نبني نجاحك؟" + " 🚀",
       ctaSubtitle: "يلا نحول فكرتك لواقع",
-      ebookCta: "احصل على الدليل",
     },
     pricing: {
       title: "محتاج موقع أو تطبيق احترافي لمشروعك؟",
@@ -139,10 +153,10 @@ export const TRANSLATIONS: Translations = {
     },
     projects: [
       {
-        name: "الدليل الشامل لبناء اﳌواقع والتطبيقات بالذكاء اﻻصطناعي 🚀",
-        summary: "🚀 كتاب 'الدليل الشامل لبناء المواقع والتطبيقات بالذكاء الاصطناعي' يعلّمك كيف تحوّل أي فكرة لتطبيق جاهز في ساعات، بدون خبرة برمجية. أكثر من 50 أمر جاهز + مشاريع عملية + ملحقات تسهّل عليك كل شيء!",
-        linkPreview: "https://osama-lab.com/products/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D8%B4%D8%A7%D9%85%D9%84-%D9%84%D8%A8%D9%86%D8%A7%D8%A1-%D8%A7%D9%84%D9%85%D9%88%D8%A7%D9%82%D8%B9-%D9%88%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1-%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A",
-        image: "/ebook.png",
+        name: "منصة مليحة",
+        summary: "منصة متكاملة لحجز مواعيد خبيرات التجميل، توصل العملاء بخبيرات المكياج المحترفات. المنصة فيها نظام حجز لحظي، دفع آمن، معرض أعمال لكل خبيرة، وإدارة سهلة للمواعيد. مبنية بتقنيات حديثة عشان تتحمل آلاف الحجوزات بدون أي مشاكل.",
+        linkPreview: "https://maliha.me",
+        image: "/maliha.png",
       },
       {
         name: "Glowpick",
@@ -186,6 +200,20 @@ export const TRANSLATIONS: Translations = {
       `,
       image: "/osama.webp",
     },
+    testimonials: [
+      {
+        content: "التعاون مع أسامة كان نقلة نوعية لمشروعنا. حول فكرتنا لمنصة متكاملة، خبيرات المكياج والعملاء عندنا يحبونها. نظام الحجز سلس، التصميم راقي، وكل شي يشتغل بدون مشاكل تقنية. صراحة أنصح فيه بقوة!",
+        platform: "مليحة",
+      },
+      {
+        content: "أسامة سلّم المشروع فوق التوقعات. دمج الذكاء الاصطناعي كان معقد، لكن خلاه يشتغل بكل سلاسة مع المتجر الإلكتروني. اهتمامه بالتفاصيل وتحسين الأداء خلى التطبيق يبرز في السوق. محترف من الدرجة الأولى!",
+        platform: "Glowpick",
+      },
+      {
+        content: "أسامة بنى لنا منصة سريعة وموثوقة، تعرض مرافقنا بشكل جميل وتغطي كل احتياجاتنا. المشروع انسلم بالوقت وبالميزانية المحددة. محترف، متجاوب، وسلّم بالضبط اللي نبيه!",
+        platform: "مدارس دريم العالمية",
+      },
+    ],
   },
 };
 
@@ -193,4 +221,5 @@ export const SITE_CONTENT: SiteContent = {
   hero: TRANSLATIONS.en.hero,
   projects: TRANSLATIONS.en.projects,
   about: TRANSLATIONS.en.about,
+  testimonials: TRANSLATIONS.en.testimonials,
 };

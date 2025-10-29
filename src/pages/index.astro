@@ -5,6 +5,7 @@ import Layout from "@layouts/Layout.astro";
 import Projects from "@components/Projects.astro";
 import CTA from "@components/CTA.astro";
 import About from "@components/About.astro";
+import Testimonials from "@components/Testimonials.astro";
 
 import "../styles/global.css";
 ---
@@ -12,6 +13,7 @@ import "../styles/global.css";
 <Layout>
   <Hero {...SITE_CONTENT.hero} />
   <Projects projects={SITE_CONTENT.projects} />
+  <Testimonials testimonials={SITE_CONTENT.testimonials} />
   <CTA />
   <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
 </Layout>
