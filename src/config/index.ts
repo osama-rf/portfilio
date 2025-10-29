@@ -60,6 +60,13 @@ export const TRANSLATIONS: Translations = {
         image: "/maliha.png",
       },
       {
+        name: "Kedan",
+        summary:
+          "Your strategic partner for empowering third sector organizations. A comprehensive business communication platform designed specifically for non-profit organizations, featuring streamlined workflows, stakeholder management, and collaborative tools to enhance organizational impact.",
+        linkPreview: "https://new.kidanm.com.sa/",
+        image: "/kedan-logo.svg",
+      },
+      {
         name: "Glowpick",
         summary:
           "AI-powered skincare analysis app with e-commerce integration.",
@@ -108,6 +115,10 @@ export const TRANSLATIONS: Translations = {
       {
         content: "Working with Osama was a game-changer for our business. He transformed our idea into a fully functional platform that our makeup artists and clients love. The booking system is smooth, the interface is elegant, and everything runs without technical issues. Highly recommend!",
         platform: "Maliha",
+      },
+      {
+        content: "Osama understood the unique needs of our third sector organization and delivered a communication platform that truly empowers our teams. The workflow management and stakeholder collaboration tools have streamlined our operations significantly. His expertise in building scalable solutions made a real difference in our organizational impact.",
+        platform: "Kedan",
       },
       {
         content: "Osama delivered beyond our expectations. The AI integration was complex, but he made it work seamlessly with our e-commerce platform. His attention to detail and commitment to performance optimization made our app stand out in the market. A true professional!",
@@ -159,6 +170,12 @@ export const TRANSLATIONS: Translations = {
         image: "/maliha.png",
       },
       {
+        name: "كدان",
+        summary: "شريكك الاستراتيجي لتمكين مؤسسات القطاع الثالث. منصة تواصل أعمال متكاملة مصممة خصيصاً للمؤسسات غير الربحية، فيها إدارة سير العمل، إدارة أصحاب المصلحة، وأدوات تعاونية تعزز أثر المؤسسة وتسهل التواصل بين الفرق.",
+        linkPreview: "https://new.kidanm.com.sa/",
+        image: "/kedan-logo.svg",
+      },
+      {
         name: "Glowpick",
         summary: "تطبيق ذكاء اصطناعي لتحليل البشرة مع متجر إلكتروني.",
         linkPreview: "https://apps.apple.com/sa/app/glowpick/id6737756143",
@@ -204,6 +221,10 @@ export const TRANSLATIONS: Translations = {
       {
         content: "التعاون مع أسامة كان نقلة نوعية لمشروعنا. حول فكرتنا لمنصة متكاملة، خبيرات المكياج والعملاء عندنا يحبونها. نظام الحجز سلس، التصميم راقي، وكل شي يشتغل بدون مشاكل تقنية. صراحة أنصح فيه بقوة!",
         platform: "مليحة",
+      },
+      {
+        content: "أسامة فهم احتياجات مؤسستنا في القطاع الثالث وسلّمنا منصة تواصل تمكّن فرقنا بشكل حقيقي. أدوات إدارة سير العمل والتعاون مع أصحاب المصلحة سهّلت علينا العمليات بشكل كبير. خبرته في بناء حلول قابلة للتوسع خلت فرق واضح في أثر مؤسستنا.",
+        platform: "كدان",
       },
       {
         content: "أسامة سلّم المشروع فوق التوقعات. دمج الذكاء الاصطناعي كان معقد، لكن خلاه يشتغل بكل سلاسة مع المتجر الإلكتروني. اهتمامه بالتفاصيل وتحسين الأداء خلى التطبيق يبرز في السوق. محترف من الدرجة الأولى!",
