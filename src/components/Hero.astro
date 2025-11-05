@@ -5,7 +5,7 @@ type Props = HeroProps;
 const { name, specialty, summary } = Astro.props;
 ---
 
-<section class="py-24 md:py-32" id="#hero">
+<section class="py-24 md:py-32 text-center" id="#hero">
   <h1
     id="hero-name"
     class="hero-name mb-12 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-16 md:text-9xl lg:text-[8rem] xl:text-[9rem]"
@@ -15,11 +15,11 @@ const { name, specialty, summary } = Astro.props;
   </h1>
   <p
     id="hero-specialty"
-    class="mb-12 font-serif text-xl leading-[36px] font-medium tracking-tight text-primary/80 sm:text-2xl md:text-3xl md:mb-16 text-center"
+    class="hero-specialty mb-12 font-serif text-xl leading-[36px] font-medium tracking-tight text-primary/80 sm:text-2xl md:text-3xl md:mb-16"
   >
     {specialty}
   </p>
-  <p id="hero-summary" class="mb-12 text-base font-normal text-neutral md:text-lg text-center max-w-3xl mx-auto">
+  <p id="hero-summary" class="hero-summary mb-12 text-base font-normal text-neutral md:text-lg max-w-3xl mx-auto">
     {summary}
   </p>
 
@@ -88,6 +88,16 @@ const { name, specialty, summary } = Astro.props;
 
   [dir="rtl"] .hero-name {
     direction: ltr !important;
+    text-align: center !important;
+  }
+
+  .hero-specialty,
+  .hero-summary {
+    text-align: center !important;
+  }
+
+  [dir="rtl"] .hero-specialty,
+  [dir="rtl"] .hero-summary {
     text-align: center !important;
   }
 

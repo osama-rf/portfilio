@@ -5,13 +5,13 @@
 <section
   class="cta-section flex flex-col items-center justify-center py-24 text-center"
 >
-    <h2 id="cta-title" class="mb-8 text-3xl font-bold md:text-4xl">
-      🚀 Ready to Build Your Success?
-    </h2>
+  <h2 id="cta-title" class="mb-8 text-3xl font-bold md:text-4xl">
+    🚀 Ready to Build Your Success?
+  </h2>
 
-    <h3 id="cta-subtitle" class="mb-8 text-xl md:text-2xl text-white/80 font-medium">
-      بكم أقدر أبدأ معك؟
-    </h3>
+  <h3 id="cta-subtitle" class="mb-8 text-xl md:text-2xl text-white/80 font-medium">
+    بكم أقدر أبدأ معك؟
+  </h3>
 
   <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-2xl border border-white/10 mx-auto max-w-lg mb-12">
     <div class="space-y-4">
@@ -20,7 +20,7 @@
       </p>
       <div class="text-4xl md:text-5xl font-bold text-primary">
         <span id="cta-price-amount">2849</span>
-        <span id="cta-price-currency" class="text-xl md:text-2xl text-white/80 mr-2">ريال</span>
+        <span id="cta-price-currency" class="text-xl md:text-2xl text-white/80 mr-2">ریال</span>
       </div>
       <p id="cta-price-note" class="text-base md:text-lg text-white/70 leading-relaxed">
         السعر النهائي يعتمد على حجم الفكرة والمزايا المطلوبة
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="mb-16">
+  <div class="mb-16 flex justify-center">
     <a
       id="cta-button"
       href="https://wa.me/966563913944?text=مرحباً، عندي فكرة وأبغى أعرف تفاصيل العرض."
@@ -49,31 +49,27 @@
         >Let's Turn Your Idea Into Reality</span
       >
     </a>
-
-    <!-- Trust Badges -->
-    <div class="mt-12 flex flex-wrap justify-center gap-8 items-center opacity-70">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-        <span class="text-sm text-neutral" id="trust-delivery">On-Time Delivery</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-        <span class="text-sm text-neutral" id="trust-quality">Quality Guaranteed</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
-          <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
-        </svg>
-        <span class="text-sm text-neutral" id="trust-support">24/7 Support</span>
-      </div>
-    </div>
   </div>
 </section>
+
+<style>
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+</style>
 
 <script>
   import { languageStore } from "@app/language-store";
