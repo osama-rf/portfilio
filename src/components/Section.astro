@@ -26,9 +26,10 @@ const { text, href } = Astro.props;
     const sectionTitleMapping: { [key: string]: string } = {
       'projects': content.nav.featuredProjects,
       'about': content.nav.aboutMe,
-      'testimonials': content.nav.testimonials
+      'testimonials': content.nav.testimonials,
+      'tech-partners': content.ui.techPartners
     };
-    
+
     Object.entries(sectionTitleMapping).forEach(([href, title]) => {
       const titleEl = document.getElementById(`section-title-${href}`);
       if (titleEl) {

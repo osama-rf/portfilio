@@ -21,10 +21,10 @@ export const SITE_CONFIG: SiteConfig = {
 export const TRANSLATIONS: Translations = {
   en: {
     nav: {
-      projects: "Projects",
-      about: "About",
-      featuredProjects: "Featured Projects",
-      aboutMe: "About Me",
+      projects: "Our Projects",
+      about: "About Us",
+      featuredProjects: "Our Projects",
+      aboutMe: "About Us",
       testimonials: "Testimonials",
     },
     ui: {
@@ -35,6 +35,16 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "Let's Chat on WhatsApp",
       ctaMain: "Ready to Build Your Success? 🚀",
       ctaSubtitle: "Let's Turn Your Idea Into Reality",
+      techPartners: "Tech Partners",
+      heroCTAPrimary: "Let's Build Your App",
+      heroCTASecondary: "View Our Work",
+      statProjects: "Projects Delivered",
+      statSatisfaction: "Client Satisfaction",
+      statSupport: "Support Available",
+      statPrice: "SAR Starting Price",
+      trustDelivery: "On-Time Delivery",
+      trustQuality: "Quality Guaranteed",
+      trustSupport: "24/7 Support",
     },
     pricing: {
       title: "How Much to Get Started?",
@@ -45,10 +55,10 @@ export const TRANSLATIONS: Translations = {
       ctaText: "Send Your Idea & Get Custom Quote",
     },
     hero: {
-      name: "Osama Refay",
+      name: "osama-labs",
       specialty: "Your Tech Partner for Turning Ideas into Success",
       summary:
-        "I help entrepreneurs and businesses turn ideas into mobile and web apps that actually work and scale.",
+        "We help entrepreneurs and businesses turn ideas into mobile and web apps that actually work and scale.",
       email: "youremail@example.com",
     },
     projects: [
@@ -105,9 +115,9 @@ export const TRANSLATIONS: Translations = {
     ],
     about: {
       description: `
-        I'm Osama Refay, a Saudi software engineer who loves building apps that make life easier.
-        From e-commerce to AI-powered platforms, I focus on clean UI, high performance, and scalability.
-        Co-founder of Mutfarid, builder of Glowpick and Zaai AI.
+        We're a Saudi software team that loves building apps that make life easier.
+        From e-commerce to AI-powered platforms, we focus on clean UI, high performance, and scalability.
+        Co-founders of Mutfarid, builders of Glowpick and Zaai AI.
       `,
       image: "/osama.webp",
     },
@@ -132,10 +142,10 @@ export const TRANSLATIONS: Translations = {
   },
   ar: {
     nav: {
-      projects: "مشاريعي",
-      about: "عنّي",
-      featuredProjects: "مشاريعي",
-      aboutMe: "عنّي",
+      projects: "مشاريعنا",
+      about: "عنّا",
+      featuredProjects: "مشاريعنا",
+      aboutMe: "عنّا",
       testimonials: "آراء العملاء",
     },
     ui: {
@@ -146,6 +156,16 @@ export const TRANSLATIONS: Translations = {
       whatsapp: "يلا نتواصل على الواتس",
       ctaMain: " جاهز نبني نجاحك؟" + " 🚀",
       ctaSubtitle: "يلا نحول فكرتك لواقع",
+      techPartners: "تقنياتنا",
+      heroCTAPrimary: "يلا نبني تطبيقك",
+      heroCTASecondary: "شاهد أعمالنا",
+      statProjects: "مشروع منجز",
+      statSatisfaction: "رضا العملاء",
+      statSupport: "دعم متوفر",
+      statPrice: "ريال سعر البداية",
+      trustDelivery: "تسليم في الوقت المحدد",
+      trustQuality: "جودة مضمونة",
+      trustSupport: "دعم 24/7",
     },
     pricing: {
       title: "محتاج موقع أو تطبيق احترافي لمشروعك؟",
@@ -156,10 +176,10 @@ export const TRANSLATIONS: Translations = {
       ctaText: "أرسل فكرتك وخذ عرض سعر مخصص",
     },
     hero: {
-      name: "أسامة الرفاعي",
+      name: "osama-labs",
       specialty: "شريكك التقني في تحويل افكارك لنجاحات",
       summary:
-        "أساعد رواد الأعمال والشركات يحولون أفكارهم لتطبيقات ويب وجوال تشتغل وتكبر معهم.",
+        "نساعد رواد الأعمال والشركات يحولون أفكارهم لتطبيقات ويب وجوال تشتغل وتكبر معهم.",
       email: "youremail@example.com",
     },
     projects: [
@@ -212,7 +232,7 @@ export const TRANSLATIONS: Translations = {
     ],
     about: {
       description: `
-        هلا! أنا أسامة رفاعي، مهندس برمجيات سعودي أحب أحول الأفكار لمنتجات تشتغل وتنجح.
+        هلا! أنا أسامة، مهندس برمجيات سعودي أحب أحول الأفكار لمنتجات تشتغل وتنجح.
         من المتاجر الإلكترونية لمنصات الذكاء الاصطناعي، تركيزي دايم على الواجهة النظيفة والأداء العالي
       `,
       image: "/osama.webp",

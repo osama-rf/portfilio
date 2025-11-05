@@ -1,0 +1,98 @@
+---
+import Section from "./Section.astro";
+
+const logos = [
+  { name: "AWS", src: "/tech-partners/Amazon Web Services_idS5TK0MYh_1.png" },
+  { name: "Expo", src: "/tech-partners/Expo_idgV7hO3ul_1.png" },
+  { name: "Meta", src: "/tech-partners/Meta_idlf4cVSsS_1.png" },
+  { name: "Next.js", src: "/tech-partners/Next.js_Logo_2.webp" },
+  { name: "Resend", src: "/tech-partners/Resend_Logo_1.png" },
+  { name: "Supabase", src: "/tech-partners/supabase.png" },
+];
+---
+
+<Section text="تقنياتنا" href="tech-partners">
+  <div class="tech-partners-wrapper">
+    <div class="tech-partners-scroll">
+      {[...logos, ...logos, ...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+        <div class="tech-partner-logo">
+          <img src={logo.src} alt={logo.name} />
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .tech-partners-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .tech-partners-scroll {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    animation: scroll 40s linear infinite;
+  }
+
+  .tech-partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 180px;
+    height: 90px;
+  }
+
+  .tech-partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    filter: brightness(1.2);
+  }
+
+  .tech-partner-logo:hover img {
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% / 6));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tech-partners-scroll {
+      gap: 4rem;
+    }
+
+    .tech-partner-logo {
+      width: 140px;
+      height: 70px;
+    }
+  }
+</style>

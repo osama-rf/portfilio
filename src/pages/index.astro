@@ -6,6 +6,7 @@ import Projects from "@components/Projects.astro";
 import CTA from "@components/CTA.astro";
 import About from "@components/About.astro";
 import Testimonials from "@components/Testimonials.astro";
+import TechPartners from "@components/TechPartners.astro";
 
 import "../styles/global.css";
 ---
@@ -14,6 +15,7 @@ import "../styles/global.css";
   <Hero {...SITE_CONTENT.hero} />
   <Projects projects={SITE_CONTENT.projects} />
   <Testimonials testimonials={SITE_CONTENT.testimonials} />
+  <TechPartners />
   <CTA />
   <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
 </Layout>
