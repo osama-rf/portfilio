@@ -27,7 +27,8 @@ const { text, href } = Astro.props;
       'projects': content.nav.featuredProjects,
       'about': content.nav.aboutMe,
       'testimonials': content.nav.testimonials,
-      'tech-partners': content.ui.techPartners
+      'tech-partners': content.ui.techPartners,
+      'business-card': content.ui.businessCardTitle || 'بطاقة الأعمال'
     };
 
     Object.entries(sectionTitleMapping).forEach(([href, title]) => {

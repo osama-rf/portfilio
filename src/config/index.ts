@@ -9,6 +9,7 @@ export const SITE_CONFIG: SiteConfig = {
   navLinks: [
     { text: "Projects", href: "#projects" },
     { text: "About", href: "#about" },
+    { text: "Business Card", href: "/business-card" },
   ],
   socialLinks: [
     { text: "LinkedIn", href: "https://linkedin.com/in/osama-alrefay" },
@@ -26,6 +27,7 @@ export const TRANSLATIONS: Translations = {
       featuredProjects: "Our Projects",
       aboutMe: "About Us",
       testimonials: "Testimonials",
+      businessCard: "Business Card",
     },
     ui: {
       email: "Email",
@@ -45,6 +47,10 @@ export const TRANSLATIONS: Translations = {
       trustDelivery: "On-Time Delivery",
       trustQuality: "Quality Guaranteed",
       trustSupport: "24/7 Support",
+      businessCardTagline: "Your Tech Partner for Turning Ideas into Success",
+      businessCardScan: "Scan the code to visit our website",
+      businessCardCTA: "Contact Us Now",
+      businessCardTitle: "Business Card",
     },
     pricing: {
       title: "How Much to Get Started?",
@@ -145,6 +151,7 @@ export const TRANSLATIONS: Translations = {
       projects: "مشاريعنا",
       about: "عنّا",
       featuredProjects: "مشاريعنا",
+      businessCard: "بطاقة الأعمال",
       aboutMe: "عنّا",
       testimonials: "آراء العملاء",
     },
@@ -166,6 +173,10 @@ export const TRANSLATIONS: Translations = {
       trustDelivery: "تسليم في الوقت المحدد",
       trustQuality: "جودة مضمونة",
       trustSupport: "دعم 24/7",
+      businessCardTagline: "شريكك التقني في تحويل افكارك لنجاحات",
+      businessCardScan: "امسح الكود لزيارة موقعنا",
+      businessCardCTA: "تواصل معنا الآن",
+      businessCardTitle: "بطاقة الأعمال",
     },
     pricing: {
       title: "محتاج موقع أو تطبيق احترافي لمشروعك؟",
