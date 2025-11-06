@@ -13,12 +13,17 @@ const { name, specialty, summary } = Astro.props;
   >
     {name}
   </h1>
-  <p
-    id="hero-specialty"
-    class="hero-specialty mb-12 font-serif text-xl leading-[36px] font-medium tracking-tight text-primary/80 sm:text-2xl md:text-3xl md:mb-16"
-  >
-    {specialty}
-  </p>
+  <div class="inline-block mb-12 md:mb-16 relative">
+    <p
+      id="hero-specialty"
+      class="hero-specialty font-serif text-xl leading-[36px] font-medium tracking-tight text-primary/80 sm:text-2xl md:text-3xl relative pb-3"
+    >
+      {specialty}
+    </p>
+    <svg class="wavy-underline absolute bottom-0 left-0 w-full" height="12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,8 Q10,2 20,8 T40,8 T60,8 T80,8 T100,8 T120,8 T140,8 T160,8 T180,8 T200,8 T220,8 T240,8 T260,8 T280,8 T300,8 T320,8 T340,8 T360,8 T380,8 T400,8 T420,8 T440,8 T460,8 T480,8 T500,8 T520,8 T540,8 T560,8 T580,8 T600,8 T620,8 T640,8 T660,8 T680,8 T700,8 T720,8 T740,8 T760,8 T780,8 T800,8 T820,8 T840,8 T860,8 T880,8 T900,8 T920,8 T940,8 T960,8 T980,8 T1000,8" stroke="#f093fb" stroke-width="3" fill="none"/>
+    </svg>
+  </div>
   <p id="hero-summary" class="hero-summary mb-12 text-base font-normal text-neutral md:text-lg max-w-3xl mx-auto">
     {summary}
   </p>
