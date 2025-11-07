@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Your website URL - change this to your actual deployed URL
-const websiteURL = 'https://osama-rf.vercel.app';
+const websiteURL = 'https://osama-lab.com/';
 
 // QR Code options with your theme colors
 const options = {

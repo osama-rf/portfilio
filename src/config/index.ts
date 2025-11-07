@@ -230,8 +230,8 @@ export const TRANSLATIONS: Translations = {
       {
         name: "Zaai AI",
         summary: "حلول ذكاء اصطناعي للأعمال تشمل التحليلات والأتمتة والتوصيات.",
-        linkPreview: "zaai.vercel.app",
-        image: "/zaai-ai.png",
+        linkPreview: "https://zaai.vercel.app/ar",
+        image: "/zaai-og.png",
       },
       {
         name: "مدارس دريم العالمية",
