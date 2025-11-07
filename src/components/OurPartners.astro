@@ -1,0 +1,97 @@
+---
+import Section from "./Section.astro";
+
+const partners = [
+  { name: "Maliha", src: "/maliha.png" },
+  { name: "Kedan", src: "/kedan-logo.svg" },
+  { name: "Glowpick", src: "/glowpick.png" },
+  { name: "Zaai AI", src: "/zaai-og.png" },
+  { name: "Dream International Schools", src: "/dis.png" },
+];
+---
+
+<Section text="شركائنا" href="our-partners">
+  <div class="our-partners-wrapper">
+    <div class="our-partners-scroll">
+      {[...partners, ...partners, ...partners, ...partners, ...partners, ...partners].map((partner) => (
+        <div class="our-partner-logo">
+          <img src={partner.src} alt={partner.name} />
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .our-partners-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .our-partners-scroll {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    animation: scroll 40s linear infinite;
+  }
+
+  .our-partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 180px;
+    height: 90px;
+  }
+
+  .our-partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    filter: brightness(1.2);
+  }
+
+  .our-partner-logo:hover img {
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% / 6));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .our-partners-scroll {
+      gap: 4rem;
+    }
+
+    .our-partner-logo {
+      width: 140px;
+      height: 70px;
+    }
+  }
+</style>
