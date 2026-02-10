@@ -17,6 +17,12 @@ importers:
       '@fontsource/be-vietnam-pro':
         specifier: ^5.1.0
         version: 5.1.0
+      '@fontsource/ibm-plex-sans':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/ibm-plex-sans-arabic':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@tailwindcss/vite':
         specifier: ^4.1.10
         version: 4.1.10(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.5.1))
@@ -289,6 +295,12 @@ packages:
 
   '@fontsource/be-vietnam-pro@5.1.0':
     resolution: {integrity: sha512-7/bvo9Rxexnqh52W5JuLZWOV7JR6l71QJW360HQ89rTPZIY/qLMB212pfoYXGPYBTsttTBS+e22/wEurghp6oA==}
+
+  '@fontsource/ibm-plex-sans-arabic@5.2.8':
+    resolution: {integrity: sha512-zqBKzZt6WTnCEUlgnRMQ7arRjd0t59gEWWIcIgQIQNThsHMp36i9/4X5YvpmTZs33oJO6hQvLSTkh001XsgzoQ==}
+
+  '@fontsource/ibm-plex-sans@5.2.8':
+    resolution: {integrity: sha512-eztSXjDhPhcpxNIiGTgMebdLP9qS4rWkysuE1V7c+DjOR0qiezaiDaTwQE7bTnG5HxAY/8M43XKDvs3cYq6ZYQ==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -2439,6 +2451,10 @@ snapshots:
   '@fontsource-variable/gabarito@5.1.0': {}
 
   '@fontsource/be-vietnam-pro@5.1.0': {}
+
+  '@fontsource/ibm-plex-sans-arabic@5.2.8': {}
+
+  '@fontsource/ibm-plex-sans@5.2.8': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
