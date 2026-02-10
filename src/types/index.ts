@@ -65,7 +65,8 @@ export interface AboutProps {
 export interface PricingProps {
   title: string;
   mvpText: string;
-  priceAmount: string;
+  priceFrom: string;
+  priceTo: string;
   priceCurrency: string;
   note: string;
   ctaText: string;
@@ -78,4 +79,27 @@ export interface HeaderProps {
 export interface TestimonialProps {
   content: string;
   platform: string;
+}
+
+export interface ProblemItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface SolutionFeature {
+  icon: string;
+  text: string;
+}
+
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export interface WhyUsItem {
+  icon: string;
+  title: string;
+  description: string;
 }

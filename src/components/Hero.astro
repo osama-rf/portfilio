@@ -2,133 +2,105 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name, specialty, summary } = Astro.props;
+const { specialty, summary } = Astro.props;
 ---
 
-<section class="py-24 md:py-32 text-center" id="#hero">
-  <h1
-    id="hero-name"
-    class="hero-name mb-12 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-16 md:text-9xl lg:text-[8rem] xl:text-[9rem]"
-    dir="ltr"
-  >
-    {name}
-  </h1>
-  <div class="inline-block mb-12 md:mb-16 relative">
-    <p
+<section class="relative min-h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden" id="#hero">
+  <!-- Background effects -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/[0.04] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-violet-500/[0.03] rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="relative z-10 px-4 max-w-5xl mx-auto">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-5 py-2.5 mb-10 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span id="hero-badge" class="text-sm font-medium text-primary">نقبل مشاريع جديدة الآن</span>
+    </div>
+
+    <!-- Main headline -->
+    <h1
       id="hero-specialty"
-      class="hero-specialty font-serif text-xl leading-[36px] font-medium tracking-tight text-primary/80 sm:text-2xl md:text-3xl relative pb-3"
+      class="hero-headline font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.15]"
     >
       {specialty}
+    </h1>
+
+    <!-- Subheadline -->
+    <p id="hero-summary" class="hero-summary text-lg md:text-xl text-neutral max-w-2xl mx-auto leading-relaxed mb-12">
+      {summary}
     </p>
-    <svg class="wavy-underline absolute bottom-0 left-0 w-full" height="12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,8 Q10,2 20,8 T40,8 T60,8 T80,8 T100,8 T120,8 T140,8 T160,8 T180,8 T200,8 T220,8 T240,8 T260,8 T280,8 T300,8 T320,8 T340,8 T360,8 T380,8 T400,8 T420,8 T440,8 T460,8 T480,8 T500,8 T520,8 T540,8 T560,8 T580,8 T600,8 T620,8 T640,8 T660,8 T680,8 T700,8 T720,8 T740,8 T760,8 T780,8 T800,8 T820,8 T840,8 T860,8 T880,8 T900,8 T920,8 T940,8 T960,8 T980,8 T1000,8" stroke="#f093fb" stroke-width="3" fill="none"/>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <a
+        href="https://wa.me/966563913944?text=مرحباً، عندي فكرة وأبغى أعرف تفاصيل العرض."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hero-cta-primary group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-bold text-xl rounded-full shadow-2xl hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105"
+      >
+        <svg class="w-7 h-7 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"></path>
+        </svg>
+        <span id="hero-cta-primary">ابدأ مشروعك الآن</span>
+      </a>
+
+      <a
+        href="#projects"
+        class="inline-flex items-center gap-2 px-8 py-5 bg-white/5 backdrop-blur-sm text-white font-semibold text-lg rounded-full border border-white/10 hover:bg-white/10 hover:border-primary/30 transition-all duration-300"
+      >
+        <span id="hero-cta-secondary">شوف النتيجة</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-xl mx-auto">
+      <div class="stat-card inline-flex items-center gap-2 py-2.5 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+        <span class="text-lg font-bold text-white">6+</span>
+        <span class="text-xs text-neutral/70" id="stat-projects">تطبيق أطلقناه</span>
+      </div>
+      <div class="stat-card inline-flex items-center gap-2 py-2.5 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+        <span class="text-lg font-bold text-white">100%</span>
+        <span class="text-xs text-neutral/70" id="stat-satisfaction">رضا العملاء</span>
+      </div>
+      <div class="stat-card inline-flex items-center gap-2 py-2.5 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+        <span class="text-lg font-bold text-white">14</span>
+        <span class="text-xs text-neutral/70" id="stat-support">يوم للتسليم</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+    <svg class="w-6 h-6 text-neutral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
     </svg>
   </div>
-  <p id="hero-summary" class="hero-summary mb-12 text-base font-normal text-neutral md:text-lg max-w-3xl mx-auto">
-    {summary}
-  </p>
-
-  <!-- CTA Buttons -->
-  <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 mb-8">
-    <a
-      href="https://wa.me/966563913944?text=مرحباً، عندي فكرة وأبغى أعرف تفاصيل العرض."
-      target="_blank"
-      rel="noopener noreferrer"
-      class="hero-cta-primary group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 animate-pulse-slow"
-    >
-      <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"></path>
-      </svg>
-      <span id="hero-cta-primary">Let's Build Your App</span>
-    </a>
-
-    <a
-      href="#projects"
-      class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-full border-2 border-white/20 hover:bg-white/20 hover:border-primary/50 transition-all duration-300 hover:scale-105"
-    >
-      <span id="hero-cta-secondary">View Our Work</span>
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Social Proof Stats -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-    <div class="text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300">
-      <div class="text-3xl md:text-4xl font-bold text-primary mb-2">6+</div>
-      <div class="text-sm text-neutral" id="stat-projects">Projects Delivered</div>
-    </div>
-    <div class="text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300">
-      <div class="text-3xl md:text-4xl font-bold text-primary mb-2">100%</div>
-      <div class="text-sm text-neutral" id="stat-satisfaction">Client Satisfaction</div>
-    </div>
-    <div class="text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300">
-      <div class="text-3xl md:text-4xl font-bold text-primary mb-2">24/7</div>
-      <div class="text-sm text-neutral" id="stat-support">Support Available</div>
-    </div>
-    <div class="text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300">
-      <div class="text-3xl md:text-4xl font-bold text-primary mb-2">2849</div>
-      <div class="text-sm text-neutral" id="stat-price">SAR Starting Price</div>
-    </div>
-  </div>
-
 </section>
 
 <style>
-  .hero-name {
-    direction: ltr !important;
+  .hero-headline {
     text-align: center !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background: linear-gradient(180deg, #f1f5f9 0%, #94a3b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    white-space: nowrap;
   }
 
-  [dir="rtl"] .hero-name {
-    direction: ltr !important;
+  [dir="rtl"] .hero-headline {
     text-align: center !important;
   }
 
-  .hero-specialty,
   .hero-summary {
     text-align: center !important;
   }
 
-  [dir="rtl"] .hero-specialty,
   [dir="rtl"] .hero-summary {
     text-align: center !important;
-  }
-
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  @keyframes pulse-slow {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.9;
-    }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 3s ease-in-out infinite;
   }
 
   .hero-cta-primary {
@@ -142,6 +114,37 @@ const { name, specialty, summary } = Astro.props;
   .hero-cta-primary span {
     color: white !important;
   }
+
+  .stat-card {
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    border-color: rgba(99, 102, 241, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  /* Light theme */
+  html.light .hero-headline {
+    background: linear-gradient(180deg, #0f172a 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  html.light .stat-card {
+    border-color: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  html.light .stat-card:hover {
+    border-color: rgba(99, 102, 241, 0.2);
+    background: rgba(99, 102, 241, 0.04);
+  }
+
+  html.light .stat-card .text-white {
+    color: #0f172a !important;
+  }
 </style>
 
 <script>
@@ -151,34 +154,25 @@ const { name, specialty, summary } = Astro.props;
     const content = languageStore.content.hero;
     const ui = languageStore.content.ui;
 
-    const nameEl = document.getElementById('hero-name');
     const specialtyEl = document.getElementById('hero-specialty');
     const summaryEl = document.getElementById('hero-summary');
+    const badgeEl = document.getElementById('hero-badge');
     const ctaPrimaryEl = document.getElementById('hero-cta-primary');
     const ctaSecondaryEl = document.getElementById('hero-cta-secondary');
     const statProjectsEl = document.getElementById('stat-projects');
     const statSatisfactionEl = document.getElementById('stat-satisfaction');
     const statSupportEl = document.getElementById('stat-support');
-    const statPriceEl = document.getElementById('stat-price');
 
-    if (nameEl) {
-      nameEl.textContent = content.name;
-      // Ensure LTR direction is always set
-      nameEl.setAttribute('dir', 'ltr');
-    }
     if (specialtyEl) specialtyEl.textContent = content.specialty;
     if (summaryEl) summaryEl.textContent = content.summary;
-    if (ctaPrimaryEl) ctaPrimaryEl.textContent = ui.heroCTAPrimary || "Let's Build Your App";
-    if (ctaSecondaryEl) ctaSecondaryEl.textContent = ui.heroCTASecondary || "View Our Work";
-    if (statProjectsEl) statProjectsEl.textContent = ui.statProjects || "Projects Delivered";
-    if (statSatisfactionEl) statSatisfactionEl.textContent = ui.statSatisfaction || "Client Satisfaction";
-    if (statSupportEl) statSupportEl.textContent = ui.statSupport || "Support Available";
-    if (statPriceEl) statPriceEl.textContent = ui.statPrice || "SAR Starting Price";
+    if (badgeEl) badgeEl.textContent = ui.heroBadge || "متاح للمشاريع الجديدة";
+    if (ctaPrimaryEl) ctaPrimaryEl.textContent = ui.heroCTAPrimary || "اطلب عرض سعر";
+    if (ctaSecondaryEl) ctaSecondaryEl.textContent = ui.heroCTASecondary || "شوف أعمالنا";
+    if (statProjectsEl) statProjectsEl.textContent = ui.statProjects || "تطبيق أطلقناه";
+    if (statSatisfactionEl) statSatisfactionEl.textContent = ui.statSatisfaction || "رضا العملاء";
+    if (statSupportEl) statSupportEl.textContent = ui.statSupport || "دعم مستمر";
   };
 
-  // Listen for language changes
   window.addEventListener('language-change', updateHero);
-  
-  // Initialize
   updateHero();
 </script>

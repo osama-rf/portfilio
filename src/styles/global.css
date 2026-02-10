@@ -1,33 +1,27 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Arabic';
-  src: local('Noto Sans Arabic'), local('Arabic UI'), local('Segoe UI');
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
-}
-
 @theme {
-  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
   --font-serif: "Gabarito Variable", ui-serif, serif;
-  --font-arabic: "Arabic", "Noto Sans Arabic", "Arabic UI", system-ui, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
 
   /* Dark theme colors */
-  --color-primary: #2563eb;
+  --color-primary: #6366f1;
   --color-neutral: #94a3b8;
-  --color-white: #e2e8f0;
-  --color-black: #0e141b;
+  --color-white: #f1f5f9;
+  --color-black: #0a0f1a;
 
   /* Light theme colors */
-  --color-light-bg: #ffffff;
-  --color-light-text: #1f2937;
-  --color-light-neutral: #6b7280;
-  --color-pink-500: #ec4899;
-  --color-pink-400: #f472b6;
-  --color-pink-600: #db2777;
-  --color-pink-gradient-start: #ec4899;
-  --color-pink-gradient-end: #f472b6;
-  
-  /* Enhanced vibrant colors */
+  --color-light-bg: #fafbfc;
+  --color-light-text: #0f172a;
+  --color-light-neutral: #64748b;
+  --color-pink-500: #6366f1;
+  --color-pink-400: #818cf8;
+  --color-pink-600: #4f46e5;
+  --color-pink-gradient-start: #6366f1;
+  --color-pink-gradient-end: #8b5cf6;
+
+  /* Professional accent colors */
   --color-accent-blue: #3b82f6;
   --color-accent-purple: #8b5cf6;
   --color-accent-green: #10b981;
@@ -87,6 +81,11 @@ html[dir="rtl"] * {
   text-align: right;
 }
 
+html[dir="rtl"] .text-center,
+html[dir="rtl"] .text-center * {
+  text-align: center !important;
+}
+
 html[dir="rtl"] .text-left {
   text-align: right !important;
 }
@@ -118,20 +117,20 @@ html[dir="rtl"] .flex-row {
   --bg-color: var(--color-light-bg);
   --text-color: var(--color-light-text);
   --text-muted: var(--color-light-neutral);
-  --primary-gradient: linear-gradient(135deg, var(--color-pink-gradient-start), var(--color-pink-gradient-end));
-  --primary-color: var(--color-pink-500);
-  --accent-gradient: linear-gradient(135deg, var(--color-pink-500), var(--color-accent-purple));
-  --success-gradient: linear-gradient(135deg, var(--color-accent-green), var(--color-pink-500));
+  --primary-gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --primary-color: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --success-gradient: linear-gradient(135deg, #10b981, #6366f1);
 }
 
 .dark {
   --bg-color: var(--color-black);
   --text-color: var(--color-white);
   --text-muted: var(--color-neutral);
-  --primary-gradient: linear-gradient(135deg, var(--color-primary), var(--color-pink-500));
-  --primary-color: var(--color-primary);
-  --accent-gradient: linear-gradient(135deg, var(--color-accent-purple), var(--color-pink-500));
-  --success-gradient: linear-gradient(135deg, var(--color-accent-green), var(--color-pink-500));
+  --primary-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --primary-color: #6366f1;
+  --accent-gradient: linear-gradient(135deg, #8b5cf6, #6366f1);
+  --success-gradient: linear-gradient(135deg, #10b981, #6366f1);
 }
 
 /* Light theme styles */
@@ -194,7 +193,7 @@ html.light .text-white\/70 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-pink-500), var(--color-pink-400), var(--color-accent-purple));
+  background: linear-gradient(90deg, #6366f1, #818cf8, #8b5cf6);
   border-radius: 2px;
 }
 
@@ -209,7 +208,7 @@ html.light .text-white\/70 {
 }
 
 html.light .project-card:hover {
-  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.15);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.12);
 }
 
 /* Gradient text effects */
@@ -267,11 +266,11 @@ html.light .lang-switch:hover {
 
 /* CTA Section Styles */
 .cta-section {
-  background: radial-gradient(circle at center, rgba(236, 72, 153, 0.05), transparent);
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.06), transparent);
 }
 
 html.light .cta-section {
-  background: radial-gradient(circle at center, rgba(236, 72, 153, 0.08), transparent);
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.08), transparent);
 }
 
 /* CTA Title Color */
@@ -435,7 +434,7 @@ html.light #ebook-button svg {
   
   [data-mobile-card-link]:active .project-card {
     border-color: var(--color-primary) !important;
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2) !important;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2) !important;
   }
 }
 

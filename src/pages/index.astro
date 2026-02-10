@@ -2,11 +2,14 @@
 import { SITE_CONTENT } from "@config";
 import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
-import Projects from "@components/Projects.astro";
-import CTA from "@components/CTA.astro";
-import About from "@components/About.astro";
+import Problem from "@components/Problem.astro";
+import Solution from "@components/Solution.astro";
+import Industries from "@components/Industries.astro";
+import Process from "@components/Process.astro";
+import ProductShowcase from "@components/ProductShowcase.astro";
 import Testimonials from "@components/Testimonials.astro";
-import TechPartners from "@components/TechPartners.astro";
+import WhyUs from "@components/WhyUs.astro";
+import CTA from "@components/CTA.astro";
 import OurPartners from "@components/OurPartners.astro";
 
 import "../styles/global.css";
@@ -14,10 +17,13 @@ import "../styles/global.css";
 
 <Layout>
   <Hero {...SITE_CONTENT.hero} />
-  <Projects projects={SITE_CONTENT.projects} />
+  <Problem />
+  <Solution />
+  <Industries />
+  <ProductShowcase />
+  <Process />
   <Testimonials testimonials={SITE_CONTENT.testimonials} />
-  <OurPartners />
-  <TechPartners />
+  <WhyUs />
   <CTA />
-  <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
+  <OurPartners />
 </Layout>

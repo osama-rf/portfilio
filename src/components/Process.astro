@@ -1,0 +1,81 @@
+---
+import { PROCESS_STEPS } from "@config";
+
+const steps = PROCESS_STEPS.ar;
+---
+
+<section id="process" class="py-16">
+  <div class="text-center mb-20">
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">طريقة عملنا</p>
+    <h2
+      id="process-title"
+      class="text-3xl md:text-5xl font-bold font-serif gradient-text-primary mb-6"
+    >
+      كيف نشتغل؟
+    </h2>
+    <p id="process-subtitle" class="text-lg text-neutral max-w-xl mx-auto leading-relaxed">
+      من أول رسالة واتساب لتطبيقك على المتجر — 3 خطوات بس.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="process-steps">
+    {
+      steps.map(({ number, title, description }, index) => (
+        <div
+          class="process-step group text-center rounded-3xl border border-primary/10 bg-gradient-to-b from-primary/5 to-transparent p-10 transition-all duration-500 hover:border-primary/25 hover:from-primary/10 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 relative"
+          data-process-index={index}
+        >
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 mb-8 group-hover:scale-110 transition-transform duration-300">
+            <span class="process-number text-3xl font-bold text-primary">{number}</span>
+          </div>
+          <h3 class="process-title text-xl md:text-2xl font-bold text-white mb-4">{title}</h3>
+          <p class="process-description text-neutral leading-relaxed text-sm max-w-xs mx-auto">{description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .process-step {
+    text-align: center !important;
+  }
+  [dir="rtl"] .process-step {
+    text-align: center !important;
+  }
+  [dir="rtl"] .process-step * {
+    text-align: center !important;
+  }
+</style>
+
+<script>
+  import { languageStore } from "@app/language-store";
+  import { PROCESS_STEPS } from "@config";
+
+  const updateProcess = () => {
+    const ui = languageStore.content.ui;
+    const lang = languageStore.language as "en" | "ar";
+    const steps = PROCESS_STEPS[lang];
+
+    const titleEl = document.getElementById("process-title");
+    const subtitleEl = document.getElementById("process-subtitle");
+
+    if (titleEl) titleEl.textContent = ui.processTitle || "How We Work";
+    if (subtitleEl) subtitleEl.textContent = ui.processSubtitle || "Clear from day one. No surprises.";
+
+    const stepEls = document.querySelectorAll("[data-process-index]");
+    stepEls.forEach((el, index) => {
+      const step = steps[index];
+      if (!step) return;
+      const titleEl = el.querySelector(".process-title");
+      const descEl = el.querySelector(".process-description");
+      const numEl = el.querySelector(".process-number");
+      if (titleEl) titleEl.textContent = step.title;
+      if (descEl) descEl.textContent = step.description;
+      if (numEl) numEl.textContent = step.number;
+    });
+  };
+
+  window.addEventListener("language-change", updateProcess);
+  updateProcess();
+</script>

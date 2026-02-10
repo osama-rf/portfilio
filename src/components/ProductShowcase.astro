@@ -1,0 +1,130 @@
+---
+---
+
+<section id="projects" class="py-16">
+  <div class="text-center mb-20">
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">شوف النتيجة</p>
+    <h2
+      id="showcase-title"
+      class="text-3xl md:text-5xl font-bold font-serif gradient-text-primary mb-6"
+    >
+      تطبيق + لوحة تحكم خلال 14 يوم
+    </h2>
+    <p id="showcase-subtitle" class="text-lg text-neutral max-w-2xl mx-auto leading-relaxed">
+      عميلك يحمّل التطبيق وأنت تدير كل شيء من لوحة التحكم. هذا اللي نسلمك إياه.
+    </p>
+  </div>
+
+  <!-- Mobile App Screens -->
+  <div class="mb-16">
+    <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+        </svg>
+      </div>
+      <h3 id="showcase-app-label" class="text-xl font-bold text-white">تطبيق العميل</h3>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+      <div class="showcase-phone relative group">
+        <div class="relative rounded-[2rem] border-2 border-white/10 bg-white/5 p-2 shadow-2xl shadow-primary/10 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-primary/20 overflow-hidden max-w-[260px]">
+          <img
+            src="/features/app.png"
+            alt="تطبيق الجوال - الصفحة الرئيسية"
+            class="w-full rounded-[1.5rem]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="showcase-phone relative group">
+        <div class="relative rounded-[2rem] border-2 border-white/10 bg-white/5 p-2 shadow-2xl shadow-primary/10 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-primary/20 overflow-hidden max-w-[260px]">
+          <img
+            src="/features/app2.png"
+            alt="تطبيق الجوال - قائمة الخدمات"
+            class="w-full rounded-[1.5rem]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div>
+    <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+        </svg>
+      </div>
+      <h3 id="showcase-dashboard-label" class="text-xl font-bold text-white">لوحة التحكم</h3>
+    </div>
+
+    <div class="group max-w-4xl mx-auto">
+      <div class="relative rounded-2xl border-2 border-white/10 bg-white/5 p-2 shadow-2xl shadow-primary/10 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-primary/20 overflow-hidden">
+        <img
+          src="/features/admin-dashboard.png"
+          alt="لوحة تحكم الإدارة"
+          class="w-full rounded-xl"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom tagline -->
+  <div class="text-center mt-16">
+    <p id="showcase-tagline" class="text-neutral text-base max-w-xl mx-auto leading-relaxed">
+      كل مشروع نسلمه يشمل تطبيق جوال كامل + لوحة تحكم لإدارة المحتوى والمستخدمين والإشعارات
+    </p>
+  </div>
+</section>
+
+<style>
+  .showcase-phone {
+    transition: transform 0.5s ease;
+  }
+  .showcase-phone:hover {
+    transform: translateY(-8px);
+  }
+
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+
+  html.light .showcase-phone > div,
+  html.light .group > div {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  html.light .showcase-phone:hover > div,
+  html.light .group:hover > div {
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+</style>
+
+<script>
+  import { languageStore } from "@app/language-store";
+
+  const updateShowcase = () => {
+    const ui = languageStore.content.ui;
+
+    const titleEl = document.getElementById("showcase-title");
+    const subtitleEl = document.getElementById("showcase-subtitle");
+    const appLabelEl = document.getElementById("showcase-app-label");
+    const dashboardLabelEl = document.getElementById("showcase-dashboard-label");
+    const taglineEl = document.getElementById("showcase-tagline");
+
+    if (titleEl) titleEl.textContent = ui.showcaseTitle || "تطبيق + لوحة تحكم خلال 14 يوم";
+    if (subtitleEl) subtitleEl.textContent = ui.showcaseSubtitle || "عميلك يحمّل التطبيق وأنت تدير كل شيء من لوحة التحكم. هذا اللي نسلمك إياه.";
+    if (appLabelEl) appLabelEl.textContent = ui.showcaseAppLabel || "تطبيق العميل";
+    if (dashboardLabelEl) dashboardLabelEl.textContent = ui.showcaseDashboardLabel || "لوحة التحكم";
+    if (taglineEl) taglineEl.textContent = ui.showcaseTagline || "كل مشروع نسلمه يشمل تطبيق جوال كامل + لوحة تحكم لإدارة المحتوى والمستخدمين والإشعارات";
+  };
+
+  window.addEventListener("language-change", updateShowcase);
+  updateShowcase();
+</script>

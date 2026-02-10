@@ -1,0 +1,95 @@
+---
+import { SOLUTION_FEATURES } from "@config";
+
+const features = SOLUTION_FEATURES.ar;
+---
+
+<section id="solution" class="py-16">
+  <div class="text-center mb-20">
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">اللي تاخذه</p>
+    <h2
+      id="solution-title"
+      class="text-3xl md:text-5xl font-bold font-serif gradient-text-primary mb-6"
+    >
+      وش تاخذ بالضبط؟
+    </h2>
+    <p id="solution-description" class="text-lg text-neutral max-w-2xl mx-auto leading-relaxed">
+      تطبيق جوال كامل + لوحة تحكم تدير كل شيء. كل هذا خلال 14 يوم فقط.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-6 max-w-lg mx-auto" id="solution-grid">
+    {
+      features.map(({ icon, text }, index) => (
+        <div
+          class="solution-card group flex flex-col items-center text-center rounded-3xl border border-primary/10 bg-gradient-to-b from-primary/5 to-transparent p-8 md:p-10 transition-all duration-500 hover:border-primary/25 hover:from-primary/10 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
+          data-solution-index={index}
+        >
+          <div class="solution-icon inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-5 group-hover:scale-110 transition-transform duration-300">
+            {icon === "phone" && (
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+              </svg>
+            )}
+            {icon === "dashboard" && (
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+              </svg>
+            )}
+            {icon === "bell" && (
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+            )}
+            {icon === "rocket" && (
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              </svg>
+            )}
+          </div>
+          <span class="solution-text text-base md:text-lg font-semibold text-white">{text}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .solution-card {
+    text-align: center !important;
+  }
+  [dir="rtl"] .solution-card {
+    text-align: center !important;
+  }
+  [dir="rtl"] .solution-card * {
+    text-align: center !important;
+  }
+</style>
+
+<script>
+  import { languageStore } from "@app/language-store";
+  import { SOLUTION_FEATURES } from "@config";
+
+  const updateSolution = () => {
+    const ui = languageStore.content.ui;
+    const lang = languageStore.language as "en" | "ar";
+    const features = SOLUTION_FEATURES[lang];
+
+    const titleEl = document.getElementById("solution-title");
+    const descEl = document.getElementById("solution-description");
+
+    if (titleEl) titleEl.textContent = ui.solutionTitle || "Fast Execution. Zero Shortcuts.";
+    if (descEl) descEl.textContent = ui.solutionDescription || "";
+
+    const cards = document.querySelectorAll("[data-solution-index]");
+    cards.forEach((card, index) => {
+      const feature = features[index];
+      if (!feature) return;
+      const textEl = card.querySelector(".solution-text");
+      if (textEl) textEl.textContent = feature.text;
+    });
+  };
+
+  window.addEventListener("language-change", updateSolution);
+  updateSolution();
+</script>

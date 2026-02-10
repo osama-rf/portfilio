@@ -3,41 +3,50 @@
 ---
 
 <section
-  class="cta-section flex flex-col items-center justify-center py-24 text-center"
+  id="cta-section"
+  class="cta-section relative flex flex-col items-center justify-center py-20 text-center overflow-hidden"
 >
-  <h2 id="cta-title" class="mb-8 text-3xl font-bold md:text-4xl">
-    🚀 Ready to Build Your Success?
-  </h2>
-
-  <h3 id="cta-subtitle" class="mb-8 text-xl md:text-2xl text-white/80 font-medium">
-    بكم أقدر أبدأ معك؟
-  </h3>
-
-  <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-2xl border border-white/10 mx-auto max-w-lg mb-12">
-    <div class="space-y-4">
-      <p id="cta-mvp-text" class="text-xl md:text-2xl text-white/90 font-medium">
-        النسخة الأولية (MVP) تبدأ من
-      </p>
-      <div class="text-4xl md:text-5xl font-bold text-primary">
-        <span id="cta-price-amount">2849</span>
-        <span id="cta-price-currency" class="text-xl md:text-2xl text-white/80 mr-2">ریال</span>
-      </div>
-      <p id="cta-price-note" class="text-base md:text-lg text-white/70 leading-relaxed">
-        السعر النهائي يعتمد على حجم الفكرة والمزايا المطلوبة
-      </p>
-    </div>
+  <!-- Background glow -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div class="w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
   </div>
 
-  <div class="mb-16 flex justify-center">
+  <div class="relative z-10">
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">ابدأ الآن</p>
+    <h2 id="cta-title" class="mb-4 text-4xl font-bold font-serif md:text-6xl gradient-text-primary">
+      فكرتك تستاهل تطبيق
+    </h2>
+
+    <p id="cta-subtitle" class="mb-14 text-xl md:text-2xl text-neutral font-medium max-w-xl mx-auto leading-relaxed">
+      أرسل لنا فكرتك على واتساب وخلال 14 يوم تطبيقك يكون جاهز
+    </p>
+
+    <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-10 md:p-14 shadow-2xl border border-white/10 mx-auto max-w-md mb-14">
+      <div class="space-y-5">
+        <p id="cta-mvp-text" class="text-lg md:text-xl text-neutral font-medium">
+          تطبيق + لوحة تحكم
+        </p>
+        <div class="flex items-baseline justify-center gap-2 text-primary tracking-tight">
+          <span id="cta-price-from" class="text-4xl md:text-5xl font-bold">5,600</span>
+          <span class="text-2xl md:text-3xl text-neutral/50">—</span>
+          <span id="cta-price-to" class="text-4xl md:text-5xl font-bold">9,600</span>
+          <span id="cta-price-currency" class="text-xl md:text-2xl text-neutral mr-1">ريال</span>
+        </div>
+        <p id="cta-price-note" class="text-sm md:text-base text-neutral/70 leading-relaxed max-w-sm mx-auto">
+          السعر يعتمد على حجم المشروع والمميزات المطلوبة
+        </p>
+      </div>
+    </div>
+
     <a
       id="cta-button"
       href="https://wa.me/966563913944?text=مرحباً، عندي فكرة وأبغى أعرف تفاصيل العرض."
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex min-w-max items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 transition-all duration-300 hover:scale-105"
+      class="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 px-12 py-5 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-indigo-500/40"
     >
       <svg
-        class="h-6 w-6 flex-shrink-0 text-white"
+        class="h-7 w-7 flex-shrink-0 text-white"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -45,31 +54,12 @@
           d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
         ></path>
       </svg>
-      <span id="cta-button-text" class="text-lg font-bold text-white"
-        >Let's Turn Your Idea Into Reality</span
+      <span id="cta-button-text" class="text-xl font-bold text-white"
+        >أرسل فكرتك الآن</span
       >
     </a>
   </div>
 </section>
-
-<style>
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient 15s ease infinite;
-  }
-</style>
 
 <script>
   import { languageStore } from "@app/language-store";
@@ -82,28 +72,21 @@
     const ctaSubtitleEl = document.getElementById("cta-subtitle");
     const ctaButtonTextEl = document.getElementById("cta-button-text");
     const ctaMvpTextEl = document.getElementById("cta-mvp-text");
-    const ctaPriceAmountEl = document.getElementById("cta-price-amount");
+    const ctaPriceFromEl = document.getElementById("cta-price-from");
+    const ctaPriceToEl = document.getElementById("cta-price-to");
     const ctaPriceCurrencyEl = document.getElementById("cta-price-currency");
     const ctaPriceNoteEl = document.getElementById("cta-price-note");
-    const trustDeliveryEl = document.getElementById("trust-delivery");
-    const trustQualityEl = document.getElementById("trust-quality");
-    const trustSupportEl = document.getElementById("trust-support");
 
-    if (ctaTitleEl) ctaTitleEl.textContent = ui.ctaMain || "🚀 Ready to Build Your Success?";
-    if (ctaSubtitleEl) ctaSubtitleEl.textContent = pricing.title;
-    if (ctaButtonTextEl) ctaButtonTextEl.textContent = ui.ctaSubtitle || "Let's Turn Your Idea Into Reality";
+    if (ctaTitleEl) ctaTitleEl.textContent = ui.ctaFinalTitle || ui.ctaMain || "Ready to Launch?";
+    if (ctaSubtitleEl) ctaSubtitleEl.textContent = ui.ctaSubtitle || "Let's turn your idea into an app people love";
+    if (ctaButtonTextEl) ctaButtonTextEl.textContent = ui.ctaFinalButton || ui.whatsapp || "Message Us on WhatsApp";
     if (ctaMvpTextEl) ctaMvpTextEl.textContent = pricing.mvpText;
-    if (ctaPriceAmountEl) ctaPriceAmountEl.textContent = pricing.priceAmount;
+    if (ctaPriceFromEl) ctaPriceFromEl.textContent = pricing.priceFrom;
+    if (ctaPriceToEl) ctaPriceToEl.textContent = pricing.priceTo;
     if (ctaPriceCurrencyEl) ctaPriceCurrencyEl.textContent = pricing.priceCurrency;
     if (ctaPriceNoteEl) ctaPriceNoteEl.textContent = pricing.note;
-    if (trustDeliveryEl) trustDeliveryEl.textContent = ui.trustDelivery || "On-Time Delivery";
-    if (trustQualityEl) trustQualityEl.textContent = ui.trustQuality || "Quality Guaranteed";
-    if (trustSupportEl) trustSupportEl.textContent = ui.trustSupport || "24/7 Support";
   };
 
-  // Listen for language changes
   window.addEventListener("language-change", updateCTA);
-
-  // Initialize
   updateCTA();
 </script>

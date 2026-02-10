@@ -1,0 +1,112 @@
+---
+const industries = [
+  { icon: "dumbbell", name: "نادي رياضي" },
+  { icon: "clinic", name: "عيادات" },
+  { icon: "salon", name: "صالون" },
+  { icon: "consulting", name: "مكتب استشارات" },
+  { icon: "chalet", name: "شاليه" },
+  { icon: "nursery", name: "حضانة أطفال" },
+  { icon: "spa", name: "العناية الشخصية والسبا" },
+  { icon: "car", name: "تأجير سيارات" },
+];
+---
+
+<section id="industries" class="py-16">
+  <div class="text-center mb-16">
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">لمين الخدمة؟</p>
+    <h2
+      id="industries-title"
+      class="text-3xl md:text-5xl font-bold font-serif gradient-text-primary mb-6"
+    >
+      تطبيقك مهما كان مجالك
+    </h2>
+    <p id="industries-subtitle" class="text-lg text-neutral max-w-2xl mx-auto leading-relaxed">
+      نبني تطبيقات لأي نشاط يقدم خدمات ويحتاج يدير عملاءه وحجوزاته
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl mx-auto" id="industries-grid">
+    {
+      industries.map(({ icon, name }, index) => (
+        <div
+          class="industry-item group flex flex-col items-center gap-3 py-6 px-4 rounded-2xl border border-primary/10 bg-gradient-to-b from-primary/5 to-transparent transition-all duration-300 hover:border-primary/25 hover:from-primary/10"
+          data-industry-index={index}
+        >
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            {icon === "dumbbell" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12h1m16 0h1M5.5 8.5v7M18.5 8.5v7M7 10v4a1 1 0 001 1h8a1 1 0 001-1v-4a1 1 0 00-1-1H8a1 1 0 00-1 1z" />
+              </svg>
+            )}
+            {icon === "clinic" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            {icon === "salon" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+              </svg>
+            )}
+            {icon === "consulting" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            )}
+            {icon === "chalet" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            )}
+            {icon === "nursery" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+              </svg>
+            )}
+            {icon === "spa" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
+            )}
+            {icon === "car" && (
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+              </svg>
+            )}
+          </div>
+          <span class="industry-name text-sm font-semibold text-white text-center">{name}</span>
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="text-center text-neutral/60 text-sm mt-8" id="industries-more">وغيرها الكثير...</p>
+</section>
+
+<style>
+  .industry-item {
+    text-align: center !important;
+  }
+  [dir="rtl"] .industry-item {
+    text-align: center !important;
+  }
+</style>
+
+<script>
+  import { languageStore } from "@app/language-store";
+
+  const updateIndustries = () => {
+    const ui = languageStore.content.ui;
+
+    const titleEl = document.getElementById("industries-title");
+    const subtitleEl = document.getElementById("industries-subtitle");
+    const moreEl = document.getElementById("industries-more");
+
+    if (titleEl) titleEl.textContent = ui.industriesTitle || "تطبيقك مهما كان مجالك";
+    if (subtitleEl) subtitleEl.textContent = ui.industriesSubtitle || "نبني تطبيقات لأي نشاط يقدم خدمات ويحتاج يدير عملاءه وحجوزاته";
+    if (moreEl) moreEl.textContent = ui.industriesMore || "وغيرها الكثير...";
+  };
+
+  window.addEventListener("language-change", updateIndustries);
+  updateIndustries();
+</script>
