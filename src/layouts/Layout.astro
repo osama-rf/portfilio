@@ -20,35 +20,105 @@ const {
   author,
   socialLinks,
   socialImage,
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  canonicalURL,
 } = SITE_CONFIG;
 
+const pageURL = canonicalURL + Astro.url.pathname;
 const ogImgUrl = canonicalURL + socialImage;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "osama-labs",
+  description: "نبني تطبيقك كامل مع لوحة تحكم خلال 14 يوم",
+  url: canonicalURL,
+  logo: canonicalURL + "/favicon.svg",
+  image: ogImgUrl,
+  priceRange: "5600 - 9600 SAR",
+  currenciesAccepted: "SAR",
+  areaServed: {
+    "@type": "Country",
+    name: "Saudi Arabia",
+  },
+  founder: {
+    "@type": "Person",
+    name: "Osama AlRefay",
+    url: "https://linkedin.com/in/osama-alrefay",
+  },
+  sameAs: [
+    "https://linkedin.com/in/osama-alrefay",
+    "https://github.com/osama-rf",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    availableLanguage: ["Arabic", "English"],
+    url: "https://wa.me/966563913944",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "App Development Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "تطبيق جوال + لوحة تحكم",
+        description: "تطبيق جوال كامل مع لوحة إدارة خلال 14 يوم",
+        price: "5600",
+        priceCurrency: "SAR",
+      },
+    ],
+  },
+};
 ---
 
 <!doctype html>
-<html lang={lang} dir="ltr" class="scroll-pt-16 scroll-smooth">
+<html lang={lang} dir="rtl" class="scroll-pt-16 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
 
+    <title>{title}</title>
+    <link rel="canonical" href={pageURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="osama-labs" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:url" content={pageURL} />
     <meta property="og:image" content={ogImgUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:locale:alternate" content="en_US" />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImgUrl} />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImgUrl} />
+    <meta name="twitter:url" content={pageURL} />
 
+    <!-- hreflang for bilingual -->
+    <link rel="alternate" hreflang="ar" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Analytics -->
     <script
+      is:inline
       defer
       data-website-id="dfid_hRQji3lN3KfBD3FZpe9zD"
       data-domain="osama-lab.com"
@@ -60,11 +130,11 @@ const ogImgUrl = canonicalURL + socialImage;
       <slot />
     </main>
     <Footer author={author} socialLinks={socialLinks} />
-    
+
     <script>
       import { languageStore } from "@app/language-store";
       import { themeStore } from "@app/theme-store";
-      
+
       // Initialize language and theme stores on page load
       languageStore;
       themeStore;

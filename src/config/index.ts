@@ -16,7 +16,7 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "Github", href: "https://github.com/osama-rf" },
   ],
   socialImage: "/osama-og.png",
-  canonicalURL: "https://osama-portfolio.vercel.app",
+  canonicalURL: "https://osama-lab.com",
 };
 
 export const PROBLEM_ITEMS: { en: ProblemItem[]; ar: ProblemItem[] } = {
