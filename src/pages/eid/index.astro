@@ -2,29 +2,35 @@
 export const prerender = true;
 import "../../styles/global.css";
 const moyasarPublicKey = import.meta.env.MOYASAR_PUBLIC_KEY ?? "";
-const paymentEnabled   = Boolean(moyasarPublicKey);
-const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/\/+$/, "");
+const paymentEnabled = Boolean(moyasarPublicKey);
+const publicAppUrl = (import.meta.env.PUBLIC_APP_URL ?? "")
+  .trim()
+  .replace(/\/+$/, "");
 ---
 
 <!doctype html>
-<html lang="ar" dir="rtl" class="scroll-smooth scroll-pt-16 light">
+<html lang="ar" dir="rtl" class="light scroll-pt-16 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="أرسل بطاقات عيد مميزة لأحبائك — كل واحد يفتح مظروفه الخاص ويلاقي كوبون مفاجأة" />
+    <meta
+      name="description"
+      content="أرسل بطاقات عيد مميزة لأحبائك — كل واحد يفتح مظروفه الخاص ويلاقي كوبون مفاجأة"
+    />
     <title>بطاقات العيد — فرح وكوبونات لأحبائك</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    {paymentEnabled && (
-      <link
-        rel="stylesheet"
-        href="https://cdn.moyasar.com/mpf/1.13.0/moyasar.css"
-        data-moyasar-css="1"
-      />
-    )}
+    {
+      paymentEnabled && (
+        <link
+          rel="stylesheet"
+          href="https://cdn.moyasar.com/mpf/1.13.0/moyasar.css"
+          data-moyasar-css="1"
+        />
+      )
+    }
   </head>
 
   <body style="background:#fafbfc;color:#0f172a;" class="font-sans">
-
     <!-- Runtime config for JS (hidden) -->
     <div
       id="app-config"
@@ -32,46 +38,88 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
       data-payment-enabled={paymentEnabled ? "1" : "0"}
       data-public-app-url={publicAppUrl}
       style="display:none;"
-    ></div>
+    >
+    </div>
 
     <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-    <section class="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-5 text-center">
+    <section
+      class="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-5 text-center"
+    >
       <!-- Soft glows -->
       <div class="pointer-events-none absolute inset-0">
-        <div class="absolute left-1/2 top-1/4 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]" style="background:rgba(99,102,241,0.07);"></div>
-        <div class="absolute bottom-0 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full blur-[100px]" style="background:rgba(139,92,246,0.05);"></div>
+        <div
+          class="absolute top-1/4 left-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]"
+          style="background:rgba(99,102,241,0.07);"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full blur-[100px]"
+          style="background:rgba(139,92,246,0.05);"
+        >
+        </div>
       </div>
 
       <div class="relative z-10 mx-auto max-w-4xl">
         <h1
-          class="mb-6 font-serif text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl"
+          class="mb-6 font-serif text-5xl leading-tight font-bold tracking-tight sm:text-6xl md:text-7xl"
           style="background:linear-gradient(180deg,#0f172a 0%,#475569 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"
         >
-          فرّح أحبابك<br />
-          <span style="background:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          فرّح أحبائك<br />
+          <span
+            style="background:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"
+          >
             بمظروف عيد مميز
           </span>
         </h1>
 
-        <p class="mx-auto mb-12 max-w-xl text-lg leading-relaxed md:text-xl" style="color:#64748b;">
-          أنشئ بطاقات عيد شخصية — كل واحد يفتح مظروفه ويلاقي كوبون مفاجأة خاص فيه
+        <p
+          class="mx-auto mb-12 max-w-xl text-lg leading-relaxed md:text-xl"
+          style="color:#64748b;"
+        >
+          أنشئ بطاقات عيد شخصية — كل واحد يفتح مظروفه ويلاقي كوبون مفاجأة خاص
+          فيه
         </p>
 
         <!-- Envelope preview -->
         <div class="mb-12 flex justify-center gap-4 md:gap-6">
-          <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-md" style="background:#fff;border:2px solid #6366f1;transform:scale(1.06);">
-            <img src="/envelopes/opened.png" alt="مظروف مفتوح" class="h-20 w-auto object-contain" />
-            <span class="text-sm font-semibold" style="color:#0f172a;">سارة</span>
-            <span class="rounded-full border px-2 py-0.5 text-xs font-medium" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;">EID-GIFT</span>
+          <div
+            class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-md"
+            style="background:#fff;border:2px solid #6366f1;transform:scale(1.06);"
+          >
+            <img
+              src="/envelopes/opened.png"
+              alt="مظروف مفتوح"
+              class="h-20 w-auto object-contain"
+            />
+            <span class="text-sm font-semibold" style="color:#0f172a;"
+              >سارة</span
+            >
+            <span
+              class="rounded-full border px-2 py-0.5 text-xs font-medium"
+              style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;"
+              >EID-GIFT</span
+            >
           </div>
-          <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-sm transition-all hover:shadow-md" style="background:#fff;border:1.5px solid rgba(0,0,0,0.06);">
-            <img src="/envelopes/closed.png" alt="مظروف مغلق" class="h-20 w-auto object-contain envelope-float" style="animation-delay:1.2s;" />
-            <span class="text-sm font-semibold" style="color:#0f172a;">محمد</span>
+          <div
+            class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-sm transition-all hover:shadow-md"
+            style="background:#fff;border:1.5px solid rgba(0,0,0,0.06);"
+          >
+            <img
+              src="/envelopes/closed.png"
+              alt="مظروف مغلق"
+              class="envelope-float h-20 w-auto object-contain"
+              style="animation-delay:1.2s;"
+            />
+            <span class="text-sm font-semibold" style="color:#0f172a;"
+              >محمد</span
+            >
           </div>
         </div>
 
         <!-- CTAs -->
-        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div
+          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
           <a
             href="#form-section"
             style="color:#fff;"
@@ -84,17 +132,38 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
             class="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-8 py-4 text-lg font-semibold text-indigo-600 transition-all duration-300 hover:border-indigo-300 hover:shadow-sm"
           >
             كيف تشتغل؟
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </a>
         </div>
       </div>
 
       <!-- Scroll arrow -->
-      <div class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce opacity-30 md:block">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:#64748b;">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      <div
+        class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce opacity-30 md:block"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          style="color:#64748b;"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
       </div>
     </section>
@@ -103,22 +172,58 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
     <section id="how-it-works" class="px-5 py-16" style="background:#fff;">
       <div class="mx-auto max-w-4xl">
         <div class="mb-14 text-center">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">طريقة عملها</p>
-          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">3 خطوات وخلصت</h2>
+          <p
+            class="mb-4 text-sm font-semibold tracking-widest uppercase"
+            style="color:#6366f1;"
+          >
+            طريقة عملها
+          </p>
+          <h2
+            class="font-serif text-3xl font-bold md:text-5xl"
+            style="color:#0f172a;"
+          >
+            3 خطوات وخلصت
+          </h2>
         </div>
 
         <div class="grid gap-6 md:grid-cols-3">
-          {[
-            { n: "1", title: "أضف الأسماء", desc: "اكتب اسمك وأسماء كل اللي تبي تعيدهم" },
-            { n: "2", title: "شارك الرابط",  desc: "راح تحصل رابط واحد تشاركه في الواتساب" },
-            { n: "3", title: "يفتحون مظاريفهم", desc: "كل شخص يدور اسمه ويفتح المظروف ويشوف مفاجأته" },
-          ].map(step => (
-            <div class="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center transition-all hover:shadow-md" style="background:#fafbfc;border-color:rgba(0,0,0,0.06);">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full text-base font-extrabold ring-1" style="background:rgba(99,102,241,0.08);color:#6366f1;ring-color:rgba(99,102,241,0.15);">{step.n}</div>
-              <h3 class="text-lg font-bold" style="color:#0f172a;">{step.title}</h3>
-              <p class="text-sm leading-relaxed" style="color:#64748b;">{step.desc}</p>
-            </div>
-          ))}
+          {
+            [
+              {
+                n: "1",
+                title: "أضف الأسماء",
+                desc: "اكتب اسمك وأسماء كل اللي تبي تعيدهم",
+              },
+              {
+                n: "2",
+                title: "شارك الرابط",
+                desc: "راح تحصل رابط واحد تشاركه في الواتساب",
+              },
+              {
+                n: "3",
+                title: "يفتحون مظاريفهم",
+                desc: "كل شخص يدور اسمه ويفتح المظروف ويشوف مفاجأته",
+              },
+            ].map((step) => (
+              <div
+                class="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center transition-all hover:shadow-md"
+                style="background:#fafbfc;border-color:rgba(0,0,0,0.06);"
+              >
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full text-base font-extrabold ring-1"
+                  style="background:rgba(99,102,241,0.08);color:#6366f1;ring-color:rgba(99,102,241,0.15);"
+                >
+                  {step.n}
+                </div>
+                <h3 class="text-lg font-bold" style="color:#0f172a;">
+                  {step.title}
+                </h3>
+                <p class="text-sm leading-relaxed" style="color:#64748b;">
+                  {step.desc}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -127,49 +232,108 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
     <section class="px-5 py-16">
       <div class="mx-auto max-w-4xl">
         <div class="mb-14 text-center">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">ليش تستخدمها؟</p>
-          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">تجربة لا تُنسى</h2>
+          <p
+            class="mb-4 text-sm font-semibold tracking-widest uppercase"
+            style="color:#6366f1;"
+          >
+            ليش تستخدمها؟
+          </p>
+          <h2
+            class="font-serif text-3xl font-bold md:text-5xl"
+            style="color:#0f172a;"
+          >
+            تجربة لا تُنسى
+          </h2>
         </div>
 
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { title: "شخصي لكل واحد",  desc: "كل مظروف باسم صاحبه وكوبون خاص فيه" },
-            { title: "كوبون مفاجأة",   desc: "ما يعرف وش فيه لين يفتح — المفاجأة هي الفرحة" },
-            { title: "يُفتح مرة وحدة", desc: "كل مظروف يُفتح مرة واحدة بس — ما يتكرر" },
-            { title: "رابط واحد للكل", desc: "شارك رابط واحد على الواتساب أو مجموعة العيلة" },
-            { title: "في ثواني",        desc: "تنشئ مجموعة البطاقات في أقل من دقيقة" },
-            { title: "ما يحتاج تحميل", desc: "يشتغل مباشرة في المتصفح بدون أي تطبيق" },
-          ].map(f => (
-            <div class="rounded-2xl border p-6 transition-all duration-300 hover:shadow-md" style="background:#fff;border-color:rgba(0,0,0,0.07);">
-              <h3 class="mb-2 font-bold" style="color:#0f172a;">{f.title}</h3>
-              <p class="text-sm leading-relaxed" style="color:#64748b;">{f.desc}</p>
-            </div>
-          ))}
+          {
+            [
+              {
+                title: "شخصي لكل واحد",
+                desc: "كل مظروف باسم صاحبه وكوبون خاص فيه",
+              },
+              {
+                title: "كوبون مفاجأة",
+                desc: "ما يعرف وش فيه لين يفتح — المفاجأة هي الفرحة",
+              },
+              {
+                title: "يُفتح مرة وحدة",
+                desc: "كل مظروف يُفتح مرة واحدة بس — ما يتكرر",
+              },
+              {
+                title: "رابط واحد للكل",
+                desc: "شارك رابط واحد على الواتساب أو مجموعة العيلة",
+              },
+              {
+                title: "في ثواني",
+                desc: "تنشئ مجموعة البطاقات في أقل من دقيقة",
+              },
+              {
+                title: "ما يحتاج تحميل",
+                desc: "يشتغل مباشرة في المتصفح بدون أي تطبيق",
+              },
+            ].map((f) => (
+              <div
+                class="rounded-2xl border p-6 transition-all duration-300 hover:shadow-md"
+                style="background:#fff;border-color:rgba(0,0,0,0.07);"
+              >
+                <h3 class="mb-2 font-bold" style="color:#0f172a;">
+                  {f.title}
+                </h3>
+                <p class="text-sm leading-relaxed" style="color:#64748b;">
+                  {f.desc}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
 
     <!-- ── Form ──────────────────────────────────────────────────────────── -->
-    <section id="form-section" class="relative overflow-hidden px-5 py-20" style="background:#fff;">
+    <section
+      id="form-section"
+      class="relative overflow-hidden px-5 py-20"
+      style="background:#fff;"
+    >
       <!-- Soft glow -->
-      <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div class="h-[500px] w-[500px] rounded-full blur-[120px]" style="background:rgba(99,102,241,0.06);"></div>
+      <div
+        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+      >
+        <div
+          class="h-[500px] w-[500px] rounded-full blur-[120px]"
+          style="background:rgba(99,102,241,0.06);"
+        >
+        </div>
       </div>
 
       <div class="relative z-10 mx-auto max-w-lg">
         <div class="mb-10 text-center">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">ابدأ الآن</p>
-          <h2 class="mb-3 font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">أنشئ بطاقاتك</h2>
+          <p
+            class="mb-4 text-sm font-semibold tracking-widest uppercase"
+            style="color:#6366f1;"
+          >
+            ابدأ الآن
+          </p>
+          <h2
+            class="mb-3 font-serif text-3xl font-bold md:text-5xl"
+            style="color:#0f172a;"
+          >
+            أنشئ بطاقاتك
+          </h2>
           <p style="color:#64748b;">كلّ يفتح مظروفه ويلاقي مفاجأته</p>
         </div>
 
-        <div class="rounded-3xl p-8 shadow-xl md:p-10" style="background:#fafbfc;border:1.5px solid rgba(0,0,0,0.08);">
+        <div
+          class="rounded-3xl p-8 shadow-xl md:p-10"
+          style="background:#fafbfc;border:1.5px solid rgba(0,0,0,0.08);"
+        >
           <form id="eid-form" class="space-y-7">
-
             <!-- Sender name -->
             <div class="space-y-2">
               <label class="block text-sm font-medium" style="color:#334155;">
-                اسمك — اللي سيظهر لأحبابك
+                اسمك — اللي سيظهر لأحبائك
               </label>
               <input
                 id="display-name"
@@ -190,7 +354,11 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
                 <label class="block text-sm font-medium" style="color:#334155;">
                   أسماء المستلمين
                 </label>
-                <span id="name-count" class="rounded-full border px-3 py-0.5 text-xs font-medium" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;">
+                <span
+                  id="name-count"
+                  class="rounded-full border px-3 py-0.5 text-xs font-medium"
+                  style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;"
+                >
                   0 أسماء
                 </span>
               </div>
@@ -205,15 +373,29 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
                 onmouseover="this.style.borderColor='#6366f1';this.style.color='#6366f1';this.style.background='rgba(99,102,241,0.05)'"
                 onmouseout="this.style.borderColor='rgba(0,0,0,0.12)';this.style.color='#94a3b8';this.style.background='transparent'"
               >
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M12 4v16m8-8H4"></path>
                 </svg>
                 إضافة اسم
               </button>
             </div>
 
             <!-- Error -->
-            <p id="form-error" class="hidden rounded-xl border px-4 py-3 text-sm font-medium" style="background:#fef2f2;border-color:#fecaca;color:#dc2626;"></p>
+            <p
+              id="form-error"
+              class="hidden rounded-xl border px-4 py-3 text-sm font-medium"
+              style="background:#fef2f2;border-color:#fecaca;color:#dc2626;"
+            >
+            </p>
 
             <!-- Submit -->
             <button
@@ -222,15 +404,11 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
               style="color:#fff;"
               class="flex w-full items-center justify-center rounded-full bg-indigo-600 px-5 py-3 text-base font-bold shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 hover:shadow-indigo-500/30 disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-4 sm:text-lg"
             >
-              <span id="submit-text">
-                {paymentEnabled ? "انتقل للدفع — 5 ريال" : "أنشئ البطاقات وشارك الرابط"}
-              </span>
+              <span id="submit-text"> أنشئ البطاقات وشارك الرابط </span>
             </button>
 
             <p class="text-center text-xs" style="color:#94a3b8;">
-              {paymentEnabled
-                ? "بعد الدفع سيتم إنشاء رابطك تلقائياً"
-                : "بعد الإنشاء راح تحصل رابط تشاركه مع الكل"}
+              بعد الإنشاء راح تحصل رابط تشاركه مع الكل
             </p>
           </form>
         </div>
@@ -238,70 +416,137 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
     </section>
 
     <!-- ── Footer ─────────────────────────────────────────────────────────── -->
-    <footer class="px-5 py-8 text-center text-sm" style="border-top:1px solid rgba(0,0,0,0.06);color:#94a3b8;">
+    <footer
+      class="px-5 py-8 text-center text-sm"
+      style="border-top:1px solid rgba(0,0,0,0.06);color:#94a3b8;"
+    >
       عيد مبارك وسعيد
     </footer>
 
     <!-- ══════════════════════════════════════════════════════════════════════
          Payment overlay — shown when user submits form (payment enabled)
          ══════════════════════════════════════════════════════════════════════ -->
-    <div id="payment-overlay" style="display:none;position:fixed;inset:0;z-index:1000;background:#f5f7ff;overflow-y:auto;">
-      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.25rem 1rem 3rem;">
-
+    <div
+      id="payment-overlay"
+      style="display:none;position:fixed;inset:0;z-index:1000;background:#f5f7ff;overflow-y:auto;"
+    >
+      <div
+        style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.25rem 1rem 3rem;"
+      >
         <!-- Back button -->
         <div style="width:100%;max-width:460px;margin-bottom:1.25rem;">
           <button
             id="cancel-payment-btn"
             style="display:inline-flex;align-items:center;gap:0.375rem;color:#4f46e5;background:none;border:none;cursor:pointer;font-size:0.9rem;font-family:inherit;padding:0.25rem 0;"
           >
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M9 5l7 7-7 7"></path>
             </svg>
             رجوع
           </button>
         </div>
 
         <!-- Order summary card -->
-        <div style="width:100%;max-width:460px;margin-bottom:1rem;background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);">
+        <div
+          style="width:100%;max-width:460px;margin-bottom:1rem;background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);"
+        >
           <!-- Price row -->
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.25rem;border-bottom:1px solid #E0E7FF;">
+          <div
+            style="display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.25rem;border-bottom:1px solid #E0E7FF;"
+          >
             <div>
-              <p style="font-size:0.9375rem;font-weight:700;color:#0B0A0A;margin:0 0 0.125rem;">بطاقات العيد</p>
-              <p style="font-size:0.75rem;color:#64748b;margin:0;">دفعة واحدة</p>
+              <p
+                style="font-size:0.9375rem;font-weight:700;color:#0B0A0A;margin:0 0 0.125rem;"
+              >
+                بطاقات العيد
+              </p>
+              <p style="font-size:0.75rem;color:#64748b;margin:0;">
+                دفعة واحدة
+              </p>
             </div>
-            <div style="display:flex;align-items:center;justify-content:center;min-width:120px;">
-              <span style="font-size:1.125rem;font-weight:800;color:#0B0A0A;line-height:1;text-align:center;">5 ريال سعودي</span>
+            <div
+              style="display:flex;align-items:center;justify-content:center;min-width:120px;"
+            >
+              <span
+                style="font-size:1.125rem;font-weight:800;color:#0B0A0A;line-height:1;text-align:center;"
+                >5 ريال سعودي</span
+              >
             </div>
           </div>
           <!-- Benefits -->
-          <div style="padding:0.875rem 1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
-            {[
-              "رابط مشترك لجميع المستلمين",
-              "كل مظروف بكوبون مفاجأة خاص فيه",
-              "يُفتح مرة واحدة فقط",
-            ].map(b => (
-              <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:#64748b;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 13l4 4L19 7"/>
-                </svg>
-                {b}
-              </div>
-            ))}
+          <div
+            style="padding:0.875rem 1.25rem;display:flex;flex-direction:column;gap:0.5rem;"
+          >
+            {
+              [
+                "رابط مشترك لجميع المستلمين",
+                "كل مظروف بكوبون مفاجأة خاص فيه",
+                "يُفتح مرة واحدة فقط",
+              ].map((b) => (
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:#64748b;">
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#6366f1"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  {b}
+                </div>
+              ))
+            }
           </div>
         </div>
 
         <!-- Payment method section -->
         <div style="width:100%;max-width:460px;margin-bottom:0.625rem;">
-          <p style="font-size:0.8125rem;font-weight:700;color:#0B0A0A;margin:0 0 0.625rem;">طريقة الدفع</p>
+          <p
+            style="font-size:0.8125rem;font-weight:700;color:#0B0A0A;margin:0 0 0.625rem;"
+          >
+            طريقة الدفع
+          </p>
 
           <!-- Method cards -->
-          <div style="background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);">
-            <label class="payment-method-option" for="payment-applepay" style="border-bottom:1px solid #E0E7FF;">
-              <input id="payment-applepay" type="radio" name="payment-method" value="applepay" class="payment-method-radio" checked />
+          <div
+            style="background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);"
+          >
+            <label
+              class="payment-method-option"
+              for="payment-applepay"
+              style="border-bottom:1px solid #E0E7FF;"
+            >
+              <input
+                id="payment-applepay"
+                type="radio"
+                name="payment-method"
+                value="applepay"
+                class="payment-method-radio"
+                checked
+              />
               <div class="payment-method-content">
-                <div class="payment-method-icon payment-method-icon-apple" aria-hidden="true">
+                <div
+                  class="payment-method-icon payment-method-icon-apple"
+                  aria-hidden="true"
+                >
                   <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                    <path d="M9.3 2.2c.4-.5.6-1.1.6-1.9-.6.1-1.4.4-1.8.9-.4.5-.7 1-.6 1.8.7.1 1.4-.3 1.8-.8zM11.3 8.5c0-2 1.7-2.9 1.8-3-.9-1.3-2.4-1.5-2.9-1.5-1.2-.1-2.2.7-2.8.7-.6 0-1.4-.7-2.4-.6-1.2 0-2.4.7-3 1.9-1.3 2.2-.3 5.5.9 7.3.6.9 1.3 2 2.3 1.9.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6c1 0 1.6-1 2.2-1.9.7-1 1-2 1-2 0 0-1.9-.8-1.9-2.8z" fill="white"/>
+                    <path
+                      d="M9.3 2.2c.4-.5.6-1.1.6-1.9-.6.1-1.4.4-1.8.9-.4.5-.7 1-.6 1.8.7.1 1.4-.3 1.8-.8zM11.3 8.5c0-2 1.7-2.9 1.8-3-.9-1.3-2.4-1.5-2.9-1.5-1.2-.1-2.2.7-2.8.7-.6 0-1.4-.7-2.4-.6-1.2 0-2.4.7-3 1.9-1.3 2.2-.3 5.5.9 7.3.6.9 1.3 2 2.3 1.9.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6c1 0 1.6-1 2.2-1.9.7-1 1-2 1-2 0 0-1.9-.8-1.9-2.8z"
+                      fill="white"></path>
                   </svg>
                 </div>
                 <div class="payment-method-copy">
@@ -313,18 +558,46 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
             </label>
 
             <label class="payment-method-option" for="payment-creditcard">
-              <input id="payment-creditcard" type="radio" name="payment-method" value="creditcard" class="payment-method-radio" />
+              <input
+                id="payment-creditcard"
+                type="radio"
+                name="payment-method"
+                value="creditcard"
+                class="payment-method-radio"
+              />
               <div class="payment-method-content">
-                <div class="payment-method-icon payment-method-icon-card" aria-hidden="true">
+                <div
+                  class="payment-method-icon payment-method-icon-card"
+                  aria-hidden="true"
+                >
                   <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-                    <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="#4338ca" stroke-width="1.5"/>
-                    <path d="M1.5 4.8h17" stroke="#4338ca" stroke-width="1.5" stroke-linecap="round"/>
-                    <rect x="3.5" y="8" width="5" height="1.8" rx="0.9" fill="#6366f1"/>
+                    <rect
+                      x="1"
+                      y="1"
+                      width="18"
+                      height="12"
+                      rx="2.5"
+                      stroke="#4338ca"
+                      stroke-width="1.5"></rect>
+                    <path
+                      d="M1.5 4.8h17"
+                      stroke="#4338ca"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                    <rect
+                      x="3.5"
+                      y="8"
+                      width="5"
+                      height="1.8"
+                      rx="0.9"
+                      fill="#6366f1"></rect>
                   </svg>
                 </div>
                 <div class="payment-method-copy">
                   <span class="payment-method-title">بطاقة بنكية</span>
-                  <span class="payment-method-subtitle">فيزا، ماستركارد، مدى</span>
+                  <span class="payment-method-subtitle"
+                    >فيزا، ماستركارد، مدى</span
+                  >
                 </div>
               </div>
               <span class="payment-method-indicator" aria-hidden="true"></span>
@@ -333,32 +606,51 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
         </div>
 
         <!-- Moyasar form — revealed after method selection -->
-        <div id="moyasar-wrapper" style="display:none;width:100%;max-width:460px;">
+        <div
+          id="moyasar-wrapper"
+          style="display:none;width:100%;max-width:460px;"
+        >
           <div style="background:#fff;border-radius:1rem;padding:1.25rem;">
             <div class="mysr-form-applepay"></div>
             <div class="mysr-form-creditcard" style="display:none;"></div>
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════════════════════
          Processing overlay — shown while creating the batch after payment
          ══════════════════════════════════════════════════════════════════════ -->
-    <div id="processing-overlay" style="display:none;position:fixed;inset:0;z-index:1001;background:#fafbfc;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;text-align:center;padding:2rem;">
-      <div style="width:3rem;height:3rem;border-radius:50%;border:3px solid rgba(99,102,241,0.2);border-top-color:#6366f1;animation:spin 0.8s linear infinite;"></div>
+    <div
+      id="processing-overlay"
+      style="display:none;position:fixed;inset:0;z-index:1001;background:#fafbfc;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;text-align:center;padding:2rem;"
+    >
+      <div
+        style="width:3rem;height:3rem;border-radius:50%;border:3px solid rgba(99,102,241,0.2);border-top-color:#6366f1;animation:spin 0.8s linear infinite;"
+      >
+      </div>
       <div>
-        <p style="font-size:1.125rem;font-weight:700;color:#0f172a;margin:0 0 0.25rem;">جاري إنشاء بطاقاتك…</p>
+        <p
+          style="font-size:1.125rem;font-weight:700;color:#0f172a;margin:0 0 0.25rem;"
+        >
+          جاري إنشاء بطاقاتك…
+        </p>
         <p style="font-size:0.875rem;color:#64748b;margin:0;">لحظة واحدة فقط</p>
       </div>
     </div>
 
     <style>
-      .envelope-float { animation: envFloat 3s ease-in-out infinite; }
+      .envelope-float {
+        animation: envFloat 3s ease-in-out infinite;
+      }
       @keyframes envFloat {
-        0%,100% { transform: translateY(0); }
-        50%      { transform: translateY(-6px); }
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
       }
 
       .name-row-item {
@@ -368,12 +660,20 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
         animation: rowIn 0.18s ease-out;
       }
       @keyframes rowIn {
-        from { opacity: 0; transform: translateY(-4px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .payment-method-option {
@@ -434,7 +734,9 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
         height: 1px;
         pointer-events: none;
       }
-      .payment-method-radio:checked + .payment-method-content .payment-method-title {
+      .payment-method-radio:checked
+        + .payment-method-content
+        .payment-method-title {
         color: #4338ca;
       }
       .payment-method-indicator {
@@ -471,7 +773,9 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
     <style is:global>
       /* Hide "Powered by Moyasar" footer */
       .mysr-form-applepay .mysr-form-footer,
-      .mysr-form-creditcard .mysr-form-footer { display: none !important; }
+      .mysr-form-creditcard .mysr-form-footer {
+        display: none !important;
+      }
 
       /* Theme the pay button to match our indigo brand */
       .mysr-form-button {
@@ -522,34 +826,40 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
     <script is:inline>
       (function () {
         /* ── Config from server ───────────────────────────────────────────── */
-        const cfg            = document.getElementById("app-config");
-        const MOYASAR_KEY    = cfg.getAttribute("data-moyasar-key");
-        const PAYMENT_ENABLED = cfg.getAttribute("data-payment-enabled") === "1";
-        const PUBLIC_APP_URL = (cfg.getAttribute("data-public-app-url") || "").replace(/\/+$/, "");
+        const cfg = document.getElementById("app-config");
+        const MOYASAR_KEY = cfg.getAttribute("data-moyasar-key");
+        const PAYMENT_ENABLED = false;
+        const PUBLIC_APP_URL = (
+          cfg.getAttribute("data-public-app-url") || ""
+        ).replace(/\/+$/, "");
 
         /* ── DOM refs ─────────────────────────────────────────────────────── */
-        const namesList         = document.getElementById("names-list");
-        const addBtn            = document.getElementById("add-name-btn");
-        const countEl           = document.getElementById("name-count");
-        const errorEl           = document.getElementById("form-error");
-        const form              = document.getElementById("eid-form");
-        const submitBtn         = document.getElementById("submit-btn");
-        const submitText        = document.getElementById("submit-text");
-        const paymentOverlay    = document.getElementById("payment-overlay");
+        const namesList = document.getElementById("names-list");
+        const addBtn = document.getElementById("add-name-btn");
+        const countEl = document.getElementById("name-count");
+        const errorEl = document.getElementById("form-error");
+        const form = document.getElementById("eid-form");
+        const submitBtn = document.getElementById("submit-btn");
+        const submitText = document.getElementById("submit-text");
+        const paymentOverlay = document.getElementById("payment-overlay");
         const processingOverlay = document.getElementById("processing-overlay");
-        const cancelPaymentBtn  = document.getElementById("cancel-payment-btn");
-        const moyasarWrapper    = document.getElementById("moyasar-wrapper");
+        const cancelPaymentBtn = document.getElementById("cancel-payment-btn");
+        const moyasarWrapper = document.getElementById("moyasar-wrapper");
         const moyasarApplepayEl = document.querySelector(".mysr-form-applepay");
-        const moyasarCreditEl   = document.querySelector(".mysr-form-creditcard");
-        const paymentMethodRadios = Array.from(document.querySelectorAll('input[name="payment-method"]'));
+        const moyasarCreditEl = document.querySelector(".mysr-form-creditcard");
+        const paymentMethodRadios = Array.from(
+          document.querySelectorAll('input[name="payment-method"]'),
+        );
 
         const defaultSubmitText = submitText.textContent.trim();
-        let selectedPaymentMethod = paymentMethodRadios.find((r) => r.checked)?.value || "applepay";
+        let selectedPaymentMethod =
+          paymentMethodRadios.find((r) => r.checked)?.value || "applepay";
 
         /* ── Name field helpers ───────────────────────────────────────────── */
         function getNames() {
           return Array.from(namesList.querySelectorAll(".name-input"))
-            .map(i => i.value.trim()).filter(Boolean);
+            .map((i) => i.value.trim())
+            .filter(Boolean);
         }
 
         function updateCount() {
@@ -563,14 +873,21 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
           row.className = "name-row-item";
 
           const input = document.createElement("input");
-          input.type      = "text";
+          input.type = "text";
           input.placeholder = "اسم المستلم";
           input.className = "name-input";
           input.maxLength = 40;
-          input.value     = value;
-          input.style.cssText = "flex:1;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.1);background:#fff;padding:0.625rem 1rem;font-size:1rem;font-family:inherit;color:#0f172a;outline:none;transition:border-color 0.2s,box-shadow 0.2s;direction:rtl;width:100%;";
-          input.addEventListener("focus", () => { input.style.borderColor = "#6366f1"; input.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; });
-          input.addEventListener("blur",  () => { input.style.borderColor = "rgba(0,0,0,0.1)"; input.style.boxShadow = "none"; });
+          input.value = value;
+          input.style.cssText =
+            "flex:1;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.1);background:#fff;padding:0.625rem 1rem;font-size:1rem;font-family:inherit;color:#0f172a;outline:none;transition:border-color 0.2s,box-shadow 0.2s;direction:rtl;width:100%;";
+          input.addEventListener("focus", () => {
+            input.style.borderColor = "#6366f1";
+            input.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)";
+          });
+          input.addEventListener("blur", () => {
+            input.style.borderColor = "rgba(0,0,0,0.1)";
+            input.style.boxShadow = "none";
+          });
           input.addEventListener("input", updateCount);
 
           row.appendChild(input);
@@ -595,32 +912,13 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
           });
         });
 
-        /* ── On page load: check if returning from Moyasar ───────────────── */
-        const urlParams    = new URLSearchParams(window.location.search);
-        const returnPayId  = urlParams.get("id");
-        const returnStatus = String(urlParams.get("status") || "").toLowerCase();
-
-        if (returnPayId && returnStatus === "paid") {
-          // Read stored form data first; if none exists, ignore forged/manual callback URLs.
-          let pending = null;
-          try { pending = JSON.parse(localStorage.getItem("eid_pending_form") || "null"); } catch (_) {}
-
-          // Clean up URL so refresh doesn't re-trigger in all cases.
-          window.history.replaceState({}, "", "/eid");
-
-          if (pending && pending.displayName && Array.isArray(pending.names) && pending.names.length > 0) {
-            processingOverlay.style.display = "flex";
-            createBatch(pending.displayName, pending.names, returnPayId);
-          }
-        }
-
         /* ── Create batch API call ────────────────────────────────────────── */
         async function createBatch(displayName, names, paymentId) {
           try {
-            const res  = await fetch("/api/eid/create", {
-              method:  "POST",
+            const res = await fetch("/api/eid/create", {
+              method: "POST",
               headers: { "Content-Type": "application/json" },
-              body:    JSON.stringify({ displayName, names, paymentId }),
+              body: JSON.stringify({ displayName, names, paymentId }),
             });
             const data = await res.json();
 
@@ -633,13 +931,16 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
 
             // Persist batch data for the wall page
             localStorage.removeItem("eid_pending_form");
-            localStorage.setItem(`eid_batch_${data.batchId}`, JSON.stringify({
-              displayName: data.displayName,
-              recipients:  data.recipients,
-              demo:        data.demo,
-            }));
+            localStorage.setItem(
+              `eid_batch_${data.batchId}`,
+              JSON.stringify({
+                displayName: data.displayName,
+                recipients: data.recipients,
+                demo: data.demo,
+              }),
+            );
 
-            window.location.href = `/eid/${data.batchId}`;
+            window.location.href = `/eid/${data.batchId}?owner=1`;
           } catch (_) {
             processingOverlay.style.display = "none";
             showError("تعذر الاتصال، تحقق من الإنترنت");
@@ -652,25 +953,19 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
           e.preventDefault();
           errorEl.classList.add("hidden");
 
-          const displayName = document.getElementById("display-name").value.trim();
-          const names       = getNames();
+          const displayName = document
+            .getElementById("display-name")
+            .value.trim();
+          const names = getNames();
 
-          if (!displayName)       return showError("اكتب اسمك أولاً");
+          if (!displayName) return showError("اكتب اسمك أولاً");
           if (names.length === 0) return showError("أضف اسم واحد على الأقل");
-          if (names.length > 50)  return showError("الحد الأقصى 50 اسم");
+          if (names.length > 50) return showError("الحد الأقصى 50 اسم");
 
-          if (PAYMENT_ENABLED) {
-            // Store form data then show payment form
-            localStorage.setItem("eid_pending_form", JSON.stringify({ displayName, names }));
-            paymentOverlay.style.display = "block";
-            showSelectedPaymentForm();
-          } else {
-            // Demo mode — create directly
-            submitBtn.disabled = true;
-            submitText.textContent = "جاري الإنشاء...";
-            await createBatch(displayName, names, null);
-            resetBtn();
-          }
+          submitBtn.disabled = true;
+          submitText.textContent = "جاري الإنشاء...";
+          await createBatch(displayName, names, null);
+          resetBtn();
         });
 
         /* ── Moyasar loading & init ───────────────────────────────────────── */
@@ -681,18 +976,21 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
         };
 
         function loadMoyasar(cb) {
-          if (window.Moyasar) { cb(); return; }
+          if (window.Moyasar) {
+            cb();
+            return;
+          }
 
           if (!document.querySelector('link[data-moyasar-css="1"]')) {
             const link = document.createElement("link");
-            link.rel   = "stylesheet";
-            link.href  = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.css";
+            link.rel = "stylesheet";
+            link.href = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.css";
             link.setAttribute("data-moyasar-css", "1");
             document.head.appendChild(link);
           }
 
-          const script  = document.createElement("script");
-          script.src    = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
+          const script = document.createElement("script");
+          script.src = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
           script.onload = cb;
           document.head.appendChild(script);
         }
@@ -724,28 +1022,37 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
         function renderMoyasar(method) {
           if (moyasarInitialized[method]) return;
 
-          const mount = method === "creditcard" ? moyasarCreditEl : moyasarApplepayEl;
+          const mount =
+            method === "creditcard" ? moyasarCreditEl : moyasarApplepayEl;
           if (!mount) return;
           mount.innerHTML = "";
 
-          const element = method === "creditcard" ? ".mysr-form-creditcard" : ".mysr-form-applepay";
-          const methods = method === "creditcard" ? ["creditcard"] : ["applepay"];
-          const paymentLabel = method === "creditcard" ? "بطاقات العيد - بطاقة بنكية" : "بطاقات العيد - Apple Pay";
+          const element =
+            method === "creditcard"
+              ? ".mysr-form-creditcard"
+              : ".mysr-form-applepay";
+          const methods =
+            method === "creditcard" ? ["creditcard"] : ["applepay"];
+          const paymentLabel =
+            method === "creditcard"
+              ? "بطاقات العيد - بطاقة بنكية"
+              : "بطاقات العيد - Apple Pay";
           const callbackBase = PUBLIC_APP_URL || window.location.origin;
 
           Moyasar.init({
             element,
-            amount:              500,          // 5 SAR in halalas
-            currency:            "SAR",
-            description:         paymentLabel,
+            amount: 500, // 5 SAR in halalas
+            currency: "SAR",
+            description: paymentLabel,
             publishable_api_key: MOYASAR_KEY,
-            callback_url:        `${callbackBase}/eid`,
+            callback_url: `${callbackBase}/eid`,
             methods,
-            language:            "ar",
+            language: "ar",
             apple_pay: {
-              country:               "SA",
-              label:                 "بطاقات العيد",
-              validate_merchant_url: "https://api.moyasar.com/v1/applepay/initiate",
+              country: "SA",
+              label: "بطاقات العيد",
+              validate_merchant_url:
+                "https://api.moyasar.com/v1/applepay/initiate",
             },
           });
 
@@ -759,11 +1066,10 @@ const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/
           errorEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
         function resetBtn() {
-          submitBtn.disabled     = false;
+          submitBtn.disabled = false;
           submitText.textContent = defaultSubmitText;
         }
       })();
     </script>
-
   </body>
 </html>

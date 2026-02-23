@@ -42,16 +42,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     let hasPaymentIdColumn = true;
 
-    // ── PAYMENT VERIFICATION ─────────────────────────────────────────────────
+    // ── PAYMENT VERIFICATION (optional) ──────────────────────────────────────
     const moyasarSecret = import.meta.env.MOYASAR_SECRET;
-    if (moyasarSecret && !isDemoMode) {
-      if (!paymentId) {
-        return new Response(
-          JSON.stringify({ error: "الدفع مطلوب لإنشاء البطاقات" }),
-          { status: 402, headers: { "Content-Type": "application/json" } }
-        );
-      }
-
+    if (moyasarSecret && !isDemoMode && paymentId) {
       // Verify with Moyasar API (with short retries to avoid callback race)
       let payData: { status?: string; amount?: number; id?: string } = {};
       let lastHttpStatus = 0;
