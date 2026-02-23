@@ -12,10 +12,12 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^9.0.4",
     "@fontsource-variable/gabarito": "^5.1.0",
     "@fontsource/be-vietnam-pro": "^5.1.0",
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@fontsource/ibm-plex-sans-arabic": "^5.2.8",
+    "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/vite": "^4.1.10",
     "astro": "^5.10.1",
     "qrcode": "^1.5.4",

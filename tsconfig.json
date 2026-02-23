@@ -10,7 +10,8 @@
       "@icons/*": ["src/icons/*"],
       "@types": ["src/types/index.ts"],
       "@config": ["src/config/index.ts"],
-      "@app/*": ["src/app/*"]
+      "@app/*": ["src/app/*"],
+      "@lib/*": ["src/lib/*"]
     }
   }
 }

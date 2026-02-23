@@ -1,0 +1,52 @@
+[
+  {
+    "code": "EID-CAFE-2025",
+    "type": "قهوة مجانية",
+    "description": "قهوة مجانية في أي فرع"
+  },
+  {
+    "code": "EID-SWEET-2025",
+    "type": "حلويات مجانية",
+    "description": "طبق حلويات مجاني عند الطلب"
+  },
+  {
+    "code": "EID-GIFT-2025",
+    "type": "هدية مجانية",
+    "description": "هدية مجانية من المتجر"
+  },
+  {
+    "code": "EID-OFF20-2025",
+    "type": "خصم 20%",
+    "description": "خصم 20% على أي طلب"
+  },
+  {
+    "code": "EID-OFF30-2025",
+    "type": "خصم 30%",
+    "description": "خصم 30% على أي منتج"
+  },
+  {
+    "code": "EID-FREE-2025",
+    "type": "توصيل مجاني",
+    "description": "توصيل مجاني لأي طلب"
+  },
+  {
+    "code": "EID-SPA-2025",
+    "type": "جلسة مجانية",
+    "description": "جلسة عناية مجانية"
+  },
+  {
+    "code": "EID-BOOK-2025",
+    "type": "حجز مجاني",
+    "description": "حجز مجاني بدون رسوم"
+  },
+  {
+    "code": "EID-EXTRA-2025",
+    "type": "إضافة مجانية",
+    "description": "إضافة مجانية على أي طلب"
+  },
+  {
+    "code": "EID-VIP-2025",
+    "type": "ترقية VIP",
+    "description": "ترقية مجانية لعضوية VIP"
+  }
+]

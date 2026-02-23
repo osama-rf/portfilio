@@ -1,0 +1,330 @@
+---
+import "../../styles/global.css";
+import { supabase, isDemoMode } from "@lib/supabase";
+
+const { batchId } = Astro.params;
+
+// ── Server-side: fetch from Supabase if configured ──────────────────────────
+let serverDisplayName: string | null = null;
+let serverRecipients: {
+  id: string;
+  name: string;
+  coupon_code: string;
+  coupon_type: string;
+  coupon_description: string;
+  opened: boolean;
+}[] = [];
+
+if (!isDemoMode && batchId) {
+  const { data: creator } = await supabase!
+    .from("eid_creators")
+    .select("id, display_name")
+    .eq("id", batchId)
+    .single();
+
+  if (creator) {
+    serverDisplayName = creator.display_name;
+    const { data: recipients } = await supabase!
+      .from("eid_recipients")
+      .select(
+        "id, name, coupon_code, coupon_type, coupon_description, opened"
+      )
+      .eq("creator_id", batchId)
+      .order("created_at");
+
+    serverRecipients = recipients ?? [];
+  }
+}
+
+// If Supabase returned no data and we're not in demo mode, show 404
+const notFound = !isDemoMode && !serverDisplayName;
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title id="page-title">بطاقات العيد 🌙</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-black font-sans text-white">
+
+    <!-- Background glow -->
+    <div class="pointer-events-none fixed inset-0 overflow-hidden">
+      <div class="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-primary/10 blur-[140px]"></div>
+      <div class="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-amber-500/5 blur-[100px]"></div>
+    </div>
+
+    {notFound ? (
+      <!-- 404 state -->
+      <main class="relative flex min-h-screen flex-col items-center justify-center px-5 text-center">
+        <p class="text-6xl mb-6">🔍</p>
+        <h1 class="mb-3 text-2xl font-bold text-white">البطاقات غير موجودة</h1>
+        <p class="text-neutral/60 mb-8">تحقق من الرابط أو اطلب من المرسل إعادة إرساله</p>
+        <a href="/eid" class="rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary/90 transition-all">
+          أنشئ بطاقاتك
+        </a>
+      </main>
+    ) : (
+      <main class="relative mx-auto max-w-4xl px-5 py-16">
+
+        <!-- Header -->
+        <div class="mb-12 text-center" id="wall-header">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-sm text-amber-400">
+            🌙 عيد مبارك وسعيد
+          </div>
+          <h1 id="wall-title" class="mb-3 text-3xl font-bold text-white md:text-4xl">
+            {serverDisplayName ? `بطاقات العيد من ${serverDisplayName}` : "بطاقات العيد"}
+          </h1>
+          <p class="text-neutral/60">
+            دور على اسمك وافتح مظروفك — في الداخل مفاجأة خاصة لك 🎁
+          </p>
+        </div>
+
+        <!-- Loading state (shown until JS hydrates) -->
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20 text-neutral/50">
+          <div class="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-primary/30 border-t-primary"></div>
+          <p>جاري تحميل البطاقات...</p>
+        </div>
+
+        <!-- Envelope grid -->
+        <div
+          id="envelope-grid"
+          class="hidden grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-6"
+        ></div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="hidden py-20 text-center text-neutral/50">
+          <p class="text-4xl mb-4">📭</p>
+          <p>لا توجد بطاقات في هذه المجموعة</p>
+        </div>
+
+        <!-- Share section -->
+        <div id="share-section" class="mt-12 hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
+          <p class="mb-3 text-sm text-neutral/60">شارك هذا الرابط مع أحبائك</p>
+          <div class="flex items-center gap-2 rounded-xl border border-white/10 bg-black px-4 py-3">
+            <span id="share-url" class="flex-1 truncate text-sm text-neutral/80 text-left dir-ltr"></span>
+            <button id="copy-btn" class="shrink-0 rounded-lg bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary/30">
+              نسخ
+            </button>
+          </div>
+        </div>
+
+        <!-- Back link -->
+        <div class="mt-8 text-center">
+          <a href="/eid" class="text-sm text-neutral/40 hover:text-neutral/70 transition-colors">
+            ← أنشئ مجموعة جديدة
+          </a>
+        </div>
+
+      </main>
+    )}
+
+    <!-- Coupon Modal -->
+    <div
+      id="coupon-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+    >
+      <div class="relative w-full max-w-sm rounded-3xl border border-white/10 bg-[#0a0a0a] p-8 text-center shadow-2xl">
+        <button
+          id="modal-close"
+          class="absolute left-4 top-4 rounded-full border border-white/10 bg-white/5 p-1.5 text-neutral/50 hover:text-white transition-colors"
+          aria-label="إغلاق"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <img
+          src="/envelopes/opened.png"
+          alt="مظروف مفتوح"
+          class="mx-auto mb-6 h-32 w-auto object-contain"
+          id="modal-envelope-img"
+        />
+        <h2 id="modal-greeting" class="mb-5 text-xl font-bold text-white leading-relaxed"></h2>
+        <div class="rounded-2xl border border-primary/20 bg-primary/10 px-6 py-5 mb-4">
+          <p class="mb-1 text-xs uppercase tracking-widest text-primary/60" id="modal-coupon-type"></p>
+          <p class="text-3xl font-bold tracking-widest text-white font-mono" id="modal-coupon-code"></p>
+        </div>
+        <p class="text-sm text-neutral/50" id="modal-coupon-desc"></p>
+      </div>
+    </div>
+
+    <!-- Envelope template (hidden, cloned by JS) -->
+    <template id="envelope-template">
+      <div
+        class="envelope-card group relative cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.06] hover:scale-[1.02] active:scale-[0.98]"
+      >
+        <div class="envelope-front">
+          <img
+            src="/envelopes/closed.png"
+            alt="مظروف"
+            class="mx-auto mb-3 h-24 w-auto object-contain transition-transform duration-500 group-hover:-translate-y-1 md:h-28"
+          />
+          <p class="name-label truncate text-sm font-semibold text-white md:text-base"></p>
+          <p class="opened-badge mt-1 hidden text-xs text-primary">✓ تم الفتح</p>
+        </div>
+      </div>
+    </template>
+
+    <script
+      is:inline
+      define:vars={{
+        batchId,
+        serverDisplayName,
+        serverRecipients,
+        isDemoMode,
+      }}
+    >
+      const STORAGE_BATCH_KEY = `eid_batch_${batchId}`;
+
+      // ── Load recipients ────────────────────────────────────────────────────
+      let displayName = serverDisplayName;
+      let recipients = serverRecipients;
+
+      // If no server data (demo mode or SSR miss), try sessionStorage
+      if (!recipients || recipients.length === 0) {
+        const stored = sessionStorage.getItem(STORAGE_BATCH_KEY);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            displayName = parsed.displayName;
+            recipients = parsed.recipients;
+          } catch {}
+        }
+      }
+
+      // Update page title + heading with displayName
+      if (displayName) {
+        document.title = `بطاقات العيد من ${displayName} 🌙`;
+        const titleEl = document.getElementById("wall-title");
+        if (titleEl) titleEl.textContent = `بطاقات العيد من ${displayName}`;
+      }
+
+      // ── Render grid ────────────────────────────────────────────────────────
+      const loadingEl = document.getElementById("loading-state");
+      const gridEl = document.getElementById("envelope-grid");
+      const emptyEl = document.getElementById("empty-state");
+      const shareSection = document.getElementById("share-section");
+      const shareUrl = document.getElementById("share-url");
+
+      function renderGrid() {
+        if (!gridEl || !loadingEl) return;
+        loadingEl.classList.add("hidden");
+
+        if (!recipients || recipients.length === 0) {
+          emptyEl?.classList.remove("hidden");
+          return;
+        }
+
+        gridEl.classList.remove("hidden");
+        gridEl.classList.add("grid");
+
+        // Show share URL
+        if (shareSection && shareUrl) {
+          shareUrl.textContent = window.location.href;
+          shareSection.classList.remove("hidden");
+        }
+
+        const template = document.getElementById(
+          "envelope-template"
+        );
+
+        recipients.forEach((recipient) => {
+          const card = template.content.cloneNode(true);
+          const div = card.querySelector(".envelope-card");
+          const nameLabel = card.querySelector(".name-label");
+          const openedBadge = card.querySelector(".opened-badge");
+
+          div.dataset.id = recipient.id;
+          div.dataset.name = recipient.name;
+          div.dataset.code = recipient.coupon_code;
+          div.dataset.type = recipient.coupon_type;
+          div.dataset.desc = recipient.coupon_description;
+          nameLabel.textContent = recipient.name;
+
+          // Check if already opened (localStorage or server-flagged)
+          const localOpened =
+            localStorage.getItem(`eid_opened_${recipient.id}`) === "1";
+          if (recipient.opened || localOpened) {
+            openedBadge?.classList.remove("hidden");
+            div.querySelector("img").src = "/envelopes/opened.png";
+            div.classList.add("opacity-60");
+          }
+
+          div.addEventListener("click", () => handleOpen(div));
+          gridEl.appendChild(card);
+        });
+      }
+
+      renderGrid();
+
+      // ── Handle envelope open ───────────────────────────────────────────────
+      async function handleOpen(card) {
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const code = card.dataset.code;
+        const type = card.dataset.type;
+        const desc = card.dataset.desc;
+
+        // Mark as opened in localStorage immediately (optimistic)
+        localStorage.setItem(`eid_opened_${id}`, "1");
+
+        // Update card UI
+        const img = card.querySelector("img");
+        const badge = card.querySelector(".opened-badge");
+        img.src = "/envelopes/opened.png";
+        badge?.classList.remove("hidden");
+        card.classList.add("opacity-60");
+
+        // Show modal with coupon
+        showModal(name, code, type, desc);
+
+        // Fire-and-forget: notify server (no need to await for UX)
+        fetch("/api/eid/open", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ recipientId: id }),
+        }).catch(() => {});
+      }
+
+      // ── Modal ──────────────────────────────────────────────────────────────
+      const modal = document.getElementById("coupon-modal");
+      const modalClose = document.getElementById("modal-close");
+
+      function showModal(name, code, type, desc) {
+        document.getElementById("modal-greeting").textContent =
+          `عيدك مبارك يا ${name}! 🌙✨`;
+        document.getElementById("modal-coupon-code").textContent = code;
+        document.getElementById("modal-coupon-type").textContent = type;
+        document.getElementById("modal-coupon-desc").textContent = desc;
+        modal?.classList.remove("hidden");
+        modal?.classList.add("flex");
+      }
+
+      modalClose?.addEventListener("click", closeModal);
+      modal?.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      function closeModal() {
+        modal?.classList.add("hidden");
+        modal?.classList.remove("flex");
+      }
+
+      // ── Copy link ──────────────────────────────────────────────────────────
+      document.getElementById("copy-btn")?.addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const btn = document.getElementById("copy-btn");
+          if (btn) {
+            btn.textContent = "تم ✓";
+            setTimeout(() => (btn.textContent = "نسخ"), 2000);
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

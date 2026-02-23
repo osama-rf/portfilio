@@ -1,0 +1,358 @@
+---
+export const prerender = true;
+import "../../styles/global.css";
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth scroll-pt-16 light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="أرسل بطاقات عيد مميزة لأحبائك — كل واحد يفتح مظروفه الخاص ويلاقي كوبون مفاجأة" />
+    <title>بطاقات العيد — فرح وكوبونات لأحبائك</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body style="background:#fafbfc;color:#0f172a;" class="font-sans">
+
+    <!-- ── Sticky nav ────────────────────────────────────────────────────── -->
+    <!-- <header style="background:rgba(250,251,252,0.85);border-bottom:1px solid rgba(0,0,0,0.06);" class="sticky top-0 z-50 backdrop-blur-sm">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
+        <span class="text-base font-bold" style="color:#0f172a;">بطاقات العيد</span>
+        <a
+          href="#form-section"
+          style="color:#fff;"
+          class="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-bold shadow-lg transition-all duration-300 hover:scale-105 hover:bg-indigo-700 hover:shadow-indigo-500/30"
+        >
+          ابدأ الآن
+        </a>
+      </div>
+    </header> -->
+
+    <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+    <section class="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-5 text-center">
+      <!-- Soft glows -->
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute left-1/2 top-1/4 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]" style="background:rgba(99,102,241,0.07);"></div>
+        <div class="absolute bottom-0 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full blur-[100px]" style="background:rgba(139,92,246,0.05);"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <!-- Headline — same gradient-text style adapted for light -->
+        <h1
+          class="mb-6 font-serif text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl"
+          style="background:linear-gradient(180deg,#0f172a 0%,#475569 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"
+        >
+          فرّح أحبابك<br />
+          <span style="background:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+            بمظروف عيد مميز
+          </span>
+        </h1>
+
+        <p class="mx-auto mb-12 max-w-xl text-lg leading-relaxed md:text-xl" style="color:#64748b;">
+          أنشئ بطاقات عيد شخصية — كل واحد يفتح مظروفه ويلاقي كوبون مفاجأة خاص فيه
+        </p>
+
+        <!-- Envelope preview -->
+        <div class="mb-12 flex justify-center gap-4 md:gap-6">
+          <!-- <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-sm transition-all hover:shadow-md" style="background:#fff;border:1.5px solid rgba(0,0,0,0.06);">
+            <img src="/envelopes/closed.png" alt="مظروف مغلق" class="h-20 w-auto object-contain envelope-float" />
+            <span class="text-sm font-semibold" style="color:#0f172a;">أحمد</span>
+          </div> -->
+          <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-md" style="background:#fff;border:2px solid #6366f1;transform:scale(1.06);">
+            <img src="/envelopes/opened.png" alt="مظروف مفتوح" class="h-20 w-auto object-contain" />
+            <span class="text-sm font-semibold" style="color:#0f172a;">سارة</span>
+            <span class="rounded-full border px-2 py-0.5 text-xs font-medium" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;">EID-GIFT</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-sm transition-all hover:shadow-md" style="background:#fff;border:1.5px solid rgba(0,0,0,0.06);">
+            <img src="/envelopes/closed.png" alt="مظروف مغلق" class="h-20 w-auto object-contain envelope-float" style="animation-delay:1.2s;" />
+            <span class="text-sm font-semibold" style="color:#0f172a;">محمد</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="#form-section"
+            style="color:#fff;"
+            class="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-10 py-4 text-xl font-bold shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-indigo-700 hover:shadow-indigo-500/35"
+          >
+            أنشئ بطاقاتك الآن
+          </a>
+          <a
+            href="#how-it-works"
+            class="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-8 py-4 text-lg font-semibold text-indigo-600 transition-all duration-300 hover:border-indigo-300 hover:shadow-sm"
+          >
+            كيف تشتغل؟
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll arrow -->
+      <div class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce opacity-30 md:block">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:#64748b;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ── How it works ──────────────────────────────────────────────────── -->
+    <section id="how-it-works" class="px-5 py-16" style="background:#fff;">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-14 text-center">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">طريقة عملها</p>
+          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">٣ خطوات وخلصت</h2>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          {[
+            { n: "١", title: "أضف الأسماء", desc: "اكتب اسمك وأسماء كل اللي تبي تعيدهم" },
+            { n: "٢", title: "شارك الرابط",  desc: "راح تحصل رابط واحد تشاركه في الواتساب" },
+            { n: "٣", title: "يفتحون مظاريفهم", desc: "كل شخص يدور اسمه ويفتح المظروف ويشوف مفاجأته" },
+          ].map(step => (
+            <div class="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center transition-all hover:shadow-md" style="background:#fafbfc;border-color:rgba(0,0,0,0.06);">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full text-base font-extrabold ring-1" style="background:rgba(99,102,241,0.08);color:#6366f1;ring-color:rgba(99,102,241,0.15);">{step.n}</div>
+              <h3 class="text-lg font-bold" style="color:#0f172a;">{step.title}</h3>
+              <p class="text-sm leading-relaxed" style="color:#64748b;">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Features ──────────────────────────────────────────────────────── -->
+    <section class="px-5 py-16">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-14 text-center">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">ليش تستخدمها؟</p>
+          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">تجربة لا تُنسى</h2>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { title: "شخصي لكل واحد",  desc: "كل مظروف باسم صاحبه وكوبون خاص فيه" },
+            { title: "كوبون مفاجأة",   desc: "ما يعرف وش فيه لين يفتح — المفاجأة هي الفرحة" },
+            { title: "يُفتح مرة وحدة", desc: "كل مظروف يُفتح مرة واحدة بس — ما يتكرر" },
+            { title: "رابط واحد للكل", desc: "شارك رابط واحد على الواتساب أو مجموعة العيلة" },
+            { title: "في ثواني",        desc: "تنشئ مجموعة البطاقات في أقل من دقيقة" },
+            { title: "ما يحتاج تحميل", desc: "يشتغل مباشرة في المتصفح بدون أي تطبيق" },
+          ].map(f => (
+            <div class="rounded-2xl border p-6 transition-all duration-300 hover:shadow-md" style="background:#fff;border-color:rgba(0,0,0,0.07);">
+              <h3 class="mb-2 font-bold" style="color:#0f172a;">{f.title}</h3>
+              <p class="text-sm leading-relaxed" style="color:#64748b;">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Form ──────────────────────────────────────────────────────────── -->
+    <section id="form-section" class="relative overflow-hidden px-5 py-20" style="background:#fff;">
+      <!-- Soft glow -->
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div class="h-[500px] w-[500px] rounded-full blur-[120px]" style="background:rgba(99,102,241,0.06);"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-lg">
+        <div class="mb-10 text-center">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">ابدأ الآن</p>
+          <h2 class="mb-3 font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">أنشئ بطاقاتك</h2>
+          <p style="color:#64748b;">كلّ يفتح مظروفه ويلاقي مفاجأته</p>
+        </div>
+
+        <div class="rounded-3xl p-8 shadow-xl md:p-10" style="background:#fafbfc;border:1.5px solid rgba(0,0,0,0.08);">
+          <form id="eid-form" class="space-y-7">
+
+            <!-- Sender name -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium" style="color:#334155;">
+                اسمك — اللي سيظهر لأحبابك
+              </label>
+              <input
+                id="display-name"
+                type="text"
+                required
+                maxlength="40"
+                placeholder="اسم المرسل"
+                class="w-full rounded-xl px-4 py-3 text-base transition-all outline-none"
+                style="background:#fff;border:1.5px solid rgba(0,0,0,0.1);color:#0f172a;font-family:inherit;"
+                onfocus="this.style.borderColor='#6366f1';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.12)'"
+                onblur="this.style.borderColor='rgba(0,0,0,0.1)';this.style.boxShadow='none'"
+              />
+            </div>
+
+            <!-- Recipients -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="block text-sm font-medium" style="color:#334155;">
+                  أسماء المستلمين
+                </label>
+                <span id="name-count" class="rounded-full border px-3 py-0.5 text-xs font-medium" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;">
+                  ٠ أسماء
+                </span>
+              </div>
+
+              <div id="names-list" class="space-y-2"></div>
+
+              <button
+                type="button"
+                id="add-name-btn"
+                class="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed px-4 py-3 text-sm transition-all duration-200"
+                style="border-color:rgba(0,0,0,0.12);color:#94a3b8;background:transparent;"
+                onmouseover="this.style.borderColor='#6366f1';this.style.color='#6366f1';this.style.background='rgba(99,102,241,0.05)'"
+                onmouseout="this.style.borderColor='rgba(0,0,0,0.12)';this.style.color='#94a3b8';this.style.background='transparent'"
+              >
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                </svg>
+                إضافة اسم
+              </button>
+            </div>
+
+            <!-- Error -->
+            <p id="form-error" class="hidden rounded-xl border px-4 py-3 text-sm font-medium" style="background:#fef2f2;border-color:#fecaca;color:#dc2626;"></p>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              id="submit-btn"
+              style="color:#fff;"
+              class="flex w-full items-center justify-center rounded-full bg-indigo-600 px-5 py-3 text-base font-bold shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 hover:shadow-indigo-500/30 disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-4 sm:text-lg"
+            >
+              <span id="submit-text">أنشئ البطاقات وشارك الرابط</span>
+            </button>
+
+            <p class="text-center text-xs" style="color:#94a3b8;">
+              بعد الإنشاء راح تحصل رابط تشاركه مع الكل
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+    <footer class="px-5 py-8 text-center text-sm" style="border-top:1px solid rgba(0,0,0,0.06);color:#94a3b8;">
+      عيد مبارك وسعيد
+    </footer>
+
+    <style>
+      .envelope-float { animation: envFloat 3s ease-in-out infinite; }
+      @keyframes envFloat {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-6px); }
+      }
+
+      .name-row-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        animation: rowIn 0.18s ease-out;
+      }
+      @keyframes rowIn {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+
+    <script is:inline>
+      const namesList  = document.getElementById("names-list");
+      const addBtn     = document.getElementById("add-name-btn");
+      const countEl   = document.getElementById("name-count");
+      const errorEl   = document.getElementById("form-error");
+      const form       = document.getElementById("eid-form");
+      const submitBtn  = document.getElementById("submit-btn");
+      const submitText = document.getElementById("submit-text");
+
+      const AR = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+      const toAr = n => String(n).replace(/\d/g, d => AR[+d]);
+
+      function getNames() {
+        return Array.from(namesList.querySelectorAll(".name-input"))
+          .map(i => i.value.trim()).filter(Boolean);
+      }
+
+      function updateCount() {
+        const n = getNames().length;
+        countEl.textContent = `${toAr(n)} أسماء`;
+        addBtn.style.display = n >= 50 ? "none" : "flex";
+      }
+
+      function addField(value = "") {
+        const row = document.createElement("div");
+        row.className = "name-row-item";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "اسم المستلم";
+        input.className = "name-input";
+        input.maxLength = 40;
+        input.value = value;
+        input.style.cssText = "flex:1;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.1);background:#fff;padding:0.625rem 1rem;font-size:1rem;font-family:inherit;color:#0f172a;outline:none;transition:border-color 0.2s,box-shadow 0.2s;direction:rtl;width:100%;";
+        input.addEventListener("focus", () => { input.style.borderColor="#6366f1"; input.style.boxShadow="0 0 0 3px rgba(99,102,241,0.12)"; });
+        input.addEventListener("blur",  () => { input.style.borderColor="rgba(0,0,0,0.1)"; input.style.boxShadow="none"; });
+        input.addEventListener("input", updateCount);
+
+        row.appendChild(input);
+        namesList.appendChild(row);
+        input.focus();
+        updateCount();
+      }
+
+      addBtn.addEventListener("click", () => addField());
+      for (let i = 0; i < 4; i++) addField();
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorEl.classList.add("hidden");
+
+        const displayName = document.getElementById("display-name").value.trim();
+        const names = getNames();
+
+        if (!displayName)       return showError("اكتب اسمك أولاً");
+        if (names.length === 0) return showError("أضف اسم واحد على الأقل");
+        if (names.length > 50)  return showError("الحد الأقصى ٥٠ اسم");
+
+        submitBtn.disabled = true;
+        submitText.textContent = "جاري الإنشاء...";
+
+        try {
+          const res  = await fetch("/api/eid/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ displayName, names }),
+          });
+          const data = await res.json();
+
+          if (!res.ok || !data.success) {
+            showError(data.error || "حدث خطأ، حاول مرة أخرى");
+            return resetBtn();
+          }
+
+          sessionStorage.setItem(`eid_batch_${data.batchId}`, JSON.stringify({
+            displayName: data.displayName,
+            recipients:  data.recipients,
+            demo:        data.demo,
+          }));
+
+          window.location.href = `/eid/${data.batchId}`;
+        } catch {
+          showError("تعذر الاتصال، تحقق من الإنترنت");
+          resetBtn();
+        }
+      });
+
+      function showError(msg) {
+        errorEl.textContent = msg;
+        errorEl.classList.remove("hidden");
+      }
+      function resetBtn() {
+        submitBtn.disabled = false;
+        submitText.textContent = "أنشئ البطاقات وشارك الرابط";
+      }
+    </script>
+
+  </body>
+</html>
