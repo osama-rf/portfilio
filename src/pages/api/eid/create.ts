@@ -24,17 +24,25 @@ export const POST: APIRoute = async ({ request }) => {
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
-    if (names.length > 50) {
+    const creatorName = displayName.trim();
+    const normalize = (value: string) => value.trim().toLowerCase();
+
+    // Ensure creator has their own card and keep max total recipients to 50
+    const normalizedCreator = normalize(creatorName);
+    const preparedNames = names.map((n) => n.trim()).filter(Boolean);
+    if (!preparedNames.some((n) => normalize(n) === normalizedCreator)) {
+      preparedNames.unshift(creatorName);
+    }
+
+    if (preparedNames.length > 50) {
       return new Response(
-        JSON.stringify({ error: "الحد الأقصى 50 مستلماً" }),
+        JSON.stringify({ error: "الحد الأقصى 50 مستلماً (شاملاً اسمك)" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
     // Assign random coupons to each recipient
-    const recipientsWithCoupons = names
-      .map((n) => n.trim())
-      .filter(Boolean)
+    const recipientsWithCoupons = preparedNames
       .map((name) => {
         const coupon = getRandomCoupon();
         return { name, ...coupon };

@@ -383,7 +383,7 @@ const notFound = !isDemoMode && !serverDisplayName;
       function getOwnerRecipientId() {
         if (!Array.isArray(recipients) || recipients.length === 0) return null;
         const creatorMatch = recipients.find((r) => normalizeName(r.name) === normalizeName(displayName));
-        return (creatorMatch || recipients[0])?.id || null;
+        return creatorMatch?.id || null;
       }
 
       const ownerRecipientId = getOwnerRecipientId();
@@ -529,7 +529,7 @@ const notFound = !isDemoMode && !serverDisplayName;
 
           let shouldLock = false;
           if (!allUnlocked) {
-            shouldLock = true;
+            shouldLock = isCreatorView ? Boolean(ownerRecipientId) : true;
           } else if (!isCreatorView && visitorOpenedId && visitorOpenedId !== recipient.id) {
             shouldLock = true;
           }
