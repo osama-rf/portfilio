@@ -46,76 +46,128 @@ const notFound = !isDemoMode && !serverDisplayName;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title id="page-title">بطاقات العيد 🌙</title>
+    <title>بطاقات العيد </title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body class="min-h-screen bg-black font-sans text-white">
+    <style>
+      body { background: #fafbfc; color: #0f172a; }
 
-    <!-- Background glow -->
-    <div class="pointer-events-none fixed inset-0 overflow-hidden">
-      <div class="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-primary/10 blur-[140px]"></div>
-      <div class="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-amber-500/5 blur-[100px]"></div>
+      .env-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      @media (min-width: 640px) { .env-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 768px) { .env-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+
+      .env-card {
+        background: #fff;
+        border: 1.5px solid rgba(0, 0, 0, 0.07);
+        border-radius: 1rem;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        user-select: none;
+      }
+      .env-card:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.12);
+      }
+      .env-card.is-opened { opacity: 0.65; }
+      .env-card.is-locked {
+        cursor: not-allowed;
+        opacity: 0.35;
+        filter: grayscale(0.5);
+        pointer-events: none;
+      }
+      .env-card.is-locked:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: rgba(0, 0, 0, 0.07);
+      }
+      .env-card img { transition: transform 0.3s ease; }
+      .env-card:not(.is-locked):not(.is-opened):hover img { transform: translateY(-4px); }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body style="min-height:100vh;background:#fafbfc;font-family:var(--font-arabic, 'IBM Plex Sans Arabic', sans-serif);">
+
+    <!-- Subtle background glow -->
+    <div style="pointer-events:none;position:fixed;inset:0;overflow:hidden;z-index:0;">
+      <div style="position:absolute;left:50%;top:-100px;height:600px;width:600px;transform:translateX(-50%);border-radius:50%;background:rgba(99,102,241,0.04);filter:blur(120px);"></div>
     </div>
 
     {notFound ? (
-      <!-- 404 state -->
-      <main class="relative flex min-h-screen flex-col items-center justify-center px-5 text-center">
-        <p class="text-6xl mb-6">🔍</p>
-        <h1 class="mb-3 text-2xl font-bold text-white">البطاقات غير موجودة</h1>
-        <p class="text-neutral/60 mb-8">تحقق من الرابط أو اطلب من المرسل إعادة إرساله</p>
-        <a href="/eid" class="rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary/90 transition-all">
+      <main style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:1.25rem;text-align:center;">
+        <p style="font-size:3.75rem;margin-bottom:1.5rem;">🔍</p>
+        <h1 style="margin-bottom:0.75rem;font-size:1.5rem;font-weight:700;color:#0f172a;">البطاقات غير موجودة</h1>
+        <p style="color:#64748b;margin-bottom:2rem;">تحقق من الرابط أو اطلب من المرسل إعادة إرساله</p>
+        <a href="/eid" style="border-radius:0.75rem;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.75rem 1.5rem;font-weight:700;color:#fff;text-decoration:none;display:inline-block;">
           أنشئ بطاقاتك
         </a>
       </main>
     ) : (
-      <main class="relative mx-auto max-w-4xl px-5 py-16">
+      <main style="position:relative;z-index:1;max-width:56rem;margin:0 auto;padding:4rem 1.25rem;">
 
         <!-- Header -->
-        <div class="mb-12 text-center" id="wall-header">
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-sm text-amber-400">
-            🌙 عيد مبارك وسعيد
-          </div>
-          <h1 id="wall-title" class="mb-3 text-3xl font-bold text-white md:text-4xl">
+        <div class="text-center" style="margin-bottom:3rem;">
+          <h1 id="wall-title" style="margin-bottom:0.75rem;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;color:#0f172a;">
             {serverDisplayName ? `بطاقات العيد من ${serverDisplayName}` : "بطاقات العيد"}
           </h1>
-          <p class="text-neutral/60">
-            دور على اسمك وافتح مظروفك — في الداخل مفاجأة خاصة لك 🎁
+          <p style="color:#64748b;font-size:1rem;">
+            دور على اسمك وافتح مظروفك — في الداخل مفاجأة خاصة لك 
           </p>
         </div>
 
-        <!-- Loading state (shown until JS hydrates) -->
-        <div id="loading-state" class="flex flex-col items-center justify-center py-20 text-neutral/50">
-          <div class="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-primary/30 border-t-primary"></div>
+        <!-- Locked notice (shown after visitor opens a card) -->
+        <div id="locked-notice" class="text-center" style="display:none;margin-bottom:1.5rem;">
+          <div style="display:inline-flex;align-items:center;gap:0.5rem;border-radius:9999px;background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.18);padding:0.5rem 1.25rem;font-size:0.875rem;color:#6366f1;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            فتحت بطاقتك — كل مظروف لصاحبه فقط
+          </div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loading-state" class="text-center" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 0;color:#94a3b8;">
+          <div style="margin-bottom:1rem;height:2rem;width:2rem;border-radius:50%;border:2px solid rgba(99,102,241,0.2);border-top-color:#6366f1;animation:spin 0.8s linear infinite;"></div>
           <p>جاري تحميل البطاقات...</p>
         </div>
 
         <!-- Envelope grid -->
-        <div
-          id="envelope-grid"
-          class="hidden grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-6"
-        ></div>
+        <div id="envelope-grid" class="env-grid" style="display:none;"></div>
 
         <!-- Empty state -->
-        <div id="empty-state" class="hidden py-20 text-center text-neutral/50">
-          <p class="text-4xl mb-4">📭</p>
+        <div id="empty-state" class="text-center" style="display:none;padding:5rem 0;color:#94a3b8;">
+          <p style="font-size:2.5rem;margin-bottom:1rem;">📭</p>
           <p>لا توجد بطاقات في هذه المجموعة</p>
         </div>
 
         <!-- Share section -->
-        <div id="share-section" class="mt-12 hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-          <p class="mb-3 text-sm text-neutral/60">شارك هذا الرابط مع أحبائك</p>
-          <div class="flex items-center gap-2 rounded-xl border border-white/10 bg-black px-4 py-3">
-            <span id="share-url" class="flex-1 truncate text-sm text-neutral/80 text-left dir-ltr"></span>
-            <button id="copy-btn" class="shrink-0 rounded-lg bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary/30">
+        <div id="share-section" class="text-center" style="display:none;margin-top:3rem;border-radius:1rem;border:1.5px solid rgba(0,0,0,0.06);background:#fff;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+          <p style="margin-bottom:0.75rem;font-size:0.875rem;color:#64748b;">شارك هذا الرابط مع أحبائك</p>
+          <div style="display:flex;align-items:center;gap:0.5rem;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.07);background:#f8fafc;padding:0.75rem 1rem;">
+            <span id="share-url" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.8125rem;color:#64748b;text-align:left;direction:ltr;"></span>
+            <button id="share-btn" style="flex-shrink:0;border-radius:0.5rem;background:#6366f1;padding:0.375rem 0.875rem;font-size:0.75rem;font-weight:600;color:#fff;border:none;cursor:pointer;transition:all 0.2s;">
+              مشاركة
+            </button>
+            <button id="copy-btn" style="flex-shrink:0;border-radius:0.5rem;background:rgba(99,102,241,0.1);padding:0.375rem 0.875rem;font-size:0.75rem;font-weight:600;color:#6366f1;border:none;cursor:pointer;transition:all 0.2s;">
               نسخ
             </button>
           </div>
         </div>
 
-        <!-- Back link -->
-        <div class="mt-8 text-center">
-          <a href="/eid" class="text-sm text-neutral/40 hover:text-neutral/70 transition-colors">
-            ← أنشئ مجموعة جديدة
+        <!-- Back CTA -->
+        <div class="text-center" style="margin-top:2.5rem;">
+          <a
+            href="/eid"
+            style="display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.875rem 2rem;font-size:1rem;font-weight:700;color:#fff;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 16px rgba(99,102,241,0.25);"
+          >
+            أنشئ بطاقاتك وشارك احبابك الفرحة
           </a>
         </div>
 
@@ -125,47 +177,67 @@ const notFound = !isDemoMode && !serverDisplayName;
     <!-- Coupon Modal -->
     <div
       id="coupon-modal"
-      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      style="display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:1rem;"
     >
-      <div class="relative w-full max-w-sm rounded-3xl border border-white/10 bg-[#0a0a0a] p-8 text-center shadow-2xl">
+      <div class="text-center" style="position:relative;width:100%;max-width:22rem;border-radius:1.5rem;border:1.5px solid rgba(0,0,0,0.06);background:#fff;padding:2rem;box-shadow:0 25px 60px rgba(0,0,0,0.18);">
         <button
           id="modal-close"
-          class="absolute left-4 top-4 rounded-full border border-white/10 bg-white/5 p-1.5 text-neutral/50 hover:text-white transition-colors"
+          style="position:absolute;left:1rem;top:1rem;border-radius:50%;border:1.5px solid rgba(0,0,0,0.08);background:#f8fafc;padding:0.375rem;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color 0.2s;line-height:0;"
           aria-label="إغلاق"
         >
-          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg style="height:1rem;width:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
+
         <img
           src="/envelopes/opened.png"
           alt="مظروف مفتوح"
-          class="mx-auto mb-6 h-32 w-auto object-contain"
-          id="modal-envelope-img"
+          style="margin:0 auto 1rem;height:5.5rem;width:auto;object-fit:contain;"
         />
-        <h2 id="modal-greeting" class="mb-5 text-xl font-bold text-white leading-relaxed"></h2>
-        <div class="rounded-2xl border border-primary/20 bg-primary/10 px-6 py-5 mb-4">
-          <p class="mb-1 text-xs uppercase tracking-widest text-primary/60" id="modal-coupon-type"></p>
-          <p class="text-3xl font-bold tracking-widest text-white font-mono" id="modal-coupon-code"></p>
+
+        <h2 id="modal-greeting" style="margin-bottom:1.25rem;font-size:1.0625rem;font-weight:700;color:#0f172a;line-height:1.6;"></h2>
+
+        <!-- Coupon ticket -->
+        <div style="position:relative;border-radius:1rem;border:2px dashed rgba(99,102,241,0.35);background:linear-gradient(135deg,rgba(99,102,241,0.05),rgba(139,92,246,0.05));padding:1.25rem 1rem;margin-bottom:1rem;overflow:visible;">
+          <!-- Notch circles -->
+          <div style="position:absolute;top:50%;left:-10px;width:18px;height:18px;border-radius:50%;background:#fff;transform:translateY(-50%);border:2px dashed rgba(99,102,241,0.35);"></div>
+          <div style="position:absolute;top:50%;right:-10px;width:18px;height:18px;border-radius:50%;background:#fff;transform:translateY(-50%);border:2px dashed rgba(99,102,241,0.35);"></div>
+
+          <p id="modal-coupon-type" style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.12em;color:#6366f1;font-weight:700;margin-bottom:0.625rem;"></p>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.625rem;flex-wrap:wrap;margin-bottom:0.625rem;">
+            <span id="modal-coupon-code" style="font-size:clamp(1.25rem,6vw,1.625rem);font-weight:800;letter-spacing:0.1em;color:#0f172a;font-family:monospace;line-height:1;"></span>
+            <button
+              id="copy-code-btn"
+              style="flex-shrink:0;border-radius:0.5rem;background:rgba(99,102,241,0.12);border:1.5px solid rgba(99,102,241,0.25);padding:0.3rem 0.75rem;font-size:0.75rem;font-weight:700;color:#6366f1;cursor:pointer;transition:all 0.2s;white-space:nowrap;line-height:1.5;"
+            >نسخ</button>
+          </div>
+
+          <p id="modal-coupon-desc" style="font-size:0.8125rem;color:#64748b;line-height:1.5;margin:0;"></p>
         </div>
-        <p class="text-sm text-neutral/50" id="modal-coupon-desc"></p>
+
+        <!-- CTA: create your own cards -->
+        <a
+          href="/eid"
+          style="display:block;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.875rem 1.5rem;font-size:0.9375rem;font-weight:700;color:#fff;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 15px rgba(99,102,241,0.25);margin-top:1.25rem;"
+        >
+          أنشئ بطاقاتك وشارك احبابك الفرحة
+        </a>
       </div>
     </div>
 
-    <!-- Envelope template (hidden, cloned by JS) -->
+    <!-- Envelope card template (cloned by JS) -->
     <template id="envelope-template">
-      <div
-        class="envelope-card group relative cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.06] hover:scale-[1.02] active:scale-[0.98]"
-      >
-        <div class="envelope-front">
-          <img
-            src="/envelopes/closed.png"
-            alt="مظروف"
-            class="mx-auto mb-3 h-24 w-auto object-contain transition-transform duration-500 group-hover:-translate-y-1 md:h-28"
-          />
-          <p class="name-label truncate text-sm font-semibold text-white md:text-base"></p>
-          <p class="opened-badge mt-1 hidden text-xs text-primary">✓ تم الفتح</p>
-        </div>
+      <div class="env-card text-center">
+        <img
+          src="/envelopes/closed.png"
+          alt="مظروف"
+          style="margin:0 auto 0.75rem;height:6rem;width:auto;object-fit:contain;"
+        />
+        <p class="name-label" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.875rem;font-weight:600;color:#0f172a;"></p>
+        <p class="opened-badge" style="display:none;margin-top:0.25rem;font-size:0.75rem;color:#6366f1;">✓ تم الفتح</p>
+        <p class="lock-badge" style="display:none;margin-top:0.25rem;font-size:0.75rem;color:#94a3b8;">🔒 مقفول</p>
       </div>
     </template>
 
@@ -179,82 +251,109 @@ const notFound = !isDemoMode && !serverDisplayName;
       }}
     >
       const STORAGE_BATCH_KEY = `eid_batch_${batchId}`;
+      const VISITOR_KEY       = `eid_visitor_${batchId}`;   // stores opened recipientId
+      const COOKIE_KEY        = `eidv_${batchId.substring(0, 8)}`;
 
-      // ── Load recipients ────────────────────────────────────────────────────
+      // ── Cookie helpers ─────────────────────────────────────────────────────
+      function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/;SameSite=Strict`;
+      }
+      function getCookie(name) {
+        const m = document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
+        return m ? m.pop() : null;
+      }
+      function getVisitorOpenedId() {
+        return localStorage.getItem(VISITOR_KEY) || getCookie(COOKIE_KEY) || null;
+      }
+      function markVisitorOpened(recipientId) {
+        localStorage.setItem(VISITOR_KEY, recipientId);
+        setCookie(COOKIE_KEY, recipientId, 30);
+      }
+
+      // ── Load recipients (localStorage for cross-tab support) ──────────────
       let displayName = serverDisplayName;
-      let recipients = serverRecipients;
+      let recipients  = serverRecipients;
 
-      // If no server data (demo mode or SSR miss), try sessionStorage
       if (!recipients || recipients.length === 0) {
-        const stored = sessionStorage.getItem(STORAGE_BATCH_KEY);
+        const stored = localStorage.getItem(STORAGE_BATCH_KEY);
         if (stored) {
           try {
             const parsed = JSON.parse(stored);
-            displayName = parsed.displayName;
-            recipients = parsed.recipients;
+            displayName  = parsed.displayName;
+            recipients   = parsed.recipients;
           } catch {}
         }
       }
 
-      // Update page title + heading with displayName
       if (displayName) {
-        document.title = `بطاقات العيد من ${displayName} 🌙`;
+        document.title = `بطاقات العيد من ${displayName} `;
         const titleEl = document.getElementById("wall-title");
         if (titleEl) titleEl.textContent = `بطاقات العيد من ${displayName}`;
       }
 
       // ── Render grid ────────────────────────────────────────────────────────
-      const loadingEl = document.getElementById("loading-state");
-      const gridEl = document.getElementById("envelope-grid");
-      const emptyEl = document.getElementById("empty-state");
+      const loadingEl    = document.getElementById("loading-state");
+      const gridEl       = document.getElementById("envelope-grid");
+      const emptyEl      = document.getElementById("empty-state");
       const shareSection = document.getElementById("share-section");
-      const shareUrl = document.getElementById("share-url");
+      const shareUrlEl   = document.getElementById("share-url");
+      const lockedNotice = document.getElementById("locked-notice");
 
       function renderGrid() {
         if (!gridEl || !loadingEl) return;
-        loadingEl.classList.add("hidden");
+        loadingEl.style.display = "none";
 
         if (!recipients || recipients.length === 0) {
-          emptyEl?.classList.remove("hidden");
+          if (emptyEl) emptyEl.style.display = "block";
           return;
         }
 
-        gridEl.classList.remove("hidden");
-        gridEl.classList.add("grid");
+        gridEl.style.display = "grid";
 
-        // Show share URL
-        if (shareSection && shareUrl) {
-          shareUrl.textContent = window.location.href;
-          shareSection.classList.remove("hidden");
+        if (shareSection && shareUrlEl) {
+          shareUrlEl.textContent = window.location.href;
+          shareSection.style.display = "block";
         }
 
-        const template = document.getElementById(
-          "envelope-template"
-        );
+        const visitorOpenedId = getVisitorOpenedId();
+        if (visitorOpenedId && lockedNotice) {
+          lockedNotice.style.display = "block";
+        }
+
+        const template = document.getElementById("envelope-template");
 
         recipients.forEach((recipient) => {
-          const card = template.content.cloneNode(true);
-          const div = card.querySelector(".envelope-card");
+          const card      = template.content.cloneNode(true);
+          const div       = card.querySelector(".env-card");
           const nameLabel = card.querySelector(".name-label");
           const openedBadge = card.querySelector(".opened-badge");
+          const lockBadge   = card.querySelector(".lock-badge");
 
-          div.dataset.id = recipient.id;
+          div.dataset.id   = recipient.id;
           div.dataset.name = recipient.name;
           div.dataset.code = recipient.coupon_code;
           div.dataset.type = recipient.coupon_type;
           div.dataset.desc = recipient.coupon_description;
           nameLabel.textContent = recipient.name;
 
-          // Check if already opened (localStorage or server-flagged)
-          const localOpened =
-            localStorage.getItem(`eid_opened_${recipient.id}`) === "1";
+          const localOpened = localStorage.getItem(`eid_opened_${recipient.id}`) === "1";
           if (recipient.opened || localOpened) {
-            openedBadge?.classList.remove("hidden");
+            openedBadge.style.display = "block";
             div.querySelector("img").src = "/envelopes/opened.png";
-            div.classList.add("opacity-60");
+            div.classList.add("is-opened");
           }
 
-          div.addEventListener("click", () => handleOpen(div));
+          // One-card-per-visitor: lock cards that are NOT theirs
+          if (visitorOpenedId && visitorOpenedId !== recipient.id) {
+            div.classList.add("is-locked");
+            lockBadge.style.display = "block";
+          } else {
+            // Allow clicking (own card or no card opened yet)
+            div.addEventListener("click", () => handleOpen(div));
+          }
+
           gridEl.appendChild(card);
         });
       }
@@ -263,26 +362,41 @@ const notFound = !isDemoMode && !serverDisplayName;
 
       // ── Handle envelope open ───────────────────────────────────────────────
       async function handleOpen(card) {
-        const id = card.dataset.id;
+        const id   = card.dataset.id;
         const name = card.dataset.name;
         const code = card.dataset.code;
         const type = card.dataset.type;
         const desc = card.dataset.desc;
 
-        // Mark as opened in localStorage immediately (optimistic)
+        // Mark this card as opened (individual tracking)
         localStorage.setItem(`eid_opened_${id}`, "1");
 
+        // Mark visitor's chosen card (one-card limit)
+        markVisitorOpened(id);
+
         // Update card UI
-        const img = card.querySelector("img");
+        const img   = card.querySelector("img");
         const badge = card.querySelector(".opened-badge");
         img.src = "/envelopes/opened.png";
-        badge?.classList.remove("hidden");
-        card.classList.add("opacity-60");
+        if (badge) badge.style.display = "block";
+        card.classList.add("is-opened");
 
-        // Show modal with coupon
+        // Immediately lock all OTHER cards on the page
+        document.querySelectorAll(".env-card").forEach((c) => {
+          if (c.dataset.id !== id) {
+            c.classList.add("is-locked");
+            const lb = c.querySelector(".lock-badge");
+            if (lb) lb.style.display = "block";
+          }
+        });
+
+        // Show locked notice
+        if (lockedNotice) lockedNotice.style.display = "block";
+
+        // Show coupon modal
         showModal(name, code, type, desc);
 
-        // Fire-and-forget: notify server (no need to await for UX)
+        // Notify server (fire-and-forget)
         fetch("/api/eid/open", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -291,28 +405,21 @@ const notFound = !isDemoMode && !serverDisplayName;
       }
 
       // ── Modal ──────────────────────────────────────────────────────────────
-      const modal = document.getElementById("coupon-modal");
+      const modal      = document.getElementById("coupon-modal");
       const modalClose = document.getElementById("modal-close");
 
       function showModal(name, code, type, desc) {
-        document.getElementById("modal-greeting").textContent =
-          `عيدك مبارك يا ${name}! 🌙✨`;
+        document.getElementById("modal-greeting").textContent  = `عيدك مبارك يا ${name}! 🌙✨`;
         document.getElementById("modal-coupon-code").textContent = code;
         document.getElementById("modal-coupon-type").textContent = type;
         document.getElementById("modal-coupon-desc").textContent = desc;
-        modal?.classList.remove("hidden");
-        modal?.classList.add("flex");
+        modal.style.display = "flex";
       }
 
-      modalClose?.addEventListener("click", closeModal);
+      modalClose?.addEventListener("click", () => { modal.style.display = "none"; });
       modal?.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
+        if (e.target === modal) modal.style.display = "none";
       });
-
-      function closeModal() {
-        modal?.classList.add("hidden");
-        modal?.classList.remove("flex");
-      }
 
       // ── Copy link ──────────────────────────────────────────────────────────
       document.getElementById("copy-btn")?.addEventListener("click", () => {
@@ -321,6 +428,56 @@ const notFound = !isDemoMode && !serverDisplayName;
           if (btn) {
             btn.textContent = "تم ✓";
             setTimeout(() => (btn.textContent = "نسخ"), 2000);
+          }
+        });
+      });
+
+      // ── Native share (mobile-friendly) ────────────────────────────────────
+      document.getElementById("share-btn")?.addEventListener("click", async () => {
+        const shareUrl = window.location.href;
+        const shareData = {
+          title: document.title || "بطاقات العيد",
+          text: "بطاقات العيد",
+          url: shareUrl,
+        };
+        const btn = document.getElementById("share-btn");
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            if (btn) {
+              btn.textContent = "تمت المشاركة";
+              setTimeout(() => (btn.textContent = "مشاركة"), 2000);
+            }
+            return;
+          }
+
+          await navigator.clipboard.writeText(shareUrl);
+          if (btn) {
+            btn.textContent = "تم النسخ";
+            setTimeout(() => (btn.textContent = "مشاركة"), 2000);
+          }
+        } catch (_) {
+          // User may cancel native share; no error UI needed.
+        }
+      });
+
+      // ── Copy coupon code ───────────────────────────────────────────────────
+      document.getElementById("copy-code-btn")?.addEventListener("click", () => {
+        const code = document.getElementById("modal-coupon-code")?.textContent || "";
+        navigator.clipboard.writeText(code).then(() => {
+          const btn = document.getElementById("copy-code-btn");
+          if (btn) {
+            btn.textContent = "تم النسخ ✓";
+            btn.style.background = "rgba(16,185,129,0.12)";
+            btn.style.borderColor = "rgba(16,185,129,0.3)";
+            btn.style.color = "#10b981";
+            setTimeout(() => {
+              btn.textContent = "نسخ";
+              btn.style.background = "rgba(99,102,241,0.12)";
+              btn.style.borderColor = "rgba(99,102,241,0.25)";
+              btn.style.color = "#6366f1";
+            }, 2000);
           }
         });
       });

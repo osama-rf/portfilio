@@ -1,6 +1,9 @@
 ---
 export const prerender = true;
 import "../../styles/global.css";
+const moyasarPublicKey = import.meta.env.MOYASAR_PUBLIC_KEY ?? "";
+const paymentEnabled   = Boolean(moyasarPublicKey);
+const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/\/+$/, "");
 ---
 
 <!doctype html>
@@ -11,23 +14,25 @@ import "../../styles/global.css";
     <meta name="description" content="أرسل بطاقات عيد مميزة لأحبائك — كل واحد يفتح مظروفه الخاص ويلاقي كوبون مفاجأة" />
     <title>بطاقات العيد — فرح وكوبونات لأحبائك</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {paymentEnabled && (
+      <link
+        rel="stylesheet"
+        href="https://cdn.moyasar.com/mpf/1.13.0/moyasar.css"
+        data-moyasar-css="1"
+      />
+    )}
   </head>
 
   <body style="background:#fafbfc;color:#0f172a;" class="font-sans">
 
-    <!-- ── Sticky nav ────────────────────────────────────────────────────── -->
-    <!-- <header style="background:rgba(250,251,252,0.85);border-bottom:1px solid rgba(0,0,0,0.06);" class="sticky top-0 z-50 backdrop-blur-sm">
-      <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-        <span class="text-base font-bold" style="color:#0f172a;">بطاقات العيد</span>
-        <a
-          href="#form-section"
-          style="color:#fff;"
-          class="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-bold shadow-lg transition-all duration-300 hover:scale-105 hover:bg-indigo-700 hover:shadow-indigo-500/30"
-        >
-          ابدأ الآن
-        </a>
-      </div>
-    </header> -->
+    <!-- Runtime config for JS (hidden) -->
+    <div
+      id="app-config"
+      data-moyasar-key={moyasarPublicKey}
+      data-payment-enabled={paymentEnabled ? "1" : "0"}
+      data-public-app-url={publicAppUrl}
+      style="display:none;"
+    ></div>
 
     <!-- ── Hero ─────────────────────────────────────────────────────────── -->
     <section class="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-5 text-center">
@@ -38,7 +43,6 @@ import "../../styles/global.css";
       </div>
 
       <div class="relative z-10 mx-auto max-w-4xl">
-        <!-- Headline — same gradient-text style adapted for light -->
         <h1
           class="mb-6 font-serif text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl"
           style="background:linear-gradient(180deg,#0f172a 0%,#475569 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"
@@ -55,10 +59,6 @@ import "../../styles/global.css";
 
         <!-- Envelope preview -->
         <div class="mb-12 flex justify-center gap-4 md:gap-6">
-          <!-- <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-sm transition-all hover:shadow-md" style="background:#fff;border:1.5px solid rgba(0,0,0,0.06);">
-            <img src="/envelopes/closed.png" alt="مظروف مغلق" class="h-20 w-auto object-contain envelope-float" />
-            <span class="text-sm font-semibold" style="color:#0f172a;">أحمد</span>
-          </div> -->
           <div class="flex flex-col items-center gap-2 rounded-2xl p-4 shadow-md" style="background:#fff;border:2px solid #6366f1;transform:scale(1.06);">
             <img src="/envelopes/opened.png" alt="مظروف مفتوح" class="h-20 w-auto object-contain" />
             <span class="text-sm font-semibold" style="color:#0f172a;">سارة</span>
@@ -104,14 +104,14 @@ import "../../styles/global.css";
       <div class="mx-auto max-w-4xl">
         <div class="mb-14 text-center">
           <p class="mb-4 text-sm font-semibold uppercase tracking-widest" style="color:#6366f1;">طريقة عملها</p>
-          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">٣ خطوات وخلصت</h2>
+          <h2 class="font-serif text-3xl font-bold md:text-5xl" style="color:#0f172a;">3 خطوات وخلصت</h2>
         </div>
 
         <div class="grid gap-6 md:grid-cols-3">
           {[
-            { n: "١", title: "أضف الأسماء", desc: "اكتب اسمك وأسماء كل اللي تبي تعيدهم" },
-            { n: "٢", title: "شارك الرابط",  desc: "راح تحصل رابط واحد تشاركه في الواتساب" },
-            { n: "٣", title: "يفتحون مظاريفهم", desc: "كل شخص يدور اسمه ويفتح المظروف ويشوف مفاجأته" },
+            { n: "1", title: "أضف الأسماء", desc: "اكتب اسمك وأسماء كل اللي تبي تعيدهم" },
+            { n: "2", title: "شارك الرابط",  desc: "راح تحصل رابط واحد تشاركه في الواتساب" },
+            { n: "3", title: "يفتحون مظاريفهم", desc: "كل شخص يدور اسمه ويفتح المظروف ويشوف مفاجأته" },
           ].map(step => (
             <div class="flex flex-col items-center gap-4 rounded-2xl border p-8 text-center transition-all hover:shadow-md" style="background:#fafbfc;border-color:rgba(0,0,0,0.06);">
               <div class="flex h-10 w-10 items-center justify-center rounded-full text-base font-extrabold ring-1" style="background:rgba(99,102,241,0.08);color:#6366f1;ring-color:rgba(99,102,241,0.15);">{step.n}</div>
@@ -191,7 +191,7 @@ import "../../styles/global.css";
                   أسماء المستلمين
                 </label>
                 <span id="name-count" class="rounded-full border px-3 py-0.5 text-xs font-medium" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#6366f1;">
-                  ٠ أسماء
+                  0 أسماء
                 </span>
               </div>
 
@@ -222,11 +222,15 @@ import "../../styles/global.css";
               style="color:#fff;"
               class="flex w-full items-center justify-center rounded-full bg-indigo-600 px-5 py-3 text-base font-bold shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 hover:shadow-indigo-500/30 disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-4 sm:text-lg"
             >
-              <span id="submit-text">أنشئ البطاقات وشارك الرابط</span>
+              <span id="submit-text">
+                {paymentEnabled ? "انتقل للدفع — 5 ريال" : "أنشئ البطاقات وشارك الرابط"}
+              </span>
             </button>
 
             <p class="text-center text-xs" style="color:#94a3b8;">
-              بعد الإنشاء راح تحصل رابط تشاركه مع الكل
+              {paymentEnabled
+                ? "بعد الدفع سيتم إنشاء رابطك تلقائياً"
+                : "بعد الإنشاء راح تحصل رابط تشاركه مع الكل"}
             </p>
           </form>
         </div>
@@ -237,6 +241,118 @@ import "../../styles/global.css";
     <footer class="px-5 py-8 text-center text-sm" style="border-top:1px solid rgba(0,0,0,0.06);color:#94a3b8;">
       عيد مبارك وسعيد
     </footer>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         Payment overlay — shown when user submits form (payment enabled)
+         ══════════════════════════════════════════════════════════════════════ -->
+    <div id="payment-overlay" style="display:none;position:fixed;inset:0;z-index:1000;background:#f5f7ff;overflow-y:auto;">
+      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.25rem 1rem 3rem;">
+
+        <!-- Back button -->
+        <div style="width:100%;max-width:460px;margin-bottom:1.25rem;">
+          <button
+            id="cancel-payment-btn"
+            style="display:inline-flex;align-items:center;gap:0.375rem;color:#4f46e5;background:none;border:none;cursor:pointer;font-size:0.9rem;font-family:inherit;padding:0.25rem 0;"
+          >
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            </svg>
+            رجوع
+          </button>
+        </div>
+
+        <!-- Order summary card -->
+        <div style="width:100%;max-width:460px;margin-bottom:1rem;background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);">
+          <!-- Price row -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.25rem;border-bottom:1px solid #E0E7FF;">
+            <div>
+              <p style="font-size:0.9375rem;font-weight:700;color:#0B0A0A;margin:0 0 0.125rem;">بطاقات العيد</p>
+              <p style="font-size:0.75rem;color:#64748b;margin:0;">دفعة واحدة</p>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;min-width:120px;">
+              <span style="font-size:1.125rem;font-weight:800;color:#0B0A0A;line-height:1;text-align:center;">5 ريال سعودي</span>
+            </div>
+          </div>
+          <!-- Benefits -->
+          <div style="padding:0.875rem 1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+            {[
+              "رابط مشترك لجميع المستلمين",
+              "كل مظروف بكوبون مفاجأة خاص فيه",
+              "يُفتح مرة واحدة فقط",
+            ].map(b => (
+              <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:#64748b;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 13l4 4L19 7"/>
+                </svg>
+                {b}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Payment method section -->
+        <div style="width:100%;max-width:460px;margin-bottom:0.625rem;">
+          <p style="font-size:0.8125rem;font-weight:700;color:#0B0A0A;margin:0 0 0.625rem;">طريقة الدفع</p>
+
+          <!-- Method cards -->
+          <div style="background:#fff;border-radius:1rem;overflow:hidden;border:1px solid rgba(99,102,241,0.16);">
+            <label class="payment-method-option" for="payment-applepay" style="border-bottom:1px solid #E0E7FF;">
+              <input id="payment-applepay" type="radio" name="payment-method" value="applepay" class="payment-method-radio" checked />
+              <div class="payment-method-content">
+                <div class="payment-method-icon payment-method-icon-apple" aria-hidden="true">
+                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+                    <path d="M9.3 2.2c.4-.5.6-1.1.6-1.9-.6.1-1.4.4-1.8.9-.4.5-.7 1-.6 1.8.7.1 1.4-.3 1.8-.8zM11.3 8.5c0-2 1.7-2.9 1.8-3-.9-1.3-2.4-1.5-2.9-1.5-1.2-.1-2.2.7-2.8.7-.6 0-1.4-.7-2.4-.6-1.2 0-2.4.7-3 1.9-1.3 2.2-.3 5.5.9 7.3.6.9 1.3 2 2.3 1.9.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6c1 0 1.6-1 2.2-1.9.7-1 1-2 1-2 0 0-1.9-.8-1.9-2.8z" fill="white"/>
+                  </svg>
+                </div>
+                <div class="payment-method-copy">
+                  <span class="payment-method-title">Apple Pay</span>
+                  <span class="payment-method-subtitle"></span>
+                </div>
+              </div>
+              <span class="payment-method-indicator" aria-hidden="true"></span>
+            </label>
+
+            <label class="payment-method-option" for="payment-creditcard">
+              <input id="payment-creditcard" type="radio" name="payment-method" value="creditcard" class="payment-method-radio" />
+              <div class="payment-method-content">
+                <div class="payment-method-icon payment-method-icon-card" aria-hidden="true">
+                  <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+                    <rect x="1" y="1" width="18" height="12" rx="2.5" stroke="#4338ca" stroke-width="1.5"/>
+                    <path d="M1.5 4.8h17" stroke="#4338ca" stroke-width="1.5" stroke-linecap="round"/>
+                    <rect x="3.5" y="8" width="5" height="1.8" rx="0.9" fill="#6366f1"/>
+                  </svg>
+                </div>
+                <div class="payment-method-copy">
+                  <span class="payment-method-title">بطاقة بنكية</span>
+                  <span class="payment-method-subtitle">فيزا، ماستركارد، مدى</span>
+                </div>
+              </div>
+              <span class="payment-method-indicator" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Moyasar form — revealed after method selection -->
+        <div id="moyasar-wrapper" style="display:none;width:100%;max-width:460px;">
+          <div style="background:#fff;border-radius:1rem;padding:1.25rem;">
+            <div class="mysr-form-applepay"></div>
+            <div class="mysr-form-creditcard" style="display:none;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         Processing overlay — shown while creating the batch after payment
+         ══════════════════════════════════════════════════════════════════════ -->
+    <div id="processing-overlay" style="display:none;position:fixed;inset:0;z-index:1001;background:#fafbfc;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;text-align:center;padding:2rem;">
+      <div style="width:3rem;height:3rem;border-radius:50%;border:3px solid rgba(99,102,241,0.2);border-top-color:#6366f1;animation:spin 0.8s linear infinite;"></div>
+      <div>
+        <p style="font-size:1.125rem;font-weight:700;color:#0f172a;margin:0 0 0.25rem;">جاري إنشاء بطاقاتك…</p>
+        <p style="font-size:0.875rem;color:#64748b;margin:0;">لحظة واحدة فقط</p>
+      </div>
+    </div>
 
     <style>
       .envelope-float { animation: envFloat 3s ease-in-out infinite; }
@@ -255,103 +371,398 @@ import "../../styles/global.css";
         from { opacity: 0; transform: translateY(-4px); }
         to   { opacity: 1; transform: translateY(0); }
       }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      .payment-method-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+      .payment-method-option:hover {
+        background: #f8faff;
+      }
+      .payment-method-content {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+      .payment-method-icon {
+        width: 2.625rem;
+        height: 2rem;
+        border-radius: 0.625rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .payment-method-icon-apple {
+        background: #111827;
+        color: #fff;
+      }
+      .payment-method-icon-card {
+        background: #eef2ff;
+      }
+      .payment-method-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.1rem;
+      }
+      .payment-method-title {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        color: #0b0a0a;
+        line-height: 1.3;
+      }
+      .payment-method-subtitle {
+        font-size: 0.75rem;
+        color: #64748b;
+        line-height: 1.3;
+      }
+      .payment-method-radio {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+      }
+      .payment-method-radio:checked + .payment-method-content .payment-method-title {
+        color: #4338ca;
+      }
+      .payment-method-indicator {
+        width: 20px;
+        height: 20px;
+        border-radius: 9999px;
+        border: 1.5px solid #a5b4fc;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .payment-method-indicator::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 9999px;
+        background: transparent;
+      }
+      .payment-method-radio:checked + div + .payment-method-indicator {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+      .payment-method-radio:checked + div + .payment-method-indicator::after {
+        background: #4f46e5;
+      }
+      .payment-method-radio:focus-visible + div + .payment-method-indicator {
+        outline: 2px solid #6366f1;
+        outline-offset: 2px;
+      }
+    </style>
+
+    <!-- Moyasar form overrides (global — Moyasar injects its own DOM) -->
+    <style is:global>
+      /* Hide "Powered by Moyasar" footer */
+      .mysr-form-applepay .mysr-form-footer,
+      .mysr-form-creditcard .mysr-form-footer { display: none !important; }
+
+      /* Theme the pay button to match our indigo brand */
+      .mysr-form-button {
+        background-color: #6366f1 !important;
+        border-color: #6366f1 !important;
+        border-radius: 2rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      .mysr-form-button:hover {
+        background-color: #4f46e5 !important;
+        border-color: #4f46e5 !important;
+      }
+      .mysr-form-button span,
+      .mysr-form-button div {
+        text-align: center !important;
+        margin-inline: auto !important;
+      }
+
+      /* Clean up the form's outer wrapper */
+      .mysr-form-applepay form,
+      .mysr-form-creditcard form {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+
+      /* Better typography and alignment in card payment form */
+      .mysr-form-creditcard .mysr-form-input-label,
+      .mysr-form-creditcard .mysr-input-label {
+        color: #334155 !important;
+        font-weight: 600 !important;
+      }
+      .mysr-form-creditcard .mysr-form-input,
+      .mysr-form-creditcard input {
+        text-align: left !important;
+        direction: ltr !important;
+      }
+      .mysr-form-creditcard .mysr-form-card {
+        text-align: right !important;
+      }
     </style>
 
     <script is:inline>
-      const namesList  = document.getElementById("names-list");
-      const addBtn     = document.getElementById("add-name-btn");
-      const countEl   = document.getElementById("name-count");
-      const errorEl   = document.getElementById("form-error");
-      const form       = document.getElementById("eid-form");
-      const submitBtn  = document.getElementById("submit-btn");
-      const submitText = document.getElementById("submit-text");
+      (function () {
+        /* ── Config from server ───────────────────────────────────────────── */
+        const cfg            = document.getElementById("app-config");
+        const MOYASAR_KEY    = cfg.getAttribute("data-moyasar-key");
+        const PAYMENT_ENABLED = cfg.getAttribute("data-payment-enabled") === "1";
+        const PUBLIC_APP_URL = (cfg.getAttribute("data-public-app-url") || "").replace(/\/+$/, "");
 
-      const AR = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
-      const toAr = n => String(n).replace(/\d/g, d => AR[+d]);
+        /* ── DOM refs ─────────────────────────────────────────────────────── */
+        const namesList         = document.getElementById("names-list");
+        const addBtn            = document.getElementById("add-name-btn");
+        const countEl           = document.getElementById("name-count");
+        const errorEl           = document.getElementById("form-error");
+        const form              = document.getElementById("eid-form");
+        const submitBtn         = document.getElementById("submit-btn");
+        const submitText        = document.getElementById("submit-text");
+        const paymentOverlay    = document.getElementById("payment-overlay");
+        const processingOverlay = document.getElementById("processing-overlay");
+        const cancelPaymentBtn  = document.getElementById("cancel-payment-btn");
+        const moyasarWrapper    = document.getElementById("moyasar-wrapper");
+        const moyasarApplepayEl = document.querySelector(".mysr-form-applepay");
+        const moyasarCreditEl   = document.querySelector(".mysr-form-creditcard");
+        const paymentMethodRadios = Array.from(document.querySelectorAll('input[name="payment-method"]'));
 
-      function getNames() {
-        return Array.from(namesList.querySelectorAll(".name-input"))
-          .map(i => i.value.trim()).filter(Boolean);
-      }
+        const defaultSubmitText = submitText.textContent.trim();
+        let selectedPaymentMethod = paymentMethodRadios.find((r) => r.checked)?.value || "applepay";
 
-      function updateCount() {
-        const n = getNames().length;
-        countEl.textContent = `${toAr(n)} أسماء`;
-        addBtn.style.display = n >= 50 ? "none" : "flex";
-      }
+        /* ── Name field helpers ───────────────────────────────────────────── */
+        function getNames() {
+          return Array.from(namesList.querySelectorAll(".name-input"))
+            .map(i => i.value.trim()).filter(Boolean);
+        }
 
-      function addField(value = "") {
-        const row = document.createElement("div");
-        row.className = "name-row-item";
+        function updateCount() {
+          const n = getNames().length;
+          countEl.textContent = `${n} أسماء`;
+          addBtn.style.display = n >= 50 ? "none" : "flex";
+        }
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "اسم المستلم";
-        input.className = "name-input";
-        input.maxLength = 40;
-        input.value = value;
-        input.style.cssText = "flex:1;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.1);background:#fff;padding:0.625rem 1rem;font-size:1rem;font-family:inherit;color:#0f172a;outline:none;transition:border-color 0.2s,box-shadow 0.2s;direction:rtl;width:100%;";
-        input.addEventListener("focus", () => { input.style.borderColor="#6366f1"; input.style.boxShadow="0 0 0 3px rgba(99,102,241,0.12)"; });
-        input.addEventListener("blur",  () => { input.style.borderColor="rgba(0,0,0,0.1)"; input.style.boxShadow="none"; });
-        input.addEventListener("input", updateCount);
+        function addField(value = "", autoFocus = true) {
+          const row = document.createElement("div");
+          row.className = "name-row-item";
 
-        row.appendChild(input);
-        namesList.appendChild(row);
-        input.focus();
-        updateCount();
-      }
+          const input = document.createElement("input");
+          input.type      = "text";
+          input.placeholder = "اسم المستلم";
+          input.className = "name-input";
+          input.maxLength = 40;
+          input.value     = value;
+          input.style.cssText = "flex:1;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.1);background:#fff;padding:0.625rem 1rem;font-size:1rem;font-family:inherit;color:#0f172a;outline:none;transition:border-color 0.2s,box-shadow 0.2s;direction:rtl;width:100%;";
+          input.addEventListener("focus", () => { input.style.borderColor = "#6366f1"; input.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; });
+          input.addEventListener("blur",  () => { input.style.borderColor = "rgba(0,0,0,0.1)"; input.style.boxShadow = "none"; });
+          input.addEventListener("input", updateCount);
 
-      addBtn.addEventListener("click", () => addField());
-      for (let i = 0; i < 4; i++) addField();
+          row.appendChild(input);
+          namesList.appendChild(row);
+          if (autoFocus) input.focus();
+          updateCount();
+        }
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        errorEl.classList.add("hidden");
+        addBtn.addEventListener("click", () => addField());
+        for (let i = 0; i < 4; i++) addField("", false);
 
-        const displayName = document.getElementById("display-name").value.trim();
-        const names = getNames();
+        /* ── Cancel payment ───────────────────────────────────────────────── */
+        cancelPaymentBtn.addEventListener("click", () => {
+          paymentOverlay.style.display = "none";
+        });
 
-        if (!displayName)       return showError("اكتب اسمك أولاً");
-        if (names.length === 0) return showError("أضف اسم واحد على الأقل");
-        if (names.length > 50)  return showError("الحد الأقصى ٥٠ اسم");
-
-        submitBtn.disabled = true;
-        submitText.textContent = "جاري الإنشاء...";
-
-        try {
-          const res  = await fetch("/api/eid/create", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ displayName, names }),
+        paymentMethodRadios.forEach((radio) => {
+          radio.addEventListener("change", () => {
+            if (!radio.checked) return;
+            selectedPaymentMethod = radio.value;
+            if (PAYMENT_ENABLED) showSelectedPaymentForm();
           });
-          const data = await res.json();
+        });
 
-          if (!res.ok || !data.success) {
-            showError(data.error || "حدث خطأ، حاول مرة أخرى");
-            return resetBtn();
+        /* ── On page load: check if returning from Moyasar ───────────────── */
+        const urlParams    = new URLSearchParams(window.location.search);
+        const returnPayId  = urlParams.get("id");
+        const returnStatus = String(urlParams.get("status") || "").toLowerCase();
+
+        if (returnPayId && returnStatus === "paid") {
+          // Read stored form data first; if none exists, ignore forged/manual callback URLs.
+          let pending = null;
+          try { pending = JSON.parse(localStorage.getItem("eid_pending_form") || "null"); } catch (_) {}
+
+          // Clean up URL so refresh doesn't re-trigger in all cases.
+          window.history.replaceState({}, "", "/eid");
+
+          if (pending && pending.displayName && Array.isArray(pending.names) && pending.names.length > 0) {
+            processingOverlay.style.display = "flex";
+            createBatch(pending.displayName, pending.names, returnPayId);
+          }
+        }
+
+        /* ── Create batch API call ────────────────────────────────────────── */
+        async function createBatch(displayName, names, paymentId) {
+          try {
+            const res  = await fetch("/api/eid/create", {
+              method:  "POST",
+              headers: { "Content-Type": "application/json" },
+              body:    JSON.stringify({ displayName, names, paymentId }),
+            });
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+              processingOverlay.style.display = "none";
+              showError(data.error || "حدث خطأ، حاول مرة أخرى");
+              resetBtn();
+              return;
+            }
+
+            // Persist batch data for the wall page
+            localStorage.removeItem("eid_pending_form");
+            localStorage.setItem(`eid_batch_${data.batchId}`, JSON.stringify({
+              displayName: data.displayName,
+              recipients:  data.recipients,
+              demo:        data.demo,
+            }));
+
+            window.location.href = `/eid/${data.batchId}`;
+          } catch (_) {
+            processingOverlay.style.display = "none";
+            showError("تعذر الاتصال، تحقق من الإنترنت");
+            resetBtn();
+          }
+        }
+
+        /* ── Form submit ──────────────────────────────────────────────────── */
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errorEl.classList.add("hidden");
+
+          const displayName = document.getElementById("display-name").value.trim();
+          const names       = getNames();
+
+          if (!displayName)       return showError("اكتب اسمك أولاً");
+          if (names.length === 0) return showError("أضف اسم واحد على الأقل");
+          if (names.length > 50)  return showError("الحد الأقصى 50 اسم");
+
+          if (PAYMENT_ENABLED) {
+            // Store form data then show payment form
+            localStorage.setItem("eid_pending_form", JSON.stringify({ displayName, names }));
+            paymentOverlay.style.display = "block";
+            showSelectedPaymentForm();
+          } else {
+            // Demo mode — create directly
+            submitBtn.disabled = true;
+            submitText.textContent = "جاري الإنشاء...";
+            await createBatch(displayName, names, null);
+            resetBtn();
+          }
+        });
+
+        /* ── Moyasar loading & init ───────────────────────────────────────── */
+        let moyasarReady = false;
+        const moyasarInitialized = {
+          applepay: false,
+          creditcard: false,
+        };
+
+        function loadMoyasar(cb) {
+          if (window.Moyasar) { cb(); return; }
+
+          if (!document.querySelector('link[data-moyasar-css="1"]')) {
+            const link = document.createElement("link");
+            link.rel   = "stylesheet";
+            link.href  = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.css";
+            link.setAttribute("data-moyasar-css", "1");
+            document.head.appendChild(link);
           }
 
-          sessionStorage.setItem(`eid_batch_${data.batchId}`, JSON.stringify({
-            displayName: data.displayName,
-            recipients:  data.recipients,
-            demo:        data.demo,
-          }));
-
-          window.location.href = `/eid/${data.batchId}`;
-        } catch {
-          showError("تعذر الاتصال، تحقق من الإنترنت");
-          resetBtn();
+          const script  = document.createElement("script");
+          script.src    = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
+          script.onload = cb;
+          document.head.appendChild(script);
         }
-      });
 
-      function showError(msg) {
-        errorEl.textContent = msg;
-        errorEl.classList.remove("hidden");
-      }
-      function resetBtn() {
-        submitBtn.disabled = false;
-        submitText.textContent = "أنشئ البطاقات وشارك الرابط";
-      }
+        function showSelectedPaymentForm() {
+          moyasarWrapper.style.display = "block";
+          if (selectedPaymentMethod === "creditcard") {
+            moyasarCreditEl.style.display = "block";
+            moyasarApplepayEl.style.display = "none";
+          } else {
+            moyasarApplepayEl.style.display = "block";
+            moyasarCreditEl.style.display = "none";
+          }
+
+          initMoyasar(selectedPaymentMethod);
+        }
+
+        function initMoyasar(method) {
+          loadMoyasar(function () {
+            if (moyasarReady) {
+              renderMoyasar(method);
+              return;
+            }
+            moyasarReady = true;
+            renderMoyasar(method);
+          });
+        }
+
+        function renderMoyasar(method) {
+          if (moyasarInitialized[method]) return;
+
+          const mount = method === "creditcard" ? moyasarCreditEl : moyasarApplepayEl;
+          if (!mount) return;
+          mount.innerHTML = "";
+
+          const element = method === "creditcard" ? ".mysr-form-creditcard" : ".mysr-form-applepay";
+          const methods = method === "creditcard" ? ["creditcard"] : ["applepay"];
+          const paymentLabel = method === "creditcard" ? "بطاقات العيد - بطاقة بنكية" : "بطاقات العيد - Apple Pay";
+          const callbackBase = PUBLIC_APP_URL || window.location.origin;
+
+          Moyasar.init({
+            element,
+            amount:              500,          // 5 SAR in halalas
+            currency:            "SAR",
+            description:         paymentLabel,
+            publishable_api_key: MOYASAR_KEY,
+            callback_url:        `${callbackBase}/eid`,
+            methods,
+            language:            "ar",
+            apple_pay: {
+              country:               "SA",
+              label:                 "بطاقات العيد",
+              validate_merchant_url: "https://api.moyasar.com/v1/applepay/initiate",
+            },
+          });
+
+          moyasarInitialized[method] = true;
+        }
+
+        /* ── Helpers ──────────────────────────────────────────────────────── */
+        function showError(msg) {
+          errorEl.textContent = msg;
+          errorEl.classList.remove("hidden");
+          errorEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        function resetBtn() {
+          submitBtn.disabled     = false;
+          submitText.textContent = defaultSubmitText;
+        }
+      })();
     </script>
 
   </body>

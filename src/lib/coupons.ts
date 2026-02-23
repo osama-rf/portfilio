@@ -4,21 +4,24 @@ export interface Coupon {
   description: string;
 }
 
-// Load coupons from the public JSON file.
-// In a real setup this could come from a CMS or Supabase.
-let _coupons: Coupon[] | null = null;
+// Inlined to avoid fs.readFileSync path issues in Vercel serverless.
+const COUPONS: Coupon[] = [
+  { code: "EID-CAFE-2025",  type: "قهوة مجانية",   description: "قهوة مجانية في أي فرع" },
+  { code: "EID-SWEET-2025", type: "حلويات مجانية", description: "طبق حلويات مجاني عند الطلب" },
+  { code: "EID-GIFT-2025",  type: "هدية مجانية",   description: "هدية مجانية من المتجر" },
+  { code: "EID-OFF20-2025", type: "خصم 20%",       description: "خصم 20% على أي طلب" },
+  { code: "EID-OFF30-2025", type: "خصم 30%",       description: "خصم 30% على أي منتج" },
+  { code: "EID-FREE-2025",  type: "توصيل مجاني",   description: "توصيل مجاني لأي طلب" },
+  { code: "EID-SPA-2025",   type: "جلسة مجانية",   description: "جلسة عناية مجانية" },
+  { code: "EID-BOOK-2025",  type: "حجز مجاني",     description: "حجز مجاني بدون رسوم" },
+  { code: "EID-EXTRA-2025", type: "إضافة مجانية",  description: "إضافة مجانية على أي طلب" },
+  { code: "EID-VIP-2025",   type: "ترقية VIP",     description: "ترقية مجانية لعضوية VIP" },
+];
 
-export async function getCoupons(): Promise<Coupon[]> {
-  if (_coupons) return _coupons;
-  // In server context we read the file directly
-  const { readFileSync } = await import("fs");
-  const { join } = await import("path");
-  const filePath = join(process.cwd(), "public", "coupons.json");
-  _coupons = JSON.parse(readFileSync(filePath, "utf-8")) as Coupon[];
-  return _coupons;
+export function getCoupons(): Coupon[] {
+  return COUPONS;
 }
 
-export async function getRandomCoupon(): Promise<Coupon> {
-  const coupons = await getCoupons();
-  return coupons[Math.floor(Math.random() * coupons.length)];
+export function getRandomCoupon(): Coupon {
+  return COUPONS[Math.floor(Math.random() * COUPONS.length)];
 }
