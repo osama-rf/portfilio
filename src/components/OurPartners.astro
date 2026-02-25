@@ -2,19 +2,21 @@
 import Section from "./Section.astro";
 
 const partners = [
+  { name: "STC", src: "/partners/stc.svg" },
+  { name: "Moyasar", src: "/partners/moyasar.png" },
+  { name: "Alrajhi Bank", src: "/partners/alrajhi.svg" },
+  { name: "Tamara", src: "/partners/tamara.png" },
   { name: "Kedan", src: "/kedan-logo.svg" },
   { name: "Glowpick", src: "/glowpick.png" },
-  { name: "Zaai AI", src: "/zaai-og.png" },
-  { name: "Dream International Schools", src: "/dis.png" },
 ];
 ---
 
-<Section text="شركائنا" href="our-partners">
-  <div class="our-partners-wrapper">
-    <div class="our-partners-scroll">
-      {[...partners, ...partners, ...partners, ...partners, ...partners, ...partners].map((partner) => (
-        <div class="our-partner-logo">
-          <img src={partner.src} alt={partner.name} />
+<Section text="Trusted by" href="our-partners">
+  <div class="partners-grid">
+    <div class="partners-track">
+      {partners.map((partner) => (
+        <div class="partner-logo-card">
+          <img src={partner.src} alt={`${partner.name} logo`} loading="lazy" decoding="async" />
         </div>
       ))}
     </div>
@@ -22,75 +24,49 @@ const partners = [
 </Section>
 
 <style>
-  .our-partners-wrapper {
+  :global(#section-title-our-partners) {
+    text-align: center !important;
+  }
+
+  .partners-grid {
     width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 2rem 0;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
+    padding: 1rem 0 0;
   }
 
-  .our-partners-scroll {
+  .partners-track {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: 6rem;
-    animation: scroll 40s linear infinite;
+    gap: 2.25rem 2.75rem;
   }
 
-  .our-partner-logo {
+  .partner-logo-card {
+    width: 150px;
+    height: 84px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    min-width: 180px;
-    height: 90px;
+    padding: 0.45rem;
   }
 
-  .our-partner-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+  .partner-logo-card img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    filter: brightness(1.2);
-  }
-
-  .our-partner-logo:hover img {
-    opacity: 1;
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-100% / 6));
-    }
+    opacity: 0.95;
   }
 
   @media (max-width: 768px) {
-    .our-partners-scroll {
-      gap: 4rem;
+    .partners-track {
+      gap: 1.5rem 1.75rem;
     }
 
-    .our-partner-logo {
-      width: 140px;
-      height: 70px;
+    .partner-logo-card {
+      width: 122px;
+      height: 72px;
+      padding: 0.5rem;
     }
   }
 </style>

@@ -1,4 +1,12 @@
-import type { SiteConfig, SiteContent, Translations, ProblemItem, SolutionFeature, ProcessStep, WhyUsItem } from "../types";
+import type {
+  SiteConfig,
+  SiteContent,
+  Translations,
+  ProblemItem,
+  SolutionFeature,
+  ProcessStep,
+  WhyUsItem,
+} from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
   title: "osama-labs | تطبيقك جاهز خلال 14 يوم",
@@ -11,10 +19,7 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "كيف نشتغل", href: "#process" },
     { text: "ابدأ الآن", href: "#cta-section" },
   ],
-  socialLinks: [
-    { text: "LinkedIn", href: "https://linkedin.com/in/osama-alrefay" },
-    { text: "Github", href: "https://github.com/osama-rf" },
-  ],
+  socialLinks: [],
   socialImage: "/osama-og.png",
   canonicalURL: "https://osama-lab.com",
 };
@@ -66,7 +71,10 @@ export const PROBLEM_ITEMS: { en: ProblemItem[]; ar: ProblemItem[] } = {
   ],
 };
 
-export const SOLUTION_FEATURES: { en: SolutionFeature[]; ar: SolutionFeature[] } = {
+export const SOLUTION_FEATURES: {
+  en: SolutionFeature[];
+  ar: SolutionFeature[];
+} = {
   en: [
     { icon: "phone", text: "iOS & Android App" },
     { icon: "dashboard", text: "Admin Dashboard" },
@@ -86,17 +94,20 @@ export const PROCESS_STEPS: { en: ProcessStep[]; ar: ProcessStep[] } = {
     {
       number: "01",
       title: "Understanding Your Vision",
-      description: "We sit with you, understand the idea, define the scope, and set clear expectations",
+      description:
+        "We sit with you, understand the idea, define the scope, and set clear expectations",
     },
     {
       number: "02",
       title: "Building & Execution",
-      description: "We design and develop your app with continuous updates so you see progress daily",
+      description:
+        "We design and develop your app with continuous updates so you see progress daily",
     },
     {
       number: "03",
       title: "Launch & Support",
-      description: "We deploy to the stores, hand you the keys, and stay with you after launch",
+      description:
+        "We deploy to the stores, hand you the keys, and stay with you after launch",
     },
   ],
   ar: [
@@ -108,12 +119,14 @@ export const PROCESS_STEPS: { en: ProcessStep[]; ar: ProcessStep[] } = {
     {
       number: "02",
       title: "نبني خلال 14 يوم",
-      description: "نصمم ونبني التطبيق مع لوحة التحكم. تشوف التقدم أول بأول وتعطينا ملاحظاتك",
+      description:
+        "نصمم ونبني التطبيق مع لوحة التحكم. تشوف التقدم أول بأول وتعطينا ملاحظاتك",
     },
     {
       number: "03",
       title: "تطبيقك جاهز",
-      description: "نسلمك التطبيق جاهز للنشر على المتاجر مع لوحة تحكم كاملة ودعم مستمر",
+      description:
+        "نسلمك التطبيق جاهز للنشر على المتاجر مع لوحة تحكم كاملة ودعم مستمر",
     },
   ],
 };
@@ -145,17 +158,20 @@ export const WHY_US_ITEMS: { en: WhyUsItem[]; ar: WhyUsItem[] } = {
     {
       icon: "experience",
       title: "سوّيناها قبل",
-      description: "بنينا وأطلقنا تطبيقات حقيقية بنفس الطريقة — تطبيق + لوحة تحكم خلال 14 يوم",
+      description:
+        "بنينا وأطلقنا تطبيقات حقيقية بنفس الطريقة — تطبيق + لوحة تحكم خلال 14 يوم",
     },
     {
       icon: "speed",
       title: "14 يوم مو 6 شهور",
-      description: "بينما غيرنا يعطيك مواعيد بالشهور، نحن نسلمك تطبيق شغّال خلال أسبوعين",
+      description:
+        "بينما غيرنا يعطيك مواعيد بالشهور، نحن نسلمك تطبيق شغّال خلال أسبوعين",
     },
     {
       icon: "chat",
       title: "تكلم المطوّر مباشرة",
-      description: "بدون وسطاء ولا مدراء مشاريع. تتكلم مع اللي يبني تطبيقك واتساب",
+      description:
+        "بدون وسطاء ولا مدراء مشاريع. تتكلم مع اللي يبني تطبيقك واتساب",
     },
     {
       icon: "target",
@@ -188,7 +204,7 @@ export const TRANSLATIONS: Translations = {
       ctaMain: "Ready to Launch?",
       ctaSubtitle: "Let's turn your idea into an app people love",
       techPartners: "Our Tech Stack",
-      ourPartners: "Our Partners",
+      ourPartners: "Trusted by",
       heroBadge: "Available for New Projects",
       heroCTAPrimary: "Get a Quote",
       heroCTASecondary: "See Our Work",
@@ -206,19 +222,23 @@ export const TRANSLATIONS: Translations = {
       problemTitle: "Sound Familiar?",
       problemSubtitle: "Most app ideas die before they see the light",
       solutionTitle: "Fast Execution. Zero Shortcuts.",
-      solutionDescription: "We use a smart execution methodology focused on the core of your app, delivering a launch-ready product in record time",
+      solutionDescription:
+        "We use a smart execution methodology focused on the core of your app, delivering a launch-ready product in record time",
       processTitle: "How We Work",
       processSubtitle: "Clear from day one. No surprises.",
       whyUsTitle: "Why Work With Us?",
       ctaFinalTitle: "Ready to Start?",
       ctaFinalButton: "Message Us on WhatsApp",
       showcaseTitle: "App + Admin Dashboard in 14 Days",
-      showcaseSubtitle: "Your client downloads the app while you manage everything from the dashboard. That's what we deliver.",
+      showcaseSubtitle:
+        "Your client downloads the app while you manage everything from the dashboard. That's what we deliver.",
       showcaseAppLabel: "Client App",
       showcaseDashboardLabel: "Admin Dashboard",
-      showcaseTagline: "Every project we deliver includes a full mobile app + admin dashboard for managing content, users, and notifications",
+      showcaseTagline:
+        "Every project we deliver includes a full mobile app + admin dashboard for managing content, users, and notifications",
       industriesTitle: "Your App, Whatever Your Industry",
-      industriesSubtitle: "We build apps for any service business that needs to manage clients and bookings",
+      industriesSubtitle:
+        "We build apps for any service business that needs to manage clients and bookings",
       industriesMore: "And many more...",
     },
     pricing: {
@@ -285,15 +305,18 @@ export const TRANSLATIONS: Translations = {
     },
     testimonials: [
       {
-        content: "Osama understood our organization's unique needs and delivered a platform that truly empowers our teams. His expertise in building scalable solutions made a real difference.",
+        content:
+          "Osama understood our organization's unique needs and delivered a platform that truly empowers our teams. His expertise in building scalable solutions made a real difference.",
         platform: "Kedan",
       },
       {
-        content: "The AI integration was complex, but he made it work seamlessly. His attention to detail and performance optimization made our app stand out in the market.",
+        content:
+          "The AI integration was complex, but he made it work seamlessly. His attention to detail and performance optimization made our app stand out in the market.",
         platform: "Glowpick",
       },
       {
-        content: "Fast, reliable, and delivered exactly what we needed — on time and within budget. Professional and responsive throughout the entire project.",
+        content:
+          "Fast, reliable, and delivered exactly what we needed — on time and within budget. Professional and responsive throughout the entire project.",
         platform: "Dream International Schools",
       },
     ],
@@ -320,7 +343,7 @@ export const TRANSLATIONS: Translations = {
       ctaMain: "مستعد تبدأ؟",
       ctaSubtitle: "كلمنا واتساب وخلال 14 يوم تطبيقك يكون جاهز",
       techPartners: "تقنياتنا",
-      ourPartners: "شركاؤنا",
+      ourPartners: "موثوق بنا من قبل",
       heroBadge: "نقبل مشاريع جديدة الآن",
       heroCTAPrimary: "ابدأ مشروعك الآن",
       heroCTASecondary: "شوف النتيجة",
@@ -336,21 +359,26 @@ export const TRANSLATIONS: Translations = {
       businessCardCTA: "تواصل معنا الآن",
       businessCardTitle: "بطاقة الأعمال",
       problemTitle: "صار معك كذا قبل؟",
-      problemSubtitle: "تبي تطبيق لنشاطك بس كل ما تسأل مطوّر يقولك شهور وأرقام خيالية",
+      problemSubtitle:
+        "تبي تطبيق لنشاطك بس كل ما تسأل مطوّر يقولك شهور وأرقام خيالية",
       solutionTitle: "وش تاخذ بالضبط؟",
-      solutionDescription: "تطبيق جوال كامل + لوحة تحكم تدير كل شيء. كل هذا خلال 14 يوم فقط.",
+      solutionDescription:
+        "تطبيق جوال كامل + لوحة تحكم تدير كل شيء. كل هذا خلال 14 يوم فقط.",
       processTitle: "كيف نشتغل؟",
       processSubtitle: "من أول رسالة واتساب لتطبيقك على المتجر — 3 خطوات بس.",
       whyUsTitle: "ليش تشتغل معنا؟",
       ctaFinalTitle: "نشاطك يستاهل تطبيق",
       ctaFinalButton: "اطلب تطبيقك الآن",
       showcaseTitle: "تطبيق + لوحة تحكم خلال 14 يوم",
-      showcaseSubtitle: "عميلك يحمّل التطبيق وأنت تدير كل شيء من لوحة التحكم. هذا اللي نسلمك إياه.",
+      showcaseSubtitle:
+        "عميلك يحمّل التطبيق وأنت تدير كل شيء من لوحة التحكم. هذا اللي نسلمك إياه.",
       showcaseAppLabel: "تطبيق العميل",
       showcaseDashboardLabel: "لوحة التحكم",
-      showcaseTagline: "كل مشروع نسلمه يشمل تطبيق جوال كامل + لوحة تحكم لإدارة المحتوى والمستخدمين والإشعارات",
+      showcaseTagline:
+        "كل مشروع نسلمه يشمل تطبيق جوال كامل + لوحة تحكم لإدارة المحتوى والمستخدمين والإشعارات",
       industriesTitle: "تطبيقك مهما كان مجالك",
-      industriesSubtitle: "نبني تطبيقات لأي نشاط يقدم خدمات ويحتاج يدير عملاءه وحجوزاته",
+      industriesSubtitle:
+        "نبني تطبيقات لأي نشاط يقدم خدمات ويحتاج يدير عملاءه وحجوزاته",
       industriesMore: "وغيرها الكثير...",
     },
     pricing: {
@@ -372,7 +400,8 @@ export const TRANSLATIONS: Translations = {
     projects: [
       {
         name: "كدان",
-        summary: "منصة تواصل أعمال متكاملة للمؤسسات غير الربحية. إدارة سير العمل وأدوات تعاونية تعزز أثر المؤسسة وتسهل التواصل بين الفرق.",
+        summary:
+          "منصة تواصل أعمال متكاملة للمؤسسات غير الربحية. إدارة سير العمل وأدوات تعاونية تعزز أثر المؤسسة وتسهل التواصل بين الفرق.",
         linkPreview: "https://new.kidanm.com.sa/",
         image: "/kedan-logo.svg",
       },
@@ -392,7 +421,8 @@ export const TRANSLATIONS: Translations = {
       },
       {
         name: "Zaai AI",
-        summary: "منصة حلول ذكاء اصطناعي للأعمال — تحليلات، أتمتة، وتوصيات ذكية.",
+        summary:
+          "منصة حلول ذكاء اصطناعي للأعمال — تحليلات، أتمتة، وتوصيات ذكية.",
         linkPreview: "https://zaai.vercel.app/ar",
         image: "/zaai-og.png",
       },
@@ -413,15 +443,18 @@ export const TRANSLATIONS: Translations = {
     },
     testimonials: [
       {
-        content: "أسامة فهم احتياجات مؤسستنا وسلّمنا منصة تمكّن فرقنا بشكل حقيقي. خبرته في بناء حلول قابلة للتوسع خلت فرق واضح في أثر مؤسستنا.",
+        content:
+          "أسامة فهم احتياجات مؤسستنا وسلّمنا منصة تمكّن فرقنا بشكل حقيقي. خبرته في بناء حلول قابلة للتوسع خلت فرق واضح في أثر مؤسستنا.",
         platform: "كدان",
       },
       {
-        content: "دمج الذكاء الاصطناعي كان معقد، لكن خلاه يشتغل بكل سلاسة. اهتمامه بالتفاصيل وتحسين الأداء خلى التطبيق يبرز في السوق.",
+        content:
+          "دمج الذكاء الاصطناعي كان معقد، لكن خلاه يشتغل بكل سلاسة. اهتمامه بالتفاصيل وتحسين الأداء خلى التطبيق يبرز في السوق.",
         platform: "Glowpick",
       },
       {
-        content: "منصة سريعة وموثوقة، انسلمت بالوقت وبالميزانية. محترف، متجاوب، وسلّم بالضبط اللي نبيه!",
+        content:
+          "منصة سريعة وموثوقة، انسلمت بالوقت وبالميزانية. محترف، متجاوب، وسلّم بالضبط اللي نبيه!",
         platform: "مدارس دريم العالمية",
       },
     ],
