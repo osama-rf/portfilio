@@ -3,53 +3,28 @@ import "../../styles/global.css";
 import { supabase, isDemoMode } from "@lib/supabase";
 
 const { batchId } = Astro.params;
-const moyasarPublicKey = import.meta.env.MOYASAR_PUBLIC_KEY ?? "";
-const paymentEnabled   = Boolean(moyasarPublicKey);
-const publicAppUrl     = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/\/+$/, "");
+const publicAppUrl = (import.meta.env.PUBLIC_APP_URL ?? "").trim().replace(/\/+$/, "");
 
-// ── Server-side: fetch from Supabase if configured ──────────────────────────
 let serverDisplayName: string | null = null;
-let serverActivated = false;
 let serverRecipients: {
   id: string;
   name: string;
-  coupon_code: string;
-  coupon_type: string;
-  coupon_description: string;
+  message: string;
   opened: boolean;
 }[] = [];
 
 if (!isDemoMode && batchId) {
-  let creator: { id: string; display_name: string; payment_id?: string | null } | null = null;
-  let creatorError: { code?: string; message?: string } | null = null;
-
-  ({ data: creator, error: creatorError } = await supabase!
+  const { data: creator } = await supabase!
     .from("eid_creators")
-    .select("id, display_name, payment_id")
+    .select("id, display_name")
     .eq("id", batchId)
-    .single());
-
-  if (creatorError) {
-    const missingPaymentCol =
-      creatorError.code === "PGRST204" &&
-      String(creatorError.message || "").includes("payment_id");
-    if (missingPaymentCol) {
-      ({ data: creator } = await supabase!
-        .from("eid_creators")
-        .select("id, display_name")
-        .eq("id", batchId)
-        .single());
-    }
-  }
+    .single();
 
   if (creator) {
     serverDisplayName = creator.display_name;
-    serverActivated = Boolean(creator.payment_id);
     const { data: recipients } = await supabase!
       .from("eid_recipients")
-      .select(
-        "id, name, coupon_code, coupon_type, coupon_description, opened"
-      )
+      .select("id, name, message, opened")
       .eq("creator_id", batchId)
       .order("created_at");
 
@@ -57,7 +32,6 @@ if (!isDemoMode && batchId) {
   }
 }
 
-// If Supabase returned no data and we're not in demo mode, show 404
 const notFound = !isDemoMode && !serverDisplayName;
 ---
 
@@ -67,7 +41,7 @@ const notFound = !isDemoMode && !serverDisplayName;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>بطاقات العيد </title>
+    <title>بطاقات العيد</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
       body { background: #fafbfc; color: #0f172a; }
@@ -82,7 +56,7 @@ const notFound = !isDemoMode && !serverDisplayName;
 
       .env-card {
         background: #fff;
-        border: 1.5px solid rgba(0, 0, 0, 0.07);
+        border: 1.5px solid rgba(0,0,0,0.07);
         border-radius: 1rem;
         padding: 1rem;
         text-align: center;
@@ -92,39 +66,25 @@ const notFound = !isDemoMode && !serverDisplayName;
         user-select: none;
       }
       .env-card:hover {
-        border-color: rgba(99, 102, 241, 0.3);
+        border-color: rgba(99,102,241,0.3);
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.12);
+        box-shadow: 0 10px 25px rgba(99,102,241,0.12);
       }
       .env-card.is-opened { opacity: 0.65; }
-      .env-card.is-locked {
-        cursor: not-allowed;
-        opacity: 0.35;
-        filter: grayscale(0.5);
-        pointer-events: none;
-      }
-      .env-card.is-locked:hover {
-        transform: none;
-        box-shadow: none;
-        border-color: rgba(0, 0, 0, 0.07);
-      }
       .env-card img { transition: transform 0.3s ease; }
-      .env-card:not(.is-locked):not(.is-opened):hover img { transform: translateY(-4px); }
+      .env-card:not(.is-opened):hover img { transform: translateY(-4px); }
 
       @keyframes spin { to { transform: rotate(360deg); } }
     </style>
   </head>
-  <body style="min-height:100vh;background:#fafbfc;font-family:var(--font-arabic, 'IBM Plex Sans Arabic', sans-serif);">
+
+  <body style="min-height:100vh;background:#fafbfc;font-family:var(--font-arabic,'IBM Plex Sans Arabic',sans-serif);">
     <div
       id="app-config"
-      data-moyasar-key={moyasarPublicKey}
-      data-payment-enabled={paymentEnabled ? "1" : "0"}
       data-public-app-url={publicAppUrl}
-      data-server-activated={serverActivated ? "1" : "0"}
       style="display:none;"
     ></div>
 
-    <!-- Subtle background glow -->
     <div style="pointer-events:none;position:fixed;inset:0;overflow:hidden;z-index:0;">
       <div style="position:absolute;left:50%;top:-100px;height:600px;width:600px;transform:translateX(-50%);border-radius:50%;background:rgba(99,102,241,0.04);filter:blur(120px);"></div>
     </div>
@@ -147,7 +107,7 @@ const notFound = !isDemoMode && !serverDisplayName;
             {serverDisplayName ? `بطاقات العيد من ${serverDisplayName}` : "بطاقات العيد"}
           </h1>
           <p style="color:#475569;font-size:1.125rem;line-height:1.9;font-weight:500;">
-            فرحة العيد تنتظرك هنا، دور على اسمك وافتح مظروفك واكتشف هديتك الخاصة
+            فرحة العيد تنتظرك هنا، دور على اسمك وافتح مظروفك واقرأ رسالتك الخاصة
           </p>
         </div>
 
@@ -159,36 +119,6 @@ const notFound = !isDemoMode && !serverDisplayName;
             </svg>
             فتحت بطاقتك — كل مظروف لصاحبه فقط
           </div>
-        </div>
-
-        <div id="unlock-rest-section" class="text-center" style="display:none;margin-bottom:1.5rem;">
-          <div style="border-radius:1rem;border:1.5px solid rgba(99,102,241,0.18);background:rgba(99,102,241,0.06);padding:1.1rem;">
-            <p style="margin:0 0 0.7rem;font-size:1.2rem;color:#3730a3;font-weight:800;">
-              ممتاز! فتحت بطاقتك 🎉
-            </p>
-            <p style="margin:0 0 1rem;font-size:1rem;color:#475569;line-height:1.8;font-weight:500;">
-              كمّل فرحتك الآن، فعّل بقية الهدايا وشارك الرابط مع أهلك وأصحابك
-            </p>
-            <button
-              id="unlock-rest-btn"
-              style="border:none;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.85rem 1.3rem;font-size:1rem;font-weight:800;color:#fff;cursor:pointer;"
-            >
-              انتقل للدفع لتفعيل الهدايا
-            </button>
-          </div>
-        </div>
-
-        <div id="activation-notice" class="text-center" style="display:none;margin-bottom:1.5rem;">
-          <div style="display:inline-flex;align-items:center;gap:0.5rem;border-radius:9999px;background:#fff7ed;border:1px solid #fdba74;padding:0.65rem 1.1rem;font-size:0.95rem;color:#c2410c;font-weight:700;">
-            الهدايا بتتفعل قريب، بانتظار المرسل يكمل التفعيل
-          </div>
-        </div>
-
-        <div id="owner-card-stage" style="display:none;margin-bottom:2rem;">
-          <p id="owner-stage-title" style="margin:0 0 0.85rem;font-size:1.15rem;color:#4f46e5;font-weight:800;text-align:center;">
-            أنشئ بطاقاتك وشارك احبابك الفرحة
-          </p>
-          <div id="owner-card-slot"></div>
         </div>
 
         <!-- Loading state -->
@@ -206,7 +136,7 @@ const notFound = !isDemoMode && !serverDisplayName;
           <p>لا توجد بطاقات في هذه المجموعة</p>
         </div>
 
-        <!-- Share section -->
+        <!-- Share section (owner only) -->
         <div id="share-section" class="text-center" style="display:none;margin-top:3rem;border-radius:1rem;border:1.5px solid rgba(0,0,0,0.06);background:#fff;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
           <p style="margin-bottom:0.75rem;font-size:1.05rem;color:#334155;font-weight:700;">شارك الرابط الآن وخلي فرحة العيد توصل لكل أحبائك</p>
           <div style="display:flex;align-items:center;gap:0.5rem;border-radius:0.75rem;border:1.5px solid rgba(0,0,0,0.07);background:#f8fafc;padding:0.75rem 1rem;">
@@ -220,8 +150,8 @@ const notFound = !isDemoMode && !serverDisplayName;
           </div>
         </div>
 
-        <!-- Back CTA -->
-        <div id="create-cards-cta" class="text-center" style="margin-top:2.5rem;">
+        <!-- Back CTA (non-owner) -->
+        <div id="create-cards-cta" class="text-center" style="display:none;margin-top:2.5rem;">
           <a
             href="/eid"
             style="display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.875rem 2rem;font-size:1rem;font-weight:700;color:#fff;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 16px rgba(99,102,241,0.25);"
@@ -233,15 +163,15 @@ const notFound = !isDemoMode && !serverDisplayName;
       </main>
     )}
 
-    <!-- Coupon Modal -->
+    <!-- Message Modal -->
     <div
-      id="coupon-modal"
+      id="msg-modal"
       style="display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:1rem;"
     >
-      <div class="text-center" style="position:relative;width:100%;max-width:22rem;border-radius:1.5rem;border:1.5px solid rgba(0,0,0,0.06);background:#fff;padding:2rem;box-shadow:0 25px 60px rgba(0,0,0,0.18);">
+      <div class="text-center" style="position:relative;width:100%;max-width:24rem;border-radius:1.5rem;border:1.5px solid rgba(0,0,0,0.06);background:#fff;padding:2rem;box-shadow:0 25px 60px rgba(0,0,0,0.18);">
         <button
           id="modal-close"
-          style="position:absolute;left:1rem;top:1rem;border-radius:50%;border:1.5px solid rgba(0,0,0,0.08);background:#f8fafc;padding:0.375rem;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color 0.2s;line-height:0;"
+          style="position:absolute;left:1rem;top:1rem;border-radius:50%;border:1.5px solid rgba(0,0,0,0.08);background:#f8fafc;padding:0.375rem;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:0;"
           aria-label="إغلاق"
         >
           <svg style="height:1rem;width:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,53 +185,25 @@ const notFound = !isDemoMode && !serverDisplayName;
           style="margin:0 auto 1rem;height:5.5rem;width:auto;object-fit:contain;"
         />
 
-        <h2 id="modal-greeting" style="margin-bottom:1.25rem;font-size:1.0625rem;font-weight:700;color:#0f172a;line-height:1.6;"></h2>
+        <h2 id="modal-greeting" style="margin-bottom:1.25rem;font-size:1.125rem;font-weight:800;color:#0f172a;line-height:1.5;"></h2>
 
-        <!-- Coupon ticket -->
-        <div style="position:relative;border-radius:1rem;border:2px dashed rgba(99,102,241,0.35);background:linear-gradient(135deg,rgba(99,102,241,0.05),rgba(139,92,246,0.05));padding:1.25rem 1rem;margin-bottom:1rem;overflow:visible;">
-          <!-- Notch circles -->
-          <div style="position:absolute;top:50%;left:-10px;width:18px;height:18px;border-radius:50%;background:#fff;transform:translateY(-50%);border:2px dashed rgba(99,102,241,0.35);"></div>
-          <div style="position:absolute;top:50%;right:-10px;width:18px;height:18px;border-radius:50%;background:#fff;transform:translateY(-50%);border:2px dashed rgba(99,102,241,0.35);"></div>
-
-          <p id="modal-coupon-type" style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.12em;color:#6366f1;font-weight:700;margin-bottom:0.625rem;"></p>
-
-          <div style="display:flex;align-items:center;justify-content:center;gap:0.625rem;flex-wrap:wrap;margin-bottom:0.625rem;">
-            <span id="modal-coupon-code" style="font-size:clamp(1.25rem,6vw,1.625rem);font-weight:800;letter-spacing:0.1em;color:#0f172a;font-family:monospace;line-height:1;"></span>
-            <button
-              id="copy-code-btn"
-              style="flex-shrink:0;border-radius:0.5rem;background:rgba(99,102,241,0.12);border:1.5px solid rgba(99,102,241,0.25);padding:0.3rem 0.75rem;font-size:0.75rem;font-weight:700;color:#6366f1;cursor:pointer;transition:all 0.2s;white-space:nowrap;line-height:1.5;"
-            >نسخ</button>
-          </div>
-
-          <p id="modal-coupon-desc" style="font-size:0.8125rem;color:#64748b;line-height:1.5;margin:0;"></p>
+        <!-- Message card -->
+        <div style="border-radius:1rem;background:linear-gradient(135deg,rgba(99,102,241,0.06),rgba(139,92,246,0.06));border:1.5px solid rgba(99,102,241,0.18);padding:1.25rem 1rem;margin-bottom:1.25rem;text-align:right;">
+          <p id="modal-message" style="font-size:0.9375rem;color:#334155;line-height:1.8;margin:0;white-space:pre-wrap;"></p>
         </div>
 
-        <!-- CTA: create your own cards -->
+        <!-- CTA: create your own cards (shown only to non-owners) -->
         <a
-          id="modal-create-cards-cta"
+          id="modal-create-cta"
           href="/eid"
-          style="display:block;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.875rem 1.5rem;font-size:0.9375rem;font-weight:700;color:#fff;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 15px rgba(99,102,241,0.25);margin-top:1.25rem;"
+          style="display:none;border-radius:9999px;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:0.875rem 1.5rem;font-size:0.9375rem;font-weight:700;color:#fff;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 15px rgba(99,102,241,0.25);margin-top:0.25rem;"
         >
-          أنشئ بطاقاتك وشارك احبابك الفرحة
+          أنشئ بطاقاتك وشارك احبابك الفرحة 🎉
         </a>
       </div>
     </div>
 
-    <div id="activation-payment-overlay" style="display:none;position:fixed;inset:0;z-index:55;background:rgba(15,23,42,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:1rem;overflow-y:auto;">
-      <div style="max-width:28rem;margin:3rem auto;background:#fff;border-radius:1rem;border:1px solid rgba(99,102,241,0.2);padding:1rem;">
-        <button id="close-activation-payment" style="border:none;background:none;color:#64748b;font-size:0.8125rem;cursor:pointer;margin-bottom:0.75rem;">إغلاق</button>
-        <p style="margin:0 0 0.5rem;font-weight:700;color:#0f172a;">تفعيل بقية الهدايا</p>
-        <p style="margin:0 0 1rem;font-size:0.8125rem;color:#64748b;">أكمل الدفع ثم يتم فتح بقية بطاقات الأهل والأصدقاء تلقائياً.</p>
-        <div class="mysr-form-activate"></div>
-      </div>
-    </div>
-
-    <div id="activation-processing-overlay" style="display:none;position:fixed;inset:0;z-index:60;background:#fafbfc;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;padding:2rem;">
-      <div style="width:3rem;height:3rem;border-radius:50%;border:3px solid rgba(99,102,241,0.2);border-top-color:#6366f1;animation:spin 0.8s linear infinite;"></div>
-      <p style="margin:0;color:#475569;font-size:0.875rem;">جاري تفعيل الهدايا...</p>
-    </div>
-
-    <!-- Envelope card template (cloned by JS) -->
+    <!-- Envelope card template -->
     <template id="envelope-template">
       <div class="env-card text-center">
         <img
@@ -311,53 +213,29 @@ const notFound = !isDemoMode && !serverDisplayName;
         />
         <p class="name-label" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.875rem;font-weight:600;color:#0f172a;"></p>
         <p class="opened-badge" style="display:none;margin-top:0.25rem;font-size:0.75rem;color:#6366f1;">✓ تم الفتح</p>
-        <p class="lock-badge" style="display:none;margin-top:0.25rem;font-size:0.75rem;color:#94a3b8;">🔒 مقفول</p>
       </div>
     </template>
 
     <script
       is:inline
-      define:vars={{
-        batchId,
-        serverDisplayName,
-        serverRecipients,
-        isDemoMode,
-      }}
+      define:vars={{ batchId, serverDisplayName, serverRecipients, isDemoMode }}
     >
-      const cfg                = document.getElementById("app-config");
-      const PAYMENT_ENABLED    = cfg.getAttribute("data-payment-enabled") === "1";
-      const MOYASAR_KEY        = cfg.getAttribute("data-moyasar-key") || "";
-      const PUBLIC_APP_URL     = (cfg.getAttribute("data-public-app-url") || "").replace(/\/+$/, "");
-      let serverActivatedFlag  = cfg.getAttribute("data-server-activated") === "1";
-
       const STORAGE_BATCH_KEY = `eid_batch_${batchId}`;
       const VISITOR_KEY       = `eid_visitor_${batchId}`;
-      const COOKIE_KEY        = `eidv_${batchId.substring(0, 8)}`;
-      const UNLOCK_ALL_KEY    = `eid_unlock_all_${batchId}`;
 
-      function setCookie(name, value, days) {
-        const d = new Date();
-        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-        document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/;SameSite=Strict`;
-      }
-      function getCookie(name) {
-        const m = document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
-        return m ? m.pop() : null;
-      }
       function getVisitorOpenedId() {
-        return localStorage.getItem(VISITOR_KEY) || getCookie(COOKIE_KEY) || null;
+        return localStorage.getItem(VISITOR_KEY) || null;
       }
       function markVisitorOpened(recipientId) {
         localStorage.setItem(VISITOR_KEY, recipientId);
-        setCookie(COOKIE_KEY, recipientId, 30);
       }
 
       let displayName = serverDisplayName;
       let recipients  = serverRecipients;
+
       const hasLocalBatch = Boolean(localStorage.getItem(STORAGE_BATCH_KEY));
       const params = new URLSearchParams(window.location.search);
-      const ownerParam = params.get("owner");
-      const isCreatorView = hasLocalBatch || ownerParam === "1";
+      const isCreatorView = hasLocalBatch || params.get("owner") === "1";
 
       if (!recipients || recipients.length === 0) {
         const stored = localStorage.getItem(STORAGE_BATCH_KEY);
@@ -371,67 +249,32 @@ const notFound = !isDemoMode && !serverDisplayName;
       }
 
       if (displayName) {
-        document.title = `بطاقات العيد من ${displayName} `;
+        document.title = `بطاقات العيد من ${displayName}`;
         const titleEl = document.getElementById("wall-title");
         if (titleEl) titleEl.textContent = `بطاقات العيد من ${displayName}`;
       }
 
-      function normalizeName(name) {
-        return String(name || "").trim().toLowerCase();
-      }
-
-      function getOwnerRecipientId() {
-        if (!Array.isArray(recipients) || recipients.length === 0) return null;
-        const creatorMatch = recipients.find((r) => normalizeName(r.name) === normalizeName(displayName));
-        return creatorMatch?.id || null;
-      }
-
-      const ownerRecipientId = getOwnerRecipientId();
-
-      function isOwnerOpened() {
-        if (!ownerRecipientId) return false;
-        const owner = recipients?.find((r) => r.id === ownerRecipientId);
-        const localOpened = localStorage.getItem(`eid_opened_${ownerRecipientId}`) === "1";
-        return Boolean(owner?.opened || localOpened);
-      }
-
-      function isAllUnlocked() {
-        return serverActivatedFlag || localStorage.getItem(UNLOCK_ALL_KEY) === "1";
-      }
-
-      const loadingEl            = document.getElementById("loading-state");
-      const gridEl               = document.getElementById("envelope-grid");
-      const emptyEl              = document.getElementById("empty-state");
-      const shareSection         = document.getElementById("share-section");
-      const shareUrlEl           = document.getElementById("share-url");
-      const createCardsCta       = document.getElementById("create-cards-cta");
-      const lockedNotice         = document.getElementById("locked-notice");
-      const unlockRestSection    = document.getElementById("unlock-rest-section");
-      const unlockRestBtn        = document.getElementById("unlock-rest-btn");
-      const activationNotice     = document.getElementById("activation-notice");
-      const ownerCardStage       = document.getElementById("owner-card-stage");
-      const ownerCardSlot        = document.getElementById("owner-card-slot");
-      const ownerStageTitle      = document.getElementById("owner-stage-title");
-      const modal                = document.getElementById("coupon-modal");
-      const modalClose           = document.getElementById("modal-close");
-      const modalCreateCardsCta  = document.getElementById("modal-create-cards-cta");
-      const activationOverlay    = document.getElementById("activation-payment-overlay");
-      const closeActivationBtn   = document.getElementById("close-activation-payment");
-      const activationProcessing = document.getElementById("activation-processing-overlay");
+      const loadingEl      = document.getElementById("loading-state");
+      const gridEl         = document.getElementById("envelope-grid");
+      const emptyEl        = document.getElementById("empty-state");
+      const shareSection   = document.getElementById("share-section");
+      const shareUrlEl     = document.getElementById("share-url");
+      const createCardsCta = document.getElementById("create-cards-cta");
+      const lockedNotice   = document.getElementById("locked-notice");
+      const modal          = document.getElementById("msg-modal");
+      const modalClose     = document.getElementById("modal-close");
+      const modalCreateCta = document.getElementById("modal-create-cta");
 
       function makeCard(recipient) {
-        const template = document.getElementById("envelope-template");
-        const card      = template.content.cloneNode(true);
-        const div       = card.querySelector(".env-card");
-        const nameLabel = card.querySelector(".name-label");
+        const template    = document.getElementById("envelope-template");
+        const card        = template.content.cloneNode(true);
+        const div         = card.querySelector(".env-card");
+        const nameLabel   = card.querySelector(".name-label");
         const openedBadge = card.querySelector(".opened-badge");
-        const lockBadge   = card.querySelector(".lock-badge");
 
-        div.dataset.id   = recipient.id;
-        div.dataset.name = recipient.name;
-        div.dataset.code = recipient.coupon_code;
-        div.dataset.type = recipient.coupon_type;
-        div.dataset.desc = recipient.coupon_description;
+        div.dataset.id      = recipient.id;
+        div.dataset.name    = recipient.name;
+        div.dataset.message = recipient.message || "";
         nameLabel.textContent = recipient.name;
 
         const localOpened = localStorage.getItem(`eid_opened_${recipient.id}`) === "1";
@@ -441,7 +284,7 @@ const notFound = !isDemoMode && !serverDisplayName;
           div.classList.add("is-opened");
         }
 
-        return { card, div, lockBadge };
+        return { card, div };
       }
 
       function renderGrid() {
@@ -454,14 +297,11 @@ const notFound = !isDemoMode && !serverDisplayName;
           return;
         }
 
-        const allUnlocked = isAllUnlocked();
-        const ownerOpened = isOwnerOpened();
         const visitorOpenedId = getVisitorOpenedId();
-        const ownerStageActive = isCreatorView && !allUnlocked && Boolean(ownerRecipientId);
 
         if (shareSection && shareUrlEl) {
           shareUrlEl.textContent = `${window.location.origin}/eid/${batchId}`;
-          shareSection.style.display = "block";
+          shareSection.style.display = isCreatorView ? "block" : "none";
         }
 
         if (createCardsCta) {
@@ -469,74 +309,21 @@ const notFound = !isDemoMode && !serverDisplayName;
         }
 
         if (lockedNotice) {
-          lockedNotice.style.display = (!isCreatorView && allUnlocked && visitorOpenedId) ? "block" : "none";
-        }
-
-        if (activationNotice) {
-          activationNotice.style.display = (!isCreatorView && !allUnlocked) ? "block" : "none";
-        }
-
-        if (isCreatorView && unlockRestSection) {
-          unlockRestSection.style.display = ownerOpened && !allUnlocked ? "block" : "none";
-          if (unlockRestBtn) {
-            unlockRestBtn.textContent = ownerOpened && !allUnlocked
-              ? "شارك مع احبابك الكروت"
-              : "انتقل للدفع لتفعيل الهدايا";
-          }
-        }
-
-        if (ownerStageTitle) {
-          if (isCreatorView && ownerOpened && !allUnlocked) {
-            ownerStageTitle.textContent = "شارك مع احبابك الكروت";
-            ownerStageTitle.style.cursor = "pointer";
-            ownerStageTitle.style.textDecoration = "underline";
-            ownerStageTitle.onclick = () => openActivationPayment();
-          } else {
-            ownerStageTitle.textContent = "أنشئ بطاقاتك وشارك احبابك الفرحة";
-            ownerStageTitle.style.cursor = "default";
-            ownerStageTitle.style.textDecoration = "none";
-            ownerStageTitle.onclick = null;
-          }
-        }
-
-        if (ownerCardStage && ownerCardSlot) {
-          ownerCardSlot.innerHTML = "";
-          ownerCardStage.style.display = ownerStageActive ? "block" : "none";
-
-          if (ownerStageActive) {
-            const ownerRecipient = recipients.find((r) => r.id === ownerRecipientId);
-            if (ownerRecipient) {
-              const { card, div } = makeCard(ownerRecipient);
-              div.style.maxWidth = "26rem";
-              div.style.margin = "0 auto";
-              div.style.padding = "1.5rem";
-              div.style.borderColor = "rgba(99,102,241,0.35)";
-              div.style.boxShadow = "0 12px 30px rgba(99,102,241,0.18)";
-              div.querySelector("img").style.height = "8rem";
-              div.addEventListener("click", () => handleOpen(div));
-              ownerCardSlot.appendChild(card);
-            }
-          }
+          lockedNotice.style.display = (!isCreatorView && visitorOpenedId) ? "block" : "none";
         }
 
         gridEl.style.display = "grid";
 
         recipients.forEach((recipient) => {
-          if (ownerStageActive && recipient.id === ownerRecipientId) return;
-          if (allUnlocked && recipient.id === ownerRecipientId) return;
+          const { card, div } = makeCard(recipient);
 
-          const { card, div, lockBadge } = makeCard(recipient);
-
-          let shouldLock = false;
-          if (!allUnlocked) {
-            shouldLock = isCreatorView ? Boolean(ownerRecipientId) : true;
-          } else if (!isCreatorView && visitorOpenedId && visitorOpenedId !== recipient.id) {
-            shouldLock = true;
-          }
-
-          if (shouldLock) {
-            div.classList.add("is-locked");
-            if (lockBadge) lockBadge.style.display = "block";
+          // Visitors can only open their own card (one per device)
+          const isLocked = !isCreatorView && visitorOpenedId && visitorOpenedId !== recipient.id;
+          if (isLocked) {
+            div.style.opacity = "0.35";
+            div.style.filter = "grayscale(0.5)";
+            div.style.cursor = "not-allowed";
+            div.style.pointerEvents = "none";
           } else {
             div.addEventListener("click", () => handleOpen(div));
           }
@@ -545,21 +332,13 @@ const notFound = !isDemoMode && !serverDisplayName;
         });
       }
 
-      async function handleOpen(card) {
-        const id   = card.dataset.id;
-        const name = card.dataset.name;
-        const code = card.dataset.code;
-        const type = card.dataset.type;
-        const desc = card.dataset.desc;
-        const allUnlocked = isAllUnlocked();
-
-        if (!allUnlocked && (!isCreatorView || id !== ownerRecipientId)) return;
+      function handleOpen(card) {
+        const id      = card.dataset.id;
+        const name    = card.dataset.name;
+        const message = card.dataset.message;
 
         localStorage.setItem(`eid_opened_${id}`, "1");
-
-        if (!isCreatorView && allUnlocked) {
-          markVisitorOpened(id);
-        }
+        if (!isCreatorView) markVisitorOpened(id);
 
         const img   = card.querySelector("img");
         const badge = card.querySelector(".opened-badge");
@@ -567,24 +346,20 @@ const notFound = !isDemoMode && !serverDisplayName;
         if (badge) badge.style.display = "block";
         card.classList.add("is-opened");
 
-        const ownerEngagement = isCreatorView && !allUnlocked && id === ownerRecipientId;
-        if (ownerEngagement && unlockRestSection) {
-          unlockRestSection.style.display = "block";
-          renderGrid();
-        }
-
-        if (!isCreatorView && allUnlocked) {
+        if (!isCreatorView) {
+          // Lock all other cards
           document.querySelectorAll(".env-card").forEach((c) => {
             if (c.dataset.id !== id) {
-              c.classList.add("is-locked");
-              const lb = c.querySelector(".lock-badge");
-              if (lb) lb.style.display = "block";
+              c.style.opacity = "0.35";
+              c.style.filter  = "grayscale(0.5)";
+              c.style.cursor  = "not-allowed";
+              c.style.pointerEvents = "none";
             }
           });
           if (lockedNotice) lockedNotice.style.display = "block";
         }
 
-        showModal(name, code, type, desc, ownerEngagement);
+        showModal(name, message);
         fetch("/api/eid/open", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -592,118 +367,17 @@ const notFound = !isDemoMode && !serverDisplayName;
         }).catch(() => {});
       }
 
-      function showModal(name, code, type, desc, ownerEngagement = false) {
-        document.getElementById("modal-greeting").textContent  = `عيدك مبارك يا ${name}!✨`;
-        document.getElementById("modal-coupon-code").textContent = code;
-        document.getElementById("modal-coupon-type").textContent = type;
-        const extraLine = ownerEngagement
-          ? " فعّل بقية الهدايا بالدفع ثم شارك الرابط."
-          : "";
-        document.getElementById("modal-coupon-desc").textContent = `${desc}${extraLine}`;
-        if (modalCreateCardsCta) {
-          modalCreateCardsCta.style.display = isCreatorView ? "none" : "block";
+      function showModal(name, message) {
+        document.getElementById("modal-greeting").textContent = `عيدك مبارك يا ${name} ✨`;
+        document.getElementById("modal-message").textContent  = message || "عيدك مبارك وكل عام وأنت بخير";
+        if (modalCreateCta) {
+          modalCreateCta.style.display = isCreatorView ? "none" : "block";
         }
         modal.style.display = "flex";
       }
 
       modalClose?.addEventListener("click", () => { modal.style.display = "none"; });
-      modal?.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
-      });
-
-      let moyasarLoaded = false;
-      let activationFormInit = false;
-      function loadMoyasar(cb) {
-        if (window.Moyasar) { cb(); return; }
-        if (!document.querySelector('link[data-moyasar-css="1"]')) {
-          const link = document.createElement("link");
-          link.rel = "stylesheet";
-          link.href = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.css";
-          link.setAttribute("data-moyasar-css", "1");
-          document.head.appendChild(link);
-        }
-        const script = document.createElement("script");
-        script.src = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
-        script.onload = cb;
-        document.head.appendChild(script);
-      }
-
-      function openActivationPayment() {
-        if (!PAYMENT_ENABLED) {
-          localStorage.setItem(UNLOCK_ALL_KEY, "1");
-          renderGrid();
-          return;
-        }
-
-        activationOverlay.style.display = "block";
-        if (activationFormInit) return;
-        loadMoyasar(() => {
-          if (moyasarLoaded) return;
-          moyasarLoaded = true;
-          const callbackBase = PUBLIC_APP_URL || window.location.origin;
-          Moyasar.init({
-            element: ".mysr-form-activate",
-            amount: 500,
-            currency: "SAR",
-            description: "تفعيل هدايا بطاقات العيد",
-            publishable_api_key: MOYASAR_KEY,
-            callback_url: `${callbackBase}/eid/${batchId}?owner=1&activate=1`,
-            methods: ["applepay", "creditcard"],
-            language: "ar",
-            apple_pay: {
-              country: "SA",
-              label: "تفعيل هدايا العيد",
-              validate_merchant_url: "https://api.moyasar.com/v1/applepay/initiate",
-            },
-          });
-          activationFormInit = true;
-        });
-      }
-
-      closeActivationBtn?.addEventListener("click", () => {
-        activationOverlay.style.display = "none";
-      });
-
-      async function confirmActivation(paymentId) {
-        try {
-          const res = await fetch("/api/eid/activate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ batchId, paymentId }),
-          });
-          const data = await res.json();
-          if (!res.ok || !data.success) {
-            alert(data.error || "تعذر تفعيل الهدايا");
-            return false;
-          }
-          serverActivatedFlag = true;
-          localStorage.setItem(UNLOCK_ALL_KEY, "1");
-          return true;
-        } catch (_) {
-          alert("تعذر التحقق من الدفع");
-          return false;
-        }
-      }
-
-      unlockRestBtn?.addEventListener("click", () => {
-        openActivationPayment();
-      });
-
-      (async function handlePaymentCallback() {
-        const payId = params.get("id");
-        const status = String(params.get("status") || "").toLowerCase();
-        const activate = params.get("activate") === "1";
-        if (!isCreatorView || !activate || !payId || status !== "paid") return;
-
-        activationProcessing.style.display = "flex";
-        const ok = await confirmActivation(payId);
-        activationProcessing.style.display = "none";
-        if (ok) {
-          const clean = `${window.location.pathname}?owner=1`;
-          window.history.replaceState({}, "", clean);
-          renderGrid();
-        }
-      })();
+      modal?.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
       renderGrid();
 
@@ -720,48 +394,17 @@ const notFound = !isDemoMode && !serverDisplayName;
 
       document.getElementById("share-btn")?.addEventListener("click", async () => {
         const shareUrl = `${window.location.origin}/eid/${batchId}`;
-        const shareData = {
-          title: document.title || "بطاقات العيد",
-          text: "بطاقات العيد",
-          url: shareUrl,
-        };
         const btn = document.getElementById("share-btn");
         try {
           if (navigator.share) {
-            await navigator.share(shareData);
-            if (btn) {
-              btn.textContent = "تمت المشاركة";
-              setTimeout(() => (btn.textContent = "شارك مع احبابك"), 2000);
-            }
+            await navigator.share({ title: document.title || "بطاقات العيد", url: shareUrl });
+            if (btn) { btn.textContent = "تمت المشاركة"; setTimeout(() => (btn.textContent = "شارك مع احبابك"), 2000); }
             return;
           }
           await navigator.clipboard.writeText(shareUrl);
-          if (btn) {
-            btn.textContent = "تم النسخ";
-            setTimeout(() => (btn.textContent = "شارك مع احبابك"), 2000);
-          }
+          if (btn) { btn.textContent = "تم النسخ"; setTimeout(() => (btn.textContent = "شارك مع احبابك"), 2000); }
         } catch (_) {}
       });
-
-      document.getElementById("copy-code-btn")?.addEventListener("click", () => {
-        const code = document.getElementById("modal-coupon-code")?.textContent || "";
-        navigator.clipboard.writeText(code).then(() => {
-          const btn = document.getElementById("copy-code-btn");
-          if (btn) {
-            btn.textContent = "تم النسخ ✓";
-            btn.style.background = "rgba(16,185,129,0.12)";
-            btn.style.borderColor = "rgba(16,185,129,0.3)";
-            btn.style.color = "#10b981";
-            setTimeout(() => {
-              btn.textContent = "نسخ";
-              btn.style.background = "rgba(99,102,241,0.12)";
-              btn.style.borderColor = "rgba(99,102,241,0.25)";
-              btn.style.color = "#6366f1";
-            }, 2000);
-          }
-        });
-      });
     </script>
-
   </body>
 </html>

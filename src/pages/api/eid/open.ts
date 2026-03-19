@@ -13,9 +13,6 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // ── DEMO MODE ────────────────────────────────────────────────────────────
-    // In demo mode, the frontend already has the coupon data from sessionStorage,
-    // so this endpoint just returns success without a DB write.
     if (isDemoMode) {
       return new Response(
         JSON.stringify({ success: true, demo: true }),
@@ -23,11 +20,9 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // ── SUPABASE MODE ─────────────────────────────────────────────────────────
-    // Step 1: Fetch recipient
     const { data: recipient, error: fetchError } = await supabase!
       .from("eid_recipients")
-      .select("id, name, coupon_code, coupon_type, coupon_description, opened")
+      .select("id, name, message, opened")
       .eq("id", recipientId)
       .single();
 
@@ -38,22 +33,13 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Step 2: If already opened, return as-is (idempotent)
     if (recipient.opened) {
       return new Response(
-        JSON.stringify({
-          success: true,
-          already: true,
-          name: recipient.name,
-          coupon_code: recipient.coupon_code,
-          coupon_type: recipient.coupon_type,
-          coupon_description: recipient.coupon_description,
-        }),
+        JSON.stringify({ success: true, already: true, name: recipient.name, message: recipient.message }),
         { status: 200, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    // Step 3: Mark as opened
     const { error: updateError } = await supabase!
       .from("eid_recipients")
       .update({ opened: true, opened_at: new Date().toISOString() })
@@ -68,14 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        already: false,
-        name: recipient.name,
-        coupon_code: recipient.coupon_code,
-        coupon_type: recipient.coupon_type,
-        coupon_description: recipient.coupon_description,
-      }),
+      JSON.stringify({ success: true, already: false, name: recipient.name, message: recipient.message }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
