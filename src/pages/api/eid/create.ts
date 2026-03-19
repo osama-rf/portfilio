@@ -26,16 +26,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const creatorName = displayName.trim();
-    const normalize = (v: string) => v.trim().toLowerCase();
 
-    // Ensure creator has their own card
     const prepared = entries
       .map((e) => ({ name: e.name.trim(), message: (e.message || "").trim() || DEFAULT_MESSAGE }))
       .filter((e) => e.name);
-
-    if (!prepared.some((e) => normalize(e.name) === normalize(creatorName))) {
-      prepared.unshift({ name: creatorName, message: DEFAULT_MESSAGE });
-    }
 
     if (prepared.length > 50) {
       return new Response(

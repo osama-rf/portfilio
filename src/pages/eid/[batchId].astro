@@ -104,11 +104,10 @@ const notFound = !isDemoMode && !serverDisplayName;
         <!-- Header -->
         <div class="text-center" style="margin-bottom:3rem;">
           <h1 id="wall-title" style="margin-bottom:0.9rem;font-size:clamp(1.9rem,5vw,3rem);font-weight:800;color:#0f172a;line-height:1.35;">
-            {serverDisplayName ? `بطاقات العيد من ${serverDisplayName}` : "بطاقات العيد"}
+            {serverDisplayName ? `معايدات ${serverDisplayName}` : "معايدات"}
           </h1>
           <p style="color:#475569;font-size:1.125rem;line-height:1.9;font-weight:500;">
-            فرحة العيد تنتظرك هنا، دور على اسمك وافتح مظروفك واقرأ رسالتك الخاصة
-          </p>
+            دور على اسمك وافتح مظروفك واقرأ رسالتك الخاصة          </p>
         </div>
 
         <!-- Locked notice (shown after visitor opens a card) -->
@@ -249,9 +248,9 @@ const notFound = !isDemoMode && !serverDisplayName;
       }
 
       if (displayName) {
-        document.title = `بطاقات العيد من ${displayName}`;
+        document.title = `معايدات ${displayName}`;
         const titleEl = document.getElementById("wall-title");
-        if (titleEl) titleEl.textContent = `بطاقات العيد من ${displayName}`;
+        if (titleEl) titleEl.textContent = `معايدات ${displayName}`;
       }
 
       const loadingEl      = document.getElementById("loading-state");
