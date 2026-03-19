@@ -316,7 +316,7 @@ const notFound = !isDemoMode && !serverDisplayName;
         recipients.forEach((recipient) => {
           const { card, div } = makeCard(recipient);
 
-          // Visitors can only open their own card (one per device)
+          // Visitors are locked to one card after opening
           const isLocked = !isCreatorView && visitorOpenedId && visitorOpenedId !== recipient.id;
           if (isLocked) {
             div.style.opacity = "0.35";
@@ -337,16 +337,10 @@ const notFound = !isDemoMode && !serverDisplayName;
         const message = card.dataset.message;
 
         localStorage.setItem(`eid_opened_${id}`, "1");
-        if (!isCreatorView) markVisitorOpened(id);
-
-        const img   = card.querySelector("img");
-        const badge = card.querySelector(".opened-badge");
-        img.src = "/envelopes/opened.png";
-        if (badge) badge.style.display = "block";
-        card.classList.add("is-opened");
-
         if (!isCreatorView) {
-          // Lock all other cards
+          markVisitorOpened(id);
+
+          // Lock all other cards so only the rightful owner opens theirs
           document.querySelectorAll(".env-card").forEach((c) => {
             if (c.dataset.id !== id) {
               c.style.opacity = "0.35";
@@ -357,6 +351,12 @@ const notFound = !isDemoMode && !serverDisplayName;
           });
           if (lockedNotice) lockedNotice.style.display = "block";
         }
+
+        const img   = card.querySelector("img");
+        const badge = card.querySelector(".opened-badge");
+        img.src = "/envelopes/opened.png";
+        if (badge) badge.style.display = "block";
+        card.classList.add("is-opened");
 
         showModal(name, message);
         fetch("/api/eid/open", {
