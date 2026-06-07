@@ -1,0 +1,738 @@
+---
+export const prerender = true;
+import "../styles/global.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/ibm-plex-sans-arabic/400.css";
+import "@fontsource/ibm-plex-sans-arabic/500.css";
+import "@fontsource/ibm-plex-sans-arabic/600.css";
+import "@fontsource/ibm-plex-sans-arabic/700.css";
+import "@fontsource-variable/gabarito";
+
+---
+
+<!doctype html>
+<html lang="en" dir="ltr" class="scroll-pt-16 scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Osama AlRefay — Full Stack Software Engineer. Node.js, Next.js, React Native, Spring Boot, Python. Building production-grade apps end-to-end." />
+    <meta name="author" content="Osama AlRefay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+    <title>Osama AlRefay — Full Stack Engineer</title>
+    <link rel="canonical" href="https://osama-lab.com/portfolio" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Osama AlRefay — Full Stack Engineer" />
+    <meta property="og:description" content="Full Stack Software Engineer building production-grade apps end-to-end." />
+    <meta property="og:url" content="https://osama-lab.com/portfolio" />
+    <meta property="og:image" content="https://osama-lab.com/zaai-og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline defer data-website-id="dfid_hRQji3lN3KfBD3FZpe9zD" data-domain="osama-lab.com" src="https://datafa.st/js/script.js"></script>
+  </head>
+
+  <body class="bg-black font-sans text-white">
+
+    <!-- ─── HEADER ──────────────────────────────────────────────── -->
+    <header dir="ltr" class="sticky top-0 z-50 mx-auto flex max-w-5xl items-center justify-between bg-black px-5 py-5 border-b border-white/[0.04]">
+      <a href="/" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">
+        ← osama-lab.com
+      </a>
+      <nav class="hidden sm:flex items-center gap-1">
+        <a href="#about" class="portfolio-nav px-3 py-2 text-sm text-neutral hover:text-white transition-colors rounded-lg hover:bg-white/5">About</a>
+        <a href="#skills" class="portfolio-nav px-3 py-2 text-sm text-neutral hover:text-white transition-colors rounded-lg hover:bg-white/5">Skills</a>
+        <a href="#projects" class="portfolio-nav px-3 py-2 text-sm text-neutral hover:text-white transition-colors rounded-lg hover:bg-white/5">Projects</a>
+        <a href="#contact" class="portfolio-nav px-3 py-2 text-sm text-neutral hover:text-white transition-colors rounded-lg hover:bg-white/5">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="portfolio-theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+          <svg id="p-sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg id="p-moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+        <button id="portfolio-lang-toggle" class="lang-switch text-sm font-medium px-3 py-1.5 rounded-lg border border-white/10 text-neutral hover:text-white hover:border-white/20 transition-all">
+          العربية
+        </button>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-5">
+
+      <!-- ─── HERO ─────────────────────────────────────────────── -->
+      <section id="about" class="relative min-h-[88vh] flex flex-col items-center justify-center text-center pt-16 pb-20 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/[0.05] rounded-full blur-[130px]"></div>
+        </div>
+
+        <div class="relative z-10">
+          <!-- Photo placeholder — replace src="/osama.webp" with your photo -->
+          <div class="mx-auto mb-8 relative w-28 h-28 rounded-full overflow-hidden border-2 border-primary/30 bg-gradient-to-br from-indigo-900/60 to-violet-900/40 flex items-center justify-center shadow-xl shadow-primary/10">
+            <!-- TODO: replace with your actual photo path -->
+            <svg class="w-14 h-14 text-primary/40" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
+          </div>
+
+          <h1 class="font-serif text-5xl sm:text-6xl font-bold tracking-tight mb-3" style="background: linear-gradient(180deg,#f1f5f9 0%,#94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+            Osama AlRefay
+          </h1>
+
+          <p id="pf-title" class="text-xl text-primary font-semibold mb-5">Full Stack Software Engineer</p>
+
+          <p id="pf-bio" class="text-base text-neutral max-w-xl mx-auto leading-relaxed mb-10">
+            I build complete products end-to-end — mobile apps, web platforms, APIs, and admin dashboards. Based in Saudi Arabia, shipping production-grade software that scales.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mb-14">
+            <a id="pf-cta-primary" href="https://wa.me/966563913944?text=Hi Osama, I'd like to discuss a project." target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-indigo-500/30 hover:scale-105 transition-all duration-300 text-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.558 4.14 1.535 5.878L.057 23.997l6.304-1.654A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.895 0-3.66-.516-5.176-1.41l-.371-.221-3.844 1.008 1.026-3.744-.242-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              <span>Let's Chat on WhatsApp</span>
+            </a>
+            <a id="pf-cta-secondary" href="#projects"
+              class="inline-flex items-center gap-2 px-7 py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 hover:border-primary/30 transition-all duration-300 text-sm">
+              <span>See My Work</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+          </div>
+
+          <!-- Quick stats -->
+          <div class="flex flex-wrap justify-center gap-3">
+            <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+              <span class="text-base font-bold text-white">5+</span>
+              <span id="pf-stat-years" class="text-xs text-neutral/70">Years Experience</span>
+            </div>
+            <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+              <span class="text-base font-bold text-white">10+</span>
+              <span id="pf-stat-apps" class="text-xs text-neutral/70">Apps Shipped</span>
+            </div>
+            <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full border border-white/[0.06] bg-white/[0.02]">
+              <span class="text-base font-bold text-white">E2E</span>
+              <span id="pf-stat-e2e" class="text-xs text-neutral/70">Full Stack Delivery</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SKILLS & TECH STACK ───────────────────────────────── -->
+      <section id="skills" class="py-20 border-t border-white/[0.06]">
+        <div class="mb-12 text-center">
+          <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Tech Stack</p>
+          <h2 id="pf-skills-title" class="text-3xl font-serif font-bold text-white mb-3">Technologies I Work With</h2>
+          <p id="pf-skills-sub" class="text-neutral text-sm max-w-md mx-auto">End-to-end stack across mobile, web, backend, and infrastructure</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          <!-- Frontend / Mobile -->
+          <div class="skill-card rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-300">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <span id="pf-cat-frontend" class="text-sm font-semibold text-white">Frontend & Mobile</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-badge">Next.js</span>
+              <span class="tech-badge">React</span>
+              <span class="tech-badge">React Native (Expo)</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Tailwind CSS</span>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="skill-card rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-300">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+              </div>
+              <span id="pf-cat-backend" class="text-sm font-semibold text-white">Backend</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">Spring Boot</span>
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">REST APIs</span>
+              <span class="tech-badge">GraphQL</span>
+            </div>
+          </div>
+
+          <!-- Databases -->
+          <div class="skill-card rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-300">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+              </div>
+              <span id="pf-cat-db" class="text-sm font-semibold text-white">Databases</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-badge">MongoDB</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Supabase</span>
+              <span class="tech-badge">Redis</span>
+              <span class="tech-badge">Query Optimization</span>
+            </div>
+          </div>
+
+          <!-- Integrations & Infra -->
+          <div class="skill-card rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-300">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <span id="pf-cat-integrations" class="text-sm font-semibold text-white">Integrations & Infra</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-badge">Moyasar</span>
+              <span class="tech-badge">Stripe</span>
+              <span class="tech-badge">Tamara</span>
+              <span class="tech-badge">Resend</span>
+              <span class="tech-badge">Firebase</span>
+              <span class="tech-badge">Vercel</span>
+              <span class="tech-badge">Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expertise areas -->
+        <div class="mb-6">
+          <p id="pf-expertise-title" class="text-sm font-semibold text-white/60 uppercase tracking-widest mb-4 text-center">Specializations</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+              </div>
+              <p id="pf-exp-payments-title" class="text-sm font-semibold text-white mb-1">Payment Integrations</p>
+              <p id="pf-exp-payments-desc" class="text-xs text-neutral leading-relaxed">Moyasar · Stripe · Tamara · STC Pay · Apple Pay · webhooks & reconciliation</p>
+            </div>
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-violet-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <p id="pf-exp-mail-title" class="text-sm font-semibold text-white mb-1">Mail & Notifications</p>
+              <p id="pf-exp-mail-desc" class="text-xs text-neutral leading-relaxed">Resend · SendGrid · transactional flows · Firebase FCM · OneSignal push</p>
+            </div>
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <p id="pf-exp-highload-title" class="text-sm font-semibold text-white mb-1">High-Load Apps</p>
+              <p id="pf-exp-highload-desc" class="text-xs text-neutral leading-relaxed">Caching · queuing · horizontal scaling · CDN · performance under load</p>
+            </div>
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+              </div>
+              <p id="pf-exp-db-title" class="text-sm font-semibold text-white mb-1">DB Management</p>
+              <p id="pf-exp-db-desc" class="text-xs text-neutral leading-relaxed">Big-data queries · indexing · aggregation pipelines · RLS · migrations</p>
+            </div>
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <p id="pf-exp-auth-title" class="text-sm font-semibold text-white mb-1">Auth & Security</p>
+              <p id="pf-exp-auth-desc" class="text-xs text-neutral leading-relaxed">Supabase Auth · JWT · OAuth · row-level security · multi-tenant isolation</p>
+            </div>
+            <div class="expertise-card rounded-xl border border-white/[0.06] bg-white/[0.01] p-4 text-center hover:border-indigo-500/20 transition-all duration-300">
+              <div class="mx-auto mb-3 w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2v-1a7 7 0 00-14 0v1a2 2 0 002 2zM12 11a4 4 0 100-8 4 4 0 000 8z"></path></svg>
+              </div>
+              <p id="pf-exp-mobile-title" class="text-sm font-semibold text-white mb-1">Mobile Apps</p>
+              <p id="pf-exp-mobile-desc" class="text-xs text-neutral leading-relaxed">React Native Expo · iOS & Android · App Store · deep links · OTA updates</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── PROJECTS ──────────────────────────────────────────── -->
+      <section id="projects" class="py-20 border-t border-white/[0.06]">
+        <div class="mb-12 text-center">
+          <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Shipped End-to-End</p>
+          <h2 id="pf-projects-title" class="text-3xl font-serif font-bold text-white mb-3">Featured Projects</h2>
+          <p id="pf-projects-sub" class="text-neutral text-sm max-w-md mx-auto">Production apps I built and shipped solo as full stack engineer</p>
+        </div>
+
+        <!-- Project 1 — zaai.cc -->
+        <article class="project-card mb-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-primary/20 transition-all duration-300">
+          <a href="https://zaai.cc" target="_blank" rel="noopener noreferrer" class="block">
+            <div class="relative w-full h-48 bg-white/[0.02] overflow-hidden">
+              <img
+                src="https://s0.wp.com/mshots/v1/https://zaai.cc?w=800&h=480"
+                alt="Zaai website screenshot"
+                class="w-full h-full object-cover object-top"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-white">Zaai</h3>
+                <a href="https://zaai.cc" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline inline-flex items-center gap-1">
+                  zaai.cc
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+              </div>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="proj-badge">Next.js</span>
+                <span class="proj-badge">Node.js</span>
+                <span class="proj-badge">Supabase</span>
+                <span class="proj-badge">AI</span>
+              </div>
+            </div>
+            <p id="pf-zaai-desc" class="text-sm text-neutral leading-relaxed">
+              AI Solutions Platform — full-stack SaaS offering AI-powered automation, analytics dashboards, and smart recommendations for businesses. Built the entire product end-to-end: from API design to mobile-ready UI, subscription billing, and real-time data pipelines.
+            </p>
+          </div>
+        </article>
+
+        <!-- Project 2 — talid.cc -->
+        <article class="project-card mb-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-primary/20 transition-all duration-300">
+          <a href="https://talid.cc" target="_blank" rel="noopener noreferrer" class="block">
+            <div class="relative w-full h-48 bg-white/[0.02] overflow-hidden">
+              <img
+                src="https://s0.wp.com/mshots/v1/https://talid.cc?w=800&h=480"
+                alt="Talid website screenshot"
+                class="w-full h-full object-cover object-top"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-white">Talid</h3>
+                <a href="https://talid.cc" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline inline-flex items-center gap-1">
+                  talid.cc
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+              </div>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="proj-badge">Next.js</span>
+                <span class="proj-badge">Node.js</span>
+                <span class="proj-badge">MongoDB</span>
+                <span class="proj-badge">Moyasar</span>
+              </div>
+            </div>
+            <p id="pf-talid-desc" class="text-sm text-neutral leading-relaxed">
+              Full-stack service platform with end-to-end payment processing, user management, and real-time notifications. Integrated Moyasar payments with webhook reconciliation, automated email pipelines via Resend, and built a complete admin dashboard to manage all operations.
+            </p>
+          </div>
+        </article>
+
+        <!-- Project 3 — kidanm.com.sa -->
+        <article class="project-card mb-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-primary/20 transition-all duration-300">
+          <a href="https://kidanm.com.sa" target="_blank" rel="noopener noreferrer" class="block">
+            <div class="relative w-full h-48 bg-white/[0.02] overflow-hidden">
+              <img
+                src="https://s0.wp.com/mshots/v1/https://kidanm.com.sa?w=800&h=480"
+                alt="Kedan website screenshot"
+                class="w-full h-full object-cover object-top"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-white">Kedan</h3>
+                <a href="https://kidanm.com.sa" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline inline-flex items-center gap-1">
+                  kidanm.com.sa
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+              </div>
+              <div class="flex flex-wrap gap-1.5 justify-end">
+                <span class="proj-badge">Next.js</span>
+                <span class="proj-badge">Spring Boot</span>
+                <span class="proj-badge">PostgreSQL</span>
+                <span class="proj-badge">Supabase</span>
+              </div>
+            </div>
+            <p id="pf-kedan-desc" class="text-sm text-neutral leading-relaxed">
+              Enterprise communication platform for non-profit organizations in Saudi Arabia. Features role-based workflow management, stakeholder collaboration, organizational reporting, and a full admin system. Built backend with Spring Boot for high-throughput operations and Supabase for real-time data.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ─── CONTACT ───────────────────────────────────────────── -->
+      <section id="contact" class="py-20 border-t border-white/[0.06]">
+        <div class="text-center">
+          <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Get in Touch</p>
+          <h2 id="pf-contact-title" class="text-3xl font-serif font-bold text-white mb-4">Let's Build Something</h2>
+          <p id="pf-contact-sub" class="text-neutral text-sm max-w-sm mx-auto mb-8 leading-relaxed">
+            Have an idea? Need a full-stack engineer? I ship production-ready apps end-to-end.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="https://wa.me/966563913944?text=Hi Osama, I'd like to discuss a project." target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-indigo-500/30 hover:scale-105 transition-all duration-300 text-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.558 4.14 1.535 5.878L.057 23.997l6.304-1.654A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.895 0-3.66-.516-5.176-1.41l-.371-.221-3.844 1.008 1.026-3.744-.242-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              <span id="pf-whatsapp-btn">Message on WhatsApp</span>
+            </a>
+            <a href="/" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 hover:border-primary/30 transition-all duration-300 text-sm">
+              <span id="pf-site-btn">Visit osama-labs.com</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ─── FOOTER ────────────────────────────────────────────── -->
+    <footer class="border-t border-white/[0.06] px-5 py-8 text-center text-white">
+      <p class="text-xs text-neutral/60">Osama AlRefay © 2025</p>
+    </footer>
+
+  </body>
+</html>
+
+<style>
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    transition: all 0.2s ease;
+  }
+
+  .tech-badge:hover {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: rgba(99, 102, 241, 0.35);
+  }
+
+  .proj-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Light theme overrides */
+  html.light body {
+    background-color: #fafbfc;
+    color: #0f172a;
+  }
+
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+
+  html.light .text-neutral {
+    color: #64748b !important;
+  }
+
+  html.light .text-white\/60 {
+    color: rgba(15, 23, 42, 0.6) !important;
+  }
+
+  html.light .bg-black {
+    background-color: #fafbfc !important;
+  }
+
+  html.light .border-white\/\[0\.06\] {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  html.light .border-white\/\[0\.04\] {
+    border-color: rgba(0, 0, 0, 0.04) !important;
+  }
+
+  html.light .bg-white\/\[0\.02\] {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+  }
+
+  html.light .bg-white\/\[0\.01\] {
+    background-color: rgba(0, 0, 0, 0.01) !important;
+  }
+
+  html.light .bg-white\/5 {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+
+  html.light .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  html.light header {
+    background-color: #fafbfc !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  html.light .snippet-block {
+    background-color: #f8fafc !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html.light .snippet-block pre {
+    background-color: #f1f5f9 !important;
+  }
+
+  html.light footer {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  html.light .text-neutral\/60 {
+    color: rgba(100, 116, 139, 0.8) !important;
+  }
+
+  html.light .tech-badge {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+
+  html.light .proj-badge {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(15, 23, 42, 0.5);
+  }
+
+  html.light .border-white\/\[0\.06\] {
+    border-color: rgba(0,0,0,0.07) !important;
+  }
+
+  /* RTL adjustments for Arabic */
+  html[dir="rtl"] .portfolio-nav {
+    font-family: var(--font-arabic);
+  }
+
+  html[dir="rtl"] header a:first-child::before {
+    content: "→";
+    margin-right: 0;
+    margin-left: 0.25rem;
+  }
+
+  html[dir="rtl"] header a:first-child {
+    direction: rtl;
+  }
+</style>
+
+<script>
+  import { themeStore } from "@app/theme-store";
+
+  // ── Bilingual content ──────────────────────────────────────────────────
+  const pfContent = {
+    en: {
+      dir: "ltr",
+      lang: "en",
+      langToggle: "العربية",
+      badge: "Available for New Projects",
+      title: "Full Stack Software Engineer",
+      bio: "I build complete products end-to-end — mobile apps, web platforms, APIs, and admin dashboards. Based in Saudi Arabia, shipping production-grade software that scales.",
+      ctaPrimary: "Let's Chat on WhatsApp",
+      ctaSecondary: "See My Work",
+      statYears: "Years Experience",
+      statApps: "Apps Shipped",
+      statE2e: "Full Stack Delivery",
+      skillsTitle: "Technologies I Work With",
+      skillsSub: "End-to-end stack across mobile, web, backend, and infrastructure",
+      catFrontend: "Frontend & Mobile",
+      catBackend: "Backend",
+      catDb: "Databases",
+      catIntegrations: "Integrations & Infra",
+      expertiseTitle: "Specializations",
+      expPaymentsTitle: "Payment Integrations",
+      expPaymentsDesc: "Moyasar · Stripe · Tamara · STC Pay · Apple Pay · webhooks & reconciliation",
+      expMailTitle: "Mail & Notifications",
+      expMailDesc: "Resend · SendGrid · transactional flows · Firebase FCM · OneSignal push",
+      expHighloadTitle: "High-Load Apps",
+      expHighloadDesc: "Caching · queuing · horizontal scaling · CDN · performance under load",
+      expDbTitle: "DB Management",
+      expDbDesc: "Big-data queries · indexing · aggregation pipelines · RLS · migrations",
+      expAuthTitle: "Auth & Security",
+      expAuthDesc: "Supabase Auth · JWT · OAuth · row-level security · multi-tenant isolation",
+      expMobileTitle: "Mobile Apps",
+      expMobileDesc: "React Native Expo · iOS & Android · App Store · deep links · OTA updates",
+      projectsTitle: "Featured Projects",
+      projectsSub: "Production apps I built and shipped solo as full stack engineer",
+      zaaiDesc: "AI Solutions Platform — full-stack SaaS offering AI-powered automation, analytics dashboards, and smart recommendations for businesses. Built the entire product end-to-end: from API design to mobile-ready UI, subscription billing, and real-time data pipelines.",
+      talidDesc: "Full-stack service platform with end-to-end payment processing, user management, and real-time notifications. Integrated Moyasar payments with webhook reconciliation, automated email pipelines via Resend, and built a complete admin dashboard to manage all operations.",
+      kedanDesc: "Enterprise communication platform for non-profit organizations in Saudi Arabia. Features role-based workflow management, stakeholder collaboration, organizational reporting, and a full admin system. Built backend with Spring Boot for high-throughput operations and Supabase for real-time data.",
+      contactTitle: "Let's Build Something",
+      contactSub: "Have an idea? Need a full-stack engineer? I ship production-ready apps end-to-end.",
+      whatsappBtn: "Message on WhatsApp",
+      siteBtn: "Visit osama-labs.com",
+      navAbout: "About",
+      navSkills: "Skills",
+      navProjects: "Projects",
+      navContact: "Contact",
+    },
+    ar: {
+      dir: "rtl",
+      lang: "ar",
+      langToggle: "English",
+      badge: "متاح للمشاريع الجديدة",
+      title: "مهندس برمجيات متكامل",
+      bio: "أبني منتجات كاملة من الصفر — تطبيقات جوال، منصات ويب، APIs ولوحات تحكم. مقيم في السعودية، أشحن برمجيات جاهزة للإنتاج وقابلة للتوسع.",
+      ctaPrimary: "تواصل معي على واتساب",
+      ctaSecondary: "شوف أعمالي",
+      statYears: "سنوات خبرة",
+      statApps: "تطبيق أطلقته",
+      statE2e: "تسليم متكامل",
+      skillsTitle: "التقنيات التي أعمل بها",
+      skillsSub: "ستاك متكامل: جوال، ويب، باك-إند وبنية تحتية",
+      catFrontend: "فرونت-إند وجوال",
+      catBackend: "باك-إند",
+      catDb: "قواعد البيانات",
+      catIntegrations: "التكاملات والبنية التحتية",
+      expertiseTitle: "التخصصات",
+      expPaymentsTitle: "تكامل المدفوعات",
+      expPaymentsDesc: "ميسر · Stripe · تمارا · STC Pay · Apple Pay · ويب هوك والتسوية",
+      expMailTitle: "البريد والإشعارات",
+      expMailDesc: "Resend · SendGrid · تدفقات المعاملات · Firebase FCM · OneSignal",
+      expHighloadTitle: "تطبيقات الحمل العالي",
+      expHighloadDesc: "التخزين المؤقت · قوائم الانتظار · التوسع الأفقي · CDN · الأداء تحت الضغط",
+      expDbTitle: "إدارة قواعد البيانات",
+      expDbDesc: "استعلامات البيانات الضخمة · الفهرسة · أنابيب التجميع · RLS · الترحيل",
+      expAuthTitle: "المصادقة والأمان",
+      expAuthDesc: "Supabase Auth · JWT · OAuth · أمان على مستوى الصف · عزل متعدد المستأجرين",
+      expMobileTitle: "تطبيقات الجوال",
+      expMobileDesc: "React Native Expo · iOS وAndroid · متجر التطبيقات · الروابط العميقة · OTA",
+      projectsTitle: "المشاريع المميزة",
+      projectsSub: "تطبيقات إنتاجية بنيتها وأطلقتها بشكل منفرد كمهندس متكامل",
+      zaaiDesc: "منصة حلول الذكاء الاصطناعي — SaaS متكامل يقدم أتمتة مدعومة بالذكاء الاصطناعي ولوحات تحليلات وتوصيات ذكية للأعمال. بنيت المنتج كاملاً: من تصميم الـ API إلى الواجهة، الفواتير التلقائية، وخطوط البيانات الفورية.",
+      talidDesc: "منصة خدمات متكاملة مع معالجة مدفوعات شاملة وإدارة مستخدمين وإشعارات فورية. دمجت مدفوعات ميسر مع تسوية الويب هوك، وأتمتت تدفقات البريد عبر Resend، وبنيت لوحة تحكم إدارية كاملة.",
+      kedanDesc: "منصة تواصل مؤسسية للمنظمات غير الربحية في السعودية. تتضمن إدارة سير العمل القائمة على الأدوار، تعاون أصحاب المصلحة، التقارير المؤسسية، ونظام إدارة كامل. الباك-إند بـ Spring Boot لعمليات عالية الإنتاجية وSupabase للبيانات الفورية.",
+      contactTitle: "لنبني شيئاً معاً",
+      contactSub: "عندك فكرة؟ تبي مهندس متكامل؟ أشحن تطبيقات جاهزة للإنتاج من الصفر.",
+      whatsappBtn: "تواصل على واتساب",
+      siteBtn: "زر osama-labs.com",
+      navAbout: "عن",
+      navSkills: "المهارات",
+      navProjects: "المشاريع",
+      navContact: "تواصل",
+    },
+  };
+
+  // ── State ──────────────────────────────────────────────────────────────
+  type Lang = "en" | "ar";
+  let currentLang: Lang = "en";
+
+  // Check saved preference; portfolio defaults to EN if nothing is saved
+  const saved = localStorage.getItem("pf-language") as Lang | null;
+  if (saved === "ar" || saved === "en") {
+    currentLang = saved;
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────
+  function set(id: string, text: string) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function applyContent(lang: Lang) {
+    const c = pfContent[lang];
+    document.documentElement.setAttribute("dir", c.dir);
+    document.documentElement.setAttribute("lang", c.lang);
+
+    const toggle = document.getElementById("portfolio-lang-toggle");
+    if (toggle) toggle.textContent = c.langToggle;
+
+    set("pf-badge", c.badge);
+    set("pf-title", c.title);
+    set("pf-bio", c.bio);
+    set("pf-cta-primary", c.ctaPrimary);
+    set("pf-cta-secondary", c.ctaSecondary);
+    set("pf-stat-years", c.statYears);
+    set("pf-stat-apps", c.statApps);
+    set("pf-stat-e2e", c.statE2e);
+    set("pf-skills-title", c.skillsTitle);
+    set("pf-skills-sub", c.skillsSub);
+    set("pf-cat-frontend", c.catFrontend);
+    set("pf-cat-backend", c.catBackend);
+    set("pf-cat-db", c.catDb);
+    set("pf-cat-integrations", c.catIntegrations);
+    set("pf-expertise-title", c.expertiseTitle);
+    set("pf-exp-payments-title", c.expPaymentsTitle);
+    set("pf-exp-payments-desc", c.expPaymentsDesc);
+    set("pf-exp-mail-title", c.expMailTitle);
+    set("pf-exp-mail-desc", c.expMailDesc);
+    set("pf-exp-highload-title", c.expHighloadTitle);
+    set("pf-exp-highload-desc", c.expHighloadDesc);
+    set("pf-exp-db-title", c.expDbTitle);
+    set("pf-exp-db-desc", c.expDbDesc);
+    set("pf-exp-auth-title", c.expAuthTitle);
+    set("pf-exp-auth-desc", c.expAuthDesc);
+    set("pf-exp-mobile-title", c.expMobileTitle);
+    set("pf-exp-mobile-desc", c.expMobileDesc);
+    set("pf-projects-title", c.projectsTitle);
+    set("pf-projects-sub", c.projectsSub);
+    set("pf-zaai-desc", c.zaaiDesc);
+    set("pf-talid-desc", c.talidDesc);
+    set("pf-kedan-desc", c.kedanDesc);
+    set("pf-contact-title", c.contactTitle);
+    set("pf-contact-sub", c.contactSub);
+    set("pf-whatsapp-btn", c.whatsappBtn);
+    set("pf-site-btn", c.siteBtn);
+
+    // Update nav links text
+    const navLinks = document.querySelectorAll(".portfolio-nav");
+    const navTexts = [c.navAbout, c.navSkills, c.navProjects, c.navContact];
+    navLinks.forEach((link, i) => {
+      if (navTexts[i]) link.textContent = navTexts[i];
+    });
+
+    // CTA button inner span update for primary cta (has icon + span)
+    const ctaPrimarySpan = document.querySelector("#pf-cta-primary span:last-child") as HTMLElement;
+    if (ctaPrimarySpan) ctaPrimarySpan.textContent = c.ctaPrimary;
+
+    const ctaSecondarySpan = document.querySelector("#pf-cta-secondary span:first-child") as HTMLElement;
+    if (ctaSecondarySpan) ctaSecondarySpan.textContent = c.ctaSecondary;
+  }
+
+  // Initial render
+  applyContent(currentLang);
+
+  // ── Language toggle ────────────────────────────────────────────────────
+  document.getElementById("portfolio-lang-toggle")?.addEventListener("click", () => {
+    currentLang = currentLang === "en" ? "ar" : "en";
+    localStorage.setItem("pf-language", currentLang);
+    applyContent(currentLang);
+  });
+
+  // ── Theme toggle ───────────────────────────────────────────────────────
+  const themeBtn = document.getElementById("portfolio-theme-toggle");
+  const sunIcon = document.getElementById("p-sun-icon");
+  const moonIcon = document.getElementById("p-moon-icon");
+
+  function updateThemeIcon() {
+    if (themeStore.isDark) {
+      moonIcon?.classList.add("hidden");
+      sunIcon?.classList.remove("hidden");
+    } else {
+      moonIcon?.classList.remove("hidden");
+      sunIcon?.classList.add("hidden");
+    }
+  }
+
+  themeBtn?.addEventListener("click", () => {
+    themeStore.toggleTheme();
+    updateThemeIcon();
+  });
+
+  updateThemeIcon();
+</script>
