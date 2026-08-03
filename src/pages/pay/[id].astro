@@ -45,6 +45,7 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
       }
       .mysr-form-button {
         background-color: #0b0a0a !important;
+        color: #ffffff !important;
       }
     </style>
   </head>
@@ -62,7 +63,14 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
       )}
 
       {link && (
-        <div id="pay-root" data-link-id={link.id} data-amount={link.amount} data-currency={link.currency}>
+        <div
+          id="pay-root"
+          data-link-id={link.id}
+          data-amount={link.amount}
+          data-currency={link.currency}
+          data-moyasar-enabled={link.moyasar_enabled}
+          data-tamara-enabled={link.tamara_enabled}
+        >
           {link.status === "paid" && (
             <div class="mt-10 rounded-lg border border-[#EEF0F2] p-6 text-center dark:border-white/10">
               <h2 class="text-lg font-semibold text-green-600 dark:text-green-400">{content.pay.alreadyPaid}</h2>
@@ -114,11 +122,11 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
                       id="select-apple-pay"
                       class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
                     >
-                      <div class="flex flex-row-reverse items-center justify-between">
+                      <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                           <img src="/apple-pay-logo.svg" alt="Apple Pay" width="32" height="19" />
                         </div>
-                        <div class="flex flex-row-reverse items-center gap-2">
+                        <div class="flex items-center gap-2">
                           <span class="text-[18px]">Apple Pay</span>
                           <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
                             <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
@@ -133,13 +141,13 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
                       id="select-credit-card"
                       class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
                     >
-                      <div class="flex flex-row-reverse items-center justify-between">
+                      <div class="flex items-center justify-between">
                         <div class="flex items-center gap-1">
                           <img src="/mastercard-logo.svg" alt="Mastercard" width="28" height="22" />
                           <img src="/visa-logo.svg" alt="Visa" width="32" height="12" />
                           <img src="/mada-logo.svg" alt="Mada" width="32" height="37" />
                         </div>
-                        <div class="flex flex-row-reverse items-center gap-2">
+                        <div class="flex items-center gap-2">
                           <span class="text-[18px]">{lang === "ar" ? "البطاقة الإئتمانية" : "Credit card"}</span>
                           <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
                             <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
@@ -154,11 +162,11 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
                       id="select-tamara"
                       class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
                     >
-                      <div class="flex flex-row-reverse items-center justify-between">
+                      <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                           <img src="/tamara-logo.svg" alt="Tamara" width="60" height="24" />
                         </div>
-                        <div class="flex flex-row-reverse items-center gap-2">
+                        <div class="flex items-center gap-2">
                           <span class="text-[18px]">{lang === "ar" ? "تمارا" : "Tamara"}</span>
                           <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
                             <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
@@ -173,21 +181,21 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
                   <h2 class="mb-2 text-[20px] font-semibold">
                     {lang === "ar" ? "ملخص الطلب" : "Order summary"}
                   </h2>
-                  <div class="flex flex-row-reverse items-center justify-between border-b border-[#EEF0F2] pb-4 dark:border-white/10">
+                  <div class="flex items-center justify-between border-b border-[#EEF0F2] pb-4 dark:border-white/10">
+                    <span class="text-xs">{lang === "ar" ? "الإجمالي" : "Total"}</span>
                     <div class="flex items-center gap-1">
                       <span class="text-sm">{Number(link.amount).toFixed(2)}</span>
                       <img src="/riyal.svg" alt="ريال" width="14" height="14" />
                     </div>
-                    <span class="text-xs">{lang === "ar" ? "الإجمالي" : "Total"}</span>
                   </div>
-                  <div class="mt-3 flex flex-row-reverse items-center justify-between">
+                  <div class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">
+                      {lang === "ar" ? "الإجمالي النهائي" : "Final total"}
+                    </span>
                     <div class="flex items-center gap-1">
                       <span class="text-base font-bold">{Number(link.amount).toFixed(2)}</span>
                       <img src="/riyal.svg" alt="ريال" width="16" height="16" />
                     </div>
-                    <span class="text-sm font-bold">
-                      {lang === "ar" ? "الإجمالي النهائي" : "Final total"}
-                    </span>
                   </div>
                 </div>
 
@@ -199,7 +207,8 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
                   id="pay-cta"
                   type="button"
                   disabled
-                  class="hidden w-full rounded-lg bg-[#122023] py-3 text-[18px] font-medium text-white transition disabled:opacity-40"
+                  style="background-color: #122023; color: #ffffff; text-align: center;"
+                  class="hidden w-full rounded-lg py-3 text-center text-[18px] font-medium transition disabled:opacity-40"
                 >
                   {lang === "ar" ? "إتمام الدفع" : "Complete payment"}
                 </button>
@@ -303,6 +312,13 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
         document.getElementById("select-apple-pay")?.addEventListener("click", () => selectMethod("apple-pay"));
         document.getElementById("select-credit-card")?.addEventListener("click", () => selectMethod("credit-card"));
         document.getElementById("select-tamara")?.addEventListener("click", () => selectMethod("tamara"));
+
+        // If Tamara is the only enabled gateway, skip the selector entirely.
+        const moyasarEnabled = root.dataset.moyasarEnabled === "true";
+        const tamaraEnabled = root.dataset.tamaraEnabled === "true";
+        if (!moyasarEnabled && tamaraEnabled) {
+          selectMethod("tamara");
+        }
 
         payCta.addEventListener("click", async () => {
           if (selectedMethod === "tamara") {
