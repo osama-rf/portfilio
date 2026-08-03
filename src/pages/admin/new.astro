@@ -48,6 +48,20 @@ const content = t(lang);
       />
     </div>
 
+    <div>
+      <label class="mb-1 block text-sm text-slate-500 dark:text-white/60" for="client_phone">
+        {content.newLink.clientPhone}
+      </label>
+      <input
+        id="client_phone"
+        name="client_phone"
+        type="tel"
+        placeholder="05XXXXXXXX"
+        class="w-full rounded-md border border-slate-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
+      />
+      <p class="mt-1 text-xs text-slate-400 dark:text-white/40">{content.newLink.clientPhoneHint}</p>
+    </div>
+
     <div class="flex gap-4">
       <div class="flex-1">
         <label class="mb-1 block text-sm text-slate-500 dark:text-white/60" for="amount">
@@ -131,6 +145,7 @@ const content = t(lang);
     define:vars={{
       needMethodMsg: content.newLink.needMethod,
       createFailedMsg: content.newLink.createFailed,
+      needPhoneMsg: content.newLink.needPhone,
     }}
   >
     const form = document.getElementById("new-form");
@@ -146,6 +161,7 @@ const content = t(lang);
         title: document.getElementById("title").value,
         description: document.getElementById("description").value || null,
         client_name: document.getElementById("client_name").value || null,
+        client_phone: document.getElementById("client_phone").value || null,
         amount: parseFloat(document.getElementById("amount").value),
         currency: document.getElementById("currency").value.toUpperCase(),
         moyasar_enabled: document.getElementById("moyasar_enabled").checked,
@@ -154,6 +170,12 @@ const content = t(lang);
 
       if (!payload.moyasar_enabled && !payload.tamara_enabled) {
         errorEl.textContent = needMethodMsg;
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      if (payload.tamara_enabled && !payload.client_phone) {
+        errorEl.textContent = needPhoneMsg;
         errorEl.classList.remove("hidden");
         return;
       }

@@ -15,6 +15,7 @@ export const POST: APIRoute = async ({ request }) => {
     title,
     description,
     client_name,
+    client_phone,
     amount,
     currency,
     moyasar_enabled,
@@ -43,12 +44,20 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  if (tamara_enabled && !client_phone?.trim()) {
+    return new Response(
+      JSON.stringify({ error: "Client phone number is required when Tamara is enabled" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   const { data, error } = await supabaseAdmin
     .from("payment_links")
     .insert({
       title: title.trim(),
       description: description?.trim() || null,
       client_name: client_name?.trim() || null,
+      client_phone: client_phone?.trim() || null,
       amount: numericAmount.toFixed(2),
       currency: (currency || "SAR").toUpperCase(),
       moyasar_enabled: !!moyasar_enabled,

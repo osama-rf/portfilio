@@ -10,7 +10,7 @@ const content = t(lang);
 const { data: links, error } = supabaseAdmin
   ? await supabaseAdmin
       .from("payment_links")
-      .select("id, title, amount, currency, status, moyasar_enabled, tamara_enabled, client_name, created_at")
+      .select("id, title, amount, currency, status, moyasar_enabled, tamara_enabled, client_name, client_phone, created_at")
       .order("created_at", { ascending: false })
   : { data: [], error: null };
 
@@ -61,7 +61,13 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
           <div class="min-w-0">
             <p class="font-medium break-words">{link.title}</p>
             {link.client_name && (
-              <p class="text-sm text-slate-500 dark:text-white/50">{link.client_name}</p>
+              <p class="text-sm text-slate-500 dark:text-white/50">
+                {link.client_name}
+                {link.client_phone && ` · ${link.client_phone}`}
+              </p>
+            )}
+            {!link.client_name && link.client_phone && (
+              <p class="text-sm text-slate-500 dark:text-white/50">{link.client_phone}</p>
             )}
             <p class="mt-1 text-sm text-slate-400 dark:text-white/40">
               {new Date(link.created_at).toLocaleString(dateLocale)}

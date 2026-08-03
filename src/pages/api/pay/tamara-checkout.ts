@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const { data: link, error } = await supabaseAdmin
     .from("payment_links")
-    .select("id, title, description, amount, currency, status, tamara_enabled, client_name")
+    .select("id, title, description, amount, currency, status, tamara_enabled, client_name, client_phone")
     .eq("id", linkId)
     .single();
 
@@ -52,6 +52,13 @@ export const POST: APIRoute = async ({ request }) => {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  if (!link.client_phone) {
+    return new Response(
+      JSON.stringify({ error: "This payment link is missing a client phone number" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const appUrl = getAppUrl();
@@ -84,7 +91,7 @@ export const POST: APIRoute = async ({ request }) => {
     consumer: {
       first_name: firstName,
       last_name: lastName,
-      phone_number: "0500000000",
+      phone_number: link.client_phone,
       email: "client@example.com",
     },
     billing_address: {
@@ -93,7 +100,7 @@ export const POST: APIRoute = async ({ request }) => {
       line1: "N/A",
       city: "Riyadh",
       country_code: "SA",
-      phone_number: "0500000000",
+      phone_number: link.client_phone,
     },
     shipping_address: {
       first_name: firstName,
@@ -101,7 +108,7 @@ export const POST: APIRoute = async ({ request }) => {
       line1: "N/A",
       city: "Riyadh",
       country_code: "SA",
-      phone_number: "0500000000",
+      phone_number: link.client_phone,
     },
     payment_type: "PAY_BY_INSTALMENTS",
     merchant_url: {

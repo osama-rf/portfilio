@@ -13,6 +13,7 @@ create table payment_links (
   tamara_enabled boolean not null default false,
   status text not null default 'pending', -- pending | paid | expired | cancelled
   client_name text,
+  client_phone text,
   paid_at timestamptz,
   payment_gateway text,      -- 'moyasar' | 'tamara'
   gateway_payment_id text,   -- moyasar payment id or tamara order id
