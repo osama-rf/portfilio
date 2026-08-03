@@ -1,0 +1,275 @@
+---
+import "../../styles/global.css";
+import { supabaseAdmin } from "@lib/supabase-admin";
+import ThemeLangToggle from "@components/ThemeLangToggle.astro";
+import { getPaymentLang, t } from "@lib/payment-i18n";
+
+const { id } = Astro.params;
+const lang = getPaymentLang(Astro.url, Astro.cookies.get("lang")?.value);
+const content = t(lang);
+
+const { data: link } = supabaseAdmin
+  ? await supabaseAdmin
+      .from("payment_links")
+      .select("id, title, description, amount, currency, status, moyasar_enabled, tamara_enabled")
+      .eq("id", id)
+      .single()
+  : { data: null };
+
+const moyasarPublicKey = import.meta.env.MOYASAR_PUBLIC_KEY;
+const gatewayParam = Astro.url.searchParams.get("gateway");
+const statusParam = Astro.url.searchParams.get("status");
+const moyasarPaymentId = Astro.url.searchParams.get("id");
+const moyasarLocale = lang === "ar" ? "ar" : "en";
+---
+
+<!doctype html>
+<html lang={lang} dir={content.dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{link ? link.title : "Payment"}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light" ? saved : "light";
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <style>
+      .mysr-form .mysr-form-footer {
+        display: none !important;
+      }
+      .mysr-form-button {
+        background-color: #4f46e5 !important;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-white font-sans text-slate-900 dark:bg-black dark:text-white">
+    <div class="mx-auto max-w-md px-4 py-8 sm:py-12">
+      <div class="mb-4 flex justify-end">
+        <ThemeLangToggle lang={lang} />
+      </div>
+
+      {!link && (
+        <div class="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5">
+          <h1 class="text-lg font-semibold text-red-500 dark:text-red-400">{content.pay.notFound}</h1>
+          <p class="mt-2 text-sm text-slate-500 dark:text-white/50">{content.pay.notFoundHint}</p>
+        </div>
+      )}
+
+      {link && (
+        <div id="pay-root" data-link-id={link.id} data-amount={link.amount} data-currency={link.currency}>
+          <div class="mb-6">
+            <h1 class="text-lg font-semibold sm:text-xl">{link.title}</h1>
+            {link.description && (
+              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{link.description}</p>
+            )}
+            <p class="mt-4 text-2xl font-bold sm:text-3xl">
+              {Number(link.amount).toFixed(2)}{" "}
+              <span class="text-base font-normal text-slate-400 dark:text-white/50">{link.currency}</span>
+            </p>
+          </div>
+
+          {link.status === "paid" && (
+            <div
+              id="already-paid-box"
+              class="rounded-lg border border-green-500/30 bg-green-50 p-6 text-center dark:bg-green-500/10"
+            >
+              <h2 class="text-lg font-semibold text-green-700 dark:text-green-400">
+                {content.pay.alreadyPaid}
+              </h2>
+              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.alreadyPaidHint}</p>
+            </div>
+          )}
+
+          {(link.status === "cancelled" || link.status === "expired") && (
+            <div class="rounded-lg border border-red-500/30 bg-red-50 p-6 text-center dark:bg-red-500/10">
+              <h2 class="text-lg font-semibold text-red-600 dark:text-red-400">{content.pay.inactive}</h2>
+              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.inactiveHint}</p>
+            </div>
+          )}
+
+          {link.status === "pending" && (
+            <div id="pay-form-area">
+              <div
+                id="verifying-box"
+                class="hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5"
+              >
+                <p class="verifying-text text-sm text-slate-500 dark:text-white/60">{content.pay.verifying}</p>
+              </div>
+              <div
+                id="success-box"
+                class="hidden rounded-lg border border-green-500/30 bg-green-50 p-6 text-center dark:bg-green-500/10"
+              >
+                <h2 class="text-lg font-semibold text-green-700 dark:text-green-400">{content.pay.success}</h2>
+                <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.successHint}</p>
+              </div>
+              <div
+                id="failed-box"
+                class="hidden rounded-lg border border-red-500/30 bg-red-50 p-6 text-center dark:bg-red-500/10"
+              >
+                <h2 class="text-lg font-semibold text-red-600 dark:text-red-400">{content.pay.failed}</h2>
+                <p class="failed-text mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.failedHint}</p>
+              </div>
+
+              <div id="method-selector" class="space-y-3">
+                {link.moyasar_enabled && (
+                  <button
+                    type="button"
+                    id="select-moyasar"
+                    class="method-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left rtl:text-right hover:border-indigo-500 dark:border-white/10 dark:bg-white/5"
+                  >
+                    <span class="font-medium">{content.pay.cardApplePay}</span>
+                    <span class="block text-sm text-slate-500 dark:text-white/50">
+                      {content.pay.cardApplePayHint}
+                    </span>
+                  </button>
+                )}
+                {link.tamara_enabled && (
+                  <button
+                    type="button"
+                    id="select-tamara"
+                    class="method-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left rtl:text-right hover:border-indigo-500 dark:border-white/10 dark:bg-white/5"
+                  >
+                    <span class="font-medium">Tamara</span>
+                    <span class="block text-sm text-slate-500 dark:text-white/50">
+                      {content.pay.tamaraHint}
+                    </span>
+                  </button>
+                )}
+              </div>
+
+              <div id="moyasar-area" class="mt-4 hidden">
+                <div class="mysr-form"></div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+
+    <script
+      define:vars={{
+        moyasarPublicKey,
+        gatewayParam,
+        statusParam,
+        moyasarPaymentId,
+        moyasarLocale,
+        redirectingTamaraMsg: content.pay.redirectingTamara,
+        confirmingTamaraMsg: content.pay.confirmingTamara,
+        stillProcessingMsg: content.pay.stillProcessing,
+      }}
+    >
+      const root = document.getElementById("pay-root");
+      if (root) {
+        const linkId = root.dataset.linkId;
+        const amount = parseFloat(root.dataset.amount);
+        const currency = root.dataset.currency;
+
+        const methodSelector = document.getElementById("method-selector");
+        const moyasarArea = document.getElementById("moyasar-area");
+        const verifyingBox = document.getElementById("verifying-box");
+        const successBox = document.getElementById("success-box");
+        const failedBox = document.getElementById("failed-box");
+
+        function showOnly(el) {
+          [methodSelector, moyasarArea, verifyingBox, successBox, failedBox].forEach((e) => {
+            if (!e) return;
+            e.classList.toggle("hidden", e !== el);
+          });
+        }
+
+        function loadMoyasarAssets() {
+          return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
+            script.onload = resolve;
+            document.head.appendChild(script);
+
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.css";
+            document.head.appendChild(link);
+          });
+        }
+
+        document.getElementById("select-moyasar")?.addEventListener("click", async () => {
+          showOnly(moyasarArea);
+          await loadMoyasarAssets();
+          // @ts-ignore
+          Moyasar.init({
+            element: ".mysr-form",
+            amount: Math.round(amount * 100),
+            currency,
+            description: root.querySelector("h1")?.textContent || "Payment",
+            publishable_api_key: moyasarPublicKey,
+            callback_url: `${window.location.origin}/pay/${linkId}?gateway=moyasar`,
+            methods: ["creditcard", "applepay"],
+            apple_pay: {
+              country: "SA",
+              label: "osama-lab.com",
+              validate_merchant_url: "https://api.moyasar.com/v1/applepay/initiate",
+            },
+            language: moyasarLocale,
+          });
+        });
+
+        document.getElementById("select-tamara")?.addEventListener("click", async () => {
+          showOnly(verifyingBox);
+          verifyingBox.querySelector(".verifying-text").textContent = redirectingTamaraMsg;
+          try {
+            const res = await fetch("/api/pay/tamara-checkout", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ linkId }),
+            });
+            const data = await res.json();
+            if (res.ok && data.redirect_url) {
+              window.location.href = data.redirect_url;
+            } else {
+              showOnly(failedBox);
+            }
+          } catch {
+            showOnly(failedBox);
+          }
+        });
+
+        // Handle return redirects from Moyasar / Tamara
+        (async () => {
+          if (moyasarPaymentId && !gatewayParam) {
+            showOnly(verifyingBox);
+            try {
+              const res = await fetch(`/api/pay/verify-moyasar?id=${moyasarPaymentId}&link=${linkId}`);
+              const data = await res.json();
+              showOnly(data.verified ? successBox : failedBox);
+            } catch {
+              showOnly(failedBox);
+            }
+          } else if (gatewayParam === "tamara") {
+            if (statusParam === "success") {
+              showOnly(verifyingBox);
+              verifyingBox.querySelector(".verifying-text").textContent = confirmingTamaraMsg;
+              for (let i = 0; i < 10; i++) {
+                await new Promise((r) => setTimeout(r, 1500));
+                const res = await fetch(`/api/pay/status?link=${linkId}`);
+                const data = await res.json().catch(() => ({}));
+                if (data.status === "paid") {
+                  showOnly(successBox);
+                  return;
+                }
+              }
+              showOnly(failedBox);
+              failedBox.querySelector(".failed-text").textContent = stillProcessingMsg;
+            } else {
+              showOnly(failedBox);
+            }
+          }
+        })();
+      }
+    </script>
+  </body>
+</html>

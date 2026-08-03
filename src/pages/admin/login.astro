@@ -1,0 +1,100 @@
+---
+import "../../styles/global.css";
+import ThemeLangToggle from "@components/ThemeLangToggle.astro";
+import { getPaymentLang, t } from "@lib/payment-i18n";
+
+const lang = getPaymentLang(Astro.url, Astro.cookies.get("lang")?.value);
+const content = t(lang);
+---
+
+<!doctype html>
+<html lang={lang} dir={content.dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{content.login.title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light" ? saved : "light";
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body class="flex min-h-screen items-center justify-center bg-white px-4 font-sans text-slate-900 dark:bg-black dark:text-white">
+    <div class="absolute top-4 right-4 rtl:right-auto rtl:left-4">
+      <ThemeLangToggle lang={lang} />
+    </div>
+
+    <form
+      id="login-form"
+      class="w-full max-w-sm space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/5"
+    >
+      <h1 class="text-xl font-semibold">{content.login.title}</h1>
+      <div>
+        <label class="mb-1 block text-sm text-slate-500 dark:text-white/60" for="email">
+          {content.login.email}
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="username"
+          class="w-full rounded-md border border-slate-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-white/10 dark:bg-black/30 dark:text-white"
+        />
+      </div>
+      <div>
+        <label class="mb-1 block text-sm text-slate-500 dark:text-white/60" for="password">
+          {content.login.password}
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          autocomplete="current-password"
+          class="w-full rounded-md border border-slate-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-white/10 dark:bg-black/30 dark:text-white"
+        />
+      </div>
+      <p id="login-error" class="hidden text-sm text-red-500 dark:text-red-400"></p>
+      <button
+        type="submit"
+        class="w-full rounded-md bg-indigo-600 px-3 py-2 font-medium text-white transition hover:bg-indigo-500"
+      >
+        {content.login.signIn}
+      </button>
+    </form>
+
+    <script define:vars={{ failedMsg: content.login.failed }}>
+      const form = document.getElementById("login-form");
+      const errorEl = document.getElementById("login-error");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorEl.classList.add("hidden");
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (res.ok) {
+          window.location.href = "/admin";
+          return;
+        }
+
+        const data = await res.json().catch(() => ({ error: failedMsg }));
+        errorEl.textContent = data.error || failedMsg;
+        errorEl.classList.remove("hidden");
+      });
+    </script>
+  </body>
+</html>
