@@ -44,107 +44,165 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
         display: none !important;
       }
       .mysr-form-button {
-        background-color: #4f46e5 !important;
+        background-color: #0b0a0a !important;
       }
     </style>
   </head>
-  <body class="min-h-screen bg-white font-sans text-slate-900 dark:bg-black dark:text-white">
-    <div class="mx-auto max-w-md px-4 py-8 sm:py-12">
-      <div class="mb-4 flex justify-end">
+  <body class="min-h-screen bg-white font-sans text-[#0B0A0A] dark:bg-black dark:text-white">
+    <div class="mx-auto flex min-h-screen max-w-[428px] flex-col px-5 pt-4">
+      <div class="mb-2 flex justify-end">
         <ThemeLangToggle lang={lang} />
       </div>
 
       {!link && (
-        <div class="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5">
+        <div class="mt-10 rounded-lg border border-[#EEF0F2] p-6 text-center dark:border-white/10">
           <h1 class="text-lg font-semibold text-red-500 dark:text-red-400">{content.pay.notFound}</h1>
-          <p class="mt-2 text-sm text-slate-500 dark:text-white/50">{content.pay.notFoundHint}</p>
+          <p class="mt-2 text-sm text-[#808080]">{content.pay.notFoundHint}</p>
         </div>
       )}
 
       {link && (
         <div id="pay-root" data-link-id={link.id} data-amount={link.amount} data-currency={link.currency}>
-          <div class="mb-6">
-            <h1 class="text-lg font-semibold sm:text-xl">{link.title}</h1>
-            {link.description && (
-              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{link.description}</p>
-            )}
-            <p class="mt-4 text-2xl font-bold sm:text-3xl">
-              {Number(link.amount).toFixed(2)}{" "}
-              <span class="text-base font-normal text-slate-400 dark:text-white/50">{link.currency}</span>
-            </p>
-          </div>
-
           {link.status === "paid" && (
-            <div
-              id="already-paid-box"
-              class="rounded-lg border border-green-500/30 bg-green-50 p-6 text-center dark:bg-green-500/10"
-            >
-              <h2 class="text-lg font-semibold text-green-700 dark:text-green-400">
-                {content.pay.alreadyPaid}
-              </h2>
-              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.alreadyPaidHint}</p>
+            <div class="mt-10 rounded-lg border border-[#EEF0F2] p-6 text-center dark:border-white/10">
+              <h2 class="text-lg font-semibold text-green-600 dark:text-green-400">{content.pay.alreadyPaid}</h2>
+              <p class="mt-2 text-sm text-[#808080]">{content.pay.alreadyPaidHint}</p>
             </div>
           )}
 
           {(link.status === "cancelled" || link.status === "expired") && (
-            <div class="rounded-lg border border-red-500/30 bg-red-50 p-6 text-center dark:bg-red-500/10">
+            <div class="mt-10 rounded-lg border border-[#EEF0F2] p-6 text-center dark:border-white/10">
               <h2 class="text-lg font-semibold text-red-600 dark:text-red-400">{content.pay.inactive}</h2>
-              <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.inactiveHint}</p>
+              <p class="mt-2 text-sm text-[#808080]">{content.pay.inactiveHint}</p>
             </div>
           )}
 
           {link.status === "pending" && (
-            <div id="pay-form-area">
-              <div
-                id="verifying-box"
-                class="hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5"
-              >
-                <p class="verifying-text text-sm text-slate-500 dark:text-white/60">{content.pay.verifying}</p>
-              </div>
-              <div
-                id="success-box"
-                class="hidden rounded-lg border border-green-500/30 bg-green-50 p-6 text-center dark:bg-green-500/10"
-              >
-                <h2 class="text-lg font-semibold text-green-700 dark:text-green-400">{content.pay.success}</h2>
-                <p class="mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.successHint}</p>
-              </div>
-              <div
-                id="failed-box"
-                class="hidden rounded-lg border border-red-500/30 bg-red-50 p-6 text-center dark:bg-red-500/10"
-              >
-                <h2 class="text-lg font-semibold text-red-600 dark:text-red-400">{content.pay.failed}</h2>
-                <p class="failed-text mt-2 text-sm text-slate-500 dark:text-white/60">{content.pay.failedHint}</p>
+            <div id="pay-form-area" class="pb-10">
+              <div id="verifying-box" class="hidden py-16 text-center">
+                <div class="mysr-spinner mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-[#0B0A0A]/20 border-t-[#0B0A0A] dark:border-white/20 dark:border-t-white"></div>
+                <p class="verifying-text text-sm text-[#808080]">{content.pay.verifying}</p>
               </div>
 
-              <div id="method-selector" class="space-y-3">
-                {link.moyasar_enabled && (
-                  <button
-                    type="button"
-                    id="select-moyasar"
-                    class="method-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left rtl:text-right hover:border-indigo-500 dark:border-white/10 dark:bg-white/5"
-                  >
-                    <span class="font-medium">{content.pay.cardApplePay}</span>
-                    <span class="block text-sm text-slate-500 dark:text-white/50">
-                      {content.pay.cardApplePayHint}
-                    </span>
-                  </button>
-                )}
-                {link.tamara_enabled && (
-                  <button
-                    type="button"
-                    id="select-tamara"
-                    class="method-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left rtl:text-right hover:border-indigo-500 dark:border-white/10 dark:bg-white/5"
-                  >
-                    <span class="font-medium">Tamara</span>
-                    <span class="block text-sm text-slate-500 dark:text-white/50">
-                      {content.pay.tamaraHint}
-                    </span>
-                  </button>
-                )}
+              <div id="success-box" class="hidden py-16 text-center">
+                <h2 class="mb-2 text-lg font-semibold text-green-600 dark:text-green-400">
+                  {content.pay.success}
+                </h2>
+                <p class="text-sm text-[#808080]">{content.pay.successHint}</p>
               </div>
 
-              <div id="moyasar-area" class="mt-4 hidden">
-                <div class="mysr-form"></div>
+              <div id="failed-box" class="hidden py-16 text-center">
+                <h2 class="mb-2 text-lg font-semibold text-red-600 dark:text-red-400">{content.pay.failed}</h2>
+                <p class="failed-text text-sm text-[#808080]">{content.pay.failedHint}</p>
+              </div>
+
+              <div id="checkout-area">
+                <div class="mt-4 mb-6">
+                  <h1 class="text-lg font-semibold">{link.title}</h1>
+                  {link.description && (
+                    <p class="mt-1 text-sm text-[#808080]">{link.description}</p>
+                  )}
+                </div>
+
+                <div class="mb-6">
+                  <h2 class="mb-3 text-[20px] font-semibold">
+                    {lang === "ar" ? "طريقة الدفع" : "Payment method"}
+                  </h2>
+
+                  {link.moyasar_enabled && (
+                    <div
+                      id="select-apple-pay"
+                      class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
+                    >
+                      <div class="flex flex-row-reverse items-center justify-between">
+                        <div class="flex items-center gap-2">
+                          <img src="/apple-pay-logo.svg" alt="Apple Pay" width="32" height="19" />
+                        </div>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                          <span class="text-[18px]">Apple Pay</span>
+                          <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
+                            <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {link.moyasar_enabled && (
+                    <div
+                      id="select-credit-card"
+                      class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
+                    >
+                      <div class="flex flex-row-reverse items-center justify-between">
+                        <div class="flex items-center gap-1">
+                          <img src="/mastercard-logo.svg" alt="Mastercard" width="28" height="22" />
+                          <img src="/visa-logo.svg" alt="Visa" width="32" height="12" />
+                          <img src="/mada-logo.svg" alt="Mada" width="32" height="37" />
+                        </div>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                          <span class="text-[18px]">{lang === "ar" ? "البطاقة الإئتمانية" : "Credit card"}</span>
+                          <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
+                            <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {link.tamara_enabled && (
+                    <div
+                      id="select-tamara"
+                      class="method-row cursor-pointer border-b border-[#EEF0F2] py-4 dark:border-white/10"
+                    >
+                      <div class="flex flex-row-reverse items-center justify-between">
+                        <div class="flex items-center gap-2">
+                          <img src="/tamara-logo.svg" alt="Tamara" width="60" height="24" />
+                        </div>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                          <span class="text-[18px]">{lang === "ar" ? "تمارا" : "Tamara"}</span>
+                          <span class="method-dot flex h-4 w-4 items-center justify-center rounded-full border border-[#0B0A0A] dark:border-white">
+                            <span class="method-dot-inner hidden h-1.5 w-1.5 rounded-full bg-[#0B0A0A] dark:bg-white"></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div class="mb-6">
+                  <h2 class="mb-2 text-[20px] font-semibold">
+                    {lang === "ar" ? "ملخص الطلب" : "Order summary"}
+                  </h2>
+                  <div class="flex flex-row-reverse items-center justify-between border-b border-[#EEF0F2] pb-4 dark:border-white/10">
+                    <div class="flex items-center gap-1">
+                      <span class="text-sm">{Number(link.amount).toFixed(2)}</span>
+                      <img src="/riyal.svg" alt="ريال" width="14" height="14" />
+                    </div>
+                    <span class="text-xs">{lang === "ar" ? "الإجمالي" : "Total"}</span>
+                  </div>
+                  <div class="mt-3 flex flex-row-reverse items-center justify-between">
+                    <div class="flex items-center gap-1">
+                      <span class="text-base font-bold">{Number(link.amount).toFixed(2)}</span>
+                      <img src="/riyal.svg" alt="ريال" width="16" height="16" />
+                    </div>
+                    <span class="text-sm font-bold">
+                      {lang === "ar" ? "الإجمالي النهائي" : "Final total"}
+                    </span>
+                  </div>
+                </div>
+
+                <div id="moyasar-area" class="mb-6 hidden">
+                  <div class="mysr-form"></div>
+                </div>
+
+                <button
+                  id="pay-cta"
+                  type="button"
+                  disabled
+                  class="hidden w-full rounded-lg bg-[#122023] py-3 text-[18px] font-medium text-white transition disabled:opacity-40"
+                >
+                  {lang === "ar" ? "إتمام الدفع" : "Complete payment"}
+                </button>
               </div>
             </div>
           )}
@@ -170,24 +228,48 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
         const amount = parseFloat(root.dataset.amount);
         const currency = root.dataset.currency;
 
-        const methodSelector = document.getElementById("method-selector");
+        const checkoutArea = document.getElementById("checkout-area");
         const moyasarArea = document.getElementById("moyasar-area");
         const verifyingBox = document.getElementById("verifying-box");
         const successBox = document.getElementById("success-box");
         const failedBox = document.getElementById("failed-box");
+        const payCta = document.getElementById("pay-cta");
 
         function showOnly(el) {
-          [methodSelector, moyasarArea, verifyingBox, successBox, failedBox].forEach((e) => {
+          [checkoutArea, verifyingBox, successBox, failedBox].forEach((e) => {
             if (!e) return;
             e.classList.toggle("hidden", e !== el);
           });
         }
 
+        let selectedMethod = null;
+        let moyasarLoaded = false;
+
+        function selectMethod(method) {
+          selectedMethod = method;
+          document.querySelectorAll(".method-row").forEach((row) => {
+            const dot = row.querySelector(".method-dot-inner");
+            dot.classList.toggle("hidden", row.id !== `select-${method}`);
+          });
+          const isMoyasar = method === "apple-pay" || method === "credit-card";
+          moyasarArea.classList.toggle("hidden", !isMoyasar);
+          payCta.classList.toggle("hidden", isMoyasar);
+          payCta.disabled = false;
+
+          if (isMoyasar) {
+            initMoyasar(method);
+          }
+        }
+
         function loadMoyasarAssets() {
+          if (moyasarLoaded) return Promise.resolve();
           return new Promise((resolve) => {
             const script = document.createElement("script");
             script.src = "https://cdn.moyasar.com/mpf/1.13.0/moyasar.js";
-            script.onload = resolve;
+            script.onload = () => {
+              moyasarLoaded = true;
+              resolve();
+            };
             document.head.appendChild(script);
 
             const link = document.createElement("link");
@@ -197,9 +279,9 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
           });
         }
 
-        document.getElementById("select-moyasar")?.addEventListener("click", async () => {
-          showOnly(moyasarArea);
+        async function initMoyasar(method) {
           await loadMoyasarAssets();
+          document.querySelector(".mysr-form").innerHTML = "";
           // @ts-ignore
           Moyasar.init({
             element: ".mysr-form",
@@ -208,7 +290,7 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
             description: root.querySelector("h1")?.textContent || "Payment",
             publishable_api_key: moyasarPublicKey,
             callback_url: `${window.location.origin}/pay/${linkId}?gateway=moyasar`,
-            methods: ["creditcard", "applepay"],
+            methods: method === "apple-pay" ? ["applepay"] : ["creditcard"],
             apple_pay: {
               country: "SA",
               label: "osama-lab.com",
@@ -216,26 +298,33 @@ const moyasarLocale = lang === "ar" ? "ar" : "en";
             },
             language: moyasarLocale,
           });
-        });
+        }
 
-        document.getElementById("select-tamara")?.addEventListener("click", async () => {
-          showOnly(verifyingBox);
-          verifyingBox.querySelector(".verifying-text").textContent = redirectingTamaraMsg;
-          try {
-            const res = await fetch("/api/pay/tamara-checkout", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ linkId }),
-            });
-            const data = await res.json();
-            if (res.ok && data.redirect_url) {
-              window.location.href = data.redirect_url;
-            } else {
+        document.getElementById("select-apple-pay")?.addEventListener("click", () => selectMethod("apple-pay"));
+        document.getElementById("select-credit-card")?.addEventListener("click", () => selectMethod("credit-card"));
+        document.getElementById("select-tamara")?.addEventListener("click", () => selectMethod("tamara"));
+
+        payCta.addEventListener("click", async () => {
+          if (selectedMethod === "tamara") {
+            showOnly(verifyingBox);
+            verifyingBox.querySelector(".verifying-text").textContent = redirectingTamaraMsg;
+            try {
+              const res = await fetch("/api/pay/tamara-checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ linkId }),
+              });
+              const data = await res.json();
+              if (res.ok && data.redirect_url) {
+                window.location.href = data.redirect_url;
+              } else {
+                showOnly(failedBox);
+              }
+            } catch {
               showOnly(failedBox);
             }
-          } catch {
-            showOnly(failedBox);
           }
+          // For apple-pay / credit-card, the Moyasar widget's own button handles submission.
         });
 
         // Handle return redirects from Moyasar / Tamara
