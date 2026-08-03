@@ -104,12 +104,24 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
           >
             {content.dashboard.copy}
           </button>
+          <button
+            type="button"
+            class="delete-btn shrink-0 rounded bg-red-100 px-3 py-1 text-xs text-red-700 hover:bg-red-200 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20"
+            data-id={link.id}
+          >
+            {content.dashboard.delete}
+          </button>
         </div>
       </div>
     ))}
   </div>
 
-  <script>
+  <script
+    define:vars={{
+      deleteConfirmMsg: content.dashboard.deleteConfirm,
+      deleteFailedMsg: content.dashboard.deleteFailed,
+    }}
+  >
     document.querySelectorAll(".copy-btn").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const url = btn.getAttribute("data-url");
@@ -119,6 +131,21 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
         const copiedLabel = btn.getAttribute("data-copied") || "Copied!";
         btn.textContent = copiedLabel;
         setTimeout(() => (btn.textContent = original), 1500);
+      });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-id");
+        if (!id) return;
+        if (!confirm(deleteConfirmMsg)) return;
+
+        const res = await fetch(`/api/admin/payment-links/${id}`, { method: "DELETE" });
+        if (res.ok) {
+          window.location.reload();
+        } else {
+          alert(deleteFailedMsg);
+        }
       });
     });
   </script>
