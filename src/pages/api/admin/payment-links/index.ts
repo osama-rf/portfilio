@@ -29,6 +29,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  if (!client_name?.trim()) {
+    return new Response(JSON.stringify({ error: "Client name is required" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const numericAmount = Number(amount);
   if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
     return new Response(JSON.stringify({ error: "Amount must be a positive number" }), {

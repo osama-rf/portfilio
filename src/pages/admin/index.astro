@@ -56,19 +56,56 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
 
   <div class="space-y-3">
     {links?.map((link) => (
-      <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
+      <div class="link-card rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div class="min-w-0">
             <p class="font-medium break-words">{link.title}</p>
-            {link.client_name && (
-              <p class="text-sm text-slate-500 dark:text-white/50">
-                {link.client_name}
-                {link.client_phone && ` · ${link.client_phone}`}
-              </p>
-            )}
-            {!link.client_name && link.client_phone && (
-              <p class="text-sm text-slate-500 dark:text-white/50">{link.client_phone}</p>
-            )}
+            <div class="view-mode">
+              {link.client_name && (
+                <p class="text-sm text-slate-500 dark:text-white/50">
+                  {link.client_name}
+                  {link.client_phone && ` · ${link.client_phone}`}
+                </p>
+              )}
+              {!link.client_name && link.client_phone && (
+                <p class="text-sm text-slate-500 dark:text-white/50">{link.client_phone}</p>
+              )}
+              {!link.client_name && !link.client_phone && (
+                <p class="text-sm text-slate-400 italic dark:text-white/30">
+                  {content.newLink.clientName}: —
+                </p>
+              )}
+            </div>
+            <form class="edit-form hidden mt-2 flex flex-wrap items-center gap-2" data-id={link.id}>
+              <input
+                type="text"
+                class="edit-name w-40 rounded border border-slate-200 bg-white px-2 py-1 text-sm dark:border-white/10 dark:bg-black/30"
+                placeholder={content.newLink.clientName}
+                value={link.client_name ?? ""}
+              />
+              <input
+                type="tel"
+                class="edit-phone w-32 rounded border border-slate-200 bg-white px-2 py-1 text-sm dark:border-white/10 dark:bg-black/30"
+                placeholder={content.newLink.clientPhone}
+                value={link.client_phone ?? ""}
+              />
+              <button
+                type="submit"
+                class="rounded bg-indigo-600 px-2 py-1 text-xs text-white hover:bg-indigo-500"
+              >
+                {content.dashboard.save}
+              </button>
+              <button type="button" class="cancel-edit-btn rounded bg-slate-200 px-2 py-1 text-xs dark:bg-white/10">
+                {content.dashboard.cancel}
+              </button>
+              <p class="edit-error hidden w-full text-xs text-red-500 dark:text-red-400"></p>
+            </form>
+            <button
+              type="button"
+              class="edit-btn view-mode mt-1 text-xs text-indigo-600 hover:underline dark:text-indigo-400"
+            >
+              {content.dashboard.editClient}
+            </button>
             <p class="mt-1 text-sm text-slate-400 dark:text-white/40">
               {new Date(link.created_at).toLocaleString(dateLocale)}
             </p>
@@ -129,6 +166,7 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
     define:vars={{
       deleteConfirmMsg: content.dashboard.deleteConfirm,
       deleteFailedMsg: content.dashboard.deleteFailed,
+      updateFailedMsg: content.dashboard.updateFailed,
     }}
   >
     document.querySelectorAll(".copy-btn").forEach((btn) => {
@@ -154,6 +192,45 @@ const dateLocale = lang === "ar" ? "ar-SA" : "en-US";
           window.location.reload();
         } else {
           alert(deleteFailedMsg);
+        }
+      });
+    });
+
+    document.querySelectorAll(".link-card").forEach((card) => {
+      const editBtn = card.querySelector(".edit-btn");
+      const editForm = card.querySelector(".edit-form");
+      const cancelBtn = card.querySelector(".cancel-edit-btn");
+      const viewModeEls = card.querySelectorAll(".view-mode");
+      const errorEl = card.querySelector(".edit-error");
+
+      const toggle = (showEdit) => {
+        editForm.classList.toggle("hidden", !showEdit);
+        viewModeEls.forEach((el) => el.classList.toggle("hidden", showEdit));
+      };
+
+      editBtn?.addEventListener("click", () => toggle(true));
+      cancelBtn?.addEventListener("click", () => toggle(false));
+
+      editForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorEl.classList.add("hidden");
+
+        const id = editForm.getAttribute("data-id");
+        const client_name = editForm.querySelector(".edit-name").value.trim();
+        const client_phone = editForm.querySelector(".edit-phone").value.trim();
+
+        const res = await fetch(`/api/admin/payment-links/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ client_name, client_phone: client_phone || null }),
+        });
+
+        if (res.ok) {
+          window.location.reload();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          errorEl.textContent = data.error || updateFailedMsg;
+          errorEl.classList.remove("hidden");
         }
       });
     });

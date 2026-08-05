@@ -44,6 +44,7 @@ const content = t(lang);
         id="client_name"
         name="client_name"
         type="text"
+        required
         class="w-full rounded-md border border-slate-200 bg-white px-3 py-2 outline-none focus:border-indigo-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
       />
     </div>
@@ -146,6 +147,7 @@ const content = t(lang);
       needMethodMsg: content.newLink.needMethod,
       createFailedMsg: content.newLink.createFailed,
       needPhoneMsg: content.newLink.needPhone,
+      needClientNameMsg: content.newLink.needClientName,
     }}
   >
     const form = document.getElementById("new-form");
@@ -167,6 +169,12 @@ const content = t(lang);
         moyasar_enabled: document.getElementById("moyasar_enabled").checked,
         tamara_enabled: document.getElementById("tamara_enabled").checked,
       };
+
+      if (!payload.client_name) {
+        errorEl.textContent = needClientNameMsg;
+        errorEl.classList.remove("hidden");
+        return;
+      }
 
       if (!payload.moyasar_enabled && !payload.tamara_enabled) {
         errorEl.textContent = needMethodMsg;

@@ -1,4 +1,5 @@
 ---
+import "../../../styles/global.css";
 import { supabaseAdmin } from "@lib/supabase-admin";
 import { getPaymentLang, t } from "@lib/payment-i18n";
 
@@ -44,14 +45,19 @@ const gatewayLabel: Record<string, string> = {
         .no-print {
           display: none !important;
         }
+        html,
         body {
           background: white !important;
+        }
+        * {
           color: black !important;
+          background-color: transparent !important;
+          border-color: #cbd5e1 !important;
         }
       }
     </style>
   </head>
-  <body class="min-h-screen bg-white p-6 font-sans text-slate-900 sm:p-10 dark:bg-black dark:text-white">
+  <body class="min-h-screen bg-white p-3 font-sans text-slate-900 sm:p-6 md:p-10 dark:bg-black dark:text-white">
     <div class="mx-auto max-w-2xl">
       {!link && (
         <p class="text-red-500 dark:text-red-400">{content.invoice.notFound}</p>
@@ -59,7 +65,7 @@ const gatewayLabel: Record<string, string> = {
 
       {link && (
         <>
-          <div class="no-print mb-6 flex justify-end gap-2">
+          <div class="no-print mb-4 flex justify-end gap-2 sm:mb-6">
             <button
               id="print-btn"
               type="button"
@@ -69,22 +75,22 @@ const gatewayLabel: Record<string, string> = {
             </button>
           </div>
 
-          <div class="rounded-xl border border-slate-200 p-8 dark:border-white/10">
-            <div class="mb-8 flex items-start justify-between border-b border-slate-200 pb-6 dark:border-white/10">
+          <div class="rounded-xl border border-slate-200 p-4 sm:p-6 md:p-8 dark:border-white/10">
+            <div class="mb-6 flex flex-col gap-4 border-b border-slate-200 pb-6 sm:mb-8 sm:flex-row sm:items-start sm:justify-between dark:border-white/10">
               <div>
-                <h1 class="text-2xl font-bold">{content.invoice.title}</h1>
-                <p class="mt-1 text-sm text-slate-500 dark:text-white/50">
+                <h1 class="text-xl font-bold sm:text-2xl">{content.invoice.title}</h1>
+                <p class="mt-1 text-sm break-all text-slate-500 dark:text-white/50">
                   {content.invoice.invoiceId}: {link.id}
                 </p>
               </div>
-              <div class="text-right rtl:text-left">
+              <div class="sm:text-right sm:rtl:text-left">
                 <p class="font-semibold">أسامة يحيى عبده رفاعي</p>
                 <p class="text-sm text-slate-500 dark:text-white/50">FL-150960528</p>
                 <p class="text-sm text-slate-500 dark:text-white/50">osama-lab.com</p>
               </div>
             </div>
 
-            <div class="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div class="mb-6 grid grid-cols-1 gap-6 sm:mb-8 sm:grid-cols-2">
               <div>
                 <p class="mb-1 text-xs font-medium tracking-wide text-slate-400 uppercase dark:text-white/40">
                   {content.invoice.billedTo}
@@ -122,31 +128,33 @@ const gatewayLabel: Record<string, string> = {
               </div>
             </div>
 
-            <table class="mb-8 w-full border-collapse text-sm">
-              <thead>
-                <tr class="border-b border-slate-200 text-left rtl:text-right dark:border-white/10">
-                  <th class="pb-2 font-medium text-slate-500 dark:text-white/50">
-                    {content.invoice.description}
-                  </th>
-                  <th class="pb-2 text-right font-medium text-slate-500 rtl:text-left dark:text-white/50">
-                    {content.invoice.amount}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-b border-slate-100 dark:border-white/5">
-                  <td class="py-3">
-                    <p class="font-medium">{link.title}</p>
-                    {link.description && (
-                      <p class="text-sm text-slate-500 dark:text-white/50">{link.description}</p>
-                    )}
-                  </td>
-                  <td class="py-3 text-right rtl:text-left">
-                    {Number(link.amount).toFixed(2)} {link.currency}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="mb-6 overflow-x-auto sm:mb-8">
+              <table class="w-full min-w-[280px] border-collapse text-sm">
+                <thead>
+                  <tr class="border-b border-slate-200 text-left rtl:text-right dark:border-white/10">
+                    <th class="pb-2 font-medium text-slate-500 dark:text-white/50">
+                      {content.invoice.description}
+                    </th>
+                    <th class="pb-2 text-right font-medium whitespace-nowrap text-slate-500 rtl:text-left dark:text-white/50">
+                      {content.invoice.amount}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-slate-100 dark:border-white/5">
+                    <td class="py-3">
+                      <p class="font-medium">{link.title}</p>
+                      {link.description && (
+                        <p class="text-sm text-slate-500 dark:text-white/50">{link.description}</p>
+                      )}
+                    </td>
+                    <td class="py-3 text-right whitespace-nowrap rtl:text-left">
+                      {Number(link.amount).toFixed(2)} {link.currency}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <div class="flex justify-end">
               <div class="w-full max-w-xs">
