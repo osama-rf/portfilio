@@ -6,251 +6,387 @@ import "@fontsource/ibm-plex-sans-arabic/500.css";
 import "@fontsource/ibm-plex-sans-arabic/600.css";
 import "@fontsource/ibm-plex-sans-arabic/700.css";
 
-const WHATSAPP = "https://wa.me/966563913944";
+interface DaySection {
+  title: string;
+  items?: string[];
+  note?: string;
+  note2?: string;
+  table?: { group: string; fields: string[] }[];
+  flow?: string[];
+}
 
-const days = [
+interface CourseDay {
+  number: string;
+  title: string;
+  goal: string;
+  duration: string;
+  sections: DaySection[];
+  outcome: string;
+}
+
+const days: CourseDay[] = [
   {
     number: "01",
     title: "بناء التطبيق باستخدام Replit والذكاء الاصطناعي",
     goal: "الانتقال من فكرة بسيطة إلى تطبيق يعمل، والتعرف على طريقة استخدام Replit والذكاء الاصطناعي لبناء التطبيق دون الحاجة إلى كتابة جميع أجزاء المشروع يدويًا.",
+    duration: "90 دقيقة – ساعتان",
     sections: [
       {
-        title: "تحديد فكرة التطبيق",
+        title: "1. تحديد فكرة التطبيق",
         items: [
           "شرح فكرة التطبيق والمشكلة التي يحلها",
           "تحديد المستخدم المستهدف",
           "تحديد رحلة المستخدم داخل التطبيق",
-          "تحديد الوظائف الأساسية والوظائف المؤجلة",
-          "تحويل الفكرة إلى متطلبات واضحة للذكاء الاصطناعي",
+          "تحديد الوظائف الأساسية التي يحتاجها التطبيق",
+          "تحديد الوظائف التي يمكن تأجيلها للنسخ المستقبلية",
+          "تحويل فكرة التطبيق إلى متطلبات واضحة يمكن إعطاؤها للذكاء الاصطناعي",
         ],
       },
       {
-        title: "إنشاء المشروع في Replit",
+        title: "2. إنشاء المشروع في Replit",
         items: [
-          "إنشاء المشروع والتعرف على بيئة Replit",
-          "طريقة عمل Replit مع تطبيقات الموبايل",
-          "الملفات والمكونات الأساسية للمشروع",
-          "دور الذكاء الاصطناعي في إنشاء وتعديل المشروع",
+          "إنشاء المشروع",
+          "التعرف على بيئة Replit",
+          "التعرف على طريقة عمل Replit مع تطبيقات الموبايل",
+          "التعرف على الملفات والمكونات الأساسية للمشروع",
+          "شرح دور الذكاء الاصطناعي في إنشاء وتعديل المشروع",
+          "تجهيز المشروع للبدء في عملية التطوير",
         ],
       },
       {
-        title: "تحويل الفكرة إلى تطبيق باستخدام AI",
+        title: "3. تحويل الفكرة إلى تطبيق باستخدام AI",
         items: [
-          "كتابة الوصف الأولي وإعطاء المتطلبات بوضوح",
-          "بناء الهيكل الأساسي والشاشات الرئيسية",
-          "نظام التنقل بين الشاشات",
+          "كتابة الوصف الأولي للتطبيق",
+          "إعطاء الذكاء الاصطناعي المتطلبات بشكل واضح",
+          "بناء الهيكل الأساسي للتطبيق",
+          "إنشاء الشاشات الرئيسية",
+          "إنشاء نظام التنقل بين الشاشات",
           "إضافة المكونات والعناصر الأساسية",
         ],
       },
       {
-        title: "بناء واجهات التطبيق",
+        title: "4. بناء واجهات التطبيق",
+        note: "سيتم بناء الواجهات الأساسية للتطبيق، ومنها:",
         items: [
-          "الصفحة الرئيسية وصفحة الخدمات",
-          "صفحة تفاصيل الخدمة واختيار الموعد",
+          "الصفحة الرئيسية",
+          "صفحة الخدمات",
+          "صفحة تفاصيل الخدمة",
+          "صفحة اختيار الموعد",
           "صفحة تسجيل الدخول",
-          "صفحة الحجوزات والملف الشخصي",
+          "صفحة الحجوزات",
+          "صفحة الملف الشخصي",
         ],
       },
       {
-        title: "استخدام الذكاء الاصطناعي في التطوير",
+        title: "5. استخدام الذكاء الاصطناعي في التطوير",
         items: [
           "كيفية كتابة Prompt جيد للمشروع",
-          "إعطاء AI سياقًا كافيًا قبل طلب التعديل",
-          "طلب إضافة Feature جديدة وتعديل التصميم",
-          "التعامل مع التعديلات التي تسبب مشاكل",
+          "كيفية إعطاء AI سياقًا كافيًا قبل طلب التعديل",
+          "كيفية طلب إضافة Feature جديدة",
+          "كيفية تعديل التصميم باستخدام AI",
+          "كيفية التعامل مع التعديلات التي تؤدي إلى مشاكل",
           "أهمية اختبار التطبيق بعد كل تعديل",
         ],
       },
       {
-        title: "تشغيل التطبيق واختباره مبدئيًا",
+        title: "6. تشغيل التطبيق واختباره مبدئيًا",
         items: [
-          "تشغيل التطبيق ومعاينته من Replit",
-          "تجربة التنقل واختبار الوظائف الأساسية",
-          "اكتشاف الأخطاء الأولية وتسجيلها لليوم الثاني",
+          "تشغيل التطبيق من Replit",
+          "معاينة التطبيق",
+          "تجربة التنقل",
+          "اختبار الوظائف الأساسية",
+          "اكتشاف الأخطاء الأولية",
+          "تسجيل المشاكل التي تحتاج إلى معالجة في اليوم الثاني",
         ],
       },
     ],
     outcome: "تطبيق يعمل يحتوي على الواجهات والوظائف الأساسية للمشروع.",
-    duration: "90 دقيقة – ساعتان",
   },
   {
     number: "02",
     title: "تحسين التطبيق وإصلاح المشاكل واختباره",
     goal: "تحويل التطبيق الذي تم بناؤه في اليوم الأول من نموذج أولي إلى تطبيق أكثر استقرارًا وقابلية للاستخدام.",
+    duration: "90 دقيقة تقريبًا",
     sections: [
       {
-        title: "مراجعة التطبيق",
+        title: "1. مراجعة التطبيق",
         items: [
-          "استعراض التطبيق ومراجعة جميع الشاشات",
+          "استعراض التطبيق الذي تم بناؤه في اليوم الأول",
+          "مراجعة جميع الشاشات",
           "مراجعة رحلة المستخدم",
-          "تحديد المشاكل والوظائف التي تحتاج تحسين",
+          "تحديد المشاكل الموجودة",
+          "تحديد الوظائف التي تحتاج إلى تحسين",
         ],
       },
       {
-        title: "إصلاح المشاكل باستخدام AI",
+        title: "2. إصلاح المشاكل باستخدام AI",
         items: [
           "كيفية وصف المشكلة للذكاء الاصطناعي",
           "إعطاء AI رسالة الخطأ والسياق المناسب",
-          "تحليل سبب المشكلة وتنفيذ الحل واختباره",
-          "ماذا تفعل عندما يؤدي إصلاح مشكلة إلى ظهور أخرى",
+          "تحليل سبب المشكلة",
+          "تنفيذ الحل",
+          "اختبار الحل بعد تطبيقه",
+          "ماذا تفعل عندما يؤدي إصلاح مشكلة إلى ظهور مشكلة أخرى",
         ],
       },
       {
-        title: "تحسين تجربة المستخدم",
+        title: "3. تحسين تجربة المستخدم",
+        note: "تحسين عناصر مثل:",
         items: [
-          "أزرار التطبيق والنماذج ورسائل الخطأ",
-          "حالات التحميل وحالات عدم وجود بيانات",
-          "رسائل نجاح العمليات والتنقل بين الصفحات",
+          "أزرار التطبيق",
+          "النماذج",
+          "رسائل الخطأ",
+          "حالات التحميل",
+          "حالات عدم وجود بيانات",
+          "رسائل نجاح العمليات",
+          "التنقل بين الصفحات",
           "التعامل مع الحالات غير المتوقعة",
         ],
       },
       {
-        title: "اختبار التطبيق",
+        title: "4. اختبار التطبيق",
+        note: "اختبار السيناريوهات الأساسية، مثل:",
         items: [
-          "السيناريوهات الأساسية من الدخول حتى إرسال البيانات",
-          "التعامل مع بيانات ناقصة والضغط المتكرر على الأزرار",
+          "الدخول إلى التطبيق",
+          "استعراض الخدمات",
+          "فتح تفاصيل خدمة",
+          "اختيار موعد",
+          "إرسال البيانات",
+          "العودة بين الصفحات",
+          "التعامل مع بيانات ناقصة",
+          "الضغط المتكرر على الأزرار",
           "اختبار حالات الخطأ",
         ],
       },
       {
-        title: "مراجعة ما بناه الذكاء الاصطناعي",
+        title: "5. مراجعة ما بناه الذكاء الاصطناعي",
         items: [
           "التأكد من أن التطبيق يعمل بالشكل المطلوب",
+          "التعرف على الأجزاء التي تحتاج إلى مراجعة",
           "أهمية عدم الاعتماد على AI دون اختبار",
-          "استخدام AI للمساعدة في اكتشاف المشاكل",
+          "كيفية استخدام AI للمساعدة في اكتشاف المشاكل",
           "التأكد من أن التعديلات الجديدة لا تكسر وظائف سابقة",
         ],
       },
       {
-        title: "تجهيز التطبيق للمرحلة التالية",
+        title: "6. تجهيز التطبيق للمرحلة التالية",
+        note: "قبل الانتقال إلى قاعدة البيانات والخدمات الخارجية، نتأكد من:",
         items: [
-          "استقرار الواجهات وسلامة التنقل",
-          "اكتمال الـ User Flow الأساسي وجاهزية النماذج",
+          "استقرار الواجهات",
+          "سلامة التنقل",
+          "اكتمال الـ User Flow الأساسي",
+          "جاهزية النماذج",
           "تحديد البيانات التي يحتاج التطبيق إلى تخزينها",
         ],
       },
     ],
     outcome: "نسخة مستقرة ومختبرة من التطبيق، جاهزة لربطها بقاعدة البيانات والخدمات الخارجية.",
-    duration: "90 دقيقة تقريبًا",
   },
   {
     number: "03",
     title: "قاعدة البيانات وOTP والدفع",
     goal: "تحويل التطبيق من واجهة تعمل بشكل تجريبي إلى تطبيق متصل بخدمات حقيقية وقادر على التعامل مع المستخدمين والبيانات والعمليات.",
+    duration: "90 دقيقة – ساعتان",
     sections: [
       {
-        title: "إنشاء وربط قاعدة البيانات",
+        title: "1. إنشاء وربط قاعدة البيانات",
         items: [
-          "تحديد البيانات التي يحتاج التطبيق إلى تخزينها",
-          "إنشاء الجداول/Collections المطلوبة وربط التطبيق بها",
-          "قراءة البيانات وإضافتها وتعديلها وحذفها",
+          "التعرف على البيانات التي يحتاج التطبيق إلى تخزينها",
+          "إنشاء الجداول / Collections المطلوبة",
+          "ربط التطبيق بقاعدة البيانات",
+          "قراءة البيانات من قاعدة البيانات",
+          "إضافة بيانات جديدة",
+          "تعديل البيانات",
+          "حذف البيانات عند الحاجة",
         ],
       },
       {
         title: "البيانات الأساسية للتطبيق",
-        items: [
-          "المستخدمون: الاسم، رقم الجوال، تاريخ إنشاء الحساب",
-          "الخدمات: الاسم، الوصف، السعر، الصورة، الحالة",
-          "الحجوزات: المستخدم، الخدمة، الموعد، حالة الحجز والدفع",
+        table: [
+          { group: "المستخدمون", fields: ["الاسم", "رقم الجوال", "تاريخ إنشاء الحساب"] },
+          { group: "الخدمات", fields: ["اسم الخدمة", "وصف الخدمة", "السعر", "الصورة", "حالة الخدمة"] },
+          {
+            group: "الحجوزات",
+            fields: ["المستخدم", "الخدمة", "الموعد", "حالة الحجز", "حالة الدفع", "تاريخ إنشاء الحجز"],
+          },
         ],
       },
       {
-        title: "ربط التطبيق بالمستخدمين",
+        title: "2. ربط التطبيق بالمستخدمين",
         items: [
-          "إنشاء حساب المستخدم وتسجيل الدخول",
-          "ربط المستخدم ببياناته ومعرفة المستخدم الحالي",
+          "إنشاء حساب المستخدم",
+          "تسجيل الدخول",
+          "ربط المستخدم ببياناته",
+          "معرفة المستخدم الحالي",
           "حماية العمليات التي تتطلب تسجيل دخول",
         ],
       },
       {
-        title: "إضافة التحقق باستخدام OTP",
+        title: "3. إضافة التحقق باستخدام OTP",
         items: [
-          "شرح مفهوم OTP وإرسال رمز التحقق",
-          "إدخال الرمز والتحقق منه داخل التطبيق",
-          "التعامل مع الرمز الخاطئ وانتهاء الصلاحية وإعادة الإرسال",
+          "شرح مفهوم OTP",
+          "إرسال رمز التحقق إلى رقم الجوال",
+          "إدخال الرمز داخل التطبيق",
+          "التحقق من الرمز",
+          "التعامل مع الرمز الخاطئ",
+          "التعامل مع انتهاء صلاحية الرمز",
+          "إعادة إرسال الرمز",
           "تسجيل المستخدم بعد نجاح التحقق",
         ],
       },
       {
-        title: "ربط بوابة الدفع",
+        title: "4. ربط بوابة الدفع",
         items: [
-          "شرح دورة عملية الدفع وإنشاء عملية دفع",
+          "شرح دورة عملية الدفع",
+          "إنشاء عملية دفع",
+          "إرسال بيانات العملية",
           "فتح عملية الدفع للمستخدم",
-          "التعامل مع نجاح العملية وفشلها",
+          "التعامل مع نجاح العملية",
+          "التعامل مع فشل العملية",
           "تحديث حالة الحجز بعد نجاح الدفع",
-          "التأكد من عدم اعتبار العملية مدفوعة بمجرد الضغط على الزر",
+          "التأكد من عدم اعتبار العملية مدفوعة بمجرد ضغط المستخدم على زر الدفع",
         ],
       },
       {
-        title: "اختبار العمليات كاملة",
+        title: "5. اختبار العمليات كاملة",
+        note: "تجربة السيناريو الكامل:",
+        flow: ["تسجيل المستخدم", "اختيار الخدمة", "اختيار الموعد", "إنشاء الحجز", "الدفع", "تأكيد الحجز", "ظهور الحجز للمستخدم"],
+        note2: "ثم اختبار الحالات الفاشلة:",
         items: [
-          "السيناريو الكامل: تسجيل ← اختيار خدمة ← موعد ← حجز ← دفع ← تأكيد",
-          "اختبار الحالات الفاشلة: OTP خاطئ أو منتهي، فشل الدفع، انقطاع الاتصال",
-          "بيانات ناقصة ومحاولة تنفيذ عملية بدون تسجيل دخول",
+          "OTP خاطئ",
+          "OTP منتهي",
+          "فشل الدفع",
+          "انقطاع الاتصال",
+          "بيانات ناقصة",
+          "محاولة تنفيذ عملية بدون تسجيل دخول",
         ],
       },
     ],
-    outcome: "تطبيق متصل بقاعدة بيانات، يحتوي على تسجيل دخول وOTP، وقادر على تنفيذ عملية دفع وحجز حقيقية.",
-    duration: "90 دقيقة – ساعتان",
+    outcome: "متصلًا بقاعدة بيانات + يحتوي على تسجيل دخول وOTP + قادرًا على تنفيذ عملية دفع وحجز حقيقية.",
   },
   {
     number: "04",
     title: "تحويل التطبيق إلى تطبيق موبايل ونشره",
     goal: "تعلم كيفية أخذ التطبيق الذي تم بناؤه داخل Replit وتحويله إلى تطبيق iOS وAndroid باستخدام Expo وEAS، ثم تجهيزه للإرسال إلى المتاجر.",
+    duration: "ساعتان تقريبًا، مع إمكانية زيادة الوقت حسب مشاكل المشاركين أثناء التطبيق",
     sections: [
       {
-        title: "تجهيز التطبيق للنشر",
+        title: "1. تجهيز التطبيق للنشر",
         items: [
-          "مراجعة اسم التطبيق والأيقونة وشاشة البداية",
-          "إعداد معلومات التطبيق ورقم الإصدار",
+          "مراجعة اسم التطبيق",
+          "إعداد أيقونة التطبيق",
+          "إعداد شاشة البداية",
+          "إعداد معلومات التطبيق",
+          "إعداد رقم الإصدار",
           "إعداد Package Name وBundle Identifier",
+          "التأكد من أن إعدادات التطبيق مناسبة للنشر",
         ],
       },
       {
-        title: "Expo وEAS",
+        title: "2. Expo",
         items: [
-          "ما هو Expo ولماذا نستخدمه",
-          "ربط المشروع ببيئة Expo وتجهيزه للبناء",
-          "ما هو EAS والفرق بين Development وProduction Build",
-          "تجهيز وإعداد مشروع EAS",
+          "ما هو Expo؟",
+          "لماذا نستخدم Expo؟",
+          "كيف يعمل Expo مع تطبيقات React Native",
+          "ربط المشروع ببيئة Expo",
+          "تجهيز المشروع للبناء",
         ],
       },
       {
-        title: "إنشاء Build",
+        title: "3. EAS",
         items: [
-          "إنشاء نسخة Android وiOS حقيقية",
-          "متابعة عملية البناء وفهم الأخطاء التي قد تظهر",
-          "معالجة المشاكل الأساسية",
+          "ما هو EAS؟",
+          "الفرق بين Development Build وProduction Build",
+          "تجهيز المشروع لـ EAS",
+          "إعداد مشروع EAS",
+          "فهم عملية Build",
+          "فهم إعدادات iOS وAndroid",
         ],
       },
       {
-        title: "تجربة التطبيق على جهاز حقيقي",
+        title: "4. إنشاء Build",
+        note: "إنشاء نسخة حقيقية من التطبيق:",
+        items: ["Android Build", "iOS Build", "متابعة عملية البناء", "فهم الأخطاء التي قد تظهر أثناء الـ Build", "معالجة المشاكل الأساسية"],
+      },
+      {
+        title: "5. تجربة التطبيق على جهاز حقيقي",
         items: [
-          "تثبيت النسخة واختبار تسجيل الدخول وOTP",
-          "اختبار قاعدة البيانات والحجز والدفع",
-          "التأكد من عمل الخدمات الخارجية في النسخة النهائية",
+          "تثبيت نسخة التطبيق",
+          "تجربة تسجيل الدخول",
+          "اختبار OTP",
+          "اختبار قاعدة البيانات",
+          "اختبار الحجز",
+          "اختبار الدفع",
+          "التأكد من أن الخدمات الخارجية تعمل داخل النسخة النهائية",
         ],
       },
       {
-        title: "App Store Connect وGoogle Play Console",
+        title: "6. إعداد التطبيق في App Store Connect",
         items: [
-          "إنشاء التطبيق وإدخال المعلومات وBundle ID / Package Name",
-          "إضافة Screenshots والوصف ومعلومات الخصوصية",
-          "رفع الـ Build وإرسال التطبيق للمراجعة على المتجرين",
+          "إنشاء التطبيق",
+          "إدخال اسم التطبيق",
+          "إعداد Bundle ID",
+          "إضافة معلومات التطبيق",
+          "إضافة Screenshots",
+          "إضافة الوصف",
+          "إعداد معلومات الخصوصية",
+          "رفع الـ Build",
+          "إرسال التطبيق للمراجعة",
         ],
       },
       {
-        title: "فهم عملية النشر والمشاكل الشائعة",
+        title: "7. إعداد التطبيق في Google Play Console",
         items: [
-          "الفرق بين Build ← Submit ← Review ← Publish",
-          "رفض التطبيق، مشاكل الخصوصية والـ Screenshots",
-          "مشاكل تسجيل الدخول والدفع وأخطاء الـ Build والمتجر",
+          "إنشاء التطبيق",
+          "إعداد اسم التطبيق",
+          "إعداد Package Name",
+          "إضافة معلومات التطبيق",
+          "إضافة الصور وScreenshots",
+          "إضافة وصف التطبيق",
+          "إعداد معلومات الخصوصية",
+          "رفع نسخة Android",
+          "اختيار مسار النشر المناسب",
+          "إرسال التطبيق للمراجعة",
+        ],
+      },
+      {
+        title: "8. فهم عملية النشر",
+        note: "شرح الفرق بين:",
+        flow: ["Build", "Submit", "Review", "Publish"],
+        note2:
+          "والتوضيح أن رفع التطبيق إلى المتجر لا يعني بالضرورة ظهوره مباشرة للمستخدمين، وأن المتاجر قد تحتاج إلى مراجعة التطبيق قبل نشره.",
+        items: [],
+      },
+      {
+        title: "9. المشاكل التي قد تواجه المطور بعد الإرسال",
+        items: [
+          "رفض التطبيق",
+          "مشاكل الخصوصية",
+          "مشاكل Screenshots",
+          "مشاكل معلومات التطبيق",
+          "مشاكل تسجيل الدخول",
+          "مشاكل الدفع",
+          "أخطاء Build",
+          "أخطاء المتجر",
         ],
       },
     ],
-    outcome: "أخذ تطبيق بُني باستخدام Replit وAI، تجهيزه عبر Expo/EAS، وإنشاء Build وإرساله إلى App Store وGoogle Play.",
-    duration: "ساعتان تقريبًا، مع إمكانية زيادة الوقت حسب مشاكل المشاركين",
+    outcome:
+      "أخذ تطبيق بناه باستخدام Replit وAI → تجهيزه باستخدام Expo/EAS → إنشاء Build → إرساله إلى App Store وGoogle Play.",
   },
+];
+
+const finalJourney = [
+  "فكرة التطبيق",
+  "Replit + AI",
+  "بناء التطبيق",
+  "اختبار وتحسين التطبيق",
+  "Database",
+  "OTP",
+  "Payment",
+  "Expo",
+  "EAS Build",
+  "App Store + Google Play",
 ];
 
 const skills = [
@@ -268,23 +404,21 @@ const skills = [
   "فهم عملية نشر التطبيقات من البداية إلى النهاية",
 ];
 
-const journey = [
-  "فكرة التطبيق",
-  "Replit + AI",
-  "بناء التطبيق",
-  "اختبار وتحسين",
-  "Database",
-  "OTP",
-  "Payment",
-  "Expo",
-  "EAS Build",
-  "App Store + Google Play",
+const bookingFeatures = [
+  "استعراض الخدمات",
+  "مشاهدة تفاصيل الخدمة",
+  "اختيار الخدمة والموعد",
+  "التسجيل باستخدام رقم الجوال",
+  "التحقق من رقم الجوال باستخدام OTP",
+  "إنشاء حجز",
+  "تنفيذ عملية الدفع",
+  "مشاهدة الحجوزات السابقة والحالية",
 ];
 
 const pageURL = "https://osama-lab.com/course";
-const title = "دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي | من الفكرة إلى App Store وGoogle Play";
+const title = "منهج دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي — 4 أيام";
 const description =
-  "دورة تدريبية عملية مدتها 4 أيام: ابنِ تطبيق حجز خدمات حقيقي من الصفر باستخدام Replit والذكاء الاصطناعي، اربطه بقاعدة بيانات وOTP وبوابة دفع، وانشره على App Store وGoogle Play.";
+  "المنهج التفصيلي لدورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي: 4 أيام، من الفكرة إلى Replit وAI، قاعدة البيانات، OTP، الدفع، ثم النشر على App Store وGoogle Play.";
 ---
 
 <!doctype html>
@@ -294,231 +428,210 @@ const description =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content="Osama AlRefay" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#6366f1" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>{title}</title>
     <link rel="canonical" href={pageURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="osama-labs" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={pageURL} />
-    <meta property="og:locale" content="ar_SA" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-
-    <link rel="sitemap" href="/sitemap-index.xml" />
-
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي",
-        description,
-        provider: {
-          "@type": "Person",
-          name: "Osama AlRefay",
-          sameAs: pageURL,
-        },
-        hasCourseInstance: {
-          "@type": "CourseInstance",
-          courseMode: "Blended",
-          courseWorkload: "PT8H",
-        },
-      })}
-    />
-
-    <script
-      is:inline
-      defer
-      data-website-id="dfid_hRQji3lN3KfBD3FZpe9zD"
-      data-domain="osama-lab.com"
-      src="https://datafa.st/js/script.js"></script>
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light" ? saved : "dark";
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
 
   <body class="bg-black font-sans text-white">
-    <header class="sticky top-0 z-50 border-b border-white/[0.06] bg-black/80 backdrop-blur-md">
-      <div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
+    <!-- ─── HEADER ────────────────────────────────────────────── -->
+    <header class="sticky top-0 z-50 border-b border-white/[0.06] bg-black/90 backdrop-blur-md">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
         <a href="/" class="text-sm font-medium text-white/60 transition-colors hover:text-white">
           ← osama-lab.com
         </a>
-        <a
-          href={WHATSAPP}
-          target="_blank"
-          rel="noopener"
-          class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
-        >
-          احجز مقعدك
-        </a>
+        <p class="text-sm font-medium text-white/40">منهج الدورة التدريبي</p>
       </div>
     </header>
 
-    <!-- ─── HERO ──────────────────────────────────────────────── -->
-    <section class="relative overflow-hidden px-5 pt-20 pb-16 sm:pt-28 sm:pb-24">
-      <div
-        class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.18),transparent)]"
-      >
-      </div>
-      <div class="mx-auto max-w-3xl text-center">
-        <span
-          class="mb-6 inline-block rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300"
-        >
-          دورة تدريبية مباشرة · 4 أيام
+    <!-- ─── TITLE ─────────────────────────────────────────────── -->
+    <section class="border-b border-white/[0.06] px-5 py-10 sm:py-14">
+      <div class="mx-auto max-w-3xl">
+        <span class="mb-4 inline-block rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-300">
+          4 أيام تدريبية مباشرة
         </span>
-        <h1 class="text-3xl leading-tight font-bold sm:text-5xl sm:leading-tight">
-          دورة بناء تطبيقات حقيقية<br class="hidden sm:block" />
-          باستخدام الذكاء الاصطناعي
+        <h1 class="text-2xl leading-snug font-bold sm:text-4xl">
+          دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي
         </h1>
-        <p class="mt-5 text-lg text-white/60 sm:text-xl">من الفكرة إلى App Store وGoogle Play</p>
-        <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/50">
-          دورة عملية تطبيقية بالكامل — تُبني خلالها تطبيق حجز خدمات حقيقي من الصفر باستخدام
-          Replit وأدوات الذكاء الاصطناعي، ثم يُربط بقاعدة بيانات وOTP وبوابة دفع حقيقية،
-          وأخيرًا يُجهَّز وينشر على متجري App Store وGoogle Play.
-        </p>
-        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noopener"
-            class="w-full rounded-lg bg-indigo-600 px-8 py-3.5 text-center font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-500 sm:w-auto"
-          >
-            احجز مقعدك في الدورة
-          </a>
-          <a
-            href="#curriculum"
-            class="w-full rounded-lg border border-white/15 px-8 py-3.5 text-center font-semibold text-white/80 transition hover:border-white/30 hover:text-white sm:w-auto"
-          >
-            شوف محتوى الدورة
-          </a>
-        </div>
+        <p class="mt-2 text-base text-white/50 sm:text-lg">من الفكرة إلى App Store وGoogle Play</p>
 
-        <div class="mt-12 grid grid-cols-3 gap-4 sm:gap-8">
-          <div>
-            <p class="text-2xl font-bold sm:text-3xl">4</p>
-            <p class="mt-1 text-sm text-white/50">أيام تدريبية</p>
+        <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+            <p class="mb-1 text-xs font-semibold text-white/40">مدة الدورة</p>
+            <p class="text-sm text-white/80">4 أيام تدريبية مباشرة</p>
           </div>
-          <div>
-            <p class="text-2xl font-bold sm:text-3xl">1</p>
-            <p class="mt-1 text-sm text-white/50">تطبيق حقيقي كامل</p>
-          </div>
-          <div>
-            <p class="text-2xl font-bold sm:text-3xl">2</p>
-            <p class="mt-1 text-sm text-white/50">متجرين تطبيقات</p>
+          <div class="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+            <p class="mb-1 text-xs font-semibold text-white/40">طبيعة الدورة</p>
+            <p class="text-sm text-white/80">
+              دورة عملية تطبيقية، يتم خلالها بناء تطبيق حقيقي من الصفر باستخدام Replit وأدوات
+              الذكاء الاصطناعي، ثم ربطه بالخدمات الأساسية وتجهيزه للنشر على متاجر التطبيقات.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ─── PROJECT ───────────────────────────────────────────── -->
-    <section class="border-y border-white/[0.06] bg-white/[0.02] px-5 py-16 sm:py-20">
+    <section class="border-b border-white/[0.06] bg-white/[0.02] px-5 py-10 sm:py-12">
       <div class="mx-auto max-w-3xl">
-        <h2 class="mb-3 text-center text-2xl font-bold sm:text-3xl">المشروع التطبيقي</h2>
-        <p class="mx-auto mb-10 max-w-xl text-center leading-relaxed text-white/50">
-          سيتم خلال الدورة بناء <span class="font-semibold text-white">تطبيق لحجز الخدمات</span>،
-          وسيُستخدم لشرح المفاهيم التي يمكن تطبيقها لاحقًا على أنواع مختلفة من التطبيقات.
+        <h2 class="mb-2 text-lg font-bold sm:text-xl">المشروع التطبيقي</h2>
+        <p class="mb-5 leading-relaxed text-white/50">
+          سيتم خلال الدورة بناء <span class="font-semibold text-white">تطبيق لحجز الخدمات</span>.
+          يتيح التطبيق للمستخدم:
         </p>
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {[
-            "استعراض الخدمات",
-            "مشاهدة تفاصيل الخدمة",
-            "اختيار الخدمة والموعد",
-            "التسجيل باستخدام رقم الجوال",
-            "التحقق من رقم الجوال باستخدام OTP",
-            "إنشاء حجز",
-            "تنفيذ عملية الدفع",
-            "مشاهدة الحجوزات السابقة والحالية",
-          ].map((feature) => (
-            <div class="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-              <svg class="h-5 w-5 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {bookingFeatures.map((feature) => (
+            <div class="flex items-center gap-2 rounded-md border border-white/[0.06] bg-black/30 px-3 py-2">
+              <svg class="h-4 w-4 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span class="text-sm text-white/80">{feature}</span>
             </div>
           ))}
         </div>
+        <p class="mt-5 text-sm leading-relaxed text-white/40">
+          وسيتم استخدام المشروع لشرح المفاهيم التي يمكن تطبيقها لاحقًا على أنواع مختلفة من
+          التطبيقات.
+        </p>
       </div>
     </section>
 
-    <!-- ─── JOURNEY ───────────────────────────────────────────── -->
-    <section class="px-5 py-16 sm:py-20">
-      <div class="mx-auto max-w-4xl">
-        <h2 class="mb-10 text-center text-2xl font-bold sm:text-3xl">رحلة الدورة الكاملة</h2>
-        <div class="flex flex-wrap items-center justify-center gap-2">
-          {journey.map((step, i) => (
+    <!-- ─── DAY TABS ──────────────────────────────────────────── -->
+    <nav class="sticky top-[57px] z-40 border-b border-white/[0.06] bg-black/95 backdrop-blur-md">
+      <div class="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-2">
+        {days.map((day) => (
+          <a
+            href={`#day-${day.number}`}
+            class="day-tab shrink-0 rounded-lg px-4 py-2 text-sm font-medium text-white/50 transition hover:bg-white/5 hover:text-white"
+            data-day={day.number}
+          >
+            اليوم {day.number}
+          </a>
+        ))}
+        <a
+          href="#outcome"
+          class="day-tab shrink-0 rounded-lg px-4 py-2 text-sm font-medium text-white/50 transition hover:bg-white/5 hover:text-white"
+        >
+          النتيجة النهائية
+        </a>
+      </div>
+    </nav>
+
+    <!-- ─── DAYS ──────────────────────────────────────────────── -->
+    <main class="mx-auto max-w-3xl px-5 py-10 sm:py-14">
+      {days.map((day) => (
+        <section id={`day-${day.number}`} class="scroll-mt-32 border-t border-white/[0.06] pt-10 first:border-t-0 first:pt-0 sm:pt-14">
+          <div class="mb-8">
+            <div class="mb-2 flex flex-wrap items-center gap-3">
+              <span class="rounded-md bg-indigo-500 px-2.5 py-1 text-xs font-bold text-white">
+                اليوم {day.number}
+              </span>
+              <span class="text-xs text-white/40">المدة المقترحة: {day.duration}</span>
+            </div>
+            <h2 class="text-xl leading-snug font-bold sm:text-2xl">{day.title}</h2>
+            <div class="mt-4 rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+              <p class="mb-1 text-xs font-semibold text-white/40">الهدف من اليوم</p>
+              <p class="text-sm leading-relaxed text-white/70">{day.goal}</p>
+            </div>
+          </div>
+
+          <div class="space-y-8">
+            {day.sections.map((section) => (
+              <div>
+                <h3 class="mb-3 text-base font-bold text-white sm:text-lg">{section.title}</h3>
+
+                {section.note && (
+                  <p class="mb-2 text-sm text-white/50">{section.note}</p>
+                )}
+
+                {section.table && (
+                  <div class="mb-2 overflow-x-auto rounded-lg border border-white/[0.08]">
+                    <table class="w-full min-w-[420px] border-collapse text-sm">
+                      <tbody>
+                        {section.table.map((row) => (
+                          <tr class="border-b border-white/[0.06] last:border-b-0">
+                            <td class="w-32 border-l border-white/[0.06] bg-white/[0.03] p-3 align-top text-sm font-semibold whitespace-nowrap text-indigo-300">
+                              {row.group}
+                            </td>
+                            <td class="p-3 text-sm text-white/70">{row.fields.join("، ")}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {section.flow && (
+                  <div class="mb-3 flex flex-wrap items-center gap-2">
+                    {section.flow.map((step, i, flowArr) => (
+                      <>
+                        <span class="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-white/80">
+                          {step}
+                        </span>
+                        {i < flowArr.length - 1 && <span class="text-white/25">←</span>}
+                      </>
+                    ))}
+                  </div>
+                )}
+
+                {section.note2 && (
+                  <p class="mb-2 text-sm text-white/50">{section.note2}</p>
+                )}
+
+                {section.items && section.items.length > 0 && (
+                  <ul class="space-y-1.5">
+                    {section.items.map((item) => (
+                      <li class="flex items-start gap-2.5 text-sm leading-relaxed text-white/70">
+                        <span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-indigo-400"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-8 rounded-lg border border-indigo-500/20 bg-indigo-500/[0.06] p-4 sm:p-5">
+            <p class="mb-1 text-xs font-semibold text-indigo-300">ناتج اليوم {day.number}</p>
+            <p class="text-sm leading-relaxed text-white/80">{day.outcome}</p>
+          </div>
+        </section>
+      ))}
+    </main>
+
+    <!-- ─── FINAL OUTCOME ─────────────────────────────────────── -->
+    <section id="outcome" class="scroll-mt-32 border-t border-white/[0.06] bg-white/[0.02] px-5 py-12 sm:py-16">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="mb-6 text-lg font-bold sm:text-xl">النتيجة النهائية للدورة</h2>
+        <p class="mb-6 leading-relaxed text-white/60">
+          بنهاية الأيام الأربعة، يكون المشارك قد مر بالرحلة كاملة:
+        </p>
+        <div class="mb-10 flex flex-wrap items-center gap-2">
+          {finalJourney.map((step, i) => (
             <>
-              <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-white/80">
+              <span class="rounded-md border border-white/10 bg-black/30 px-3 py-1.5 text-sm text-white/80">
                 {step}
               </span>
-              {i < journey.length - 1 && <span class="text-white/20">←</span>}
+              {i < finalJourney.length - 1 && <span class="text-white/25">↓</span>}
             </>
           ))}
         </div>
-      </div>
-    </section>
 
-    <!-- ─── CURRICULUM ────────────────────────────────────────── -->
-    <section id="curriculum" class="border-y border-white/[0.06] bg-white/[0.02] px-5 py-16 sm:py-20">
-      <div class="mx-auto max-w-3xl">
-        <h2 class="mb-3 text-center text-2xl font-bold sm:text-3xl">محتوى الدورة</h2>
-        <p class="mx-auto mb-12 max-w-xl text-center leading-relaxed text-white/50">
-          كل يوم مبني على اليوم اللي قبله — نبدأ بتطبيق يعمل، ونطوّره خطوة بخطوة إلى تطبيق
-          جاهز للنشر.
-        </p>
-
-        <div class="space-y-6">
-          {days.map((day) => (
-            <div class="overflow-hidden rounded-2xl border border-white/[0.08] bg-black/40">
-              <div class="border-b border-white/[0.06] bg-white/[0.03] p-6 sm:p-8">
-                <div class="mb-2 flex items-center gap-3">
-                  <span class="text-sm font-bold text-indigo-400">اليوم {day.number}</span>
-                  <span class="text-xs text-white/30">·</span>
-                  <span class="text-xs text-white/40">{day.duration}</span>
-                </div>
-                <h3 class="text-xl font-bold sm:text-2xl">{day.title}</h3>
-                <p class="mt-3 leading-relaxed text-white/50">{day.goal}</p>
-              </div>
-
-              <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 sm:p-8">
-                {day.sections.map((section) => (
-                  <div>
-                    <h4 class="mb-2 text-sm font-semibold text-white/90">{section.title}</h4>
-                    <ul class="space-y-1.5">
-                      {section.items.map((item) => (
-                        <li class="flex items-start gap-2 text-sm text-white/50">
-                          <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-indigo-400/60"></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <div class="border-t border-white/[0.06] bg-indigo-500/[0.06] p-6 sm:p-8">
-                <p class="text-sm font-semibold text-indigo-300">ناتج اليوم</p>
-                <p class="mt-1 text-sm leading-relaxed text-white/70">{day.outcome}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── SKILLS ────────────────────────────────────────────── -->
-    <section class="px-5 py-16 sm:py-20">
-      <div class="mx-auto max-w-3xl">
-        <h2 class="mb-10 text-center text-2xl font-bold sm:text-3xl">
-          المهارات اللي بتخرج فيها من الدورة
-        </h2>
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <h3 class="mb-4 text-base font-bold sm:text-lg">المهارات التي سيخرج بها المشارك</h3>
+        <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {skills.map((skill) => (
-            <div class="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-              <svg class="h-5 w-5 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="flex items-center gap-2 rounded-md border border-white/[0.06] bg-black/30 px-3 py-2">
+              <svg class="h-4 w-4 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               <span class="text-sm text-white/80">{skill}</span>
@@ -528,51 +641,72 @@ const description =
       </div>
     </section>
 
-    <!-- ─── METHOD NOTE ───────────────────────────────────────── -->
-    <section class="border-y border-white/[0.06] bg-white/[0.02] px-5 py-16 sm:py-20">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="mb-4 text-2xl font-bold sm:text-3xl">دورة عملية، مو نظرية</h2>
-        <p class="leading-relaxed text-white/60">
-          الهدف مو إنك تتعلم تكتب كل سطر كود يدويًا، وإنما تتعلم كيف تستخدم أدوات الذكاء
-          الاصطناعي لبناء تطبيق حقيقي، وكيف تتعامل مع المشاكل اللي تظهر أثناء البناء، وكيف
-          تاخذ مشروعك من مرحلة الفكرة إلى تطبيق قابل للنشر فعليًا.
-        </p>
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-white/70">
-          <span class="rounded-full border border-white/10 px-4 py-2">اشرح</span>
-          <span class="text-white/20">←</span>
-          <span class="rounded-full border border-white/10 px-4 py-2">طبّق</span>
-          <span class="text-white/20">←</span>
-          <span class="rounded-full border border-white/10 px-4 py-2">اختبر</span>
-          <span class="text-white/20">←</span>
-          <span class="rounded-full border border-white/10 px-4 py-2">أصلح</span>
-          <span class="text-white/20">←</span>
-          <span class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-indigo-300">
-            الخطوة التالية
-          </span>
+    <!-- ─── TRAINER NOTE ──────────────────────────────────────── -->
+    <section class="border-t border-white/[0.06] px-5 py-12 sm:py-16">
+      <div class="mx-auto max-w-3xl">
+        <div class="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 sm:p-6">
+          <h3 class="mb-3 text-base font-bold text-amber-300 sm:text-lg">ملاحظة مهمة للمدرب</h3>
+          <div class="space-y-3 text-sm leading-relaxed text-white/70">
+            <p>الدورة ليست دورة برمجة تقليدية.</p>
+            <p>
+              الهدف ليس أن يتعلم المشارك كتابة كل سطر من الكود يدويًا، وإنما أن يتعلم: كيف
+              يستخدم أدوات الذكاء الاصطناعي لبناء تطبيق حقيقي، وكيف يتعامل مع المشاكل التي
+              تظهر أثناء البناء، وكيف يأخذ المشروع من مرحلة الفكرة إلى تطبيق قابل للنشر.
+            </p>
+            <p>
+              لذلك يفضل أن يكون معظم الوقت تطبيقًا عمليًا أمام المشاركين، وليس شرحًا نظريًا.
+            </p>
+          </div>
+          <div class="mt-5 border-t border-amber-500/20 pt-4">
+            <p class="mb-2 text-xs font-semibold text-amber-300">قاعدة الدورة</p>
+            <div class="flex flex-wrap items-center gap-2 text-sm font-medium text-white/80">
+              <span class="rounded-md border border-white/10 px-3 py-1.5">اشرح</span>
+              <span class="text-white/25">←</span>
+              <span class="rounded-md border border-white/10 px-3 py-1.5">طبّق</span>
+              <span class="text-white/25">←</span>
+              <span class="rounded-md border border-white/10 px-3 py-1.5">اختبر</span>
+              <span class="text-white/25">←</span>
+              <span class="rounded-md border border-white/10 px-3 py-1.5">أصلح</span>
+              <span class="text-white/25">←</span>
+              <span class="rounded-md border border-indigo-500/30 bg-indigo-500/10 px-3 py-1.5 text-indigo-300">
+                انتقل للخطوة التالية
+              </span>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-white/50">
+            وهذا بالضبط ما سيجعل التسجيل لاحقًا مناسبًا كدورة مسجلة مدفوعة بدل أن يكون مجرد
+            تسجيل لأربع محاضرات.
+          </p>
         </div>
-      </div>
-    </section>
-
-    <!-- ─── FINAL CTA ─────────────────────────────────────────── -->
-    <section class="px-5 py-20 sm:py-28">
-      <div class="mx-auto max-w-xl text-center">
-        <h2 class="text-2xl font-bold sm:text-3xl">جاهز تبني تطبيقك الأول؟</h2>
-        <p class="mt-4 text-white/60">
-          4 أيام، تطبيق حقيقي، ومهارة تقدر تستخدمها بعدها في أي فكرة تجيك.
-        </p>
-        <a
-          href={WHATSAPP}
-          target="_blank"
-          rel="noopener"
-          class="mt-8 inline-block rounded-lg bg-indigo-600 px-10 py-4 font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-500"
-        >
-          احجز مقعدك الآن عبر واتساب
-        </a>
       </div>
     </section>
 
     <footer class="border-t border-white/[0.06] px-5 py-8 text-center text-sm text-white/30">
       <p>© {new Date().getFullYear()} osama-lab.com — أسامة يحيى عبده رفاعي</p>
     </footer>
+
+    <script>
+      const tabs = document.querySelectorAll(".day-tab");
+      const sections = Array.from(document.querySelectorAll("main section, section#outcome"));
+
+      const setActive = (id: string) => {
+        tabs.forEach((tab) => {
+          const isActive = tab.getAttribute("href") === `#${id}`;
+          tab.classList.toggle("bg-white/10", isActive);
+          tab.classList.toggle("text-white", isActive);
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        },
+        { rootMargin: "-40% 0px -50% 0px" }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
   </body>
 </html>
