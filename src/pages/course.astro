@@ -8,11 +8,13 @@ import "@fontsource/ibm-plex-sans-arabic/700.css";
 
 interface DaySection {
   title: string;
+  time?: string;
   items?: string[];
   note?: string;
   note2?: string;
   table?: { group: string; fields: string[] }[];
   flow?: string[];
+  tip?: string;
 }
 
 interface CourseDay {
@@ -22,6 +24,7 @@ interface CourseDay {
   duration: string;
   sections: DaySection[];
   outcome: string;
+  questions: string[];
 }
 
 const days: CourseDay[] = [
@@ -33,6 +36,7 @@ const days: CourseDay[] = [
     sections: [
       {
         title: "1. تحديد فكرة التطبيق",
+        time: "15 دقيقة",
         items: [
           "شرح فكرة التطبيق والمشكلة التي يحلها",
           "تحديد المستخدم المستهدف",
@@ -41,9 +45,11 @@ const days: CourseDay[] = [
           "تحديد الوظائف التي يمكن تأجيلها للنسخ المستقبلية",
           "تحويل فكرة التطبيق إلى متطلبات واضحة يمكن إعطاؤها للذكاء الاصطناعي",
         ],
+        tip: "اكتب المتطلبات في نقاط قصيرة وواضحة قبل فتح Replit — كل ما كانت أوضح، كانت نتيجة AI أدق.",
       },
       {
         title: "2. إنشاء المشروع في Replit",
+        time: "10 دقائق",
         items: [
           "إنشاء المشروع",
           "التعرف على بيئة Replit",
@@ -55,6 +61,7 @@ const days: CourseDay[] = [
       },
       {
         title: "3. تحويل الفكرة إلى تطبيق باستخدام AI",
+        time: "20 دقيقة",
         items: [
           "كتابة الوصف الأولي للتطبيق",
           "إعطاء الذكاء الاصطناعي المتطلبات بشكل واضح",
@@ -66,6 +73,7 @@ const days: CourseDay[] = [
       },
       {
         title: "4. بناء واجهات التطبيق",
+        time: "25 دقيقة",
         note: "سيتم بناء الواجهات الأساسية للتطبيق، ومنها:",
         items: [
           "الصفحة الرئيسية",
@@ -79,6 +87,7 @@ const days: CourseDay[] = [
       },
       {
         title: "5. استخدام الذكاء الاصطناعي في التطوير",
+        time: "15 دقيقة",
         items: [
           "كيفية كتابة Prompt جيد للمشروع",
           "كيفية إعطاء AI سياقًا كافيًا قبل طلب التعديل",
@@ -87,9 +96,11 @@ const days: CourseDay[] = [
           "كيفية التعامل مع التعديلات التي تؤدي إلى مشاكل",
           "أهمية اختبار التطبيق بعد كل تعديل",
         ],
+        tip: "لا تطلب أكثر من تعديل واحد كبير في نفس الوقت — عدّل، اختبر، ثم انتقل للطلب التالي.",
       },
       {
         title: "6. تشغيل التطبيق واختباره مبدئيًا",
+        time: "10 دقائق",
         items: [
           "تشغيل التطبيق من Replit",
           "معاينة التطبيق",
@@ -101,6 +112,12 @@ const days: CourseDay[] = [
       },
     ],
     outcome: "تطبيق يعمل يحتوي على الواجهات والوظائف الأساسية للمشروع.",
+    questions: [
+      "ما هي المشكلة الحقيقية التي يحلها تطبيقك؟ لو ما قدرت تشرحها بجملة وحدة، الفكرة لسه مو واضحة.",
+      "مين بالضبط هو المستخدم المستهدف؟ صف شخص حقيقي ممكن يستخدم التطبيق.",
+      "ما هي أهم 3 وظائف لازم تكون موجودة من أول نسخة، وأيش ممكن تأجله؟",
+      "لما تكتب طلب لـ AI، هل وصفت الشاشة وشو المفروض تسوي بالضبط، ولا تركت المجال مفتوح؟",
+    ],
   },
   {
     number: "02",
@@ -110,6 +127,7 @@ const days: CourseDay[] = [
     sections: [
       {
         title: "1. مراجعة التطبيق",
+        time: "15 دقيقة",
         items: [
           "استعراض التطبيق الذي تم بناؤه في اليوم الأول",
           "مراجعة جميع الشاشات",
@@ -120,6 +138,7 @@ const days: CourseDay[] = [
       },
       {
         title: "2. إصلاح المشاكل باستخدام AI",
+        time: "25 دقيقة",
         items: [
           "كيفية وصف المشكلة للذكاء الاصطناعي",
           "إعطاء AI رسالة الخطأ والسياق المناسب",
@@ -128,9 +147,11 @@ const days: CourseDay[] = [
           "اختبار الحل بعد تطبيقه",
           "ماذا تفعل عندما يؤدي إصلاح مشكلة إلى ظهور مشكلة أخرى",
         ],
+        tip: "انسخ رسالة الخطأ كاملة والصقها لـ AI بدل ما تلخصها بكلماتك — التفاصيل الدقيقة تسرّع الحل.",
       },
       {
         title: "3. تحسين تجربة المستخدم",
+        time: "20 دقيقة",
         note: "تحسين عناصر مثل:",
         items: [
           "أزرار التطبيق",
@@ -145,6 +166,7 @@ const days: CourseDay[] = [
       },
       {
         title: "4. اختبار التطبيق",
+        time: "15 دقيقة",
         note: "اختبار السيناريوهات الأساسية، مثل:",
         items: [
           "الدخول إلى التطبيق",
@@ -160,6 +182,7 @@ const days: CourseDay[] = [
       },
       {
         title: "5. مراجعة ما بناه الذكاء الاصطناعي",
+        time: "10 دقائق",
         items: [
           "التأكد من أن التطبيق يعمل بالشكل المطلوب",
           "التعرف على الأجزاء التي تحتاج إلى مراجعة",
@@ -170,6 +193,7 @@ const days: CourseDay[] = [
       },
       {
         title: "6. تجهيز التطبيق للمرحلة التالية",
+        time: "5 دقائق",
         note: "قبل الانتقال إلى قاعدة البيانات والخدمات الخارجية، نتأكد من:",
         items: [
           "استقرار الواجهات",
@@ -181,6 +205,12 @@ const days: CourseDay[] = [
       },
     ],
     outcome: "نسخة مستقرة ومختبرة من التطبيق، جاهزة لربطها بقاعدة البيانات والخدمات الخارجية.",
+    questions: [
+      "شو أكبر مشكلة واجهتك اليوم، وكيف وصفتها لـ AI؟",
+      "هل صار عندك موقف إن إصلاح مشكلة سبب مشكلة جديدة؟ كيف تعاملت معه؟",
+      "لو جرّب مستخدم يضغط على نفس الزر 5 مرات بسرعة، شو بيصير؟",
+      "أي شاشة في تطبيقك لسه ما فيها رسالة واضحة لما يصير خطأ؟",
+    ],
   },
   {
     number: "03",
@@ -190,6 +220,7 @@ const days: CourseDay[] = [
     sections: [
       {
         title: "1. إنشاء وربط قاعدة البيانات",
+        time: "20 دقيقة",
         items: [
           "التعرف على البيانات التي يحتاج التطبيق إلى تخزينها",
           "إنشاء الجداول / Collections المطلوبة",
@@ -213,6 +244,7 @@ const days: CourseDay[] = [
       },
       {
         title: "2. ربط التطبيق بالمستخدمين",
+        time: "15 دقيقة",
         items: [
           "إنشاء حساب المستخدم",
           "تسجيل الدخول",
@@ -223,6 +255,7 @@ const days: CourseDay[] = [
       },
       {
         title: "3. إضافة التحقق باستخدام OTP",
+        time: "20 دقيقة",
         items: [
           "شرح مفهوم OTP",
           "إرسال رمز التحقق إلى رقم الجوال",
@@ -233,9 +266,11 @@ const days: CourseDay[] = [
           "إعادة إرسال الرمز",
           "تسجيل المستخدم بعد نجاح التحقق",
         ],
+        tip: "جرّب إدخال رمز خاطئ عمدًا أثناء الشرح — خلي المشاركين يشوفون رسالة الخطأ تظهر صح قبل ما ينتقلوا.",
       },
       {
         title: "4. ربط بوابة الدفع",
+        time: "25 دقيقة",
         items: [
           "شرح دورة عملية الدفع",
           "إنشاء عملية دفع",
@@ -246,9 +281,11 @@ const days: CourseDay[] = [
           "تحديث حالة الحجز بعد نجاح الدفع",
           "التأكد من عدم اعتبار العملية مدفوعة بمجرد ضغط المستخدم على زر الدفع",
         ],
+        tip: "الحالة النهائية للحجز لازم تُحدَّث فقط بعد تأكيد حقيقي من بوابة الدفع، مو بمجرد ضغط المستخدم على الزر.",
       },
       {
         title: "5. اختبار العمليات كاملة",
+        time: "20 دقيقة",
         note: "تجربة السيناريو الكامل:",
         flow: ["تسجيل المستخدم", "اختيار الخدمة", "اختيار الموعد", "إنشاء الحجز", "الدفع", "تأكيد الحجز", "ظهور الحجز للمستخدم"],
         note2: "ثم اختبار الحالات الفاشلة:",
@@ -263,6 +300,12 @@ const days: CourseDay[] = [
       },
     ],
     outcome: "متصلًا بقاعدة بيانات + يحتوي على تسجيل دخول وOTP + قادرًا على تنفيذ عملية دفع وحجز حقيقية.",
+    questions: [
+      "لو انقطع الاتصال بالإنترنت بعد إنشاء الحجز وقبل الدفع، شو المفروض يصير؟",
+      "كيف تتأكد إن الحجز ما يتحول لـ 'مدفوع' إلا بعد تأكيد حقيقي من بوابة الدفع؟",
+      "شو الفرق بين حماية عملية بمجرد إخفاء الزر، وحمايتها فعليًا على مستوى الباك اند؟",
+      "لو المستخدم طلب رمز OTP جديد 3 مرات متتالية، شو المفروض يصير؟",
+    ],
   },
   {
     number: "04",
@@ -272,6 +315,7 @@ const days: CourseDay[] = [
     sections: [
       {
         title: "1. تجهيز التطبيق للنشر",
+        time: "15 دقيقة",
         items: [
           "مراجعة اسم التطبيق",
           "إعداد أيقونة التطبيق",
@@ -284,6 +328,7 @@ const days: CourseDay[] = [
       },
       {
         title: "2. Expo",
+        time: "10 دقائق",
         items: [
           "ما هو Expo؟",
           "لماذا نستخدم Expo؟",
@@ -294,6 +339,7 @@ const days: CourseDay[] = [
       },
       {
         title: "3. EAS",
+        time: "10 دقائق",
         items: [
           "ما هو EAS؟",
           "الفرق بين Development Build وProduction Build",
@@ -305,11 +351,14 @@ const days: CourseDay[] = [
       },
       {
         title: "4. إنشاء Build",
+        time: "20 دقيقة",
         note: "إنشاء نسخة حقيقية من التطبيق:",
         items: ["Android Build", "iOS Build", "متابعة عملية البناء", "فهم الأخطاء التي قد تظهر أثناء الـ Build", "معالجة المشاكل الأساسية"],
+        tip: "الـ Build ممكن ياخذ عدة دقائق — استغل هذا الوقت لمراجعة إعدادات المتجرين مع المشاركين بدل الانتظار بصمت.",
       },
       {
         title: "5. تجربة التطبيق على جهاز حقيقي",
+        time: "10 دقائق",
         items: [
           "تثبيت نسخة التطبيق",
           "تجربة تسجيل الدخول",
@@ -322,6 +371,7 @@ const days: CourseDay[] = [
       },
       {
         title: "6. إعداد التطبيق في App Store Connect",
+        time: "15 دقيقة",
         items: [
           "إنشاء التطبيق",
           "إدخال اسم التطبيق",
@@ -336,6 +386,7 @@ const days: CourseDay[] = [
       },
       {
         title: "7. إعداد التطبيق في Google Play Console",
+        time: "15 دقيقة",
         items: [
           "إنشاء التطبيق",
           "إعداد اسم التطبيق",
@@ -351,6 +402,7 @@ const days: CourseDay[] = [
       },
       {
         title: "8. فهم عملية النشر",
+        time: "5 دقائق",
         note: "شرح الفرق بين:",
         flow: ["Build", "Submit", "Review", "Publish"],
         note2:
@@ -373,6 +425,12 @@ const days: CourseDay[] = [
     ],
     outcome:
       "أخذ تطبيق بناه باستخدام Replit وAI → تجهيزه باستخدام Expo/EAS → إنشاء Build → إرساله إلى App Store وGoogle Play.",
+    questions: [
+      "شو الفرق بين Development Build وProduction Build، ومتى تستخدم كل واحد؟",
+      "لو رفعت التطبيق للمتجر، هل يظهر للمستخدمين فورًا؟ ليش؟",
+      "شو أكثر سبب شائع لرفض تطبيق جديد من Apple أو Google حسب رأيك؟",
+      "لو تطبيقك يحتاج صلاحية الوصول لجهات الاتصال، وين لازم توضح هذا للمستخدم؟",
+    ],
   },
 ];
 
@@ -547,7 +605,17 @@ const description =
           <div class="space-y-8">
             {day.sections.map((section) => (
               <div>
-                <h3 class="mb-3 text-base font-bold text-white sm:text-lg">{section.title}</h3>
+                <div class="mb-3 flex flex-wrap items-center gap-2">
+                  <h3 class="text-base font-bold text-white sm:text-lg">{section.title}</h3>
+                  {section.time && (
+                    <span class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-xs text-white/50">
+                      <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {section.time}
+                    </span>
+                  )}
+                </div>
 
                 {section.note && (
                   <p class="mb-2 text-sm text-white/50">{section.note}</p>
@@ -597,6 +665,15 @@ const description =
                     ))}
                   </ul>
                 )}
+
+                {section.tip && (
+                  <div class="mt-3 flex items-start gap-2 rounded-md border border-emerald-500/20 bg-emerald-500/[0.06] p-3">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                    <p class="text-xs leading-relaxed text-emerald-300/90">{section.tip}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -605,6 +682,27 @@ const description =
             <p class="mb-1 text-xs font-semibold text-indigo-300">ناتج اليوم {day.number}</p>
             <p class="text-sm leading-relaxed text-white/80">{day.outcome}</p>
           </div>
+
+          {day.questions.length > 0 && (
+            <div class="mt-6 rounded-lg border border-white/[0.08] bg-white/[0.02] p-4 sm:p-5">
+              <p class="mb-3 flex items-center gap-1.5 text-xs font-semibold text-white/50">
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                أسئلة للنقاش مع المشاركين
+              </p>
+              <ol class="space-y-2">
+                {day.questions.map((q, i) => (
+                  <li class="flex items-start gap-2.5 text-sm leading-relaxed text-white/70">
+                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white/60">
+                      {i + 1}
+                    </span>
+                    <span>{q}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </section>
       ))}
     </main>
