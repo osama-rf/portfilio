@@ -1,0 +1,242 @@
+---
+export const prerender = true;
+import "../../styles/global.css";
+import "@fontsource/ibm-plex-sans-arabic/400.css";
+import "@fontsource/ibm-plex-sans-arabic/500.css";
+import "@fontsource/ibm-plex-sans-arabic/600.css";
+import "@fontsource/ibm-plex-sans-arabic/700.css";
+import { lessons } from "../../data/course-lessons";
+
+export function getStaticPaths() {
+  return lessons.map((lesson) => ({
+    params: { slug: lesson.slug },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+const lessonIndex = lessons.findIndex((l) => l.slug === lesson.slug);
+const prevLesson = lessons[lessonIndex - 1];
+const nextLesson = lessons[lessonIndex + 1];
+
+const pageURL = `https://osama-lab.com/course/${lesson.slug}`;
+const title = `${lesson.title} — درس ${lesson.number}`;
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <link rel="canonical" href={pageURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body class="min-h-screen bg-[#fafbfc] font-sans text-slate-900">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
+        <a href="/course" class="flex items-center gap-2 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          كل الدروس
+        </a>
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <span class="font-medium text-slate-600">درس {lesson.number}</span>
+          <span>/ {lessons.length}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── LESSON HEADER ─────────────────────────────────────── -->
+    <section class="border-b border-slate-200 bg-white px-5 py-10 sm:py-14">
+      <div class="mx-auto max-w-3xl">
+        {lesson.appName && (
+          <span class="mb-3 inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600">
+            تطبيق {lesson.appName} — {lesson.appTagline}
+          </span>
+        )}
+        <h1 class="text-2xl leading-snug font-bold sm:text-4xl">{lesson.title}</h1>
+        <p class="mt-2 text-base text-slate-500 sm:text-lg">{lesson.subtitle}</p>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-600">
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {lesson.duration}
+          </span>
+        </div>
+
+        <div class="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <p class="mb-1 text-xs font-semibold text-slate-400">الهدف من الدرس</p>
+          <p class="text-sm leading-relaxed text-slate-700">{lesson.goal}</p>
+        </div>
+      </div>
+    </section>
+
+    {lesson.images && lesson.images.length > 0 && (
+      <section class="border-b border-slate-200 bg-white px-5 py-8">
+        <div class="mx-auto max-w-3xl">
+          <div class="flex gap-3 overflow-x-auto pb-2">
+            {lesson.images.map((img) => (
+              <img
+                src={img}
+                alt={lesson.appName}
+                class="h-64 w-auto shrink-0 rounded-xl border border-slate-200 object-cover shadow-sm sm:h-80"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ─── SLIDE NAV ─────────────────────────────────────────── -->
+    <nav class="sticky top-[57px] z-40 border-b border-slate-200 bg-[#fafbfc]/95 backdrop-blur-md">
+      <div class="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-2">
+        <button
+          type="button"
+          class="slide-nav-btn shrink-0 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white"
+          data-target="slide-goal"
+        >
+          الهدف
+        </button>
+        {lesson.topics.map((topic, i) => (
+          <button
+            type="button"
+            class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+            data-target={`slide-topic-${i}`}
+          >
+            {topic.title}
+          </button>
+        ))}
+        <button
+          type="button"
+          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+          data-target="slide-outcome"
+        >
+          الناتج
+        </button>
+        <button
+          type="button"
+          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+          data-target="slide-questions"
+        >
+          أسئلة
+        </button>
+      </div>
+    </nav>
+
+    <!-- ─── SLIDES ────────────────────────────────────────────── -->
+    <main class="mx-auto max-w-3xl px-5 py-8">
+      <!-- Slide: Goal recap (compact, for quick glance while starting) -->
+      <div id="slide-goal" class="slide-block scroll-mt-32 py-10">
+        <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase">قبل ما نبدأ</p>
+        <h2 class="mb-4 text-xl font-bold sm:text-2xl">{lesson.title}</h2>
+        <p class="max-w-xl text-lg leading-relaxed text-slate-600">{lesson.goal}</p>
+      </div>
+
+      {lesson.topics.map((topic, i) => (
+        <div id={`slide-topic-${i}`} class="slide-block scroll-mt-32 border-t border-slate-200 py-10">
+          <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase">
+            {i + 1} / {lesson.topics.length}
+          </p>
+          <h2 class="mb-6 text-xl font-bold sm:text-3xl">{topic.title}</h2>
+          <ul class="space-y-3">
+            {topic.points.map((point) => (
+              <li class="flex items-start gap-3 text-lg leading-snug text-slate-700 sm:text-xl">
+                <span class="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-indigo-500"></span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div id="slide-outcome" class="slide-block scroll-mt-32 border-t border-slate-200 py-10">
+        <p class="mb-2 text-xs font-semibold tracking-wide text-emerald-600 uppercase">ناتج الدرس</p>
+        <h2 class="mb-4 text-xl font-bold sm:text-2xl">شو حصلنا عليه؟</h2>
+        <p class="max-w-xl text-lg leading-relaxed text-slate-700">{lesson.outcome}</p>
+      </div>
+
+      <div id="slide-questions" class="slide-block scroll-mt-32 border-t border-slate-200 py-10">
+        <p class="mb-2 text-xs font-semibold tracking-wide text-amber-600 uppercase">للنقاش مع المشاركين</p>
+        <h2 class="mb-6 text-xl font-bold sm:text-2xl">أسئلة</h2>
+        <ol class="space-y-4">
+          {lesson.questions.map((q, i) => (
+            <li class="flex items-start gap-3 text-lg leading-snug text-slate-700">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-bold text-amber-700">
+                {i + 1}
+              </span>
+              <span>{q}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </main>
+
+    <!-- ─── LESSON PAGER ──────────────────────────────────────── -->
+    <nav class="border-t border-slate-200 bg-white px-5 py-6">
+      <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
+        {prevLesson ? (
+          <a
+            href={`/course/${prevLesson.slug}`}
+            class="flex min-w-0 items-center gap-2 rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+          >
+            <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span class="truncate">درس {prevLesson.number}: {prevLesson.title}</span>
+          </a>
+        ) : (
+          <span></span>
+        )}
+        {nextLesson && (
+          <a
+            href={`/course/${nextLesson.slug}`}
+            class="flex min-w-0 items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm text-white transition hover:bg-slate-700"
+          >
+            <span class="truncate">درس {nextLesson.number}: {nextLesson.title}</span>
+            <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </nav>
+
+    <script>
+      const navButtons = document.querySelectorAll<HTMLButtonElement>(".slide-nav-btn");
+      const slideBlocks = Array.from(document.querySelectorAll<HTMLElement>(".slide-block"));
+
+      navButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.target;
+          document.getElementById(targetId || "")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      const setActive = (id: string) => {
+        navButtons.forEach((btn) => {
+          const isActive = btn.dataset.target === id;
+          btn.classList.toggle("bg-slate-900", isActive);
+          btn.classList.toggle("text-white", isActive);
+          btn.classList.toggle("text-slate-500", !isActive);
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        },
+        { rootMargin: "-30% 0px -60% 0px" }
+      );
+
+      slideBlocks.forEach((block) => observer.observe(block));
+    </script>
+  </body>
+</html>
