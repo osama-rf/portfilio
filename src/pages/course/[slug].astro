@@ -6,6 +6,7 @@ import "@fontsource/ibm-plex-sans-arabic/500.css";
 import "@fontsource/ibm-plex-sans-arabic/600.css";
 import "@fontsource/ibm-plex-sans-arabic/700.css";
 import { lessons } from "../../data/course-lessons";
+import ThemeToggle from "../../components/ThemeToggle.astro";
 
 export function getStaticPaths() {
   return lessons.map((lesson) => ({
@@ -32,50 +33,61 @@ const title = `${lesson.title} — درس ${lesson.number}`;
     <title>{title}</title>
     <link rel="canonical" href={pageURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light" ? saved : "light";
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
 
-  <body class="min-h-screen bg-[#fafbfc] font-sans text-slate-900">
-    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
+  <body class="min-h-screen bg-[#fafbfc] font-sans text-slate-900 dark:bg-black dark:text-white">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md dark:border-white/10 dark:bg-black/90">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
-        <a href="/course" class="flex items-center gap-2 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900" aria-label="العودة إلى قائمة الدروس">
+        <a href="/course" class="flex items-center gap-2 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-white/50 dark:hover:text-white" aria-label="العودة إلى قائمة الدروس">
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
-        <div class="flex items-center gap-2 text-sm text-slate-400">
-          <span class="font-medium text-slate-600">درس {lesson.number}</span>
-          <span>/ {lessons.length}</span>
+        <div class="flex items-center gap-3 text-sm text-slate-400 dark:text-white/40">
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-slate-600 dark:text-white/70">درس {lesson.number}</span>
+            <span>/ {lessons.length}</span>
+          </div>
+          <ThemeToggle />
         </div>
       </div>
     </header>
 
     <!-- ─── LESSON HEADER ─────────────────────────────────────── -->
-    <section class="border-b border-slate-200 bg-white px-5 py-10 sm:py-14">
+    <section class="border-b border-slate-200 bg-white px-5 py-10 sm:py-14 dark:border-white/10 dark:bg-black">
       <div class="mx-auto max-w-3xl">
         {lesson.appName && (
-          <span class="mb-3 inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600">
+          <span class="mb-3 inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-300">
             تطبيق {lesson.appName} — {lesson.appTagline}
           </span>
         )}
         <h1 class="text-2xl leading-snug font-bold sm:text-4xl">{lesson.title}</h1>
-        <p class="mt-2 text-base text-slate-500 sm:text-lg">{lesson.subtitle}</p>
+        <p class="mt-2 text-base text-slate-500 sm:text-lg dark:text-white/50">{lesson.subtitle}</p>
 
-        <div class="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <p class="mb-1 text-xs font-semibold text-slate-400">الهدف من الدرس</p>
-          <p class="text-sm leading-relaxed text-slate-700">{lesson.goal}</p>
+        <div class="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/[0.03]">
+          <p class="mb-1 text-xs font-semibold text-slate-400 dark:text-white/40">الهدف من الدرس</p>
+          <p class="text-sm leading-relaxed text-slate-700 dark:text-white/70">{lesson.goal}</p>
         </div>
       </div>
     </section>
 
     {lesson.images && lesson.images.length > 0 && (
-      <section class="border-b border-slate-200 bg-white px-5 py-8">
+      <section class="border-b border-slate-200 bg-white px-5 py-8 dark:border-white/10 dark:bg-black">
         <div class="mx-auto max-w-3xl">
           <div class="flex gap-3 overflow-x-auto pb-2">
             {lesson.images.map((img) => (
               <img
                 src={img}
                 alt={lesson.appName}
-                class="h-64 w-auto shrink-0 rounded-xl border border-slate-200 object-cover shadow-sm sm:h-80"
+                class="h-64 w-auto shrink-0 rounded-xl border border-slate-200 object-cover shadow-sm sm:h-80 dark:border-white/10"
               />
             ))}
           </div>
@@ -84,11 +96,11 @@ const title = `${lesson.title} — درس ${lesson.number}`;
     )}
 
     <!-- ─── SLIDE NAV ─────────────────────────────────────────── -->
-    <nav class="sticky top-[57px] z-40 border-b border-slate-200 bg-[#fafbfc]/95 backdrop-blur-md">
+    <nav class="sticky top-[57px] z-40 border-b border-slate-200 bg-[#fafbfc]/95 backdrop-blur-md dark:border-white/10 dark:bg-black/95">
       <div class="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-2">
         <button
           type="button"
-          class="slide-nav-btn shrink-0 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white"
+          class="slide-nav-btn shrink-0 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white dark:bg-white dark:text-black"
           data-target="slide-goal"
         >
           الهدف
@@ -96,7 +108,7 @@ const title = `${lesson.title} — درس ${lesson.number}`;
         {lesson.topics.map((topic, i) => (
           <button
             type="button"
-            class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+            class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100 dark:text-white/50 dark:hover:bg-white/10"
             data-target={`slide-topic-${i}`}
           >
             {topic.title}
@@ -104,14 +116,14 @@ const title = `${lesson.title} — درس ${lesson.number}`;
         ))}
         <button
           type="button"
-          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100 dark:text-white/50 dark:hover:bg-white/10"
           data-target="slide-outcome"
         >
           الناتج
         </button>
         <button
           type="button"
-          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100"
+          class="slide-nav-btn shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition hover:bg-slate-100 dark:text-white/50 dark:hover:bg-white/10"
           data-target="slide-questions"
         >
           أسئلة
@@ -123,20 +135,20 @@ const title = `${lesson.title} — درس ${lesson.number}`;
     <main class="mx-auto max-w-3xl px-5 py-8">
       <!-- Slide: Goal recap -->
       <div id="slide-goal" class="slide-block py-10">
-        <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase">قبل أن نبدأ</p>
+        <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase dark:text-indigo-400">قبل أن نبدأ</p>
         <h2 class="mb-4 text-xl font-bold sm:text-2xl">{lesson.title}</h2>
-        <p class="max-w-xl text-lg leading-relaxed text-slate-600">{lesson.goal}</p>
+        <p class="max-w-xl text-lg leading-relaxed text-slate-600 dark:text-white/60">{lesson.goal}</p>
       </div>
 
       {lesson.topics.map((topic, i) => (
         <div id={`slide-topic-${i}`} class="slide-block hidden py-10">
-          <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase">
+          <p class="mb-2 text-xs font-semibold tracking-wide text-indigo-500 uppercase dark:text-indigo-400">
             {i + 1} / {lesson.topics.length}
           </p>
           <h2 class="mb-6 text-xl font-bold sm:text-3xl">{topic.title}</h2>
           <ul class="space-y-3">
             {topic.points.map((point) => (
-              <li class="flex items-start gap-3 text-lg leading-snug text-slate-700 sm:text-xl">
+              <li class="flex items-start gap-3 text-lg leading-snug text-slate-700 sm:text-xl dark:text-white/80">
                 <span class="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-indigo-500"></span>
                 <span>{point}</span>
               </li>
@@ -146,18 +158,18 @@ const title = `${lesson.title} — درس ${lesson.number}`;
       ))}
 
       <div id="slide-outcome" class="slide-block hidden py-10">
-        <p class="mb-2 text-xs font-semibold tracking-wide text-emerald-600 uppercase">ناتج الدرس</p>
+        <p class="mb-2 text-xs font-semibold tracking-wide text-emerald-600 uppercase dark:text-emerald-400">ناتج الدرس</p>
         <h2 class="mb-4 text-xl font-bold sm:text-2xl">ماذا حققنا؟</h2>
-        <p class="max-w-xl text-lg leading-relaxed text-slate-700">{lesson.outcome}</p>
+        <p class="max-w-xl text-lg leading-relaxed text-slate-700 dark:text-white/70">{lesson.outcome}</p>
       </div>
 
       <div id="slide-questions" class="slide-block hidden py-10">
-        <p class="mb-2 text-xs font-semibold tracking-wide text-amber-600 uppercase">للنقاش مع المشاركين</p>
+        <p class="mb-2 text-xs font-semibold tracking-wide text-amber-600 uppercase dark:text-amber-400">للنقاش مع المشاركين</p>
         <h2 class="mb-6 text-xl font-bold sm:text-2xl">أسئلة</h2>
         <ol class="space-y-4">
           {lesson.questions.map((q, i) => (
-            <li class="flex items-start gap-3 text-lg leading-snug text-slate-700">
-              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-bold text-amber-700">
+            <li class="flex items-start gap-3 text-lg leading-snug text-slate-700 dark:text-white/80">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-bold text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">
                 {i + 1}
               </span>
               <span>{q}</span>
@@ -168,12 +180,12 @@ const title = `${lesson.title} — درس ${lesson.number}`;
     </main>
 
     <!-- ─── LESSON PAGER ──────────────────────────────────────── -->
-    <nav class="border-t border-slate-200 bg-white px-5 py-6">
+    <nav class="border-t border-slate-200 bg-white px-5 py-6 dark:border-white/10 dark:bg-black">
       <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
         {prevLesson ? (
           <a
             href={`/course/${prevLesson.slug}`}
-            class="flex min-w-0 items-center gap-2 rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+            class="flex min-w-0 items-center gap-2 rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:text-white/70 dark:hover:border-white/20 dark:hover:bg-white/5"
           >
             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -186,7 +198,7 @@ const title = `${lesson.title} — درس ${lesson.number}`;
         {nextLesson && (
           <a
             href={`/course/${nextLesson.slug}`}
-            class="flex min-w-0 items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm text-white transition hover:bg-slate-700"
+            class="flex min-w-0 items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm text-white transition hover:bg-slate-700 dark:bg-white dark:text-black dark:hover:bg-white/85"
           >
             <span class="truncate">درس {nextLesson.number}: {nextLesson.title}</span>
             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -209,7 +221,10 @@ const title = `${lesson.title} — درس ${lesson.number}`;
           const isActive = btn.dataset.target === id;
           btn.classList.toggle("bg-slate-900", isActive);
           btn.classList.toggle("text-white", isActive);
+          btn.classList.toggle("dark:bg-white", isActive);
+          btn.classList.toggle("dark:text-black", isActive);
           btn.classList.toggle("text-slate-500", !isActive);
+          btn.classList.toggle("dark:text-white/50", !isActive);
         });
         document.querySelector("main")?.scrollIntoView({ behavior: "instant", block: "start" });
       };

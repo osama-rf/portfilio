@@ -6,6 +6,7 @@ import "@fontsource/ibm-plex-sans-arabic/500.css";
 import "@fontsource/ibm-plex-sans-arabic/600.css";
 import "@fontsource/ibm-plex-sans-arabic/700.css";
 import { lessons } from "../../data/course-lessons";
+import ThemeToggle from "../../components/ThemeToggle.astro";
 
 const pageURL = "https://osama-lab.com/course";
 const title = "دروس دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي";
@@ -24,34 +25,45 @@ const description =
     <title>{title}</title>
     <link rel="canonical" href={pageURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light" ? saved : "light";
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
 
-  <body class="min-h-screen bg-[#fafbfc] font-sans text-slate-900">
-    <header class="border-b border-slate-200 bg-white">
+  <body class="min-h-screen bg-[#fafbfc] font-sans text-slate-900 dark:bg-black dark:text-white">
+    <header class="border-b border-slate-200 bg-white dark:border-white/10 dark:bg-black">
       <div
         class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4"
       >
         <a
           href="/"
-          class="text-sm font-medium text-slate-500 transition-colors hover:text-slate-900"
+          class="text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-white/50 dark:hover:text-white"
         >
-          osama-lab.com
+          ← osama-lab.com
         </a>
-        <p class="text-sm font-medium text-slate-400">
-          من الفكرة إلى App Store وGoogle Play
-        </p>
+        <div class="flex items-center gap-3">
+          <p class="text-sm font-medium text-slate-400 dark:text-white/40">
+            من الفكرة إلى App Store وGoogle Play
+          </p>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
 
-    <section class="border-b border-slate-200 bg-white px-5 py-12 sm:py-16">
+    <section class="border-b border-slate-200 bg-white px-5 py-12 sm:py-16 dark:border-white/10 dark:bg-black">
       <div class="mx-auto max-w-3xl">
         <h1 class="text-2xl leading-snug font-bold sm:text-4xl">
           دورة بناء تطبيقات حقيقية باستخدام الذكاء الاصطناعي
         </h1>
-        <p class="mt-2 text-base text-slate-500 sm:text-lg">
+        <p class="mt-2 text-base text-slate-500 sm:text-lg dark:text-white/50">
           من الفكرة إلى App Store وGoogle Play
         </p>
-        <p class="mt-4 max-w-2xl leading-relaxed text-slate-500">
+        <p class="mt-4 max-w-2xl leading-relaxed text-slate-500 dark:text-white/50">
           كل درس مبني حول تطبيق حقيقي كامل — تبدأ الفكرة، تبني الميزة، وتشرح
           المفهوم من خلال تطبيق يشتغل فعليًا أمام المشاركين.
         </p>
@@ -64,7 +76,7 @@ const description =
           lessons.map((lesson) => (
             <a
               href={`/course/${lesson.slug}`}
-              class="group block rounded-xl border border-slate-200 bg-white p-5 transition hover:border-indigo-300 hover:shadow-sm sm:p-6"
+              class="group block rounded-xl border border-slate-200 bg-white p-5 transition hover:border-indigo-300 hover:shadow-sm sm:p-6 dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-indigo-500/40"
             >
               <div class="flex items-start justify-between gap-4">
                 <div class="min-w-0">
@@ -73,18 +85,18 @@ const description =
                       درس {lesson.number}
                     </span>
                     {lesson.appName && (
-                      <span class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+                      <span class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-white/10 dark:text-white/60">
                         تطبيق {lesson.appName}
                       </span>
                     )}
                   </div>
-                  <h2 class="text-lg font-bold text-slate-900 sm:text-xl">
+                  <h2 class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white">
                     {lesson.title}
                   </h2>
-                  <p class="mt-1 text-sm text-slate-500">{lesson.subtitle}</p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-white/50">{lesson.subtitle}</p>
                 </div>
                 <svg
-                  class="mt-1 h-5 w-5 shrink-0 text-slate-300 transition group-hover:translate-x-[-4px] group-hover:text-indigo-500"
+                  class="mt-1 h-5 w-5 shrink-0 text-slate-300 transition group-hover:translate-x-[-4px] group-hover:text-indigo-500 dark:text-white/20"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -104,7 +116,7 @@ const description =
     </main>
 
     <footer
-      class="border-t border-slate-200 bg-white px-5 py-8 text-center text-sm text-slate-400"
+      class="border-t border-slate-200 bg-white px-5 py-8 text-center text-sm text-slate-400 dark:border-white/10 dark:bg-black dark:text-white/30"
     >
       <p>© {new Date().getFullYear()} osama-lab.com — أسامة يحيى عبده رفاعي</p>
     </footer>

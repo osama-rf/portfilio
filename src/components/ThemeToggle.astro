@@ -1,0 +1,27 @@
+---
+---
+
+<button
+  id="theme-toggle-btn"
+  type="button"
+  aria-label="تبديل الوضع الليلي"
+  class="rounded-md border border-slate-200 p-1.5 text-slate-600 transition hover:border-indigo-400 hover:text-indigo-600 dark:border-white/10 dark:text-white/60 dark:hover:text-white"
+>
+  <svg class="sun-icon hidden h-4 w-4 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.36 6.36l-.7-.7M6.34 6.34l-.7-.7m12.72 0l-.7.7M6.34 17.66l-.7.7M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+  <svg class="moon-icon h-4 w-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+</button>
+
+<script>
+  document.getElementById("theme-toggle-btn")?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    const next = isDark ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.classList.toggle("light", next !== "dark");
+    document.documentElement.setAttribute("data-theme", next);
+  });
+</script>
